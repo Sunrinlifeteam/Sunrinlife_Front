@@ -3,5 +3,6 @@ module.exports = {
   theme: {
     extend: {},
   },
-  purge: ['./index.html', './src/**/*.{vue,js}'],
+  purge: {  content: ['./public/**/*.html', './src/**/*.vue'] }
+  // purge: ['./index.html', './src/**/*.{vue,js}'],
 }
