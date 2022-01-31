@@ -1,6 +1,10 @@
 <template>
 <header>
     <div class="user-profile font-medium">
+        <img
+            src="./../assets/user_profile_img.png" alt="유저 사진"
+            @click="navOnOff"
+            >
         <span class="user-profile-data">{{currentUserData.year}}학년</span>
         <span class="user-profile-data">{{currentUserData.class}}반</span>
         <span class="user-profile-data">{{currentUserData.number}}번</span>
@@ -19,6 +23,12 @@ export default {
     data(){
         return{
             
+        }
+    },
+    methods:{
+        navOnOff(){
+            console.log("navOnOff");
+            this.$emit("navOnOff")
         }
     },
     computed :{
@@ -42,6 +52,13 @@ header {
 header .user-profile {
     display: flex;
     align-items: center;
+}
+
+header .user-profile img{
+    width : 10%;
+    margin-right : 16px;
+
+    cursor: pointer;
 }
 
 header .user-profile-data {

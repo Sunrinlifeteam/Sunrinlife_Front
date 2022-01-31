@@ -1,0 +1,11 @@
+.navBar-enter-from, .navBar-leave-to{
+    transform: translateX(-100%);
+}
+
+.navBar-enter-active, .navBar-leave-active {
+    transition: 100ms;
+}
+
+.navBar-enter-to, .navBar-leave-from{
+    transform: translateX(0%);
+}
