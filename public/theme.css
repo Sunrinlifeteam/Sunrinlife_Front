@@ -1,0 +1,41 @@
+/* 임시 컬러 */
+:root {
+    --main-btn-bg-color : #92c9e0;
+    --main-btn-border-color : #6cb8d8;
+}
+
+/* 제목 태그 테마 */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'GmarketSansBold'
+}
+
+/* 입력 요소 테마 */
+input {
+    font-family: 'GmarketSansMedium';
+    background-color: gainsboro;
+
+    border : 2px solid gray;
+    border-radius: 12px;
+}
+
+/* 버튼 테마 */
+button {
+    font-family: 'GmarketSansMedium';
+
+    color : white;
+    background-color: var(--main-btn-bg-color);
+
+    border : 2px solid var(--main-btn-border-color);
+    border-radius: 12px;
+
+    transition: 0.1s;
+}
+
+button:hover{
+    background-color: var(--main-btn-border-color);
+    transform: scale(1.01);
+}
+
+button:active{
+    transform: scale(0.99);
+}

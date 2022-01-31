@@ -37,9 +37,8 @@ export default {
     }
 
     .login input{
-        border : 1px solid gray;
+        margin : 4px 0;
         padding: 12px;
-        background-color: gainsboro;
     }
 
     .login .login-btn {
