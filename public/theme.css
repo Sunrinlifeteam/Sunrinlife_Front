@@ -18,6 +18,11 @@ input {
     border-radius: 12px;
 }
 
+input:focus{
+    outline: none !important;
+    border-color: var(--main-btn-border-color);
+}
+
 /* 버튼 테마 */
 button {
     font-family: 'GmarketSansMedium';
@@ -27,6 +32,8 @@ button {
 
     border : 2px solid var(--main-btn-border-color);
     border-radius: 12px;
+
+    cursor: pointer;
 
     transition: 0.1s;
 }
