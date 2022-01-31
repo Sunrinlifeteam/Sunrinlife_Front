@@ -12,19 +12,17 @@
 </template>
 
 <script>
+import {mapState} from "vuex"
 
-let currentUserData = {
-    name : "박희찬",
-    year : 1,
-    class : 4,
-    number : 13
-}
 export default {
     name : "Header",
     data(){
         return{
-            currentUserData
+            
         }
+    },
+    computed :{
+        ...mapState(['currentUserData'])
     }
 }
 
@@ -32,6 +30,8 @@ export default {
 
 <style>
 header {
+    background-color: var(--main-btn-bg-color);
+    
     padding : 16px;
 
     display: flex;
