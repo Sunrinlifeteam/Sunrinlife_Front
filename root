@@ -1,0 +1,31 @@
+┌─public
+│       EDCAN.svg
+│       favicon.ico
+│       index.html
+│
+│       font.css // 폰트 설정 CSS
+│       theme.css // 기본 테마 설정 CSS
+│
+└─src
+    ┝──App.vue
+    │  index.css
+    │  main.js
+    │  router.js
+    │  store.js
+    │
+    ├─assets
+    │     logo.png
+    │
+    ├─components        // 컨포넌트들
+    │  │  Header.vue    // 헤더
+    │  │
+    │  └─main // 메인페이지를 구성하는 컨포넌트들
+    │     Meal.vue      // 급식
+    │     Notice.vue    // 공지사항
+    │     Schedule.vue  // 일정
+    │     Timer.vue     // 타이머
+    │     TodaySchedule.vue    // 오늘의 일정
+    │
+    └─views // router로 연동되는 페이지 컴포넌트
+          LoginPage.vue // 로그인 페이지
+          MainPage.vue  // 메인 페이지
