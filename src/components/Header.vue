@@ -7,7 +7,7 @@
         <span class="user-profile-data">{{currentUserData.name}}</span>
     </div>
 
-    <img src="./../../public/EDCAN.svg" alt="Logo" class="logo">
+    <img src="./../assets/logo.svg" alt="Logo" class="logo">
 </header>
 </template>
 

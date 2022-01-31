@@ -2,11 +2,11 @@
 
 <Header/>
 <main>
-    <Timer/>
     <div class="notice-today-wrap">
         <Notice/>
         <TodaySchedule/>
     </div>
+    <Timer/>
     <Meal/>
     <Schedule/>
 </main>
@@ -58,6 +58,7 @@ export default {
     .notice-today-wrap{
         display : grid;
         grid-template-rows: auto 1fr;
+        grid-gap: 16px;
     }
 
     @media (min-width: 600px) {

@@ -12,11 +12,11 @@ let noticeData = [
     "2021 전국기능경기대회 수상",
     "2021 서울시 직업계고 창의아이디어경진대회 수상",
     "2021 창의아이디어경진대회 교내대회 결과 발표",
-]
+] //공지사항을 저장하는 리스트
 
-let notice = ""
-let currentNoticeIndex = 0;
-let noticeStrCount = 1
+let notice = "" //화면에 보여지는 공지
+let currentNoticeIndex = 0; //현재 보여지고 있는 공지의 순서
+let noticeStrCount = 1 //현배 보여지는 공지의 글자수
 
 export default {
     name : "Notice",
