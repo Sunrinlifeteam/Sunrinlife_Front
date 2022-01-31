@@ -26,7 +26,7 @@ import Nav from "../components/Nav.vue"
 import Timer from "../components/main/Timer.vue"
 import Notice from "../components/main/Notice.vue"
 import TodaySchedule from "../components/main/TodaySchedule.vue"
-import Meal from "../components/main/Meal.vue"
+import Meal from "../components/main/Meal/Meal.vue"
 import Schedule from "../components/main/Schedule.vue"
 
 export default {
@@ -75,16 +75,12 @@ export default {
 
     .main-page-item:nth-child(2n){
         background-color: var(--flat-purple);
+        color : white;
     }
 
     .main-page-item:nth-child(2n + 1){
         background-color: var(--flat-yellow);
     }
-
-    .main-page-item:nth-child(2n) h3{
-        color : white;
-    }
-
 
     .notice-today-wrap{
         display : grid;
@@ -92,7 +88,7 @@ export default {
         grid-gap: 16px;
     }
 
-    @media (min-width: 700px) {
+    @media (min-width: 750px) {
         main {
             display: grid;
             grid-template-columns: 1fr 1fr;

@@ -5,7 +5,17 @@ import mitt from "mitt"
 import router from './router/router.js'
 import store from "./store.js"
 
-// import "./index.css"
+import "./Model/Date.js"
+
+Date.prototype.isTooDay = function(){
+    const tooDay = new Date()
+    
+    const isSameYear = this.getYear() == tooDay.getYear()
+    const isSameMonth = this.getMonth() == tooDay.getMonth()
+    const isSameDay = this.getDate() == tooDay.getDate()
+
+    return isSameYear && isSameMonth && isSameDay
+}
 
 let emitter = mitt()
 let app = createApp(App)
