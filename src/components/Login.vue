@@ -25,6 +25,11 @@ export default {
         flex-direction: column;
         align-items: center;
         justify-content: center;
+
+        animation-name: login-bg-animation;
+        animation-duration: 30s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
     }
 
     .login form{
@@ -58,5 +63,12 @@ export default {
         .login form, .login .sign-up-wrap{
             width : 90%;
         }
+    }
+
+    @keyframes login-bg-animation {
+        0% { background-color: rgb(255, 216, 174); }
+        33% { background-color: rgb(255, 252, 174); }
+        66% { background-color: rgb(231, 255, 174); }
+        100% { background-color: rgb(174, 223, 255); }
     }
 </style>
