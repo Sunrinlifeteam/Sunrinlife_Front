@@ -1,0 +1,63 @@
+<template>
+<div class="login">
+    <h1>Sunrin Life</h1>
+    <form action="">
+        <input type="email" placeholder="Email">
+        <input type="password" placeholder="Password">
+        <button class="login-btn">로그인</button>
+    </form>
+    <div class="sign-up-wrap">
+        <span class="sign-up-goto">회원 가입</span>
+    </div>
+
+</div>
+</template>
+<script>
+export default {
+    name : "Login"
+}
+</script>
+<style>
+    .login {
+        width : 100%; height : 100vh;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .login form{
+        width : 70%;
+
+        margin-top : 12px;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .login input{
+        border : 1px solid gray;
+        padding: 12px;
+        background-color: gainsboro;
+    }
+
+    .login .login-btn {
+        font-size: 1.25em;
+
+        margin: 8px 0;
+        padding : 12px;
+    }
+
+    .login .sign-up-wrap {
+        width : 70%;
+        display: flex;
+        justify-content: right;
+    }
+
+    @media (max-width : 900px) {
+        .login form, .login .sign-up-wrap{
+            width : 90%;
+        }
+    }
+</style>
