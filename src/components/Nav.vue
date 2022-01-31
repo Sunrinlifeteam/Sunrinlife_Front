@@ -1,25 +1,26 @@
 <template>
-<nav>
-    <div class="nav-bg" @click.self="$emit('navOnOff')">
-        <ul>
-            <li>메뉴1</li>
-            <li>메뉴2</li>
-            <li>메뉴3</li>
-            <li>메뉴4</li>
-            <li>메뉴5</li>
-            <li>메뉴6</li>
-            <li>메뉴7</li>
-            <li>메뉴8</li>
-            <li>메뉴9</li>
-            <li>메뉴10</li>
-        </ul>
-    </div>
+<nav @click.self="$emit('navOnOff')">
+    <ul>
+        <img src="./../assets/logo.svg" alt="Logo" class="logo">
+        <li
+            v-for="i, n in navBarList"
+            :key="n"
+            class="font-light"
+            @click="$router.push(`${i.router}`)"
+        >{{ i.name }}</li>
+    </ul>
 </nav>
 </template>
 
 <script>
+import { mapState } from "vuex"
+
 export default {
-    name : "Nav"
+    name : "Nav",
+    computed :{
+        ...mapState(['navBarList'])
+        // store.js에 저장된 navBarList를 가져와서 목록으로 보여준다.
+    }
 }
 </script>
 
@@ -28,14 +29,23 @@ nav {
     width : 100%;
     height : 100vh;
 
+    background-color: rgba(0, 0, 0, 0.666);
+
     position: absolute;
+    top : 0px;
+    left : 0px;
+}
+
+nav img{
+    width : 100%;
+    padding : 16px;
 }
 
 nav ul {
     width : 250px;
     height: 100%;
 
-    padding : 16px;
+    /* padding : 16px 0; */
 
     background-color: white;
 
@@ -46,18 +56,22 @@ nav ul {
 }
 
 nav li{
-    display : inline
+    font-size: 20px;
+    padding : 8px 16px;
+
+    display : inline;
+
+    border : 1px solid rgb(182, 182, 182);
+    border-bottom: 0px;
 }
 
-nav .nav-bg {
-    width : 100%;
-    height : 100vh;
-
-    background-color: rgba(0, 0, 0, 0.788);
-
-    position: absolute;
-    top : 0;
-    left : 0;
-    z-index: 1;
+nav li:last-child{
+    border : 1px solid rgb(182, 182, 182);
+    /* border-bottom-width : 1px; */
 }
+
+nav li:hover{
+    background-color: rgb(232, 232, 232);
+}
+
 </style>

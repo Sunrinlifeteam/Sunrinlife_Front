@@ -2,7 +2,7 @@
 <header>
     <div class="user-profile font-medium">
         <img
-            src="./../assets/user_profile_img.png" alt="유저 사진"
+            :src="currentUserData.profileImg" alt="유저 사진"
             @click="navOnOff"
             >
         <span class="user-profile-data">{{currentUserData.year}}학년</span>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import {mapState} from "vuex"
+import { mapState } from "vuex"
 
 export default {
     name : "Header",
@@ -55,7 +55,10 @@ header .user-profile {
 }
 
 header .user-profile img{
-    width : 10%;
+    width : 10%; height : 10%;
+
+    border-radius: 100%;
+
     margin-right : 16px;
 
     cursor: pointer;
