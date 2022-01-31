@@ -1,7 +1,30 @@
 /* 임시 컬러 */
 :root {
-    --main-btn-bg-color : #92c9e0;
+    --main-color1 : #00b0ff;
+    --main-color2 : #b7e5f8;
+    
     --main-btn-border-color : #6cb8d8;
+
+    --gray0 : #f8f9fa;
+    --gray1 : #f1f3f5;
+    --gray2 : #e9ecef;
+    --gray3 : #dee2e6;
+    --gray4 : #ced4da;
+    --gray5 : #adb5bd;
+    --gray6 : #868e96;
+    --gray7 : #495057;
+    --gray8 : #343a40;
+    --gray9 : #212529;
+
+    --bg-black : #000000ab;
+
+    --flat-purple : #6c63ff;
+    --flat-blue : #536dfe;
+    --flat-light-blue : #00b0ff;
+    --flat-green : #1abc9c;
+    --flat-yellow : #f1c40f;
+    --flat-red : #e74c32;
+    --flat-black : #121212;
 }
 
 /* 제목 태그 테마 */
@@ -28,7 +51,7 @@ button {
     font-family: 'GmarketSansMedium';
 
     color : white;
-    background-color: var(--main-btn-bg-color);
+    background-color: var(--main-color1);
 
     border : 2px solid var(--main-btn-border-color);
     border-radius: 12px;

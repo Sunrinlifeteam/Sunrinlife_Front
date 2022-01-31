@@ -32,7 +32,7 @@ import Schedule from "../components/main/Schedule.vue"
 export default {
     name : "mainPage",
     data(){return{
-        isNavOn : 0
+        isNavOn : 0,
     }},
     methods :{
         navOnOff(){
@@ -68,10 +68,23 @@ export default {
     }
 
     .main-page-item{
-        border : 1px solid red;
-
+        /* background-color: var(--main-color2); */
+        border-radius: 12px;
         padding : 16px;
     }
+
+    .main-page-item:nth-child(2n){
+        background-color: var(--flat-purple);
+    }
+
+    .main-page-item:nth-child(2n + 1){
+        background-color: var(--flat-yellow);
+    }
+
+    .main-page-item:nth-child(2n) h3{
+        color : white;
+    }
+
 
     .notice-today-wrap{
         display : grid;

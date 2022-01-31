@@ -1,0 +1,14 @@
+# Query: --main-btn-bg-color
+# ContextLines: 1
+
+2개 결과 - 2 파일
+
+src\components\Header.vue:
+  41  header {
+  43:     background-color: var(--main-bg-color);
+  43      
+
+src\views\MainPage.vue:
+  70      .main-page-item{
+  71:         background-color: var(--main-bg-color);
+  72          border-radius: 12px;

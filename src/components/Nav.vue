@@ -29,7 +29,7 @@ nav {
     width : 100%;
     height : 100vh;
 
-    background-color: rgba(0, 0, 0, 0.666);
+    background-color: var(--bg-black);
 
     position: absolute;
     top : 0px;
@@ -39,6 +39,8 @@ nav {
 nav img{
     width : 100%;
     padding : 16px;
+
+    cursor: pointer;
 }
 
 nav ul {
@@ -61,17 +63,18 @@ nav li{
 
     display : inline;
 
-    border : 1px solid rgb(182, 182, 182);
+    border : 1px solid var(--gray5);
     border-bottom: 0px;
+
+    cursor: pointer;
 }
 
 nav li:last-child{
-    border : 1px solid rgb(182, 182, 182);
-    /* border-bottom-width : 1px; */
+    border : 1px solid var(--gray5);
 }
 
 nav li:hover{
-    background-color: rgb(232, 232, 232);
+    background-color: var(--gray1);
 }
 
 </style>

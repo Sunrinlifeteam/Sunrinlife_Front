@@ -40,7 +40,7 @@ export default {
 
 <style>
 header {
-    background-color: var(--main-btn-bg-color);
+    background-color: var(--main-color1);
     
     padding : 16px;
 
