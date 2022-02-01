@@ -73,6 +73,14 @@ export default {
         padding : 16px;
     }
 
+    .main-page-item:hover{
+        animation-name: hoverAnimation;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-timing-function: ease-in-out;
+    }
+
     .main-page-item:nth-child(2n){
         background-color: var(--flat-purple);
         color : white;
@@ -99,6 +107,18 @@ export default {
         main {
             width : 1100px;
             margin : 0 auto;
+        }
+    }
+
+    @keyframes hoverAnimation {
+        0%{
+            transform: rotateZ(0deg);
+        }
+        50%{
+            transform: rotateZ(-0.5deg);
+        }
+        100%{
+            transform: rotateZ(0.5deg);
         }
     }
 </style>
