@@ -1,3 +1,4 @@
+/* 메뉴바 애니메이션 */
 .nav-bar-enter-from, .nav-bar-leave-to{
     transform: translateX(-100%);
 }
@@ -10,7 +11,7 @@
     transform: translateX(0%);
 }
 
-
+/* 메뉴바 배경 애니메이션 */
 .nav-bg-enter-from, .nav-bg-leave-to {
     opacity: 0;
 }

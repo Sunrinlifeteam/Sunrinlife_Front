@@ -12,11 +12,11 @@ main{
 }
 
 .main-page-item{
-    background-color: var(--main-color1);
-    border-radius: 12px;
+    background-color: white;
+    border-radius: 8px;
     padding : 16px;
 
-    /* z-index: -1; */
+    box-shadow: 4px 4px 10px var(--gray3);
 }
 
 .main-page-item:hover{

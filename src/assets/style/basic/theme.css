@@ -28,6 +28,9 @@
     --flat-black : #121212;
 }
 
+body{
+    background-color: #ecf0f3;
+}
 /* 제목 태그 테마 */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'GmarketSansBold'

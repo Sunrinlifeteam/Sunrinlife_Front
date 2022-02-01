@@ -42,7 +42,7 @@ export default {
 
 <style>
 header {
-    background-color: var(--main-color2);
+    background-color: var(--main-color1);
     
     padding : 16px;
 
@@ -58,6 +58,8 @@ header .user-profile {
 
 header .user-profile img{
     width : 10%; height : 10%;
+
+    padding : 8px;
 
     border-radius: 100%;
 
