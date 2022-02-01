@@ -44,7 +44,14 @@ export default {
 </script>
 
 <style>
+.notice{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
 .notice p{
+    align-items: center;
     display: -webkit-box;
     overflow: hidden;
     text-overflow: ellipsis;

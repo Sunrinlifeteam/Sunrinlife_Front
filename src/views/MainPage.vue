@@ -8,13 +8,14 @@
     />
 
 <main>
-    <div class="notice-today-wrap">
-        <Notice/>
-        <TodaySchedule/>
-    </div>
-    <Timer/>
-    <Meal/>
+    <Notice/>
     <Schedule/>
+    <Timer/>
+    <Club/>
+    <Meal/>
+    <TodaySchedule/>
+    <!-- <div class="notice-today-wrap">
+    </div> -->
 </main>
 
 </template>
@@ -22,11 +23,12 @@
 import Header from "../components/Header.vue"
 import Nav from "../components/Nav.vue"
 
-import Timer from "../components/main/Timer.vue"
 import Notice from "../components/main/Notice.vue"
 import TodaySchedule from "../components/main/TodaySchedule.vue"
+import Timer from "../components/main/Timer.vue"
 import Meal from "../components/main/Meal/Meal.vue"
 import Schedule from "../components/main/Schedule.vue"
+import Club from "../components/main/Club.vue"
 
 export default {
     name : "mainPage",
@@ -43,11 +45,12 @@ export default {
         Header,
         Nav,
 
-        Timer,
         Notice,
         TodaySchedule,
+        Timer,
         Meal,
         Schedule,
+        Club,
     }
 }
 
