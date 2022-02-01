@@ -1,15 +1,28 @@
 <template>
-<nav @click.self="$emit('navOnOff')">
-    <ul>
-        <img src="./../assets/logo.svg" alt="Logo" class="logo">
-        <li
-            v-for="i, n in navBarList"
-            :key="n"
-            class="font-light"
-            @click="$router.push(`${i.router}`)"
-        >{{ i.name }}</li>
-    </ul>
-</nav>
+<transition name="nav-bar">
+    <nav
+        v-if="navState == 1"
+        @click.self="$emit('navOnOff')">
+    
+        <ul>
+            <img src="./../assets/logo.svg" alt="Logo" class="logo">
+            <li
+                v-for="i, n in navBarList"
+                :key="n"
+                class="font-light"
+                @click="$router.push(`${i.router}`)"
+            >{{ i.name }}</li>
+        </ul>
+    </nav>
+</transition>
+
+<transition name="nav-bg">
+<div
+    v-if="navState == 1"
+    @click.self="$emit('navOnOff')"
+    class="nav-bg"></div>
+</transition>
+
 </template>
 
 <script>
@@ -20,6 +33,9 @@ export default {
     computed :{
         ...mapState(['navBarList'])
         // store.js에 저장된 navBarList를 가져와서 목록으로 보여준다.
+    },
+    props : {
+        navState : Number
     }
 }
 </script>
@@ -29,11 +45,12 @@ nav {
     width : 100%;
     height : 100vh;
 
-    background-color: var(--bg-black);
+    /* background-color: var(--bg-black); */
 
     position: absolute;
     top : 0px;
     left : 0px;
+    z-index: 2;
 }
 
 nav img{
@@ -53,7 +70,6 @@ nav ul {
 
     display: inline-flex;
     flex-direction: column;
-
     z-index: 2;
 }
 
@@ -75,6 +91,17 @@ nav li:last-child{
 
 nav li:hover{
     background-color: var(--gray1);
+}
+
+.nav-bg {
+    width : 100%;
+    height: 100vh;
+    background-color: var(--bg-black);
+
+    position: absolute;
+    top : 0;
+    left : 0;
+    z-index: 1;
 }
 
 </style>

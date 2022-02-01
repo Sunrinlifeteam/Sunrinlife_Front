@@ -2,11 +2,10 @@
 
 <Header @navOnOff="navOnOff" />
 
-<transition name="navBar">
-    <Nav v-if="isNavOn == 1"
-        @navOnOff="navOnOff"
-        />
-</transition>
+<Nav
+    :navState="isNavOn"
+    @navOnOff="navOnOff"
+    />
 
 <main>
     <div class="notice-today-wrap">
