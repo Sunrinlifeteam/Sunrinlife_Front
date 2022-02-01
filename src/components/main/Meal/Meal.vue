@@ -7,6 +7,7 @@
             v-for="i, n in mealDatas" :key="n"
             :mealData="i" />
     </div>
+    <div class="meal-detail" @click="$router.push('meal')">세부 보기</div>
 </div>
 </template>
 

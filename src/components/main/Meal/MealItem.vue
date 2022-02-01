@@ -35,7 +35,7 @@ export default {
 
 .mealItem ul{
     padding : 8px;
-    border: 4px solid var(--flat-purple);
+    border: 2px solid var(--flat-purple);
     border-radius: 16px;
 
     display : inline-flex;

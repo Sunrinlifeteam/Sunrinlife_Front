@@ -5,6 +5,8 @@
             :src="currentUserData.profileImg" alt="유저 사진"
             @click="navOnOff"
             >
+        
+        <span class="user-profile-data">{{currentUserData.major}}</span>
         <span class="user-profile-data">{{currentUserData.year}}학년</span>
         <span class="user-profile-data">{{currentUserData.class}}반</span>
         <span class="user-profile-data">{{currentUserData.number}}번</span>
@@ -40,7 +42,7 @@ export default {
 
 <style>
 header {
-    background-color: var(--main-color1);
+    background-color: var(--main-color2);
     
     padding : 16px;
 
