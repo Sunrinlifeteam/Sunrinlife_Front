@@ -4,15 +4,13 @@
         v-if="navState == 1"
         @click.self="$emit('navOnOff')">
     
-        <ul>
+        <div class="nav-list">
             <img src="./../assets/logo.svg" alt="Logo" class="logo">
-            <li
-                v-for="i, n in navBarList"
-                :key="n"
-                class="font-light"
-                @click="$router.push(`${i.router}`)"
-            >{{ i.name }}</li>
-        </ul>
+            <router-link
+                
+                v-for="i, n in navBarList" :key="n"
+                :to="i.router">{{ i.name }}</router-link>
+        </div>
     </nav>
 </transition>
 
@@ -60,11 +58,11 @@ nav img{
     cursor: pointer;
 }
 
-nav ul {
+nav .nav-list {
     width : 250px;
     height: 100%;
 
-    /* padding : 16px 0; */
+    /* padding : 0 1px; */
 
     background-color: white;
 
@@ -73,23 +71,22 @@ nav ul {
     z-index: 2;
 }
 
-nav li{
+nav a{
     font-size: 20px;
     padding : 8px 16px;
 
     display : inline;
 
-    border : 1px solid var(--gray5);
-    border-bottom: 0px;
+    border-top : 1px solid var(--gray1);
 
     cursor: pointer;
 }
 
-nav li:last-child{
-    border : 1px solid var(--gray5);
+nav a:last-child{
+    border-bottom : 1px solid var(--gray1);
 }
 
-nav li:hover{
+nav a:hover{
     background-color: var(--gray1);
 }
 

@@ -73,3 +73,10 @@ button:hover{
 button:active{
     transform: scale(0.99);
 }
+
+.nav-list .router-link-exact-active{
+    border-left: 5px solid var(--flat-blue);
+    background-color: #e3e8ff;
+    color : var(--flat-blue);
+    font-family: 'GmarketSansBold';
+}

@@ -2,40 +2,24 @@ import { createStore } from "vuex"
 
 const navBarList = [
     {
-        name : "목록1",
-        router : "list1"
+        name : "메인 화면",
+        router : "main"
     },
     {
-        name : "목록2",
-        router : "list2"
+        name : "소개",
+        router : "introduce"
     },
     {
-        name : "목록3",
-        router : "list3"
+        name : "동아리",
+        router : "club"
     },
     {
-        name : "목록4",
-        router : "list4"
+        name : "학교 배치도",
+        router : "map"
     },
     {
-        name : "목록5",
-        router : "list5"
-    },
-    {
-        name : "목록6",
-        router : "list6"
-    },
-    {
-        name : "목록7",
-        router : "list7"
-    },
-    {
-        name : "목록8",
-        router : "list8"
-    },
-    {
-        name : "목록9",
-        router : "list9"
+        name : "로그아웃",
+        router : "singOut"
     },
 ]
 
