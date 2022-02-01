@@ -2,50 +2,57 @@
 <div class="meal main-page-item">
     <h3>급식</h3>
 
-    <div class="meal-items-wrap">
-        <MealItem 
-            v-for="i, n in mealDatas" :key="n"
-            :mealData="i" />
+    <ul>
+        <li v-for="i, n in mealData" :key="n">{{i}}</li>
+    </ul>
+
+    <div class="remaining-time">
+        점심시간까지<br>
+        00시간 00분 00초 남음
     </div>
+
     <div class="meal-detail" @click="$router.push('meal')">세부 보기</div>
 </div>
 </template>
 
 <script>
-import MealItem from "./MealItem.vue"
-
-const mealDatas = [
-    {
-        date : new Date("2022-2-1"),
-        menus : ["밥", "국", "반찬", "에드캔은", "정말 최고야",]
-    },
-    {
-        date : new Date("2022-2-2"),
-        menus : ["밥", "국", "반찬", "에미야", "국이 짜다",]
-    },
-    {
-        date : new Date("2022-2-3"),
-        menus : ["밥", "국", "반찬", "선린 최고의", "동아리", "EDCAN"]
-    },
+const mealData = [
+    "밥",
+    "국",
+    "반찬",
+    "에드캔은",
+    "정말 최고야",
 ]
 
 export default {
     name : "Meal",
     data(){return{
-        mealDatas
+        mealData
     }},
     components :{
-        MealItem
+
     }
 }
 </script>
 
 <style>
-.meal-items-wrap{
-    display : grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr;
+.meal {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
 
-    grid-gap: 12px;
+.meal ul {
+    padding : 16px;
+}
+
+.meal li {
+    font-size: 1.25em;
+    list-style: disc;
+}
+
+.meal-detail {
+    text-decoration: underline;
+    cursor: pointer;
 }
 </style>

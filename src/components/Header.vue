@@ -6,7 +6,6 @@
             @click="navOnOff"
             >
         
-        <span class="user-profile-data">{{currentUserData.major}}</span>
         <span class="user-profile-data">{{currentUserData.year}}학년</span>
         <span class="user-profile-data">{{currentUserData.class}}반</span>
         <span class="user-profile-data">{{currentUserData.number}}번</span>

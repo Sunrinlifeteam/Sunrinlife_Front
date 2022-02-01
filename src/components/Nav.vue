@@ -11,6 +11,10 @@
                 v-for="i, n in navBarList" :key="n"
                 :to="i.router">{{ i.name }}</router-link>
         </div>
+
+        <div 
+            @click="$router.push('easterEgg')"
+            class="easter-egg">이스터에그</div>
     </nav>
 </transition>
 
@@ -45,7 +49,7 @@ nav {
 
     /* background-color: var(--bg-black); */
 
-    position: absolute;
+    position: fixed;
     top : 0px;
     left : 0px;
     z-index: 2;
@@ -95,10 +99,19 @@ nav a:hover{
     height: 100vh;
     background-color: var(--bg-black);
 
-    position: absolute;
+    position: fixed;
     top : 0;
     left : 0;
     z-index: 1;
 }
 
+
+.easter-egg{
+    color : #f2f2f2;
+
+    position: absolute;
+    bottom : 0px;
+
+    cursor: pointer;
+}
 </style>

@@ -13,10 +13,10 @@ main{
 
 .main-page-item{
     background-color: white;
-    border-radius: 8px;
+    border-radius: 16px;
     padding : 16px;
 
-    box-shadow: 4px 4px 10px var(--gray3);
+    box-shadow: 10px 10px 20px var(--gray4);
 }
 
 .main-page-item:hover{
@@ -34,20 +34,23 @@ main{
 }
 
 .notice {
-    
+
 }
 
 .timer {
+
 }
 
 .meal {
+
 }
 
 .today-schedule {
+
 }
 
 .schedule {
-    
+
 }
 
 .club {

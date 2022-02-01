@@ -3,7 +3,7 @@
     <h3>타이머</h3>
     <div class="time-data">
         <div class="current-tiem">현재 <span class="font-bold">5</span>교시</div>
-        <div class="next-time">6교시까지 00시간 00분 00초</div>
+        <div class="next-time">6교시까지 남은 시간<br>00시간 00분 00초</div>
     </div>
 </div>
 </template>
