@@ -3,9 +3,13 @@
 
     <div class="login-box">
         <h1>Sunrin Life</h1>
-        {{ $store.state.isLogin }}
+
         <input type="email" placeholder="Email" v-model="inputEmail">
+        <small class="erroe-msg" :class="{none : isEmailEmpty}">이메일을 입력하세요.</small>
+
         <input type="password" placeholder="Password" v-model="inputPassword">
+        <small class="erroe-msg" :class="{none : isPwEmpty}">비밀번호를 입력하세요.</small>
+
         <button @click="loginClick" class="login-btn">로그인</button>
         <span class="sign-up-goto">회원 가입</span>
     </div>
@@ -20,11 +24,33 @@ export default {
     data(){return{
         inputEmail : "",
         inputPassword : "",
+
+        isEmailEmpty : false,
+        isPwEmpty : false,
     }},
     methods : {
         ...mapActions(["login", "getToken"]),
 
         loginClick(){
+            if(this.inputEmail == "" && this.inputPassword == ""){
+                this.isEmailEmpty = true
+                this.isPwEmpty = true
+                return
+            }
+
+            if(this.inputEmail == ""){
+                this.isEmailEmpty = true
+                return
+            }
+
+            if(this.inputPassword == ""){
+                this.isPwEmpty = true
+                return
+            }
+
+            this.isEmailEmpty = false
+            this.isPwEmpty = false
+
             this.login({ "email" : this.inputEmail, "password" : this.inputPassword})    
         }
     }
@@ -65,6 +91,16 @@ export default {
         padding : 12px;
 
         background-color: white;
+    }
+
+    .login .erroe-msg {
+        color : red;
+        text-align: left;
+        visibility: hidden;
+    }
+
+    .login .erroe-msg.none {
+        visibility: visible;
     }
 
     .login .login-btn {
