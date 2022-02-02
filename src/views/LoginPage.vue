@@ -4,6 +4,8 @@
     <div class="login-box">
         <h1>Sunrin Life</h1>
 
+        {{$store.state.isLogin}}
+
         <input type="email" placeholder="Email" v-model="inputEmail">
         <small class="erroe-msg" :class="{none : isEmailEmpty}">이메일을 입력하세요.</small>
 

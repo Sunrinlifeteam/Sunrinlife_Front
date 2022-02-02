@@ -6,6 +6,8 @@ import MainPage from "./../views/MainPage.vue"
 import store from "./../store.js"
 
 const checkLogin = (to, from, next) => {
+    console.log(store.state.isLogin);
+
     if(store.state.isLogin){
         return next()
     }   else{
@@ -13,7 +15,7 @@ const checkLogin = (to, from, next) => {
         return next("/")
     }
 }
-
+checkLogin
 const routes = [
     {
         path : "/",
@@ -22,7 +24,7 @@ const routes = [
     {
         path : "/main",
         component : MainPage,
-        beforeEnter: checkLogin
+        // beforeEnter: checkLogin
     },
 ]
 

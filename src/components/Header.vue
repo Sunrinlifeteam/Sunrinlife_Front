@@ -41,7 +41,7 @@ export default {
 
 <style>
 header {
-    background-color: var(--main-color1);
+    background-color: var(--main-color2);
     
     padding : 16px;
 
