@@ -1,6 +1,7 @@
 <template>
 <header>
     <div class="user-profile font-medium">
+        <!-- {{ currentUserData.profileImg }} -->
         <img
             :src="currentUserData.profileImg" alt="유저 사진"
             @click="navOnOff"
@@ -58,8 +59,6 @@ header .user-profile {
 header .user-profile img{
     width : 10%; height : 10%;
 
-    padding : 8px;
-
     border-radius: 100%;
 
     margin-right : 16px;
@@ -79,7 +78,7 @@ header .logo{
 
 @media (min-width: 600px) {
     header .logo{
-        width : 15%    
+        width : 15% 
     }
 }
 </style>

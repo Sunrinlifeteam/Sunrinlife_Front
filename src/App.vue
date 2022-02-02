@@ -5,9 +5,9 @@
 <script>
 export default {
   name: 'App',
-  mounted(){
-    this.$store.dispatch("getUserData")
-  }
+  // mounted(){
+  //   this.$store.dispatch("getUserData")
+  // }
 }
 </script>
 

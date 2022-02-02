@@ -66,7 +66,7 @@ nav .nav-list {
     width : 250px;
     height: 100%;
 
-    /* padding : 0 1px; */
+    border-radius: 0 16px 16px 0;
 
     background-color: white;
 
@@ -90,7 +90,7 @@ nav a:last-child{
     border-bottom : 1px solid var(--gray1);
 }
 
-nav a:hover{
+nav a:hover, nav a:active{
     background-color: var(--gray1);
 }
 

@@ -3,6 +3,8 @@ import { createWebHistory, createRouter } from "vue-router"
 import LoginPage from "./../views/LoginPage.vue"
 import MainPage from "./../views/MainPage.vue"
 
+import easterEgg from "./../views/EasterEgg.vue"
+
 import store from "./../store.js"
 
 const checkLogin = (to, from, next) => {
@@ -25,6 +27,10 @@ const routes = [
         path : "/main",
         component : MainPage,
         // beforeEnter: checkLogin
+    },
+    {
+        path : "/easterEgg",
+        component : easterEgg
     },
 ]
 
