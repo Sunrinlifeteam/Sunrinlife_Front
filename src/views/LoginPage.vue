@@ -1,14 +1,13 @@
 <template>
 <div class="login">
-    <h1>Sunrin Life</h1>
-    <form action="">
+
+    <form class="login-box">
+        <h1>Sunrin Life</h1>
         <input type="email" placeholder="Email">
         <input type="password" placeholder="Password">
         <button class="login-btn">로그인</button>
-    </form>
-    <div class="sign-up-wrap">
         <span class="sign-up-goto">회원 가입</span>
-    </div>
+    </form>
 
 </div>
 </template>
@@ -19,56 +18,59 @@ export default {
 </script>
 <style>
     .login {
-        width : 100%; height : 100vh;
+        width : 100%;
+        height : 100vh;
 
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-
-        animation-name: login-bg-animation;
-        animation-duration: 30s;
-        animation-iteration-count: infinite;
+        animation-name : login-bg-animation;
+        animation-duration: 10s;
         animation-direction: alternate;
+        animation-iteration-count: infinite;
     }
 
-    .login form{
-        width : 70%;
+    .login .login-box {
+        width : 80%;
+        max-width: 700px;
 
-        margin-top : 12px;
+        padding : 32px;
 
-        display: flex;
+        background-color: white;
+
+        display: inline-flex;
         flex-direction: column;
+        text-align: center;
+
+        position: absolute;
+        top : 50%;
+        left: 50%;
+
+        transform: translate(-50%, -50%);
     }
 
-    .login input{
-        margin : 4px 0;
-        padding: 12px;
+    .login .login-box input {
+        font-size: 20px;
+        padding : 12px;
+
+        background-color: white;
     }
 
     .login .login-btn {
-        font-size: 1.25em;
-
-        margin: 8px 0;
-        padding : 12px;
+        font-size : 24px;
+        padding : 20px;
+        
+        border-radius: 4px;
     }
 
-    .login .sign-up-wrap {
-        width : 70%;
-        display: flex;
-        justify-content: right;
-    }
+    .login .sign-up-goto {
+        position: absolute;
 
-    @media (max-width : 900px) {
-        .login form, .login .sign-up-wrap{
-            width : 90%;
-        }
+        bottom : 0px;
+        right : 0px;
     }
 
     @keyframes login-bg-animation {
-        0% { background-color: rgb(255, 216, 174); }
-        33% { background-color: rgb(255, 252, 174); }
-        66% { background-color: rgb(231, 255, 174); }
-        100% { background-color: rgb(174, 223, 255); }
+        0% { background-color: var(--flat-red) }
+        33% { background-color: var(--flat-yellow) }
+        66% { background-color: var(--flat-green) }
+        100% { background-color: var(--flat-blue) }
     }
 </style>
