@@ -5,8 +5,8 @@
 <script>
 export default {
   name: 'App',
-  components: {
-    
+  mounted(){
+    this.$store.dispatch("getUserData")
   }
 }
 </script>

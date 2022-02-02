@@ -1,19 +1,33 @@
 <template>
 <div class="login">
 
-    <form class="login-box">
+    <div class="login-box">
         <h1>Sunrin Life</h1>
-        <input type="email" placeholder="Email">
-        <input type="password" placeholder="Password">
-        <button class="login-btn">로그인</button>
+        {{ $store.state.isLogin }}
+        <input type="email" placeholder="Email" v-model="inputEmail">
+        <input type="password" placeholder="Password" v-model="inputPassword">
+        <button @click="loginClick" class="login-btn">로그인</button>
         <span class="sign-up-goto">회원 가입</span>
-    </form>
+    </div>
 
 </div>
 </template>
 <script>
+import { mapActions } from "vuex"
+
 export default {
-    name : "Login"
+    name : "Login",
+    data(){return{
+        inputEmail : "",
+        inputPassword : "",
+    }},
+    methods : {
+        ...mapActions(["login", "getToken"]),
+
+        loginClick(){
+            this.login({ "email" : this.inputEmail, "password" : this.inputPassword})    
+        }
+    }
 }
 </script>
 <style>
