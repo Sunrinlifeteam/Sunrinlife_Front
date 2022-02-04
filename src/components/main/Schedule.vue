@@ -70,6 +70,36 @@ export default {
 </script>
 
 <style>
+
+.schedule {
+    overflow: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.schedule::-webkit-scrollbar{
+    width : 20px;
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: 16px;
+}
+
+.schedule::-webkit-scrollbar-thumb{
+    background-color: rgba(128, 128, 128, 0.433);
+    background-clip: padding-box;
+    border : 3px solid transparent;
+    border-radius: 12px;
+}
+
+.schedule::-webkit-scrollbar-thumb:active {
+    background-color: rgba(128, 128, 128, 0.624);
+}
+
+.schedule:hover::-webkit-scrollbar-thumb{
+    background-color: rgba(128, 128, 128, 0.864);
+}
+
 .schedule .schedule-wrap{
     width : 200%;
 

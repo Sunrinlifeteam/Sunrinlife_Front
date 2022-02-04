@@ -19,14 +19,26 @@ main{
     padding : 16px;
 
     box-shadow: 10px 10px 20px var(--gray4);
+
+    transition: 500ms;
 }
 
 .main-page-item:hover{
+    /* border-radius: 4px; */
+
     animation-name: hoverAnimation;
     animation-duration: 1s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
     animation-timing-function: ease-in-out;
+}
+
+.main-page-item:nth-child(2n):hover {
+    background-color: var(--flat-light-blue);
+}
+
+.main-page-item:nth-child(2n + 1):hover {
+    background-color: var(--flat-yellow);
 }
 
 .notice-today-wrap{
@@ -52,28 +64,7 @@ main{
 }
 
 .schedule {
-    overflow: auto;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
-
-.schedule::-webkit-scrollbar{
-    width : 20px;
-    background-color: white;
-    border-radius: 16px;
-}
-
-.schedule::-webkit-scrollbar-thumb{
-    background-color: rgba(128, 128, 128, 0.433);
-    background-clip: padding-box;
-    border : 3px solid transparent;
-    border-radius: 12px;
-}
-
-.schedule::-webkit-scrollbar-thumb:active {
-    background-color: rgba(128, 128, 128, 0.624);
+    
 }
 
 .club {

@@ -10,12 +10,10 @@
 <main>
     <Notice/>
     <Schedule/>
-    <Timer/>
     <Club/>
     <Meal/>
+    <Timer/>
     <TodaySchedule/>
-    <!-- <div class="notice-today-wrap">
-    </div> -->
 </main>
 
 </template>

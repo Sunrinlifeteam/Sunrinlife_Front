@@ -86,8 +86,6 @@ header .user-profile-data{
 }
 
 header .logo {
-    width : 250px;
-
     cursor: pointer;
 }
 
@@ -100,8 +98,8 @@ header .school-img {
 }
 
 @media (max-width : 750px) {
-    header .menu .logo {
+    /* header .menu .logo {
         width : 20%;
-    }
+    } */
 }
 </style>
