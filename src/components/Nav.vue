@@ -94,6 +94,13 @@ nav a:hover, nav a:active{
     background-color: var(--gray1);
 }
 
+.nav-list .router-link-exact-active{
+    border-left: 5px solid var(--main-color3);
+    background-color: var(--sub-color3);
+    color : var(--main-color3);
+    font-family: 'GmarketSansBold';
+}
+
 .nav-bg {
     width : 100%;
     height: 100vh;
@@ -104,7 +111,6 @@ nav a:hover, nav a:active{
     left : 0;
     z-index: 1;
 }
-
 
 .easter-egg{
     color : #f2f2f2;

@@ -4,6 +4,7 @@
 }
 
 main{
+    margin-top : 70px;
     padding : 16px;
 
     max-width: 1100px;
@@ -24,7 +25,7 @@ main{
 }
 
 .main-page-item:hover{
-    /* border-radius: 4px; */
+    border-radius: 4px;
 
     animation-name: hoverAnimation;
     animation-duration: 1s;
@@ -33,13 +34,13 @@ main{
     animation-timing-function: ease-in-out;
 }
 
-.main-page-item:nth-child(2n):hover {
+/* .main-page-item:nth-child(2n):hover {
     background-color: var(--flat-light-blue);
 }
 
 .main-page-item:nth-child(2n + 1):hover {
     background-color: var(--flat-yellow);
-}
+} */
 
 .notice-today-wrap{
     display : grid;
@@ -109,6 +110,7 @@ main{
     main {
         /* width : 1100px; */
         margin : 0 auto;
+        margin-top : 70px;
     }
 }
 

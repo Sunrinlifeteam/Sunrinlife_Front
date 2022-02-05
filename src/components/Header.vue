@@ -15,9 +15,9 @@
             @click="$router.push('/main')"
             src="./../assets/logo.svg" alt="sunrin life Logo" class="logo">
     </div>
-    <div class="school-img">
+    <!-- <div class="school-img">
         <p>우리들의 두번째 학교 <b>선린 Life</b></p>
-    </div>
+    </div> -->
 </header>
 </template>
 
@@ -56,7 +56,7 @@ header .menu {
 
     padding : 12px;
 
-    box-shadow: 0px -20px 60px var(--gray8);
+    box-shadow: 0px -10px 10px var(--gray8);
 
     display: flex;
     justify-content: space-between;

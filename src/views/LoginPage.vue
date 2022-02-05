@@ -2,15 +2,23 @@
 <div class="login">
 
     <div class="login-box">
-        <h1>Sunrin Life</h1>
+        <img class="logo" src="./../assets/logo.svg" alt="선린 Life 로고">
 
-        {{$store.state.isLogin}}
+        <input
+            pattern="^[A-Za-z0-9._%+-]+@sunrint.hs.kr$"
+            required
+            :class="{'not-first-try' : notFirstTry}"
+            type="email" placeholder="Email"
+            v-model="inputEmail">
+        <small class="erroe-msg" :class="{'none' : isEmailEmpty}">{{ emailErrorMsg }}</small>
 
-        <input type="email" placeholder="Email" v-model="inputEmail">
-        <small class="erroe-msg" :class="{none : isEmailEmpty}">이메일을 입력하세요.</small>
-
-        <input type="password" placeholder="Password" v-model="inputPassword">
-        <small class="erroe-msg" :class="{none : isPwEmpty}">비밀번호를 입력하세요.</small>
+        <input
+            pattern="^[A-Za-z0-9._%+-]{6,12}$"
+            required
+            :class="{'not-first-try' : notFirstTry}"
+            type="password" placeholder="Password"
+            v-model="inputPassword">
+        <small class="erroe-msg" :class="{'none' : isPwEmpty}">{{ passwordErrorMsg }}</small>
 
         <button @click="loginClick" class="login-btn">로그인</button>
         <span class="sign-up-goto">회원 가입</span>
@@ -21,6 +29,8 @@
 <script>
 import { mapActions } from "vuex"
 
+// import { SUNRIN_EMAIL_PATTERN } from "./../Model/pattern.js"
+
 export default {
     name : "Login",
     data(){return{
@@ -29,29 +39,47 @@ export default {
 
         isEmailEmpty : false,
         isPwEmpty : false,
+
+        emailErrorMsg : "이메일을 입력하세요.",
+        passwordErrorMsg : "비밀번호를 입력하세요.",
+
+        notFirstTry : false,
     }},
     methods : {
         ...mapActions(["login", "getToken"]),
 
-        loginClick(){
-            if(this.inputEmail == "" && this.inputPassword == ""){
-                this.isEmailEmpty = true
-                this.isPwEmpty = true
-                return
-            }
-
+        checkFromEmail(){
             if(this.inputEmail == ""){
                 this.isEmailEmpty = true
-                return
+                this.emailErrorMsg = "이메일을 입력하세요."
             }
+            else {
+                this.isEmailEmpty = false
+            }
+        },
 
+        checkFromPassword(){
             if(this.inputPassword == ""){
                 this.isPwEmpty = true
+                this.passwordErrorMsg = "비밀번호를 입력하세요."
+            }
+            else if(this.inputPassword.length < 6){
+                this.isPwEmpty = true
+                this.passwordErrorMsg = "입력한 비밀번호가 너무 짧습니다."
+            }
+            else {
+                this.isEmailEmpty = false
+            }
+        },
+
+        loginClick(){
+            this.checkFromEmail()
+            this.checkFromPassword()
+
+            if( this.isEmailEmpty || this.isPwEmpty ){
+                this.notFirstTry = true
                 return
             }
-
-            this.isEmailEmpty = false
-            this.isPwEmpty = false
 
             this.login({ "email" : this.inputEmail, "password" : this.inputPassword})    
         }
@@ -62,24 +90,25 @@ export default {
     .login {
         width : 100%;
         height : 100vh;
-
-        animation-name : login-bg-animation;
-        animation-duration: 10s;
-        animation-direction: alternate;
-        animation-iteration-count: infinite;
     }
 
     .login .login-box {
         width : 80%;
         max-width: 700px;
+        min-width : 400px;
 
         padding : 32px;
 
         background-color: white;
 
+        border-radius: 16px;
+
+        box-shadow: 0px 0px 10px var(--gray5);
+
         display: inline-flex;
         flex-direction: column;
         text-align: center;
+        gap: 5px;
 
         position: absolute;
         top : 50%;
@@ -88,11 +117,27 @@ export default {
         transform: translate(-50%, -50%);
     }
 
+    .login .logo{
+        width : 50%;
+        margin : auto;
+    }
+
     .login .login-box input {
         font-size: 20px;
         padding : 12px;
 
+        border-radius: 0;
+        border : 2px solid black;
+
         background-color: white;
+    }
+
+    .login .login-box input:valid{
+        border : 2px solid var(--main-color2);
+    }
+
+    .login .login-box input.not-first-try:invalid {
+        border : 2px solid red;
     }
 
     .login .erroe-msg {
@@ -113,10 +158,12 @@ export default {
     }
 
     .login .sign-up-goto {
-        position: absolute;
+        text-align: right;
+        cursor: pointer;
+    }
 
-        bottom : 0px;
-        right : 0px;
+    .login .sign-up-goto:valid{
+        cursor: pointer;
     }
 
     @keyframes login-bg-animation {

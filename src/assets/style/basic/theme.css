@@ -1,9 +1,13 @@
-/* 임시 컬러 */
 :root {
-    --main-color1 : #92c9e0;
-    --main-color2 : #536dfe;
+    --main-color1 : #3ebbf1;
+    --main-color2 : #1fa2fe;
+    --main-color3 : #2b63ef;
+
+    --sub-color1 : #d9f4ff;
+    --sub-color2 : #bde4ff;
+    --sub-color3 : #bbceff;
     
-    --main-btn-border-color : #6cb8d8;
+    --main-btn-border-color : #3ebbf1;
     
     --gray0 : #f8f9fa;
     --gray1 : #f1f3f5;
@@ -56,7 +60,8 @@ button {
     color : white;
     background-color: var(--main-color1);
 
-    border : 2px solid var(--main-btn-border-color);
+    /* border : 2px solid var(--main-btn-border-color); */
+    border : 0px;
     border-radius: 12px;
 
     cursor: pointer;
@@ -65,17 +70,10 @@ button {
 }
 
 button:hover{
-    background-color: var(--main-btn-border-color);
+    background-color: var(--main-color2);
     transform: scale(1.01);
 }
 
 button:active{
     transform: scale(0.99);
-}
-
-.nav-list .router-link-exact-active{
-    border-left: 5px solid var(--flat-blue);
-    background-color: #e3e8ff;
-    color : var(--flat-blue);
-    font-family: 'GmarketSansBold';
 }
