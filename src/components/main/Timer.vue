@@ -2,26 +2,52 @@
 <div class="timer main-page-item">
     <h3>타이머</h3>
     <div class="time-data">
-        <div class="current-tiem">현재 <span class="font-bold">5</span>교시</div>
-        <div class="next-time">6교시까지 남은 시간<br>00시간 00분 00초</div>
+        <div class="current-tiem">현재 <span class="font-bold">{{ currentTime.className }}</span></div>
+        <div class="next-time">등교까지 남은 시간<br>{{ 남은시간.hour }}시간 {{ 남은시간.minute }}분 {{ 남은시간.second }}초</div>
     </div>
 </div>
 </template>
 
 <script>
-// import TimeTable from "./../../Model/TimeTable.js"
-// const timeDate = {
-//     '1' : new TimeTable(
+import TimerData from "./../../assets/TimerData.js"
+import Time from "./../../Model/Time.js"
 
-//     )
-// }
+let currentTime
+let nextTime
+
+let 남은시간
+let 남은시간_기준시간
+
+
+for(let i = 0; i < TimerData.length; i++){
+    if(TimerData[i].isCurrentTime){
+        currentTime = TimerData[i]
+
+        // if(i == TimerData.length - 1){
+        //     남은시간_기준시간 = TimerData[0].endTime
+        // }   else{
+        //     남은시간_기준시간 = currentTime.endTime
+        // }
+        남은시간_기준시간 = currentTime.endTime
+
+        남은시간 = new Time().diffTime(남은시간_기준시간)
+    }
+}
+
 
 export default {
     name : "Timer",
-    date(){
-        return{
-            // timeDate
-        }
+    data(){ return {
+        currentTime,
+        nextTime,
+        // currentTimeClassName,
+        남은시간
+    }},
+    mounted(){
+        setInterval(()=>{
+            this.남은시간 = new Time().diffTime(남은시간_기준시간)
+            // console.log(남은시간);
+        }, 500)
     }
 }
 </script>
