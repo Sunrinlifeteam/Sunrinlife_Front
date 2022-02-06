@@ -81,7 +81,9 @@ export default {
                 return
             }
 
-            this.login({ "email" : this.inputEmail, "password" : this.inputPassword})    
+            this.$router.push('main')
+
+            //this.login({ "email" : this.inputEmail, "password" : this.inputPassword})    
         }
     }
 }

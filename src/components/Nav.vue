@@ -7,7 +7,6 @@
         <div class="nav-list">
             <img src="./../assets/logo.svg" alt="Logo" class="logo">
             <router-link
-                
                 v-for="i, n in navBarList" :key="n"
                 :to="i.router">{{ i.name }}</router-link>
         </div>
@@ -69,6 +68,8 @@ nav .nav-list {
     border-radius: 0 16px 16px 0;
 
     background-color: white;
+
+    box-shadow: 10px 0px 100px var(--gray8);
 
     display: inline-flex;
     flex-direction: column;

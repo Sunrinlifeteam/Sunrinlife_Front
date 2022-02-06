@@ -9,11 +9,11 @@
 
 <main>
     <Notice/>
+    <Timer/>
+    <Meal/>
+    <TodaySchedule/>
     <Schedule/>
     <Club/>
-    <Meal/>
-    <Timer/>
-    <TodaySchedule/>
 </main>
 
 </template>

@@ -4,7 +4,7 @@
 }
 
 .nav-bar-enter-active, .nav-bar-leave-active {
-    transition: 100ms;
+    transition: 300ms;
 }
 
 .nav-bar-enter-to, .nav-bar-leave-from{
@@ -17,7 +17,7 @@
 }
 
 .nav-bg-enter-active, .nav-bg-leave-active  {
-    transition: 150ms;
+    transition: 300ms;
 }
 
 .nav-bg-enter-to, .nav-bg-leave-from {

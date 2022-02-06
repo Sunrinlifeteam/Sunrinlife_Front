@@ -6,57 +6,43 @@
         <div class="schedule-item">
             <span class="week">일</span>
             <ul class="todo-list">
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
+                <li>일정이 없습니다.</li>
             </ul>
         </div>
         <div class="schedule-item">
             <span class="week">월</span>
             <ul class="todo-list">
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
+                <li>일정이 없습니다.</li>
             </ul>
         </div>
         <div class="schedule-item">
             <span class="week">화</span>
             <ul class="todo-list">
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
+                <li>일정이 없습니다.</li>
             </ul>
         </div>
         <div class="schedule-item">
             <span class="week">수</span>
             <ul class="todo-list">
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
+                <li>일정이 없습니다.</li>
             </ul>
         </div>
         <div class="schedule-item">
             <span class="week">목</span>
             <ul class="todo-list">
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
+                <li>일정이 없습니다.</li>
             </ul>
         </div>
         <div class="schedule-item">
             <span class="week">금</span>
             <ul class="todo-list">
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
+                <li>일정이 없습니다.</li>
             </ul>
         </div>
         <div class="schedule-item">
             <span class="week">토</span>
             <ul class="todo-list">
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
+                <li>일정이 없습니다.</li>
             </ul>
         </div>
     </div>
