@@ -27,3 +27,24 @@
 .nav-bg-enter-to, .nav-bg-leave-from {
     opacity: 1;
 }
+
+/* 공지 아이콘 에디메이션 */
+.notice-icon-enter-from {
+    transform: scale(0);
+}
+
+.notice-icon-enter-active {
+    transition: 300ms;
+}
+
+.notice-icon-enter-to {
+    transform: scale(1);
+}
+
+/* .notice-icon-leave-to{
+    transform: translateY(-0%);
+} */
+
+/* .notice-icon-leave-from{
+    transform: translateY(-100%);
+} */
