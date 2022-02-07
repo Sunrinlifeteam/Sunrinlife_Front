@@ -3,6 +3,7 @@
     <div class="menu">
         <div class="user-profile">
             <img
+                class="user-profile-img"
                 @click="$emit('navOnOff')"
                 :src="currentUserData.profileImg" alt="사용자 프로필">
 
@@ -81,6 +82,8 @@ header .user-profile img {
     border-radius: 100%;
 
     cursor: pointer;
+
+    transition: 1000ms;
 }
 
 header .user-profile-data{
