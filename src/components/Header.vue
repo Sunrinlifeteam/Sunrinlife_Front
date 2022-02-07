@@ -46,7 +46,7 @@ export default {
 
 <style>
 header {
-    
+    z-index: 1;
 }
 
 header .menu {

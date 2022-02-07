@@ -1,6 +1,6 @@
 /* 메뉴바 애니메이션 */
 .nav-bar-enter-from, .nav-bar-leave-to{
-    transform: translateX(-100%);
+    transform: translateX(100%);
 }
 
 .nav-bar-enter-active, .nav-bar-leave-active {
@@ -10,6 +10,10 @@
 .nav-bar-enter-to, .nav-bar-leave-from{
     transform: translateX(0%);
 }
+
+/* .nav-bar-leave-to{
+    transform: translateX(-100%);
+} */
 
 /* 메뉴바 배경 애니메이션 */
 .nav-bg-enter-from, .nav-bg-leave-to {

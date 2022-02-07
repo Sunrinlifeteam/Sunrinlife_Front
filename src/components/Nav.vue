@@ -44,7 +44,7 @@ export default {
 <style>
 nav {
     width : 100%;
-    height : 100vh;
+    height : 100%;
 
     /* background-color: var(--bg-black); */
 
