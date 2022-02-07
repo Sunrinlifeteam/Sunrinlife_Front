@@ -3,24 +3,33 @@
     <div class="login-box">
         <img class="logo" src="./../assets/logo.svg" alt="선린 Life 로고">
 
-        <input
-            pattern="^[A-Za-z0-9._%+-]+@sunrint.hs.kr$"
-            required
-            :class="{'not-first-try' : notFirstTry}"
-            type="email" placeholder="Email"
-            v-model="inputEmail">
-        <small class="erroe-msg" :class="{'none' : isEmailEmpty}">{{ emailErrorMsg }}</small>
+        
+        <label class="input-element-wrap">
+            <input
+                pattern="^[A-Za-z0-9._%+-]+@sunrint.hs.kr$"
+                required
+                :class="{'not-first-try' : notFirstTry}"
+                type="email" placeholder="Email"
+                v-model="inputEmail">
+            <small class="erroe-msg" :class="{'none' : isEmailEmpty}">{{ emailErrorMsg }}</small>
+        </label>
 
-        <input
-            pattern="^[A-Za-z0-9._%+-]{6,12}$"
-            required
-            :class="{'not-first-try' : notFirstTry}"
-            type="password" placeholder="Password"
-            v-model="inputPassword">
-        <small class="erroe-msg" :class="{'none' : isPwEmpty}">{{ passwordErrorMsg }}</small>
+
+        <label class="input-element-wrap">
+            <input
+                pattern="^[A-Za-z0-9._%+-~`!@]{6,12}$"
+                required
+                :class="{'not-first-try' : notFirstTry}"
+                type="password" placeholder="Password"
+                v-model="inputPassword">
+            <small class="erroe-msg" :class="{'none' : isPwEmpty}">{{ passwordErrorMsg }}</small>
+        </label>
 
         <button @click="loginClick" class="login-btn">로그인</button>
-        <span class="sign-up-goto">회원 가입</span>
+
+        <div class="sign-up-goto-wrap">
+            <span class="sign-up-goto">회원 가입</span>
+        </div>
     </div>
 
 </div>
@@ -109,7 +118,7 @@ export default {
         display: inline-flex;
         flex-direction: column;
         text-align: center;
-        gap: 5px;
+        gap: 12px;
 
         position: absolute;
         top : 50%;
@@ -123,7 +132,12 @@ export default {
         margin : auto;
     }
 
+    .login .login-box .input-element-wrap{
+        text-align: left;
+    }
+
     .login .login-box input {
+        width : 100%;
         font-size: 20px;
         padding : 24px;
 
@@ -142,28 +156,36 @@ export default {
 
     .login .erroe-msg {
         font-size : 16px;
+
         color : var(--flat-red);
-        text-align: left;
         visibility: hidden;
+
+        margin : 0 12px;
     }
 
     .login .erroe-msg.none {
         visibility: visible;
     }
 
+
     .login .login-btn {
-        font-size : 24px;
+        font-size : 30px;
         padding : 20px;
         
         border-radius: 4px;
     }
 
+    .login .sign-up-goto-wrap{
+        text-align: right;
+    }
+
     .login .sign-up-goto {
+        font-size : 20px;
         text-align: right;
         cursor: pointer;
     }
 
-    .login .sign-up-goto:valid{
+    .login .sign-up-goto{
         cursor: pointer;
     }
 
