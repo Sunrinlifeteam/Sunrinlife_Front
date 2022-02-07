@@ -82,7 +82,7 @@ export default {
 .timer .caution-animation{
     animation-name: cautionAnimation;
     animation-duration: 1500ms;
-    /* animation-direction: alternate-reverse; */
+    animation-direction: alternate-reverse;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
 }

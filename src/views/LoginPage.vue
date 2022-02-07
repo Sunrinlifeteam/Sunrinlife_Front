@@ -1,28 +1,30 @@
 <template>
 <div class="login">
     <div class="login-box">
-        <img class="logo" src="./../assets/logo.svg" alt="선린 Life 로고">
+        <img
+            @click="easterEggClickCount++"
+            class="logo" src="./../assets/logo.svg" alt="선린 Life 로고">
 
         
-        <label class="input-element-wrap">
+        <label>
             <input
                 pattern="^[A-Za-z0-9._%+-]+@sunrint.hs.kr$"
                 required
                 :class="{'not-first-try' : notFirstTry}"
                 type="email" placeholder="Email"
                 v-model="inputEmail">
-            <small class="erroe-msg" :class="{'none' : isEmailEmpty}">{{ emailErrorMsg }}</small>
+            <small class="erroe-msg" :class="{'none' : notFirstTry && isEmailEmpty}">{{ emailErrorMsg }}</small>
         </label>
 
 
-        <label class="input-element-wrap">
+        <label>
             <input
                 pattern="^[A-Za-z0-9._%+-~`!@]{6,12}$"
                 required
                 :class="{'not-first-try' : notFirstTry}"
                 type="password" placeholder="Password"
                 v-model="inputPassword">
-            <small class="erroe-msg" :class="{'none' : isPwEmpty}">{{ passwordErrorMsg }}</small>
+            <small class="erroe-msg" :class="{'none' : notFirstTry && isPwEmpty}">{{ passwordErrorMsg }}</small>
         </label>
 
         <button @click="loginClick" class="login-btn">로그인</button>
@@ -37,7 +39,7 @@
 <script>
 import { mapActions } from "vuex"
 
-// import { SUNRIN_EMAIL_PATTERN } from "./../Model/pattern.js"
+import { SUNRIN_EMAIL_PATTERN } from "./../Model/pattern.js"
 
 export default {
     name : "Login",
@@ -52,6 +54,8 @@ export default {
         passwordErrorMsg : "비밀번호를 입력하세요.",
 
         notFirstTry : false,
+
+        easterEggClickCount : 0,
     }},
     methods : {
         ...mapActions(["login", "getToken"]),
@@ -60,6 +64,10 @@ export default {
             if(this.inputEmail == ""){
                 this.isEmailEmpty = true
                 this.emailErrorMsg = "이메일을 입력하세요."
+            }
+            else if(!SUNRIN_EMAIL_PATTERN.test(this.inputEmail)){
+                this.isEmailEmpty = true
+                this.emailErrorMsg = "이메일의 형식이 맞지 않습니다."
             }
             else {
                 this.isEmailEmpty = false
@@ -72,11 +80,11 @@ export default {
                 this.passwordErrorMsg = "비밀번호를 입력하세요."
             }
             else if(this.inputPassword.length < 6){
-                    this.isPwEmpty = true
+                this.isPwEmpty = true
                 this.passwordErrorMsg = "입력한 비밀번호가 너무 짧습니다."
             }
             else {
-                this.isEmailEmpty = false
+                this.isPwEmpty = false
             }
         },
 
@@ -92,6 +100,21 @@ export default {
             this.$router.push('main')
 
             //this.login({ "email" : this.inputEmail, "password" : this.inputPassword})    
+        }
+    },
+    watch : {
+        inputEmail(){
+            this.checkFromEmail()
+        },
+        inputPassword(){
+            this.checkFromPassword()
+        },
+
+        easterEggClickCount(it){
+            console.log(it);
+            if(it == 10){
+                this.$router.push('easterEgg')
+            }
         }
     }
 }
@@ -132,7 +155,7 @@ export default {
         margin : auto;
     }
 
-    .login .login-box .input-element-wrap{
+    .login .login-box label{
         text-align: left;
     }
 
