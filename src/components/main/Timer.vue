@@ -18,51 +18,49 @@
 
 <script>
 import TimerData from "./../../assets/TimerData.js"
-import TimerItem from "./../../Model/TimerItem.js"
 import Time from "./../../Model/Time.js"
 
-// let currentTime
-// let nextTime
+let currentTime
+let nextTime
 
-// let 남은시간
-// let 남은시간_기준시간
+let 남은시간
+let 남은시간_기준시간
 
+for(let i = 0; i < TimerData.length; i++){
 
+    if(TimerData[i].isCurrentTime){
+        currentTime = TimerData[i]
+
+        if(i == TimerData.length - 1){
+            nextTime = TimerData[0]
+            남은시간_기준시간 = nextTime.endTime
+        }
+        else if(currentTime.classType == "study"){
+            nextTime = TimerData[i + 2]
+            남은시간_기준시간 = nextTime.endTime
+        }
+        else{
+            nextTime = TimerData[i + 1]
+            남은시간_기준시간 = currentTime.endTime
+        }
+
+        남은시간 = new Time().diffTime(남은시간_기준시간)
+    }
+}
 
 export default {
     name : "Timer",
     data(){ return {
-        currentTime : new TimerItem(0, 0, 0),
-        nextTime : new TimerItem(0, 0, 0),
-        남은시간 : new Time(),
-        남은시간_기준시간 : new Time()
+        currentTime,
+        nextTime,
+        남은시간,
         // isTimeFew : false
     }},
     mounted(){
-        for(let i = 0; i < TimerData.length; i++){
-
-            if(TimerData[i].isCurrentTime){
-                this.currentTime = TimerData[i]
-
-                if(i == TimerData.length - 1){
-                    this.nextTime = TimerData[0]
-                    this.남은시간_기준시간 = this.nextTime.endTime
-                }
-                else if(this.currentTime.classType == "study"){
-                    this.nextTime = TimerData[i + 2]
-                    this.남은시간_기준시간 = this.nextTime.endTime
-                }
-                else{
-                    this.nextTime = TimerData[i + 1]
-                    this.남은시간_기준시간 = this.currentTime.endTime
-                }
-
-                this.남은시간 = new Time().diffTime(this.남은시간_기준시간)
-            }
-        }
+        
 
         setInterval(()=>{
-            this.남은시간 = new Time().diffTime(this.남은시간_기준시간)
+            this.남은시간 = new Time().diffTime(남은시간_기준시간)
         }, 500)
     }
 }
