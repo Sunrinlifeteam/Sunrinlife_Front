@@ -54,13 +54,12 @@ export default {
         currentTime,
         nextTime,
         남은시간,
-        // isTimeFew : false
+        isTimeFew : false
     }},
     mounted(){
-        
-
         setInterval(()=>{
             this.남은시간 = new Time().diffTime(남은시간_기준시간)
+            this.isTimeFew = this.남은시간.allSecond < 60
         }, 500)
     }
 }
@@ -83,9 +82,9 @@ export default {
 .timer .caution-animation{
     animation-name: cautionAnimation;
     animation-duration: 1500ms;
-    animation-direction: alternate-reverse;
+    /* animation-direction: alternate-reverse; */
     animation-iteration-count: infinite;
-    /* animation-timing-function: ease-in-out; */
+    animation-timing-function: ease-in-out;
 }
 
 @keyframes cautionAnimation {
