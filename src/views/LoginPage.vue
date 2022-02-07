@@ -1,6 +1,5 @@
 <template>
 <div class="login">
-
     <div class="login-box">
         <img class="logo" src="./../assets/logo.svg" alt="선린 Life 로고">
 
@@ -64,7 +63,7 @@ export default {
                 this.passwordErrorMsg = "비밀번호를 입력하세요."
             }
             else if(this.inputPassword.length < 6){
-                this.isPwEmpty = true
+                    this.isPwEmpty = true
                 this.passwordErrorMsg = "입력한 비밀번호가 너무 짧습니다."
             }
             else {
@@ -126,12 +125,11 @@ export default {
 
     .login .login-box input {
         font-size: 20px;
-        padding : 12px;
+        padding : 24px;
 
-        border-radius: 0;
-        border : 2px solid black;
+        border : 1px solid var(--gray5);
 
-        background-color: white;
+        background-color: var(--gray3);
     }
 
     .login .login-box input:valid{
@@ -139,11 +137,12 @@ export default {
     }
 
     .login .login-box input.not-first-try:invalid {
-        border : 2px solid red;
+        border : 2px solid var(--flat-red);
     }
 
     .login .erroe-msg {
-        color : red;
+        font-size : 16px;
+        color : var(--flat-red);
         text-align: left;
         visibility: hidden;
     }

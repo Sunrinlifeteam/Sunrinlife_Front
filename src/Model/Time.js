@@ -15,25 +15,32 @@ export default class Time{
         this.second = second
     }
 
+    get allSecond(){
+        return this.hour * 60 * 60 + this.minute * 60 + this.second
+    }
+
+    get diffTimeForNow(){
+        return new Time().diffTime(this)
+    }
+
     diffTime(targetTime){
-        let diffSecond = targetTime.second - this.second
-        if(diffSecond < 0){
-            diffSecond += 60
+        if(targetTime.second < this.second){
+            targetTime.second += 60
             targetTime.minute--
         }
+        const diffSecond = targetTime.second - this.second
 
-        let diffMinute = targetTime.minute - this.minute
-        if(diffMinute < 0){
-            diffMinute += 60
+        if(targetTime.minute < this.minute){
+            targetTime.minute += 60
             targetTime.hour--
         }
+        const diffMinute = targetTime.minute - this.minute
 
-        let diffhour = targetTime.hour - this.hour
-        if(diffhour < 0){
-            diffhour += 24
-        }
+        
+        if(targetTime.hour < this.hour)
+            targetTime.hour += 24
+        const diffhour = targetTime.hour - this.hour
 
-        // console.log(new Time(diffhour, diffMinute, diffSecond));
 
         return new Time(diffhour, diffMinute, diffSecond)
     }
