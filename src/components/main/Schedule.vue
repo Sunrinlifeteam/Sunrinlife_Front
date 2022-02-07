@@ -2,7 +2,7 @@
 <div class="schedule main-page-item">
     <h3>일주일간 일정</h3>
     
-    <div class="schedule-wrap">
+    <div class="main-page-item-content">
         <div class="schedule-item">
             <span class="week">일</span>
             <ul class="todo-list">
@@ -86,8 +86,10 @@ export default {
     background-color: rgba(128, 128, 128, 0.864);
 }
 
-.schedule .schedule-wrap{
+.schedule .main-page-item-content{
     width : 200%;
+
+    padding : 8px;
 
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -112,7 +114,7 @@ export default {
 }
 
 @media (min-width : 750px) {
-    .schedule .schedule-wrap{
+    .schedule .main-page-item-content{
         grid-template-columns: repeat(12, 1fr);
     }
 

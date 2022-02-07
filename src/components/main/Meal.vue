@@ -1,26 +1,27 @@
 <template>
 <div class="meal main-page-item">
     <h3>급식</h3>
+    <div class="main-page-item-content">
+        <ul>
+            <li v-for="i, n in mealData" :key="n">{{i}}</li>
+        </ul>
 
-    <ul>
-        <li v-for="i, n in mealData" :key="n">{{i}}</li>
-    </ul>
-
-    <div class="remaining-time">
-        점심시간까지
-        <div class="time-data">
-            <span v-if="luanchRemainingTime.hour < 10" class="zero">0</span>{{ luanchRemainingTime.hour }}시간
-            <span v-if="luanchRemainingTime.minute < 10" class="zero">0</span>{{ luanchRemainingTime.minute }}분
-            <span v-if="luanchRemainingTime.second < 10" class="zero">0</span>{{ luanchRemainingTime.second }}초 남음
+        <div class="remaining-time">
+            점심시간까지
+            <div class="time-data">
+                <span v-if="luanchRemainingTime.hour < 10" class="zero">0</span>{{ luanchRemainingTime.hour }}시간
+                <span v-if="luanchRemainingTime.minute < 10" class="zero">0</span>{{ luanchRemainingTime.minute }}분
+                <span v-if="luanchRemainingTime.second < 10" class="zero">0</span>{{ luanchRemainingTime.second }}초 남음
+            </div>
         </div>
-    </div>
 
-    <div class="meal-detail" @click="$router.push('meal')">세부 보기</div>
+        <div class="meal-detail" @click="$router.push('meal')">세부 보기</div>
+    </div>
 </div>
 </template>
 
 <script>
-import TimeTableData from "./../../../assets/TimerData.js"
+import TimeTableData from "../../assets/TimerData.js"
 // import Time from "./../../../Model/Time.js"
 
 let luanchRemainingTime
@@ -57,9 +58,7 @@ export default {
 
 <style>
 .meal {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    
 }
 
 .meal ul {

@@ -1,7 +1,7 @@
 <template>
 <div class="timer main-page-item">
     <h3>타이머</h3>
-    <div class="time-data">
+    <div class="main-page-item-content">
         <div class="current-tiem">현재 <span class="font-bold">{{ currentTime.className }}</span></div>
         <div class="next-time">
             {{ nextTime.className }}까지 남은 시간
@@ -71,7 +71,7 @@ export default {
     grid-template-rows: auto 1fr;
 }
 
-.timer .time-data{
+.timer .main-page-item-content{
     font-size: 1.5em;
 
     display: flex;

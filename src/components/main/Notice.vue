@@ -1,7 +1,9 @@
 <template>
 <div class="notice main-page-item">
     <h3>공지</h3>
-    <p>{{ notice }}</p>
+    <div class="main-page-item-content">
+        <p>{{ notice }}</p>
+    </div>
 </div>
 </template>
 
@@ -45,9 +47,12 @@ export default {
 
 <style>
 .notice{
+    
+}
+
+.notice .main-page-item-content {
     display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+    align-items: center;
 }
 
 .notice p{

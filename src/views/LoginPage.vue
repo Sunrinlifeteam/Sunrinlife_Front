@@ -128,9 +128,10 @@ export default {
     .login .login-box {
         width : 80%;
         max-width: 700px;
-        min-width : 400px;
 
-        padding : 32px;
+        padding : 20px;
+
+        font-size: 20px;
 
         background-color: white;
 
@@ -141,7 +142,7 @@ export default {
         display: inline-flex;
         flex-direction: column;
         text-align: center;
-        gap: 12px;
+        gap: 6px;
 
         position: absolute;
         top : 50%;
@@ -151,7 +152,8 @@ export default {
     }
 
     .login .logo{
-        width : 50%;
+        width : 70%;
+        max-width : 350px;
         margin : auto;
     }
 
@@ -161,8 +163,10 @@ export default {
 
     .login .login-box input {
         width : 100%;
-        font-size: 20px;
-        padding : 24px;
+
+        padding : 16px;
+
+        font-size: 0.75em;
 
         border : 1px solid var(--gray5);
 
@@ -178,7 +182,7 @@ export default {
     }
 
     .login .erroe-msg {
-        font-size : 16px;
+        font-size: 0.7em;
 
         color : var(--flat-red);
         visibility: hidden;
@@ -192,8 +196,9 @@ export default {
 
 
     .login .login-btn {
-        font-size : 30px;
         padding : 20px;
+
+        font-size: 1em;
         
         border-radius: 4px;
     }
@@ -203,7 +208,8 @@ export default {
     }
 
     .login .sign-up-goto {
-        font-size : 20px;
+        font-size : 0.9em;
+
         text-align: right;
         cursor: pointer;
     }
@@ -217,5 +223,11 @@ export default {
         33% { background-color: var(--flat-yellow) }
         66% { background-color: var(--flat-green) }
         100% { background-color: var(--flat-blue) }
+    }
+
+    @media (min-width : 750px) {
+        .login .login-box {
+            font-size : 24px;
+        }
     }
 </style>

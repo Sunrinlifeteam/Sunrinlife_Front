@@ -13,7 +13,10 @@
         </div>
         <img
             @click="$router.push('/main')"
-            src="./../assets/logo.svg" alt="sunrin life Logo" class="logo">
+            src="./../../public/symbol.svg" alt="sunrin life Logo" class="logo">
+        <!-- <img
+            @click="$router.push('/main')"
+            src="./../assets/logo.svg" alt="sunrin life Logo" class="logo"> -->
     </div>
     <!-- <div class="school-img">
         <p>우리들의 두번째 학교 <b>선린 Life</b></p>

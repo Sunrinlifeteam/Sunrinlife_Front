@@ -1,23 +1,14 @@
 <template>
 <div class="today-schedule main-page-item">
     <h3>오늘의 일정</h3>
-    
-    <div class="time-table">
-        <h4>시간표</h4>
-        <ul>
-            <li v-for="i, n in timeTable" :key="n">{{ n + 1 }}교시 : {{ i }}</li>
-        </ul>
+    <div class="main-page-item-content">
+        <div class="time-table">
+            <h4>시간표</h4>
+            <ul>
+                <li v-for="i, n in timeTable" :key="n">{{ n + 1 }}교시 : {{ i }}</li>
+            </ul>
+        </div>
     </div>
-
-    <hr>
-
-    <!-- <div class="todo-lis">
-        <h4>Todo 리스트</h4>
-        <ul>
-            <li v-for="i, n in todoList" :key="n">{{ i }}</li>
-        </ul>
-    </div> -->
-
 </div>
 </template>
 
@@ -51,24 +42,13 @@ export default {
 </script>
 
 <style>
+.today-schedule{
 
-.today-schedule > div {
-    padding : 8px;
 }
 
-.today-schedule ul{
-    padding : 2px 8px;
+.today-schedule .time-table{
+    padding : 4px 16px;
 }
 
-.today-schedule .time-table ul{
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
-
-.today-schedule hr {
-    border : 1px solid var(--gray4);
-}
 
 </style>

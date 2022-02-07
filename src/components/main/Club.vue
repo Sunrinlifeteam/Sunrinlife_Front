@@ -1,7 +1,9 @@
 <template>
 <div class="club main-page-item">
     <h3>동아리</h3>
-    <span class="font-bold">Comming soon</span>
+    <div class="main-page-item-content">
+        <span class="font-bold">Comming soon</span>
+    </div>
 </div>
 </template>
 
@@ -13,12 +15,16 @@ export default {
 
 <style>
 .club {
-    display : grid;
+
 }
 
-.club span {
-    text-align: center;
+.club .main-page-item-content {
+    display: flex;
+    
+    align-items: center;
+    justify-content: center;
+
     font-size : 32px;
-    color : var(--gray6)
+    color : var(--main-color3)
 }
 </style>

@@ -24,7 +24,7 @@ import Nav from "../components/Nav.vue"
 import Notice from "../components/main/Notice.vue"
 import TodaySchedule from "../components/main/TodaySchedule.vue"
 import Timer from "../components/main/Timer.vue"
-import Meal from "../components/main/Meal/Meal.vue"
+import Meal from "../components/main/Meal.vue"
 import Schedule from "../components/main/Schedule.vue"
 import Club from "../components/main/Club.vue"
 
