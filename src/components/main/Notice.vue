@@ -1,6 +1,6 @@
 <template>
 <div class="notice main-page-item">
-    <h3>공지</h3>
+    <div class="main-page-item-title"><h3>공지</h3></div>
     <div class="main-page-item-content">
         <p>{{ notice }}</p>
     </div>

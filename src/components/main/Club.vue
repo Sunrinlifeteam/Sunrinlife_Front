@@ -1,6 +1,8 @@
 <template>
 <div class="club main-page-item">
-    <h3>동아리</h3>
+    <divc class="main-page-item-title">
+        <h3>동아리</h3>
+    </divc>
     <div class="main-page-item-content">
         <span class="font-bold">Comming soon</span>
     </div>

@@ -1,10 +1,10 @@
 <template>
 <div class="timer main-page-item">
-    <h3>타이머</h3>
+    <div class="main-page-item-title"><h3>타이머</h3></div>
     <div class="main-page-item-content">
-        <div class="current-tiem">현재 <span class="font-bold">{{ currentTime.className }}</span></div>
+        <div class="current-tiem">현재 <span class="font-bold className">{{ currentTime.className }}</span></div>
         <div class="next-time">
-            {{ nextTime.className }}까지 남은 시간
+            <span>{{ nextTime.className }}</span>까지 남은 시간
             <div class="clock" :class="{'caution-animation' : isTimeFew}">
                 <span v-if="남은시간.hour < 10" class="zero">0</span>{{ 남은시간.hour }}시간
                 <span v-if="남은시간.minute < 10" class="zero">0</span>{{ 남은시간.minute }}분
@@ -69,6 +69,10 @@ export default {
 .timer{
     display: grid;
     grid-template-rows: auto 1fr;
+}
+
+.timer .className{
+    color : var(--main-color1)
 }
 
 .timer .main-page-item-content{

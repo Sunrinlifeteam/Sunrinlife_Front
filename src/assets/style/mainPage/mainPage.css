@@ -51,7 +51,18 @@ main{
 
 .main-page-item h3 {
     color : var(--main-color3);
+    display: inline;
+
+    transition: 500ms;
 }
+
+.main-page-item:hover h3 {
+    
+}
+
+/* .main-page-item:hover h3{
+    font-size: 20px;
+} */
 
 .notice-today-wrap{
     display : grid;

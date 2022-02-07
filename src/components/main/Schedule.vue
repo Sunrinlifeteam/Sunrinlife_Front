@@ -1,6 +1,8 @@
 <template>
 <div class="schedule main-page-item">
-    <h3>일주일간 일정</h3>
+    <div class="main-page-item-title">
+        <h3>일주일간 일정</h3>
+    </div>
     
     <div class="main-page-item-content">
         <div class="schedule-item">

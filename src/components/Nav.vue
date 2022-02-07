@@ -83,6 +83,7 @@ nav a{
     display : inline;
 
     border-top : 1px solid var(--gray1);
+    border-radius: 0 50px 50px 0;
 
     cursor: pointer;
 }

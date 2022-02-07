@@ -90,6 +90,12 @@ header .user-profile-data{
 
 header .logo {
     cursor: pointer;
+
+    transition: 1000ms;
+}
+
+header .logo:hover, header .logo:active {
+    transform: scale(1.3) rotateZ(1.5turn);
 }
 
 header .school-img {

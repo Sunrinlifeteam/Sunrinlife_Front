@@ -1,6 +1,6 @@
 <template>
 <div class="meal main-page-item">
-    <h3>급식</h3>
+    <div class="main-page-item-title"><h3>급식</h3></div>
     <div class="main-page-item-content">
         <ul>
             <li v-for="i, n in mealData" :key="n">{{i}}</li>

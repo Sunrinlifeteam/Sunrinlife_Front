@@ -1,6 +1,6 @@
 <template>
 <div class="today-schedule main-page-item">
-    <h3>오늘의 일정</h3>
+    <div class="main-page-item-title"><h3>오늘의 일정</h3></div>
     <div class="main-page-item-content">
         <div class="time-table">
             <h4>시간표</h4>
