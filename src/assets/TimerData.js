@@ -48,7 +48,7 @@ export default [
         "점심시간",
         new Time(11, 25, 0),
         new Time(12, 14, 59),
-        "not study"
+        "launch"
     ),
     new TimerItem(
         "4교시",

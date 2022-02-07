@@ -7,8 +7,12 @@
     </ul>
 
     <div class="remaining-time">
-        점심시간까지<br>
-        00시간 00분 00초 남음
+        점심시간까지
+        <div class="time-data">
+            <span v-if="luanchRemainingTime.hour < 10" class="zero">0</span>{{ luanchRemainingTime.hour }}시간
+            <span v-if="luanchRemainingTime.minute < 10" class="zero">0</span>{{ luanchRemainingTime.minute }}분
+            <span v-if="luanchRemainingTime.second < 10" class="zero">0</span>{{ luanchRemainingTime.second }}초 남음
+        </div>
     </div>
 
     <div class="meal-detail" @click="$router.push('meal')">세부 보기</div>
@@ -16,6 +20,19 @@
 </template>
 
 <script>
+import TimeTableData from "./../../../assets/TimerData.js"
+// import Time from "./../../../Model/Time.js"
+
+let luanchRemainingTime
+let launchStartTime
+
+TimeTableData.forEach((e)=>{
+    if(e.classType == "launch"){
+        launchStartTime = e.startTime
+        luanchRemainingTime = launchStartTime.diffTimeForNow
+    }
+})
+
 const mealData = [
     "밥",
     "국",
@@ -27,10 +44,13 @@ const mealData = [
 export default {
     name : "Meal",
     data(){return{
-        mealData
+        mealData,
+        luanchRemainingTime,
     }},
-    components :{
-
+    mounted(){
+        setInterval(()=>{
+            this.luanchRemainingTime = launchStartTime.diffTimeForNow
+        }, 500)
     }
 }
 </script>
