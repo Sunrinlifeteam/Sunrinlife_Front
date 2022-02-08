@@ -17,6 +17,7 @@
     </nav>
 </transition>
 
+
 <transition name="nav-bg">
 <div
     v-if="navState == 1"
@@ -54,11 +55,30 @@ nav {
     z-index: 2;
 }
 
-nav img{
+nav .logo{
     width : 100%;
     padding : 16px;
 
     cursor: pointer;
+
+    transition: 700ms;
+
+    animation-name: rotaeYInfinit;
+    animation-duration: 4000ms;
+    animation-iteration-count: infinite;
+}
+
+nav .logo:hover {
+    /* transform: rotateY(1turn); */
+}
+
+@keyframes rotaeYInfinit {
+    0%, 70% {
+        transform: rotateY(0turn);
+    }
+    100% {
+        transform: rotateY(1turn);
+    }
 }
 
 nav .nav-list {
