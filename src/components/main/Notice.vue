@@ -25,7 +25,7 @@ let noticeData = [
         "대충 파일",
     ),
     new Notice(
-        "intranet",
+        "school",
         "2021 전국기능경기대회 수상",
         "대충 내용",
         "대충 파일",
@@ -37,7 +37,7 @@ let noticeData = [
         "대충 파일",
     ),
     new Notice(
-        "intranet",
+        "school",
         "2021 창의아이디어경진대회 교내대회 결과 발표",
         "대충 내용",
         "대충 파일",

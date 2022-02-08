@@ -90,5 +90,10 @@ export default {
     grid-gap : 4px;
 }
 
+.schedule .schedule-item:nth-child(1){
+    color : white;
+    background-color: var(--main-color3);
+    box-shadow: 0px 4px 13px var(--main-color3);
+}
 
 </style>

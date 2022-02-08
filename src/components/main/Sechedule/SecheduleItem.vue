@@ -60,14 +60,22 @@ export default {
 }
 
 .schedule-item .todo-none-msg {
-    font-size: 20px;
+    font-size: 16px;
     text-align: center;
-    line-height: 40px;
+    line-height: 25px;
 
     position: absolute;
-    top : 50%;
+    top : 60%;
     left : 50%;
 
     transform: translate(-50%, -50%);
+}
+
+@media (min-width : 750px) {
+    .schedule-item .todo-none-msg {
+        font-size: 20px;
+        line-height: 30px;
+        top : 50%;
+    }
 }
 </style>
