@@ -5,7 +5,7 @@
         @click.self="$emit('navOnOff')">
     
         <div class="nav-list">
-            <img @click="$store.commit('navOnOff')" src="./../assets/logo.svg" alt="Logo" class="logo">
+            <img src="./../assets/logo.svg" alt="Logo" class="logo logo-rotate-animation">
 
             <hr class="list-category-line">
 
@@ -78,25 +78,6 @@ nav .logo{
     margin : 0 auto;
 
     cursor: pointer;
-
-    transition: 700ms;
-
-    animation-name: rotaeYInfinit;
-    animation-duration: 4000ms;
-    animation-iteration-count: infinite;
-}
-
-nav .logo:hover {
-    /* transform: rotateY(1turn); */
-}
-
-@keyframes rotaeYInfinit {
-    0%, 70% {
-        transform: rotateY(0turn);
-    }
-    100% {
-        transform: rotateY(1turn);
-    }
 }
 
 nav .nav-list {
@@ -148,7 +129,8 @@ nav a:hover, nav a:active{
 }
 
 .nav-list .router-link-exact-active{
-    border-left: 5px solid var(--main-color3);
+    border-left: 7px solid var(--main-color3);
+
     background-color: var(--sub-color3);
     color : var(--main-color3);
     font-family: 'GmarketSansBold';

@@ -1,10 +1,10 @@
 <template>
 <div class="login">
+    <!-- <img src="./../assets/sunrin.jpg" alt="배경" class="login-bg"> -->
     <div class="login-box">
         <img
             @click="easterEggClickCount++"
-            class="logo" src="./../assets/logo.svg" alt="선린 Life 로고">
-
+            class="logo logo-rotate-animation" src="./../assets/logo.svg" alt="선린 Life 로고">
         
         <label>
             <input
@@ -124,6 +124,28 @@ export default {
     .login {
         width : 100%;
         height : 100vh;
+
+        /* animation: login-bg-animation 10s infinite reverse; */
+    }
+
+    /* .login::before {
+        content: "";
+        background: url(./../assets/sunrin.jpg);
+        background-size: cover;
+        background-position: center;
+        opacity: 0.5;
+
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+    } */
+
+    .login .login-bg {
+        width : 100%;
+        height : 100vh;
+        opacity: 0.3;
     }
 
     .login .login-box {

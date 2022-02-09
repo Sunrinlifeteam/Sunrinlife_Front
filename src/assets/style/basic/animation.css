@@ -41,10 +41,19 @@
     transform: scale(1);
 }
 
-/* .notice-icon-leave-to{
-    transform: translateY(-0%);
-} */
+/* 로고 돌아가는 애니메이션 */
 
-/* .notice-icon-leave-from{
-    transform: translateY(-100%);
-} */
+.logo-rotate-animation {
+    animation-name: rotaeYInfinit;
+    animation-duration: 4000ms;
+    animation-iteration-count: infinite;
+}
+
+@keyframes rotaeYInfinit {
+    0%, 70% {
+        transform: rotateY(0turn);
+    }
+    100% {
+        transform: rotateY(1turn);
+    }
+}
