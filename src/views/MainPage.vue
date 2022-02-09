@@ -3,7 +3,7 @@
 <Header/>
 <Nav/>
 
-<main>
+<main class="page-content">
     <Notice/>
     <Timer/>
     <Meal/>

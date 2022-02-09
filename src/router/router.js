@@ -2,6 +2,7 @@ import { createWebHistory, createRouter } from "vue-router"
 
 import LoginPage from "./../views/LoginPage.vue"
 import MainPage from "./../views/MainPage.vue"
+import IntroducePage from "./../views/IntroducePage.vue"
 
 import easterEgg from "./../views/EasterEgg.vue"
 
@@ -31,6 +32,10 @@ const routes = [
     {
         path : "/easterEgg",
         component : easterEgg
+    },
+    {
+        path : "/introduce",
+        component : IntroducePage
     },
 ]
 
