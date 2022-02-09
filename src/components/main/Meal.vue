@@ -61,8 +61,14 @@ export default {
     
 }
 
+.meal .main-page-item-content {
+    display : flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
 .meal ul {
-    padding : 16px;
+    padding : 0 16px;
 }
 
 .meal li {

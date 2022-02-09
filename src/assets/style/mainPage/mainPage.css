@@ -23,6 +23,7 @@ main{
 
     display: grid;
     grid-template-rows: auto 1fr;
+    grid-gap: 12px;
 
     transition: 500ms;
 }
@@ -41,14 +42,6 @@ main{
     
 }
 
-/* .main-page-item:nth-child(2n):hover {
-    background-color: var(--flat-light-blue);
-}
-
-.main-page-item:nth-child(2n + 1):hover {
-    background-color: var(--flat-yellow);
-} */
-
 .main-page-item h3 {
     color : var(--main-color3);
     display: inline;
@@ -63,12 +56,6 @@ main{
 /* .main-page-item:hover h3{
     font-size: 20px;
 } */
-
-.notice-today-wrap{
-    display : grid;
-    grid-template-rows: auto 1fr;
-    grid-gap: 30px;
-}
 
 .notice {
 
