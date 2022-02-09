@@ -4,7 +4,7 @@
         <div class="user-profile">
             <img
                 class="user-profile-img"
-                @click="$emit('navOnOff')"
+                @click="$store.commit('navOnOff')"
                 :src="currentUserData.profileImg" alt="사용자 프로필">
 
             <span class="user-profile-data">{{ currentUserData.year }}학년</span>
@@ -12,6 +12,7 @@
             <span class="user-profile-data">{{ currentUserData.number }}번</span>
             <span class="user-profile-data">{{ currentUserData.name }}</span>
         </div>
+
         <img
             @click="$router.push('/main')"
             src="./../../public/symbol.svg" alt="sunrin life Logo" class="logo">
@@ -37,12 +38,11 @@ export default {
     },
     methods:{
         navOnOff(){
-            console.log("navOnOff");
             this.$emit("navOnOff")
         }
     },
     computed :{
-        ...mapState(['currentUserData'])
+        ...mapState(['currentUserData', "isNavOpen"]),
     }
 }
 

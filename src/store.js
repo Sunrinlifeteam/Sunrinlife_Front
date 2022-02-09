@@ -8,6 +8,7 @@ const BASE_URL = "https://reqres.in/"
 
 const store = createStore({
     state(){ return {
+        isNavOpen : false, //네브바가 켜졌는지 저장하는 변수
         isLogin : false,
         currentUserData : {
             name : "박희찬",
@@ -26,7 +27,11 @@ const store = createStore({
         loginSuccess(state, userData){
             state.currentUserData = userData
             state.isLogin = true
-        }
+        },
+        navOnOff(state){
+            console.log("Heloo World");
+            state.isNavOpen = !(state.isNavOpen)
+        },
     },
     actions : {
         login(context, loginData){

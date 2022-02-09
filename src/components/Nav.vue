@@ -1,15 +1,17 @@
 <template>
 <transition name="nav-bar">
     <nav
-        v-if="navState == 1"
+        v-if="isNavOpen"
         @click.self="$emit('navOnOff')">
     
         <div class="nav-list">
-            <img src="./../assets/logo.svg" alt="Logo" class="logo">
+            <img @click="$store.commit('navOnOff')" src="./../assets/logo.svg" alt="Logo" class="logo">
             <router-link
                 v-for="i, n in navBarList" :key="n"
                 :to="i.router">{{ i.name }}</router-link>
         </div>
+
+        <div @click="$store.commit('navOnOff')"></div>
 
         <div 
             @click="$router.push('easterEgg')"
@@ -17,11 +19,9 @@
     </nav>
 </transition>
 
-
 <transition name="nav-bg">
 <div
-    v-if="navState == 1"
-    @click.self="$emit('navOnOff')"
+    v-if="isNavOpen"
     class="nav-bg"></div>
 </transition>
 
@@ -33,11 +33,11 @@ import { mapState } from "vuex"
 export default {
     name : "Nav",
     computed :{
-        ...mapState(['navBarList'])
+        ...mapState(['navBarList', "isNavOpen"])
         // store.js에 저장된 navBarList를 가져와서 목록으로 보여준다.
     },
     props : {
-        navState : Number
+        // navState : Number
     }
 }
 </script>
@@ -48,6 +48,9 @@ nav {
     height : 100%;
 
     /* background-color: var(--bg-black); */
+
+    display: grid;
+    grid-template-columns: auto 1fr;
 
     position: fixed;
     top : 0px;

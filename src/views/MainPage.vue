@@ -1,11 +1,7 @@
 <template>
 
-<Header @navOnOff="navOnOff" />
-
-<Nav
-    :navState="isNavOn"
-    @navOnOff="navOnOff"
-    />
+<Header/>
+<Nav/>
 
 <main>
     <Notice/>
@@ -34,10 +30,7 @@ export default {
         isNavOn : 0,
     }},
     methods :{
-        navOnOff(){
-            this.isNavOn++;
-            this.isNavOn %= 2;
-        }
+        
     },
     components : {
         Header,

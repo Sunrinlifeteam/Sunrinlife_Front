@@ -37,6 +37,7 @@
 </div>
 </template>
 <script>
+
 import { mapActions } from "vuex"
 
 import { SUNRIN_EMAIL_PATTERN } from "./../Model/pattern.js"
