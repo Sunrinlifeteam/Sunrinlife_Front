@@ -6,6 +6,20 @@
     
         <div class="nav-list">
             <img @click="$store.commit('navOnOff')" src="./../assets/logo.svg" alt="Logo" class="logo">
+
+            <hr class="list-category-line">
+
+            <div class="list-user-profile">
+                {{currentUserData.name}}님 환영합니다.
+                <br>
+                {{currentUserData.year}}학년
+                {{currentUserData.class}}반
+                {{currentUserData.number}}번
+                <!-- {{currentUserData}} -->
+            </div>
+
+            <hr class="list-category-line">
+
             <router-link
                 v-for="i, n in navBarList" :key="n"
                 :to="i.router">{{ i.name }}</router-link>
@@ -33,7 +47,7 @@ import { mapState } from "vuex"
 export default {
     name : "Nav",
     computed :{
-        ...mapState(['navBarList', "isNavOpen"])
+        ...mapState(['currentUserData', 'navBarList', "isNavOpen"])
         // store.js에 저장된 navBarList를 가져와서 목록으로 보여준다.
     },
     props : {
@@ -59,8 +73,9 @@ nav {
 }
 
 nav .logo{
-    width : 100%;
+    width : 90%;
     padding : 16px;
+    margin : 0 auto;
 
     cursor: pointer;
 
@@ -97,6 +112,19 @@ nav .nav-list {
     display: inline-flex;
     flex-direction: column;
     z-index: 2;
+}
+
+nav .nav-list .list-category-line {
+    border-top : 1px solid var(--gray3);
+
+    margin : 2px 0;
+}
+
+nav .nav-list .list-user-profile {
+    font-size : 18px;
+    text-align: center;
+
+    padding : 12px 0;
 }
 
 nav a{
