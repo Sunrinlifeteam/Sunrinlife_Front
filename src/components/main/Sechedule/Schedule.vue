@@ -1,99 +1,197 @@
 <template>
 <div class="schedule main-page-item">
-    <div class="main-page-item-title">
-        <h3>일주일간 일정</h3>
+    <h3>일주일간 일정</h3>
+    <!--div>{{ tasks[0].schedule[0].content }}</div-->
+
+    <div class="schedule-item">
+    <div class="schedule-items" v-for="task in tasks" :key="task">
+        <div class="items-week">{{ task.day }}</div>
+        <div v-for="(content, i) in task.schedule" :key="i">
+
+            <div v-if="!task.schedule[i].isEditable" @click.prevent="task.schedule[i].isEditable = true">
+                {{ task.schedule[i].content }}
+            </div>
+            <div v-else>
+                <input placeholder="추가할 내용 입력" v-model="task.schedule[i].content" @keyup.enter="task.schedule[i].isEditable = false"/>
+                <button @click.prevent="task.schedule[i].isEditable = false">ok</button>
+            </div>
+
+        </div>
+
+        <div>
+            <button @click.prevent="task.schedule.push({content: '', state: 'none', isCompleted: false, isEditable: true})">add</button>
+        </div>
     </div>
-    <div class="main-page-item-content">
-        <SecheduleItem
-            v-for="i, n in secheduleData" :key="n"
-            :secheduleData="i"/>
     </div>
+
 </div>
 </template>
 
+<style>
+.schedule .main-page-item {
+    overflow: auto;
+}
+.schedule-item {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap : 8px;
+    overflow: auto;
+}
+.schedule-items{
+    width: 200px;
+    background-color: aqua;
+}
+.items-week {
+    color: red;
+}
+</style>
+
 <script>
-import SecheduleItem from "./SecheduleItem.vue"
-import Sechedule from "./../../../Model/Sechedule.js"
-
-const secheduleData = [
-    new Sechedule(
-        new Date("2022-2-8"),
-        []
-    ),
-    new Sechedule(
-        new Date("2022-2-9"),
-        ["todo1", "todo2","todo3"]
-    ),
-    new Sechedule(
-        new Date("2022-2-10"),
-        ["todo1", "todo2","todo3"]
-    ),
-    new Sechedule(
-        new Date("2022-2-11"),
-        ["todo1", "todo2","todo3"]
-    ),
-    new Sechedule(
-        new Date("2022-2-12"),
-        ["todo1", "todo2","todo3"]
-    ),
-    new Sechedule(
-        new Date("2022-2-13"),
-        ["todo1", "todo2","todo3"]
-    ),
-    new Sechedule(
-        new Date("2022-2-14"),
-        ["todo1", "todo2","todo3"]
-    ),
-]
-
 export default {
     name : "Schedule",
     data(){ return{
-        secheduleData
+        tasks: [
+            //Mon
+            {
+                day: 'mon',
+                schedule: [
+                    {
+                        content: '밥 먹기',
+                        state: 'none',
+                        isCompleted: false,
+                        isEditable: false
+                    },
+                    {
+                        content: 'UX 디자인',
+                        state: 'clubActivity',
+                        isCompleted: false,
+                        isEditable: false
+                    },
+                    {
+                        content: '학원 가기',
+                        state: 'none',
+                        isCompleted: true,
+                        isEditable: false
+                    },
+                    {
+                        content: '프로그래밍',
+                        state: 'performanceEvaluation',
+                        isCompleted: false,
+                        isEditable: false
+                    }
+                ]
+            },
+            //Tue
+            {
+                day: 'tue',
+                schedule: [
+                    {
+                        content: '컴퓨터 수리',
+                        state: 'none',
+                        isCompleted: false,
+                        isEditable: false
+                    },
+                    {
+                        content: '공모전 준비',
+                        state: 'none',
+                        isCompleted: false,
+                        isEditable: false
+                    }
+                ]
+            },
+            //Wed
+            {
+                day: 'wed',
+                schedule: [
+                    {
+                        content: '컴퓨터 수리',
+                        state: 'none',
+                        isCompleted: false,
+                        isEditable: false
+                    },
+                    {
+                        content: '공모전 준비 완료',
+                        state: 'none',
+                        isCompleted: false,
+                        isEditable: false
+                    }
+                ]
+            },
+            //Thu
+            {
+                day: 'thu',
+                schedule: [
+                    {
+                        content: '컴퓨터 수리',
+                        state: 'none',
+                        isCompleted: false,
+                        isEditable: false
+                    },
+                    {
+                        content: '공모전 준비',
+                        state: 'none',
+                        isCompleted: false,
+                        isEditable: false
+                    }
+                ]
+            },
+            //Fri
+            {
+                day: 'fri',
+                schedule: [
+                    {
+                        content: '컴퓨터 수리',
+                        state: 'none',
+                        isCompleted: false,
+                        isEditable: false
+                    },
+                    {
+                        content: '공모전 준비',
+                        state: 'none',
+                        isCompleted: false,
+                        isEditable: false
+                    }
+                ]
+            },
+            //Sat
+            {
+                day: 'sat',
+                schedule: [
+                    {
+                        content: '컴퓨터 수리',
+                        state: 'none',
+                        isCompleted: false,
+                        isEditable: false
+                    },
+                    {
+                        content: '공모전 준비',
+                        state: 'none',
+                        isCompleted: false,
+                        isEditable: false
+                    }
+                ]
+            },
+            //Sun
+            {
+                day: 'sun',
+                schedule: [
+                    {
+                        content: '컴퓨터 수리',
+                        state: 'none',
+                        isCompleted: false,
+                        isEditable: false
+                    },
+                    {
+                        content: '공모전 준비',
+                        state: 'none',
+                        isCompleted: false,
+                        isEditable: false
+                    }
+                ]
+            }
+        ]
     }},
     components : {
-        SecheduleItem
     }
 }
 </script>
-
-<style>
-
-.schedule {
-    overflow: auto;
-}
-
-.schedule::-webkit-scrollbar{
-    width : 20px;
-    background-color: rgba(255, 255, 255, 0);
-    border-radius: 16px;
-}
-
-.schedule::-webkit-scrollbar-thumb{
-    background-color: var(--gray4);
-    background-clip: padding-box;
-    border : 3px solid transparent;
-    border-radius: 12px;
-}
-
-.schedule:hover::-webkit-scrollbar-thumb {
-    background-color: var(--gray6);
-}
-
-.schedule .main-page-item-content{
-    width : 200%;
-
-    padding : 4px;
-
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-gap : 4px;
-}
-
-.schedule .schedule-item:nth-child(1){
-    color : white;
-    background-color: var(--main-color3);
-    box-shadow: 0px 4px 13px var(--main-color3);
-}
-
-</style>
