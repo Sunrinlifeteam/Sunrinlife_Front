@@ -1,27 +1,29 @@
 <template>
 <div class="schedule main-page-item">
-    <h3>일주일간 일정</h3>
-    <!--div>{{ tasks[0].schedule[0].content }}</div-->
+    <h3>일주일간 일정(스타일 X)</h3>
 
     <div class="schedule-item">
-    <div class="schedule-items" v-for="task in tasks" :key="task">
-        <div class="items-week">{{ task.day }}</div>
-        <div v-for="(content, i) in task.schedule" :key="i">
+        <div class="schedule-items" v-for="task in tasks" :key="task">
+            <div class="item-day">{{ task.day }}</div>
+            <div v-for="(content, i) in task.schedule" :key="i">
 
-            <div v-if="!task.schedule[i].isEditable" @click.prevent="task.schedule[i].isEditable = true">
-                {{ task.schedule[i].content }}
+                <div class="item-list-true" v-if="!task.schedule[i].isEditable">
+                    <div class="item-content" @click.prevent="task.schedule[i].isEditable = true">{{ task.schedule[i].content }}</div>
+                    <button class="item-button" @click.prevent="task.schedule.splice(i, 1)">del</button>
+                </div>
+                <div class="item-list-false" v-if="task.schedule[i].isEditable">
+                    <input class="item-input" placeholder="추가할 내용 입력" v-model="task.schedule[i].content" @keyup.enter="editTodo(task.schedule[i])"/>
+                    <button class="item-button" @click.prevent="editTodo(task.schedule[i])">ok</button>
+                    <button class="item-button" @click.prevent="task.schedule.splice(i, 1)">del</button>
+                </div>
+
             </div>
-            <div v-else>
-                <input placeholder="추가할 내용 입력" v-model="task.schedule[i].content" @keyup.enter="task.schedule[i].isEditable = false"/>
-                <button @click.prevent="task.schedule[i].isEditable = false">ok</button>
+            <div v-if="task.schedule.length == 0">Add Todos!</div>
+
+            <div>
+                <button class="add-button" @click.prevent="addTodo(task.schedule)">add</button>
             </div>
-
         </div>
-
-        <div>
-            <button @click.prevent="task.schedule.push({content: '', state: 'none', isCompleted: false, isEditable: true})">add</button>
-        </div>
-    </div>
     </div>
 
 </div>
@@ -33,16 +35,75 @@
 }
 .schedule-item {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-gap : 8px;
+    grid-template-columns: repeat(7, 50%);
+    grid-gap: 8px;
     overflow: auto;
 }
 .schedule-items{
-    width: 200px;
-    background-color: aqua;
+    padding: 8px;
+    background-color: rgb(248, 248, 248);
+    border-radius: 8px;
+    display: block;
 }
-.items-week {
-    color: red;
+.item-day {
+    color: black;
+    font-family: "GmarketSansMedium";
+    font-size: 16px;
+    font-weight: bold;
+    height: 24px;
+}
+.item-list-true {
+    height: 24px;
+    display: grid;
+    grid-template-columns: 1fr 30px;
+    font-family: "GmarketSansMedium";
+    margin-bottom: 4px;
+    align-items: center;
+}
+.item-list-false {
+    display: grid;
+    grid-template-columns: 1fr 30px 30px;
+    grid-gap: 4px;
+    font-family: "GmarketSansMedium";
+    margin-bottom: 4px;
+}
+.item-content {
+    font-size: 16px;
+    font-family: "GmarketSansMedium";
+}
+.item-input {
+    width: 100%;
+    height: 24px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-family: "GmarketSansMedium";
+    border: none;
+    background-color: rgb(255, 236, 233);
+}
+.item-button {
+    height: 24px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-family: "GmarketSansMedium";
+    background-color: rgb(255, 74, 42);
+}
+.item-button:hover {
+    background-color: rgb(255, 142, 122);
+    scale: scale(1);
+    transition: none;
+}
+.add-button {
+    width: 100%;
+    height: 24px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-family: "GmarketSansMedium";
+    background-color: rgb(255, 74, 42);
+}
+.add-button:hover {
+    background-color: rgb(255, 142, 122);
+    scale: scale(1.00);
+    transition: none;
 }
 </style>
 
@@ -57,25 +118,25 @@ export default {
                 schedule: [
                     {
                         content: '밥 먹기',
-                        state: 'none',
+                        isPrimary: false,
                         isCompleted: false,
                         isEditable: false
                     },
                     {
                         content: 'UX 디자인',
-                        state: 'clubActivity',
+                        isPrimary: false,
                         isCompleted: false,
                         isEditable: false
                     },
                     {
                         content: '학원 가기',
-                        state: 'none',
+                        isPrimary: false,
                         isCompleted: true,
                         isEditable: false
                     },
                     {
                         content: '프로그래밍',
-                        state: 'performanceEvaluation',
+                        isPrimary: false,
                         isCompleted: false,
                         isEditable: false
                     }
@@ -87,13 +148,13 @@ export default {
                 schedule: [
                     {
                         content: '컴퓨터 수리',
-                        state: 'none',
+                        isPrimary: false,
                         isCompleted: false,
                         isEditable: false
                     },
                     {
                         content: '공모전 준비',
-                        state: 'none',
+                        isPrimary: false,
                         isCompleted: false,
                         isEditable: false
                     }
@@ -105,13 +166,13 @@ export default {
                 schedule: [
                     {
                         content: '컴퓨터 수리',
-                        state: 'none',
+                        isPrimary: false,
                         isCompleted: false,
                         isEditable: false
                     },
                     {
                         content: '공모전 준비 완료',
-                        state: 'none',
+                        isPrimary: false,
                         isCompleted: false,
                         isEditable: false
                     }
@@ -123,13 +184,13 @@ export default {
                 schedule: [
                     {
                         content: '컴퓨터 수리',
-                        state: 'none',
+                        isPrimary: false,
                         isCompleted: false,
                         isEditable: false
                     },
                     {
                         content: '공모전 준비',
-                        state: 'none',
+                        isPrimary: false,
                         isCompleted: false,
                         isEditable: false
                     }
@@ -141,13 +202,13 @@ export default {
                 schedule: [
                     {
                         content: '컴퓨터 수리',
-                        state: 'none',
+                        isPrimary: false,
                         isCompleted: false,
                         isEditable: false
                     },
                     {
                         content: '공모전 준비',
-                        state: 'none',
+                        isPrimary: false,
                         isCompleted: false,
                         isEditable: false
                     }
@@ -159,13 +220,13 @@ export default {
                 schedule: [
                     {
                         content: '컴퓨터 수리',
-                        state: 'none',
+                        isPrimary: false,
                         isCompleted: false,
                         isEditable: false
                     },
                     {
                         content: '공모전 준비',
-                        state: 'none',
+                        isPrimary: false,
                         isCompleted: false,
                         isEditable: false
                     }
@@ -177,13 +238,13 @@ export default {
                 schedule: [
                     {
                         content: '컴퓨터 수리',
-                        state: 'none',
+                        isPrimary: false,
                         isCompleted: false,
                         isEditable: false
                     },
                     {
                         content: '공모전 준비',
-                        state: 'none',
+                        isPrimary: false,
                         isCompleted: false,
                         isEditable: false
                     }
@@ -192,6 +253,14 @@ export default {
         ]
     }},
     components : {
+    },
+    methods: {
+        addTodo(schedule) {
+            schedule.push({content: '', state: 'none', isCompleted: false, isEditable: true})
+        },
+        editTodo(schedule) {
+            schedule.isEditable = false
+        }
     }
 }
 </script>
