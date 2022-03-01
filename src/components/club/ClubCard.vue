@@ -1,5 +1,5 @@
 <template>
-<div class="club-card">
+<div class="club-card neu-morphism-card">
     <div class="header">
         <img src="/edcan.png" alt="" class="logo">
         <div class="descriptions-wrap">
@@ -13,19 +13,19 @@
     <div class="sns-ranker-wrap">
         <!-- ranker은 임원을 끗하는 겁니다...... 영어를 못해서 죄송.. -->
         <div class="sns-wrap">
-            <a class="sns-link facebook-link" href="https://www.facebook.com/edcancircle">
+            <a class="sns-link facebook-link" href="https://www.facebook.com/edcancircle" target="_blank">
                 <img src="/img/sns/facebook.svg" alt="Facebook 링크 아이콘" class="icon">
                 <div class="url">facebook.com/edcancircle</div>
             </a>
-            <a class="sns-link insta-link" href="https://www.instagram.com/sunrin_edcan/">
+            <a class="sns-link insta-link" href="https://www.instagram.com/sunrin_edcan/" target="_blank">
                 <img src="/img/sns/facebook.svg" alt="Instagram 링크 아이콘" class="icon">
                 <div class="url">@sunrin_edcan</div>
             </a>
-            <a class="sns-link web-link" href="https://edcan,kr">
+            <a class="sns-link web-link" href="https://edcan,kr" target="_blank">
                 <img src="/img/sns/link.svg" alt="Web 링크 아이콘" class="icon">
                 <div class="url">edcan.kr</div>
             </a>
-            <a class="sns-link location-link" href="#">
+            <a class="sns-link location-link" href="#" target="_blank">
                 <img src="/img/sns/location.svg" alt="붕아리 부실" class="icon">
                 <div class="url">421실</div>
             </a>
@@ -43,7 +43,14 @@
     </div>
 
     <div class="curriculum-wrap">
+        <h3>수업 커리큘럼</h3>
 
+        <ul class="curriculum">
+            <li>Android Studio</li>
+            <li>Vue.js</li>
+            <li>Figma</li>
+            <li>XD</li>
+        </ul>
     </div>
 </div>
 </template>
@@ -57,19 +64,17 @@ export default {
 <style scoped>
 .club-card {
     width : 100%;
-    height : 100%;
 
     padding: 48px 32px;
-    border-radius: 8px;
-    box-shadow: 1px 0 6px 0 #00000029;
-    background-color: #fff;
 
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     gap : 36px;
 }
 
 .header {
+    width : 100%;
     display: flex;
     align-items: center;
     gap : 32px;
@@ -158,5 +163,36 @@ export default {
     font-size: 16px;
     font-weight: 500;
     /* color: #3d3d3d; */
+}
+
+.curriculum-wrap {
+    padding : 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap : 14px;
+}
+
+.curriculum {
+    width : 100%;
+    max-width : 200px;
+
+    background-color: var(--gray1);
+    
+    border-radius: 8px;
+
+    padding: 12px;
+
+    display: inline-flex;
+    flex-direction: column;
+    /* justify-content: space-evenly; */
+    gap : 12px;
+}
+
+.curriculum li {
+    /* font-family: NotoSansKR; */
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.43;
+    color: #3d3d3d;
 }
 </style>
