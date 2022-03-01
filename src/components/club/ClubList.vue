@@ -1,28 +1,11 @@
 <template>
 <ul class="club-list neu-morphism-card">
-    <li @click="$emit('clubListItemClick', 0)">
-        <img src="/edcan.png" alt="AnA 동아리 로고" class="club-icon">
-        <div class="club-name">AnA</div>
-    </li>
-    <li @click="$emit('clubListItemClick', 1)">
-        <img src="/edcan.png" alt="App:ple Pi 동아리 로고" class="club-icon">
-        <div class="club-name">App:ple Pi</div>
-    </li>
-    <li @click="$emit('clubListItemClick', 2)">
-        <img src="/edcan.png" alt="EDCAN 동아리 로고" class="club-icon">
-        <div class="club-name">EDCAN</div>
-    </li>
-    <li @click="$emit('clubListItemClick', 3)">
-        <img src="/edcan.png" alt="IWOP 동아리 로고" class="club-icon">
-        <div class="club-name">IWOP</div>
-    </li>
-    <li @click="$emit('clubListItemClick', 4)">
-        <img src="/edcan.png" alt="RG 동아리 로고" class="club-icon">
-        <div class="club-name">RG</div>
-    </li>
-    <li @click="$emit('clubListItemClick', 5)">
-        <img src="/edcan.png" alt="zer0pen 동아리 로고" class="club-icon">
-        <div class="club-name">zer0pen</div>
+    <li
+        v-for="(i, n) in clubList" :key="n"
+        @click="$emit('clubListItemClick', n)"
+        :class="{ 'seleted' : clubIdx == n}">
+        <img src="/edcan.png" :alt="`${i} 동아리 로고`" class="club-icon">
+        <div class="club-name">{{ i }}</div>
     </li>
 </ul>
 </template>
@@ -30,6 +13,16 @@
 <script>
 export default {
     name : "Cub list",
+    data(){ return{
+        clubList : [
+            "AnA",
+            "App:ple Pi",
+            "EDCAN",
+            "IWOP",
+            "RG",
+            "zer0pen",
+        ]
+    }},
     props : {
         marorIdx : Number,
         clubIdx : Number,
@@ -57,8 +50,8 @@ export default {
     cursor: pointer;
 }
 
-.club-list li.current {
-    background-color: #f5f6f7;
+.club-list li.seleted {
+    background-color: var(--gray1);
 }
 
 .club-icon {

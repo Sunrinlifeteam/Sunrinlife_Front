@@ -58,6 +58,10 @@
 <script>
 export default {
     name : "Club card",
+    props : {
+        marorIdx : Number,
+        clubIdx : Number,
+    }
 }
 </script>
 

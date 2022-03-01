@@ -3,11 +3,16 @@
 <div class="clud-page">
     <div class="page-content">
         <div class="club-list-wrap">
-            <!-- {{ choiceClubIdx }} -->
-            <!-- Hello World -->
-            <ClubList @clubListItemClick="choiceClubIdx = $event.target.value"/>
+            <ClubList
+                @clubListItemClick="seleteClubIdx = $event"
+                :clubIdx="seleteClubIdx"
+                :marorIdx="0"
+                />
         </div>
-        <ClubCard/>
+        <ClubCard
+            :clubIdx="seleteClubIdx"
+            :marorIdx="0"
+            />
     </div>
 </div>
 </template>
@@ -20,8 +25,8 @@ import ClubCard from "./../components/club/ClubCard.vue"
 
 export default {
     name : "Club Page",
-    datat(){return{
-        choiceClubIdx : 0,
+    data(){return{
+        seleteClubIdx : 0,
     }},
     components : {
         Nav,
