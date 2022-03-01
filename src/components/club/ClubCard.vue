@@ -9,6 +9,42 @@
             </p>
         </div>
     </div>
+
+    <div class="sns-ranker-wrap">
+        <!-- ranker은 임원을 끗하는 겁니다...... 영어를 못해서 죄송.. -->
+        <div class="sns-wrap">
+            <a class="sns-link facebook-link" href="https://www.facebook.com/edcancircle">
+                <img src="/img/sns/facebook.svg" alt="Facebook 링크 아이콘" class="icon">
+                <div class="url">facebook.com/edcancircle</div>
+            </a>
+            <a class="sns-link insta-link" href="https://www.instagram.com/sunrin_edcan/">
+                <img src="/img/sns/facebook.svg" alt="Instagram 링크 아이콘" class="icon">
+                <div class="url">@sunrin_edcan</div>
+            </a>
+            <a class="sns-link web-link" href="https://edcan,kr">
+                <img src="/img/sns/link.svg" alt="Web 링크 아이콘" class="icon">
+                <div class="url">edcan.kr</div>
+            </a>
+            <a class="sns-link location-link" href="#">
+                <img src="/img/sns/location.svg" alt="붕아리 부실" class="icon">
+                <div class="url">421실</div>
+            </a>
+        </div>
+        <div class="ranker-wrap">
+            <div class="ranker">
+                <div class="position">부장</div>
+                <div class="name">진다은</div>
+            </div>
+            <div class="ranker">
+                <div class="position">부부장</div>
+                <div class="name">박희찬</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="curriculum-wrap">
+
+    </div>
 </div>
 </template>
 
@@ -67,4 +103,60 @@ export default {
     line-height: 1.43;
 }
 
+
+.sns-ranker-wrap {
+    padding : 0 24px;
+
+    display: flex;
+    flex-direction: column;
+    gap : 20px;
+}
+
+.sns-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap : 16px;
+}
+
+.sns-link {
+    display: flex;
+    align-items: center;
+    gap : 8px;
+}
+
+.sns-link .icon {
+    width : 24px;
+    height : 24px;
+}
+
+.sns-link .url {
+    /* font-family: NotoSansKR; */
+    font-size: 16px;
+    color: #3d3d3d;
+}
+
+.ranker-wrap {
+    display: flex;
+    gap : 36px;
+}
+
+.ranker {
+    display: flex;
+    align-items: center;
+    gap : 12px;
+}
+
+.ranker .position {
+    /* font-family: NotoSansKR; */
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--main-color4);
+}
+
+.ranker .name {
+    /* font-family: NotoSansKR; */
+    font-size: 16px;
+    font-weight: 500;
+    /* color: #3d3d3d; */
+}
 </style>
