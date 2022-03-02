@@ -3,6 +3,7 @@
 <div class="clud-page">
     <div class="page-content">
         <div class="club-list-wrap">
+            <MajorSeleter :seleteMajorIdx="seleteMajorIdx" @seleteMajor="seleteMajorIdx = $event"/>
             <ClubList
                 @clubListItemClick="seleteClubIdx = $event"
                 :clubIdx="seleteClubIdx"
@@ -20,6 +21,7 @@
 <script>
 import Nav from "./../components/Nav.vue"
 
+import MajorSeleter from "./../components/club/MajorSeleter.vue"
 import ClubList from "./../components/club/ClubList.vue"
 import ClubCard from "./../components/club/ClubCard.vue"
 
@@ -27,12 +29,16 @@ export default {
     name : "Club Page",
     data(){return{
         seleteClubIdx : 0,
+        seleteMajorIdx : 0,
+
+        isChoiceMajor : false
     }},
     components : {
         Nav,
 
         ClubCard,
-        ClubList
+        ClubList,
+        MajorSeleter
     }
 }
 </script>
