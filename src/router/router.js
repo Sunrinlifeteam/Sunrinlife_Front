@@ -4,6 +4,7 @@ import LoginPage from "./../views/LoginPage.vue"
 import MainPage from "./../views/MainPage.vue"
 import IntroducePage from "./../views/IntroducePage.vue"
 import ProfilePage from './../views/profilePage.vue';
+import ClubPage from "./../views/ClubPage.vue"
 
 import easterEgg from "./../views/EasterEgg.vue"
 
@@ -41,7 +42,11 @@ const routes = [
     {
         path : "/profile",
         component : ProfilePage,
-    }
+    },
+    {
+        path : "/club",
+        component : ClubPage
+    },
 ]
 
 const router = createRouter({

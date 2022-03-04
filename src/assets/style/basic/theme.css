@@ -2,6 +2,7 @@
     --main-color1 : #3ebbf1;
     --main-color2 : #1fa2fe;
     --main-color3 : #2b63ef;
+    --main-color4 : #4992ff;
 
     --sub-color1 : #d9f4ff;
     --sub-color2 : #bde4ff;
@@ -79,8 +80,14 @@ button:active{
 }
 
 .neu-morphism {
-    background-color: #f2f3f7;
-    box-shadow: 0px 15px 20px var(--gray4);
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: #fff;
+}
+
+.neu-morphism-card {
+    border-radius: 8px;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: #fff;
 }
 
 .page-content {
