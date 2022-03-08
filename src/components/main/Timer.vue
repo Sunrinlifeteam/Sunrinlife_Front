@@ -2,14 +2,17 @@
 <div class="timer main-page-item">
     <div class="main-page-item-title"><h3>타이머</h3></div>
     <div class="main-page-item-content">
-        <div class="current-tiem">현재 <span class="font-bold className">{{ currentTime.className }}</span></div>
+        <div class="current-item">
+            <span class="sub_title">현재</span>
+            <span class="font-bold className">{{ currentTime.className }}</span> <!--무슨시간인지는 api에서 불러와야함-->
+        </div>
         <div class="next-time">
-            <span>{{ nextTime.className }}</span>까지 남은 시간
-            <div class="clock" :class="{'caution-animation' : isTimeFew}">
+            <span class="sub_title">남은 시간</span>
+            <span class="clock" :class="{'caution-animation' : isTimeFew}">
                 <span v-if="남은시간.hour < 10" class="zero">0</span>{{ 남은시간.hour }}시간
                 <span v-if="남은시간.minute < 10" class="zero">0</span>{{ 남은시간.minute }}분
                 <span v-if="남은시간.second < 10" class="zero">0</span>{{ 남은시간.second }}초
-            </div>
+            </span>
 
         </div>
     </div>
@@ -35,10 +38,10 @@ for(let i = 0; i < TimerData.length; i++){
             nextTime = TimerData[0]
             남은시간_기준시간 = nextTime.endTime
         }
-        else if(currentTime.classType == "study"){
-            nextTime = TimerData[i + 2]
-            남은시간_기준시간 = nextTime.endTime
-        }
+        // else if(currentTime.classType == "study"){
+        //     nextTime = TimerData[i + 2]
+        //     남은시간_기준시간 = nextTime.endTime
+        // } //3시만 되면 오류남
         else{
             nextTime = TimerData[i + 1]
             남은시간_기준시간 = currentTime.endTime
@@ -72,13 +75,17 @@ export default {
 }
 
 .timer .className{
-    color : var(--main-color1)
+    color : #4992ff;
+    font-size:20px;
+}
+
+.timer .current-item{
+    margin-bottom:14px;
 }
 
 .timer .main-page-item-content{
     font-size: 1.5em;
 
-    display: flex;
     flex-direction: column;
     justify-content: center;
 }
@@ -89,6 +96,20 @@ export default {
     animation-direction: alternate-reverse;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
+    
+}
+
+.timer span{
+    font-family:NotoSansB;
+}
+
+.timer .sub_title{
+    font-size:16px;
+    margin-right: 16px;
+}
+
+.timer .clock{
+    font-size:20px;
 }
 
 @keyframes cautionAnimation {

@@ -1,12 +1,11 @@
 <template>
 <div class="today-schedule main-page-item">
-    <div class="main-page-item-title"><h3>오늘의 일정</h3></div>
-    <div class="main-page-item-content">
+    <div class="main-page-item-title"><h3>시간표</h3></div>
+    <div class="main-page-item-content two_panel">
         <div class="time-table">
-            <h4>시간표</h4>
-            <ul>
-                <li v-for="i, n in timeTable" :key="n">{{ n + 1 }}교시 : {{ i }}</li>
-            </ul>
+            
+            <p v-for="i, n in timeTable" :key="n">{{ i }}</p>
+
         </div>
     </div>
 </div>
@@ -24,19 +23,10 @@ const timeTable = [
     "에드캔",
 ]
 
-const todoList = [
-    "todo1",
-    "todo2",
-    "todo3",
-    "todo4",
-    "todo5",
-]
-
 export default {
     name : "TodaySchedule",
     data(){return{
         timeTable,
-        todoList,
     }}
 }
 </script>
@@ -47,7 +37,7 @@ export default {
 }
 
 .today-schedule .time-table{
-    padding : 4px 16px;
+    
 }
 
 
