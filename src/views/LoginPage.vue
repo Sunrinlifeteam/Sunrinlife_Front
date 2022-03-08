@@ -1,37 +1,9 @@
 <template>
+
 <div class="login">
     <!-- <img src="./../assets/sunrin.jpg" alt="배경" class="login-bg"> -->
     <div class="login-box">
-        <img
-            @click="easterEggClickCount++"
-            class="logo logo-rotate-animation" src="./../assets/logo.svg" alt="선린 Life 로고">
-        
-        <label>
-            <input
-                pattern="^[A-Za-z0-9._%+-]+@sunrint.hs.kr$"
-                required
-                :class="{'not-first-try' : notFirstTry}"
-                type="email" placeholder="Email"
-                v-model="inputEmail">
-            <small class="erroe-msg" :class="{'none' : notFirstTry && isEmailEmpty}">{{ emailErrorMsg }}</small>
-        </label>
-
-
-        <label>
-            <input
-                pattern="^[A-Za-z0-9._%+-~`!@]{6,12}$"
-                required
-                :class="{'not-first-try' : notFirstTry}"
-                type="password" placeholder="Password"
-                v-model="inputPassword">
-            <small class="erroe-msg" :class="{'none' : notFirstTry && isPwEmpty}">{{ passwordErrorMsg }}</small>
-        </label>
-
-        <button @click="loginClick" class="login-btn">로그인</button>
-
-        <div class="sign-up-goto-wrap">
-            <span class="sign-up-goto">회원 가입</span>
-        </div>
+        <button @click="loginClick" class="login-btn">학교 계정으로 로그인</button>
     </div>
 
 </div>
@@ -39,77 +11,29 @@
 <script>
 
 import { mapActions } from "vuex"
-
-import { SUNRIN_EMAIL_PATTERN } from "./../Model/pattern.js"
+import axios from "axios"
 
 export default {
     name : "Login",
     data(){return{
-        inputEmail : "",
-        inputPassword : "",
-
-        isEmailEmpty : false,
-        isPwEmpty : false,
-
-        emailErrorMsg : "이메일을 입력하세요.",
-        passwordErrorMsg : "비밀번호를 입력하세요.",
-
-        notFirstTry : false,
 
         easterEggClickCount : 0,
     }},
     methods : {
         ...mapActions(["login", "getToken"]),
 
-        checkFromEmail(){
-            if(this.inputEmail == ""){
-                this.isEmailEmpty = true
-                this.emailErrorMsg = "이메일을 입력하세요."
-            }
-            else if(!SUNRIN_EMAIL_PATTERN.test(this.inputEmail)){
-                this.isEmailEmpty = true
-                this.emailErrorMsg = "이메일의 형식이 맞지 않습니다."
-            }
-            else {
-                this.isEmailEmpty = false
-            }
-        },
-
-        checkFromPassword(){
-            if(this.inputPassword == ""){
-                this.isPwEmpty = true
-                this.passwordErrorMsg = "비밀번호를 입력하세요."
-            }
-            else if(this.inputPassword.length < 6){
-                this.isPwEmpty = true
-                this.passwordErrorMsg = "입력한 비밀번호가 너무 짧습니다."
-            }
-            else {
-                this.isPwEmpty = false
-            }
-        },
-
         loginClick(){
-            this.checkFromEmail()
-            this.checkFromPassword()
 
-            if( this.isEmailEmpty || this.isPwEmpty ){
-                this.notFirstTry = true
-                return
-            }
-
-            this.$router.push('main')
+            axios.get("http://devapi.sunrint.life/auth/google/callback").then((res) => {
+                console.log(res)
+            }).catch((e)=>{
+                console.log(e)
+            })
 
             //this.login({ "email" : this.inputEmail, "password" : this.inputPassword})    
         }
     },
     watch : {
-        inputEmail(){
-            this.checkFromEmail()
-        },
-        inputPassword(){
-            this.checkFromPassword()
-        },
 
         easterEggClickCount(it){
             console.log(it);

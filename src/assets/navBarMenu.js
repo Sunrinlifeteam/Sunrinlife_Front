@@ -1,22 +1,17 @@
 export default [
     {
-        name : "메인 화면",
-        router : "main"
+        name : "홈",
+        router : "/",
+        img:require("./../assets/sidebar/home.svg"),
     },
     {
-        name : "소개",
-        router : "introduce"
+        name : "공지",
+        router : "introduce",
+        img:require("./../assets/sidebar/notification.svg")
     },
     {
         name : "동아리",
-        router : "club"
-    },
-    {
-        name : "학교 배치도",
-        router : "map"
-    },
-    {
-        name : "로그아웃",
-        router : "singOut"
-    },
+        router : "club",
+        img:require("./../assets/sidebar/club.svg")
+    }
 ]

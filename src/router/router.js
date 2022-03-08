@@ -15,17 +15,17 @@ const checkLogin = (to, from, next) => {
         return next()
     }   else{
         alert("로그인후 이용해주세요.")
-        return next("/")
+        return next("/login")
     }
 }
 checkLogin
 const routes = [
     {
-        path : "/",
+        path : "/login",
         component : LoginPage,
     },
     {
-        path : "/main",
+        path : "/",
         component : MainPage,
         // beforeEnter: checkLogin
     },
