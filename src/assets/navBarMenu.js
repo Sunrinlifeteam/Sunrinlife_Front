@@ -6,7 +6,7 @@ export default [
     },
     {
         name : "공지",
-        router : "introduce",
+        router : "notice",
         img:require("./../assets/sidebar/notification.svg")
     },
     {
