@@ -59,7 +59,6 @@ export default {
     text-align: center;
 }
 .club_panel p{
-    color:white;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
     font-size:16px;
