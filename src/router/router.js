@@ -36,8 +36,8 @@ const routes = [
         component : easterEgg
     },
     {
-        path : "/notice",
-        component : NoticePage
+        path : "/notice/:pageId",
+        component : NoticePage,
     },
     {
         path : "/profile",

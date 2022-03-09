@@ -23,7 +23,8 @@
             <div class="pagination-wrap">
                 <!-- <img src="" alt="" class="prev-btn"> -->
                 <div class="page-button-wrap">
-                    <div class="page-btn" v-for="i, n in pageList" :key="n">{{ i }}</div>
+                    <router-link class="page-btn" v-for="i, n in pageList" :key="n"
+                        :to="`/notice/${i}`" >{{ i }}</router-link>
                 </div>
                 <!-- <img src="" alt="" class="next-btn"> -->
             </div>
@@ -91,6 +92,10 @@ export default {
 
 .notice-content {
     padding : 16px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .hader {
@@ -142,8 +147,6 @@ export default {
 }
 
 .notice-list {
-    margin-top: 20px;
-
     display: flex;
     flex-direction: column;
     gap : 24px;
@@ -184,13 +187,16 @@ export default {
     font-weight: 500;
 }
 
+.pagination-wrap {
+    display: flex;
+    justify-content: center;
+}
+
 .pagination-wrap .page-button-wrap {
     display: flex;
 }
 
 .pagination-wrap .page-btn {
-    background-color: #f00;
-
     width : 24px;
     height : 24px;
 
@@ -204,6 +210,16 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    cursor: pointer;
+}
+
+.pagination-wrap .page-btn.router-link-active {
+    color : white;
+
+    background-color: var(--main-color4);
+
+    border-radius: 50%;
 }
 
 </style>
