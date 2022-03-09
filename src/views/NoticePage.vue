@@ -23,8 +23,15 @@
             <div class="pagination-wrap">
                 <!-- <img src="" alt="" class="prev-btn"> -->
                 <div class="page-button-wrap">
-                    <router-link class="page-btn" v-for="i, n in pageList" :key="n"
-                        :to="`/notice/${i}`" >{{ i }}</router-link>
+                    <template v-for="i, n in pageList" :key="n">
+                        <div
+                            v-if="pageId - 2 <= n + 1 && n + 1 <= pageId + 2"
+                            class="page-btn"
+                            :class="{'current-page' : pageId == n + 1}"
+                            @click="pageId = n + 1">
+                            {{ i }}
+                        </div>
+                    </template>
                 </div>
                 <!-- <img src="" alt="" class="next-btn"> -->
             </div>
@@ -70,13 +77,15 @@ let noticeData = [
     ),
 ]
 
-let pageList = [ 1, 2, 3, 4, 5, 6, 7 ]
+let pageList = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
 
 export default {
     naem : "Notice",
     data(){return{
         noticeData,
         pageList,
+
+        pageId : 1,
     }},
     components : {
         Sidebar,
@@ -194,11 +203,12 @@ export default {
 
 .pagination-wrap .page-button-wrap {
     display: flex;
+    gap : 4px;
 }
 
 .pagination-wrap .page-btn {
-    width : 24px;
-    height : 24px;
+    width : 32px;
+    height : 32px;
 
     color: #c9c9c9;
     
@@ -207,6 +217,10 @@ export default {
     font-size: 14px;
     font-weight: 500;
 
+    border-radius: 50%;
+
+    /* padding : 4px; */
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -214,12 +228,18 @@ export default {
     cursor: pointer;
 }
 
-.pagination-wrap .page-btn.router-link-active {
+.pagination-wrap .page-btn:hover {
+    /* color : white; */
+
+    background-color: var(--gray1);
+
+    /* opacity: 0.5; */
+}
+
+.pagination-wrap .page-btn.current-page {
     color : white;
 
     background-color: var(--main-color4);
-
-    border-radius: 50%;
 }
 
 </style>
