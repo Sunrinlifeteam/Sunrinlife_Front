@@ -21,12 +21,19 @@
             </ul>
 
             <div class="pagination-wrap">
-                <!-- <img src="" alt="" class="prev-btn"> -->
+                <img src="./../assets/prev_arrow.svg" alt="" class="prev-btn">
                 <div class="page-button-wrap">
-                    <router-link class="page-btn" v-for="i, n in pageList" :key="n"
-                        :to="`/notice/${i}`" >{{ i }}</router-link>
+                    <template v-for="i, n in pageList" :key="n">
+                        <div
+                            v-if="pageId - 2 <= n + 1 && n + 1 <= pageId + 2"
+                            class="page-btn"
+                            :class="{'current-page' : pageId == n + 1}"
+                            @click="pageId = n + 1">
+                            {{ i }}
+                        </div>
+                    </template>
                 </div>
-                <!-- <img src="" alt="" class="next-btn"> -->
+                <img src="./../assets/next_arrow.svg" alt="" class="next-btn">
             </div>
         </div>
     </div>
@@ -70,13 +77,15 @@ let noticeData = [
     ),
 ]
 
-let pageList = [ 1, 2, 3, 4, 5, 6, 7 ]
+let pageList = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
 
 export default {
     naem : "Notice",
     data(){return{
         noticeData,
         pageList,
+
+        pageId : 1,
     }},
     components : {
         Sidebar,
@@ -118,6 +127,8 @@ export default {
 }
 
 .hader .search-wrap input {
+    width : 100%;
+
     border: 0px;
     border-radius: 8px;
 
@@ -137,13 +148,15 @@ export default {
 }
 
 .hader .search-wrap .search-button {
-    width : 25px;
-    height : 25px;
+    width : 20px;
+    height : 20px;
 
     position: absolute;
     top : 50%;
     right : 18px;
     transform: translateY(-50%);
+
+    cursor: pointer;
 }
 
 .notice-list {
@@ -155,6 +168,8 @@ export default {
 .notice-list li {
     display: flex;
     gap : 12px;
+
+    cursor: pointer;
 }
 
 .notice-list .notice-icon {
@@ -188,17 +203,26 @@ export default {
 }
 
 .pagination-wrap {
+    height : 32px;
+
     display: flex;
     justify-content: center;
+    gap : 12px;
+}
+
+.pagination-wrap img {
+    width : 32px;
+
+    padding : 8px;
 }
 
 .pagination-wrap .page-button-wrap {
     display: flex;
+    gap : 4px;
 }
 
 .pagination-wrap .page-btn {
-    width : 24px;
-    height : 24px;
+    width : 32px;
 
     color: #c9c9c9;
     
@@ -207,6 +231,8 @@ export default {
     font-size: 14px;
     font-weight: 500;
 
+    border-radius: 50%;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -214,12 +240,18 @@ export default {
     cursor: pointer;
 }
 
-.pagination-wrap .page-btn.router-link-active {
+.pagination-wrap .page-btn:hover {
+    /* color : white; */
+
+    background-color: var(--gray1);
+
+    /* opacity: 0.5; */
+}
+
+.pagination-wrap .page-btn.current-page {
     color : white;
 
     background-color: var(--main-color4);
-
-    border-radius: 50%;
 }
 
 </style>
