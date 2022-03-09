@@ -1,32 +1,33 @@
 <template>
 <Sidebar/>
 <div class="panel page notice-page">
-    <div class="page-content neu-morphism-card">
-        <div class="hader">
-            <h6>공지</h6>
-            <div class="search-wrap">
-                <input type="text" placeholder="검색">
-                <img src="/img/search.svg" alt="검색 아이콘" class="search-button">
+    <div class="page-content">
+        <div class="notice-content neu-morphism-card">
+            <div class="hader">
+                <h6>공지</h6>
+                <div class="search-wrap">
+                    <input type="text" placeholder="검색">
+                    <img src="/img/search.svg" alt="검색 아이콘" class="search-button">
+                </div>
+            </div>
+
+            <ul class="notice-list">
+                <li v-for="i, n in noticeData" :key="n">
+                    <div v-if="i.type === 'school'" class="notice-icon notice-school">학교</div>
+                    <div v-else-if="i.type === 'intranet'" class="notice-icon notice-intranet">인트라넷</div>
+
+                    <p class="notice-title">{{ i.title }}</p>
+                </li>
+            </ul>
+
+            <div class="pagination-wrap">
+                <!-- <img src="" alt="" class="prev-btn"> -->
+                <div class="page-button-wrap">
+                    <div class="page-btn" v-for="i, n in pageList" :key="n">{{ i }}</div>
+                </div>
+                <!-- <img src="" alt="" class="next-btn"> -->
             </div>
         </div>
-
-        <ul class="notice-list">
-            <li v-for="i, n in noticeData" :key="n">
-                <div v-if="i.type === 'school'" class="notice-icon notice-school">학교</div>
-                <div v-else-if="i.type === 'intranet'" class="notice-icon notice-intranet">인트라넷</div>
-
-                <p class="notice-title">{{ i.title }}</p>
-            </li>
-        </ul>
-
-        <div class="pagination-wrap">
-            <!-- <img src="" alt="" class="prev-btn"> -->
-            <div class="page-button-wrap">
-                <div class="page-btn" v-for="i, n in pageList" :key="n">{{ i }}</div>
-            </div>
-            <!-- <img src="" alt="" class="next-btn"> -->
-        </div>
-
     </div>
 </div>
 </template>
@@ -83,12 +84,13 @@ export default {
 </script>
 
 <style scoped>
-.panel {
-    padding : 16px;
-}
 
 .page-content {
     height: 100%;
+}
+
+.notice-content {
+    padding : 16px;
 }
 
 .hader {
@@ -188,7 +190,7 @@ export default {
 
 .pagination-wrap .page-btn {
     background-color: #f00;
-    
+
     width : 24px;
     height : 24px;
 
