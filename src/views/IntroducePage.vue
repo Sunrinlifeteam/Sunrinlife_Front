@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import Header from "../components/Header.vue"
-import Nav from "../components/Nav.vue"
+import Header from "../components/Sidebar.vue"
+import Nav from "../components/Sidebar.vue"
 
 export default {
     name : "Introduce",

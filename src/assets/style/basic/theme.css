@@ -37,12 +37,12 @@ body{
 }
 /* 제목 태그 테마 */
 h1, h2, h3, h4, h5, h6, b {
-    font-family: 'GmarketSansBold'
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 /* 입력 요소 테마 */
 input {
-    font-family: 'GmarketSansMedium';
+    font-family: 'Noto Sans KR', sans-serif;
     background-color: gainsboro;
 
     border : 2px solid gray;
@@ -56,7 +56,7 @@ input:focus{
 
 /* 버튼 테마 */
 button {
-    font-family: 'GmarketSansMedium';
+    font-family: 'Noto Sans KR', sans-serif;
 
     color : white;
     background-color: var(--main-color1);
@@ -92,10 +92,43 @@ button:active{
 
 .page-content {
     width : 100%;
-    max-width: 1100px;
+    max-width: 1200px;
 
     margin : 0 auto;
     margin-top : 70px;
     
     padding : 16px;
+}
+
+.panel{
+    margin-left:240px;
+    color:#3d3d3d;
+}
+
+.security{
+    background-color: #3d3d3d;
+}
+.security:hover{
+    background-color: #3d2d3d;
+}
+
+.software{
+    background-color:#ffcf49;
+}
+.software:hover{
+    background-color:#ffbf49;
+}
+
+.ceo{
+    background-color: #00A05C;
+}
+.ceo:hover{
+    background-color: #00905C;
+}
+
+.design{
+    background-color:#4992ff;
+}
+.design:hover{
+    background-color:#4982ff;
 }

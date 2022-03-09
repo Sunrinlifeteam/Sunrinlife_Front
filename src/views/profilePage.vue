@@ -1,68 +1,68 @@
 <template>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com"><!-- 이건 index.html에 작성해야 할 듯 -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&family=Roboto:wght@500&family=Source+Sans+Pro:wght@600&family=Ubuntu&display=swap" rel="stylesheet">
+    <Sidebar/>
+    <div class="panel">
+        <div class="user-profile">
 
-    <div class="user-profile">
-
-        <!-- 정보 수정 버튼 -->
-        <div class="info-correcrion-button">
-            <img class="correction-button-img" src="./../assets/user_profile_assets/correctionIcon.svg"/>
-        </div>
-
-        <!-- 프로필 이미지 -->
-        <div class="user-img-items">
-            <div class="user-img-item">
-                <img class="user-img" src='./../assets/user_profile_assets/basic_profile_img.svg'/>
+            <!-- 정보 수정 버튼 -->
+            <div class="info-correcrion-button">
+                <img class="correction-button-img" src="./../assets/user_profile_assets/correctionIcon.svg"/>
             </div>
-        </div>
 
-        <!-- 유저 정보(동아리, 이메일, 소개 등) -->
-        <div class="user-info-items">
-            <div class="user-basic-contact-items">
+            <!-- 프로필 이미지 -->
+            <div class="user-img-items">
+                <div class="user-img-item">
+                    <img class="user-img" src='./../assets/user_profile_assets/basic_profile_img.svg'/>
+                </div>
+            </div>
 
-                <!-- 이름, 번호, 학과 -->
-                <div class="user-basic-items">
-                    <span class="user-name-item">{{ userInfo.userName }}</span>
-                    <span class="user-major-item">{{ userInfo.userMajor }}과</span>
-                    <span class="user-number-item">{{ userInfo.userClass }}학년 {{ userInfo.userNumber }}반</span>
+            <!-- 유저 정보(동아리, 이메일, 소개 등) -->
+            <div class="user-info-items">
+                <div class="user-basic-contact-items">
+
+                    <!-- 이름, 번호, 학과 -->
+                    <div class="user-basic-items">
+                        <span class="user-name-item">{{ userInfo.userName }}</span>
+                        <span class="user-major-item">{{ userInfo.userMajor }}과</span>
+                        <span class="user-number-item">{{ userInfo.userClass }}학년 {{ userInfo.userNumber }}반</span>
+                    </div>
+
+                    <!-- 동아리, 이메일, 깃허브 -->
+                    <div class="user-contact-items">
+
+                        <!-- 동아리, 이메일 -->
+                        <div class="user-contact-item">
+                            <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
+                            <span class="user-contact-text">{{ userInfo.userClub }}</span>
+                        </div>
+                        <div class="user-contact-item">
+                            <img class="user-contact-icon" src="./../assets/user_profile_assets/emailIcon.svg"/>
+                            <span class="user-contact-text">{{ userInfo.userEmail }}</span>
+                        </div>
+
+                        <!-- 깃허브 계정 -->
+                        <div class="user-social-contact-item">
+                            <img class="user-contact-icon" src="./../assets/user_profile_assets/githubIcon.svg"/>
+                            <span class="user-contact-text">{{ userInfo.userContact.userGithub }}</span>
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <!-- 동아리, 이메일, 깃허브 -->
-                <div class="user-contact-items">
-
-                    <!-- 동아리, 이메일 -->
-                    <div class="user-contact-item">
-                        <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
-                        <span class="user-contact-text">{{ userInfo.userClub }}</span>
-                    </div>
-                    <div class="user-contact-item">
-                        <img class="user-contact-icon" src="./../assets/user_profile_assets/emailIcon.svg"/>
-                        <span class="user-contact-text">{{ userInfo.userEmail }}</span>
-                    </div>
-
-                    <!-- 깃허브 계정 -->
-                    <div class="user-social-contact-item">
-                        <img class="user-contact-icon" src="./../assets/user_profile_assets/githubIcon.svg"/>
-                        <span class="user-contact-text">{{ userInfo.userContact.userGithub }}</span>
-                    </div>
-
+                <!-- 소개 -->
+                <div class="user-introduce-items">
+                    <span class="user-introduce-title">소개</span>
+                    <span class="user-introduce-item">{{ userInfo.userIntroduce }}</span>
                 </div>
-
             </div>
 
-            <!-- 소개 -->
-            <div class="user-introduce-items">
-                <span class="user-introduce-title">소개</span>
-                <span class="user-introduce-item">{{ userInfo.userIntroduce }}</span>
-            </div>
         </div>
-
     </div>
 </template>
 
 <script>
+import Sidebar from "./../components/Sidebar.vue"
 export default {
     data() {
         return {
@@ -80,6 +80,9 @@ export default {
                 }
             }
         }
+    },
+    components:{
+        Sidebar
     }
 }
 </script>

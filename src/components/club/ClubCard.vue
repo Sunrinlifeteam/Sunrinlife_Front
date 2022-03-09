@@ -139,7 +139,8 @@ export default {
 }
 
 .sns-link .url {
-    /* font-family: NotoSansKR; */
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
     font-size: 16px;
     color: #3d3d3d;
 }
@@ -156,14 +157,16 @@ export default {
 }
 
 .ranker .position {
-    /* font-family: NotoSansKR; */
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
     font-size: 16px;
     font-weight: bold;
     color: var(--main-color4);
 }
 
 .ranker .name {
-    /* font-family: NotoSansKR; */
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
     font-size: 16px;
     font-weight: 500;
     /* color: #3d3d3d; */
@@ -193,10 +196,17 @@ export default {
 }
 
 .curriculum li {
-    /* font-family: NotoSansKR; */
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
     font-size: 14px;
     font-weight: 500;
     line-height: 1.43;
     color: #3d3d3d;
+}
+
+@media (max-width:1010px) {
+    .club-card{
+        width:513px;
+    }
 }
 </style>

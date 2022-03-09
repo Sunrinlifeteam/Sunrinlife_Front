@@ -3,12 +3,14 @@
     <div class="main-page-item-title"><h3>공지</h3></div>
     <div class="main-page-item-content">
         <div class="icon-wrap">
-            <transition name="notice-icon">
-                <div v-if="noticeType == 'school'" class="notice-icon notice-school">학교</div>
-                <div v-else-if="noticeType == 'intranet'" class="notice-icon notice-intranet">인트라넷</div>
+            <transition name="notice-icon" v-for="i, j, in noticeData" :key="j">
+                <div v-if="i.type === 'school'" class="notice-icon notice-school">학교</div>
+                <div v-else-if="i.type === 'intranet'" class="notice-icon notice-intranet">인트라넷</div>
             </transition>
         </div>
-        <p>{{ notice }}</p>
+        <div>
+            <p v-for="i, j in noticeData" :key="j" class="title">{{i.title}}</p>
+        </div>
     </div>
 </div>
 </template>
@@ -42,43 +44,24 @@ let noticeData = [
         "대충 내용",
         "대충 파일",
     ),
+    new Notice(
+        "school",
+        "2021 창의아이디어경진대회 교내대회 결과 발표",
+        "대충 내용",
+        "대충 파일",
+    ),
 ] //공지사항을 저장하는 리스트
-
-let notice = "" //화면에 보여지는 공지
-let noticeType = ""
-let currentNoticeIndex = 0; //현재 보여지고 있는 공지의 순서
-let noticeStrCount = 1 //현배 보여지는 공지의 글자수
 
 export default {
     name : "Notice",
     data(){
         return {
-            notice,
-            noticeType,
+            noticeData,
         }
     },
     methods :{
 
     },
-    mounted(){
-        setInterval(()=>{
-            this.noticeType = noticeData[currentNoticeIndex].type
-            this.notice = noticeData[currentNoticeIndex].title.slice(0, noticeStrCount++)
-
-            if(noticeStrCount == noticeData[currentNoticeIndex].title.length + 50){
-                this.notice = ""
-                noticeStrCount = 1;
-                currentNoticeIndex++
-                currentNoticeIndex %= noticeData.length
-            }
-
-        }, 100)
-    },
-    watch:{
-        noticeType(){
-            console.log("변경됨");
-        }
-    }
 }
 </script>
 
@@ -88,10 +71,10 @@ export default {
 }
 
 .notice .main-page-item-content{
-    display: grid;
+    display:grid;
     grid-template-columns: auto 1fr;
-    align-items: center;
 }
+
 
 .notice .icon-wrap {
     padding-right : 4px;
@@ -99,37 +82,40 @@ export default {
 
 .notice .notice-icon {
     font-size : 14px;
-    padding : 2px 4px;
-    padding-bottom : 0px;
-
+    padding : 2px 10px;
+    margin-bottom:14px;
     border-radius: 24px;
     color : var(--gray1);
+    width:70px;
+    height:28px;
+    text-align: center;
 }
 
 .notice-icon.notice-school {
-    background-color: var(--flat-yellow);
+    background-color: #ffcf49;
 }
 
 .notice-icon.notice-intranet {
-    background-color: var(--flat-green);
+    background-color: #4992ff;
 }
 
-.notice p{
-    align-items: center;
-    display: -webkit-box;
-    overflow: hidden;
+.title{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
     text-overflow: ellipsis;
+    overflow:hidden;
+    
     -webkit-line-clamp: 1; 
     -webkit-box-orient: vertical;
+    display: -webkit-box;
+
+    margin-bottom:18px;
 }
 
-@media (min-width : 750px) {
-    /* body {
-        background-color: #f00;
-    } */
-    .notice .notice-icon {
-        padding : 4px 8px;
-        padding-bottom : 0px;
-    }
+.notice .notice-icon {
+    padding : 4px 8px;
+    margin-right:12px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
 }
 </style>

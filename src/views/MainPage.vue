@@ -1,21 +1,21 @@
 <template>
 
-<Header/>
-<Nav/>
+<Sidebar/>
 
-<main class="page-content">
-    <Notice/>
-    <Timer/>
-    <Meal/>
-    <TodaySchedule/>
-    <Schedule/>
-    <Club/>
-</main>
+<div class="panel">
+    <main class="page-content">
+        <Notice/>
+        <Timer/>
+        <Meal/>
+        <TodaySchedule/>
+        <Schedule/>
+        <Club/>
+    </main>
+</div>
 
 </template>
 <script>
-import Header from "../components/Header.vue"
-import Nav from "../components/Nav.vue"
+import Sidebar from "../components/Sidebar.vue"
 
 import Notice from "../components/main/Notice.vue"
 import TodaySchedule from "../components/main/TodaySchedule.vue"
@@ -26,15 +26,11 @@ import Club from "../components/main/Club.vue"
 
 export default {
     name : "mainPage",
-    data(){return{
-        isNavOn : 0,
-    }},
     methods :{
         
     },
     components : {
-        Header,
-        Nav,
+        Sidebar,
 
         Notice,
         TodaySchedule,

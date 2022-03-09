@@ -1,29 +1,29 @@
 <template>
-<div class="major-seleter neu-morphism-card">
+<div class="major-selecter neu-morphism-card">
     <transition name="current-major-ani">
-        <div class="current-major" @click="isSeleteMajor = true" v-if="!isSeleteMajor">
-            <span v-if="seleteMajorIdx == 0">정보보호과</span>
-            <span v-else-if="seleteMajorIdx == 1">소프트웨어과</span>
-            <span v-else-if="seleteMajorIdx == 2">IT경영과</span>
-            <span v-else-if="seleteMajorIdx == 3">콘텐츠 디자인과</span>
+        <div class="current-major" @click="isSelectMajor = true" v-if="!isSelectMajor" :class="{security:!selectMajorIdx, software:selectMajorIdx===1, ceo:selectMajorIdx===2, design:selectMajorIdx===3}">
+            <span v-if="selectMajorIdx == 0">정보보호과</span>
+            <span v-else-if="selectMajorIdx == 1">소프트웨어과</span>
+            <span v-else-if="selectMajorIdx == 2">IT경영과</span>
+            <span v-else-if="selectMajorIdx == 3">콘텐츠 디자인과</span>
         </div>
     </transition>
     <transition name="choice-major-ani">
-        <div class="choice-major-wrap" v-if="isSeleteMajor" @click="isSeleteMajor = false">
-            <div class="choice-major" :class="{seleted : seleteMajorIdx == 0}"
-                @click="$emit('seleteMajor', 0)">
+        <div class="choice-major-wrap" v-if="isSelectMajor" @click="isSelectMajor = false">
+            <div class="choice-major security"
+                @click="$emit('selectMajor', 0)">
                 정보
             </div>
-            <div class="choice-major" :class="{seleted : seleteMajorIdx == 1}"
-                @click="$emit('seleteMajor', 1)">
+            <div class="choice-major software"
+                @click="$emit('selectMajor', 1)">
                 솦과
             </div>
-            <div class="choice-major" :class="{seleted : seleteMajorIdx == 2}"
-                @click="$emit('seleteMajor', 2)">
+            <div class="choice-major ceo"
+                @click="$emit('selectMajor', 2)">
                 아경
             </div>
-            <div class="choice-major" :class="{seleted : seleteMajorIdx == 3}"
-                @click="$emit('seleteMajor', 3)">
+            <div class="choice-major design"
+                @click="$emit('selectMajor', 3)">
                 콘디
             </div>
         </div>
@@ -33,18 +33,18 @@
 
 <script>
 export default {
-    name : "Major seleter",
+    name : "Major selecter",
     data(){return{
-        isSeleteMajor : false
+        isSelectMajor : false
     }},
     props : {
-        seleteMajorIdx : Number,
+        selectMajorIdx : Number,
     },
 }
 </script>
 
 <style scoped>
-.major-seleter {
+.major-selecter {
     height: 44px;
 
     margin-bottom : 24px;
@@ -52,13 +52,16 @@ export default {
     position: relative;
 
     overflow: hidden;
+    
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
 }
 
-.major-seleter * {
+.major-selecter * {
     cursor: pointer;
 }
 
-.major-seleter > div {
+.major-selecter > div {
     width : 100%;
     height : 100%;
 
@@ -70,12 +73,11 @@ export default {
 }
 
 .current-major {
-    font-family: NotoSansKR;
+    font-family: 'Noto Sans KR', sans-serif;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 700;
 
     color : white;
-    background-color: #ffcf49;
 
     justify-content: center;
     align-items: center;
@@ -93,20 +95,14 @@ export default {
     align-items: center;
 }
 
-.choice-major-wrap .choice-major:hover {
-    background-color: #ffce494a;
-}
-
-.choice-major-wrap .choice-major.seleted {
-    background-color: #ffcf49;
+.choice-major{
+    color:white;
 }
 
 .choice-major-wrap input {
     display: none;
 }
-</style>
 
-<style scoped>
 .current-major-ani-enter-from, .current-major-ani-leave-to {
     transform: translateY(-100%);
 }
