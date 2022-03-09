@@ -21,7 +21,7 @@
             </ul>
 
             <div class="pagination-wrap">
-                <!-- <img src="" alt="" class="prev-btn"> -->
+                <img src="./../assets/prev_arrow.svg" alt="" class="prev-btn">
                 <div class="page-button-wrap">
                     <template v-for="i, n in pageList" :key="n">
                         <div
@@ -33,7 +33,7 @@
                         </div>
                     </template>
                 </div>
-                <!-- <img src="" alt="" class="next-btn"> -->
+                <img src="./../assets/next_arrow.svg" alt="" class="next-btn">
             </div>
         </div>
     </div>
@@ -127,6 +127,8 @@ export default {
 }
 
 .hader .search-wrap input {
+    width : 100%;
+
     border: 0px;
     border-radius: 8px;
 
@@ -146,13 +148,15 @@ export default {
 }
 
 .hader .search-wrap .search-button {
-    width : 25px;
-    height : 25px;
+    width : 20px;
+    height : 20px;
 
     position: absolute;
     top : 50%;
     right : 18px;
     transform: translateY(-50%);
+
+    cursor: pointer;
 }
 
 .notice-list {
@@ -164,6 +168,8 @@ export default {
 .notice-list li {
     display: flex;
     gap : 12px;
+
+    cursor: pointer;
 }
 
 .notice-list .notice-icon {
@@ -197,8 +203,17 @@ export default {
 }
 
 .pagination-wrap {
+    height : 32px;
+
     display: flex;
     justify-content: center;
+    gap : 12px;
+}
+
+.pagination-wrap img {
+    width : 32px;
+
+    padding : 8px;
 }
 
 .pagination-wrap .page-button-wrap {
@@ -208,7 +223,6 @@ export default {
 
 .pagination-wrap .page-btn {
     width : 32px;
-    height : 32px;
 
     color: #c9c9c9;
     
@@ -218,8 +232,6 @@ export default {
     font-weight: 500;
 
     border-radius: 50%;
-
-    /* padding : 4px; */
 
     display: flex;
     align-items: center;
