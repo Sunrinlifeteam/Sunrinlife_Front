@@ -71,7 +71,8 @@ export default {
 }
 
 .two_panel p{
-    font-family: NotoSansM;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight:500;
     font-size:14px;
     margin-left: 16px;
     margin-top:7px;

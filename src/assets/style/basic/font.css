@@ -1,11 +1,4 @@
-@font-face{
-    font-family:"NotoSansM";
-    src:url("../../font/NotoSansKR-Medium.otf")
-}
-@font-face{
-    font-family:"NotoSansB";
-    src:url("../../font/NotoSansKR-Bold.otf")
-}
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700&display=swap");
 
 .font-bold {
     font-family: 'GmarketSansBold';

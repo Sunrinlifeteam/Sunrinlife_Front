@@ -57,7 +57,8 @@
 }
 .item-day {
     color: #3d3d3d;
-    font-family: "NotoSansM";
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
     font-size: 14px;
     margin-bottom: 16px;
 }
@@ -69,7 +70,8 @@
     height:32px;
     display: grid;
     grid-template-columns: auto;
-    font-family: "NotoSansM";
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
     font-size:14px;
     margin-bottom: 4px;
     align-items: center;
@@ -96,7 +98,8 @@
     height:32px;
     display: grid;
     grid-template-columns: auto;
-    font-family: "NotoSansM";
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
     font-size:14px;
     margin-bottom: 4px;
     align-items: center;
@@ -112,7 +115,8 @@
 
 .item-content {
     font-size: 14px;
-    font-family: "NotoSansM";
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -121,7 +125,8 @@
 .item-input {
     height: 24px;
     font-size: 14px;
-    font-family: "NotoSansM";
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
     background-color: transparent;
     color:white;
     border: none;

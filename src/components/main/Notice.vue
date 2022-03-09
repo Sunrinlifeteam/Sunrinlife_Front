@@ -100,7 +100,8 @@ export default {
 }
 
 .title{
-    font-family: NotoSansM;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
     text-overflow: ellipsis;
     overflow:hidden;
     
@@ -114,6 +115,7 @@ export default {
 .notice .notice-icon {
     padding : 4px 8px;
     margin-right:12px;
-    font-family: NotoSansB;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
 }
 </style>

@@ -104,3 +104,31 @@ button:active{
     margin-left:240px;
     color:#3d3d3d;
 }
+
+.security{
+    background-color: #3d3d3d;
+}
+.security:hover{
+    background-color: #3d2d3d;
+}
+
+.software{
+    background-color:#ffcf49;
+}
+.software:hover{
+    background-color:#ffbf49;
+}
+
+.ceo{
+    background-color: #00A05C;
+}
+.ceo:hover{
+    background-color: #00905C;
+}
+
+.design{
+    background-color:#4992ff;
+}
+.design:hover{
+    background-color:#4982ff;
+}

@@ -100,7 +100,8 @@ export default {
 }
 
 .timer span{
-    font-family:NotoSansB;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
 }
 
 .timer .sub_title{

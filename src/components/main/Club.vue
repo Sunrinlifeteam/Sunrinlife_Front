@@ -60,21 +60,10 @@ export default {
 }
 .club_panel p{
     color:white;
-    font-family: NotoSansB;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
     font-size:16px;
     margin-top:190px;
 }
 
-.security{
-    background-color: #3d3d3d;
-}
-.software{
-    background-color:#ffcf49;
-}
-.ceo{
-    background-color: #00A05C;
-}
-.design{
-    background-color:#4992ff;
-}
 </style>

@@ -13,7 +13,7 @@
                     v-for="i, n in navBarList" :key="n"
                     :to="i.router"><img :src="i.img"><span>{{ i.name }}</span></router-link>
             </div>
-            <div class="list-user-profile">
+            <router-link class="list-user-profile" :to="profile">
                 
                 <img :src="currentUserData.profileImg">
                 <span class="list_user_profile_text">
@@ -21,7 +21,7 @@
                     <p class="list_user_profile_department">{{currentUserData.department}}</p>
                 </span>
                 <!-- {{currentUserData}} -->
-            </div>
+            </router-link>
         </div>
 
 
@@ -31,19 +31,20 @@
     </nav>
 </transition>
 
-<transition name="nav-bg">
-<div
-    v-if="isNavOpen"
-    class="nav-bg"></div>
-</transition>
+
 
 </template>
 
 <script>
 import { mapState } from "vuex"
-
+let profile = "profile"
 export default {
     name : "Sidebar",
+    data(){
+        return{
+            profile
+        }
+    },
     computed :{
         ...mapState(['currentUserData', 'navBarList'])
         // store.js에 저장된 navBarList를 가져와서 목록으로 보여준다.
@@ -92,7 +93,8 @@ nav .nav-list .list-user-profile {
 }
 
 nav .nav-list .list-user-profile p{
-    font-family: 'NotoSansM';
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
 }
 
 nav .nav-list .list-user-profile .list_user_profile_text{
@@ -148,7 +150,8 @@ nav .menu_list a{
 }
 
 nav .menu_list a span{
-    font-family: 'NotoSansB';
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
     margin-left:10px;
     vertical-align: middle;
 }
@@ -164,7 +167,8 @@ nav .menu_list a:hover, nav a:active{
 
 .nav-list .router-link-exact-active{
     color : #4992ff;
-    font-family: 'NotoSansB';
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
 }
 
 .nav-bg {
@@ -188,9 +192,9 @@ nav .menu_list a:hover, nav a:active{
 }
 
 @media (max-height:500px) {
-nav .nav-list .list-user-profile {
-    bottom:auto;
-    top:350px;
-}
+    nav .nav-list .list-user-profile {
+        bottom:auto;
+        top:350px;
+    }
 }
 </style>
