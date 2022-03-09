@@ -5,6 +5,7 @@ import MainPage from "./../views/MainPage.vue"
 import ProfilePage from './../views/profilePage.vue';
 import ClubPage from "./../views/ClubPage.vue"
 import NoticePage from "./../views/NoticePage.vue"
+import NoticeDetailPage from "./../views/NoticeDetailPage.vue"
 
 import easterEgg from "./../views/EasterEgg.vue"
 
@@ -38,6 +39,10 @@ const routes = [
     {
         path : "/notice",
         component : NoticePage,
+    },
+    {
+        path : "/notice/:noticeId",
+        component : NoticeDetailPage,
     },
     {
         path : "/profile",

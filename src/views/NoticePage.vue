@@ -12,7 +12,8 @@
             </div>
 
             <ul class="notice-list">
-                <li v-for="i, n in noticeData" :key="n">
+                <li v-for="i, n in noticeData" :key="n"
+                    @click="$router.push(`/notice/${n}`)">
                     <div v-if="i.type === 'school'" class="notice-icon notice-school">학교</div>
                     <div v-else-if="i.type === 'intranet'" class="notice-icon notice-intranet">인트라넷</div>
 
@@ -142,7 +143,7 @@ export default {
 .hader .search-wrap input::placeholder {
     color: #949494;
 
-    font-family: NotoSansKR;
+    font-family: 'Noto Sans KR', sans-serif;
     font-size: 14px;
     font-weight: 500;
 }
