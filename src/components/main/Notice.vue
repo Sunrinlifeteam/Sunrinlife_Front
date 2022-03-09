@@ -9,7 +9,8 @@
             </transition>
         </div>
         <div>
-            <p v-for="i, j in noticeData" :key="j" class="title">{{i.title}}</p>
+            <p v-for="i, j in noticeData" :key="j" class="title"
+            @click="$router.push(`/notice/${j}`)">{{i.title}}</p>
         </div>
     </div>
 </div>
@@ -115,5 +116,7 @@ export default {
     display: -webkit-box;
 
     margin-bottom:18px;
+
+    cursor: pointer;
 }
 </style>
