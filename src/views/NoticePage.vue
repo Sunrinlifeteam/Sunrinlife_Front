@@ -18,6 +18,15 @@
                 <p class="notice-title">{{ i.title }}</p>
             </li>
         </ul>
+
+        <div class="pagination-wrap">
+            <!-- <img src="" alt="" class="prev-btn"> -->
+            <div class="page-button-wrap">
+                <div class="page-btn" v-for="i, n in pageList" :key="n">{{ i }}</div>
+            </div>
+            <!-- <img src="" alt="" class="next-btn"> -->
+        </div>
+
     </div>
 </div>
 </template>
@@ -59,10 +68,13 @@ let noticeData = [
     ),
 ]
 
+let pageList = [ 1, 2, 3, 4, 5, 6, 7 ]
+
 export default {
     naem : "Notice",
     data(){return{
         noticeData,
+        pageList,
     }},
     components : {
         Sidebar,
@@ -71,6 +83,10 @@ export default {
 </script>
 
 <style scoped>
+.panel {
+    padding : 16px;
+}
+
 .page-content {
     height: 100%;
 }
@@ -158,13 +174,34 @@ export default {
     flex: 1;
 }
 
-
 .notice-list .writer {
     color: #b9b9b9;
 
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 12px;
     font-weight: 500;
+}
+
+.pagination-wrap .page-button-wrap {
+    display: flex;
+}
+
+.pagination-wrap .page-btn {
+    background-color: #f00;
+    
+    width : 24px;
+    height : 24px;
+
+    color: #c9c9c9;
+    
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 </style>
