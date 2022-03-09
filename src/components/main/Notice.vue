@@ -89,6 +89,11 @@ export default {
     width:70px;
     height:28px;
     text-align: center;
+    
+    padding : 4px 8px;
+    margin-right:12px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
 }
 
 .notice-icon.notice-school {
@@ -110,12 +115,5 @@ export default {
     display: -webkit-box;
 
     margin-bottom:18px;
-}
-
-.notice .notice-icon {
-    padding : 4px 8px;
-    margin-right:12px;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 700;
 }
 </style>

@@ -77,8 +77,6 @@ export default {
     font-size: 16px;
     font-weight: 700;
 
-    color : white;
-
     justify-content: center;
     align-items: center;
 }
@@ -95,9 +93,6 @@ export default {
     align-items: center;
 }
 
-.choice-major{
-    color:white;
-}
 
 .choice-major-wrap input {
     display: none;

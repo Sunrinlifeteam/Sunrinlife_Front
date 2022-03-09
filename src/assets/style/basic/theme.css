@@ -107,27 +107,31 @@ button:active{
 
 .security{
     background-color: #3d3d3d;
+    color:white;
 }
 .security:hover{
-    background-color: #3d2d3d;
+    background-color: #4d4d4d;
 }
 
 .software{
     background-color:#ffcf49;
+    color:white;
 }
 .software:hover{
     background-color:#ffbf49;
 }
 
 .ceo{
-    background-color: #00A05C;
+    background-color: #f5f7f5;
+    color:#3d3d3d;
 }
 .ceo:hover{
-    background-color: #00905C;
+    background-color: #eaeaea;
 }
 
 .design{
     background-color:#4992ff;
+    color:white;
 }
 .design:hover{
     background-color:#4982ff;
