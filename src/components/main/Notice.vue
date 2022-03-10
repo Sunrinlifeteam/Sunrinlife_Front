@@ -2,15 +2,12 @@
 <div class="notice main-page-item">
     <div class="main-page-item-title"><h3>공지</h3></div>
     <div class="main-page-item-content">
-        <div class="icon-wrap">
-            <transition name="notice-icon" v-for="i, j, in noticeData" :key="j">
+        <div v-for="i, j, in noticeData" :key="j" class="title_list">
+            <transition name="notice-icon">
                 <div v-if="i.type === 'school'" class="notice-icon notice-school">학교</div>
                 <div v-else-if="i.type === 'intranet'" class="notice-icon notice-intranet">인트라넷</div>
             </transition>
-        </div>
-        <div>
-            <p v-for="i, j in noticeData" :key="j" class="title"
-            @click="$router.push(`/notice/${j}`)">{{i.title}}</p>
+            <p class="title" @click="$router.push(`/notice/${j}`)">{{i.title}}</p>
         </div>
     </div>
 </div>
@@ -72,10 +69,13 @@ export default {
 }
 
 .notice .main-page-item-content{
-    display:grid;
-    grid-template-columns: auto 1fr;
+    
 }
 
+.title_list{
+    
+    display: flex;
+}
 
 .notice .icon-wrap {
     padding-right : 4px;
@@ -87,7 +87,6 @@ export default {
     margin-bottom:14px;
     border-radius: 24px;
     color : var(--gray1);
-    width: 70px;
     height:28px;
     text-align: center;
     
@@ -99,15 +98,18 @@ export default {
 
 .notice-icon.notice-school {
     background-color: #ffcf49;
+    width:50px;
 }
 
 .notice-icon.notice-intranet {
     background-color: #4992ff;
+    width: 74px;
 }
 
 .title{
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
+    
     text-overflow: ellipsis;
     overflow:hidden;
     
@@ -118,5 +120,8 @@ export default {
     margin-bottom:18px;
 
     cursor: pointer;
+    flex: 1;
+
+    margin-top:1.5px;
 }
 </style>

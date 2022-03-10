@@ -12,7 +12,7 @@
 let msg = ""
 
 for(let i = 0; i < 1000; i++){
-    msg += "EDCAN은 정말 최고야!! "
+    msg += "TEAMLOG는 정말 최고야!! "
 }
 
 export default {
