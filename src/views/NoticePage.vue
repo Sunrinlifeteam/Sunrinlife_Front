@@ -22,11 +22,12 @@
             </ul>
 
             <div class="pagination-wrap">
-                <img src="./../assets/prev_arrow.svg" alt="" class="prev-btn">
+                <img src="./../assets/prev_arrow.svg" alt="" class="prev-btn"
+                    @click="()=>{ if(pageId > 1) pageId--}">
                 <div class="page-button-wrap">
                     <template v-for="i, n in pageList" :key="n">
                         <div
-                            v-if="pageId - 2 <= n + 1 && n + 1 <= pageId + 2"
+                            v-if="(pageId - 2 <= n + 1 && n + 1 <= pageId + 2) || (pageId <= 2 && n + 1 <= 5) || (pageId >= pageList.length - 2 && n + 1 >= pageList.length - 4)"
                             class="page-btn"
                             :class="{'current-page' : pageId == n + 1}"
                             @click="pageId = n + 1">
@@ -34,7 +35,8 @@
                         </div>
                     </template>
                 </div>
-                <img src="./../assets/next_arrow.svg" alt="" class="next-btn">
+                <img src="./../assets/next_arrow.svg" alt="" class="next-btn"
+                    @click="()=>{ if(pageId < pageList.length) pageId++ }">
             </div>
         </div>
     </div>
