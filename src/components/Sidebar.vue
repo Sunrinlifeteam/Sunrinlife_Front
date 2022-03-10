@@ -144,31 +144,31 @@ nav .menu_list a{
     padding : 8px 16px;
     padding-left:32px;
     color:#d9d9d9;
-    display : inline;
+    display : flex;
 
     cursor: pointer;
-}
-
-nav .menu_list a span{
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 700;
-    margin-left:10px;
-    vertical-align: middle;
-}
-
-nav .menu_list a img{
-    display:inilne;
-    vertical-align: middle;
-}
-
-nav .menu_list a:hover, nav a:active{
-    background-color: var(--gray1);
 }
 
 .nav-list .router-link-exact-active{
     color : #4992ff;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
+}
+
+nav .menu_list a span{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+    margin-left:10px;
+    display: block;
+}
+
+nav .menu_list a img{
+    display:inline;
+    vertical-align: middle;
+}
+
+nav .menu_list a:hover, nav a:active{
+    background-color: var(--gray1);
 }
 
 .nav-bg {
