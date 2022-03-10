@@ -6,12 +6,12 @@ export default [
     },
     {
         name : "공지",
-        router : "notice",
+        router : "/notice",
         img:require("./../assets/sidebar/notification.svg")
     },
     {
         name : "동아리",
-        router : "club",
+        router : "/club",
         img:require("./../assets/sidebar/club.svg")
     }
 ]

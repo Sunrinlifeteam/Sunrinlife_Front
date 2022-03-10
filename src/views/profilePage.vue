@@ -92,13 +92,12 @@ export default {
         /*padding: 205px 231px;*/
     }
     .user-profile {
-        width: 979px;
-        height: 351px;
+        width: 70vw;
+        height: 350px;
         background-color: #fff;
         /*margin: 205px 231px;*/
-        position: absolute;
-        top: 205px;
-        left: 231px;
+        margin: 0 auto;
+        margin-top:205px;
         border-radius: 8px;
         box-shadow: 1px 0 6px 0 rgba(0, 0, 0, 0.16);
     }
@@ -124,21 +123,17 @@ export default {
 
     .user-info-items {
         /*background-color: aquamarine;*/
-        height: 100%;
-        width: 100%;
         padding: 60px 0;
     }
 
     .user-basic-contact-items {
         /*background-color: chartreuse;*/
-        width: 100%;
         height: 118px;
     }
 
     .user-basic-items {
         /*background-color: rgb(76, 76, 110);*/
         width: 195px;
-        height: 100%;
         float: left;
     }
     .user-name-item {
@@ -169,8 +164,6 @@ export default {
 
     .user-contact-items {
         /*background-color: crimson;*/
-        width: 100%;
-        height: 100%;
     }
     .user-contact-item {
         display: inline;
@@ -234,21 +227,37 @@ export default {
         width: 36px;
         height: 36px;
         border-radius: 50%;
-        bottom: 12px;
-        display: flex;
-        top: 24px;
-        right: 24px;
-        position: absolute;
+        display:inline-block;
+        position: relative;
+        float:right;
+        margin-top:24px;
+        margin-right:24px;
         background-color: #f5f6f7;
-        cursor: pointer;
         transition-duration: 0.1s;
     }
     .info-correcrion-button:hover {
         background-color: #e1e2e4;
+        cursor: pointer;
     }
     .correction-button-img {
         width: 24px;
         height: 24px;
         margin: 6px;
+    }
+    @media (max-width:1200px) {
+        .user-social-contact-item {
+            display: block;
+            margin:0;
+        }
+        .user-contact-item{
+            display:block;
+            margin-bottom:10px;
+        }
+    }
+    @media (max-width:1000px) {
+        .user-profile{
+            width:700px;
+            margin-left:30px;
+        }
     }
 </style>
