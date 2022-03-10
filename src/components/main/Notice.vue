@@ -9,7 +9,8 @@
             </transition>
         </div>
         <div>
-            <p v-for="i, j in noticeData" :key="j" class="title">{{i.title}}</p>
+            <p v-for="i, j in noticeData" :key="j" class="title"
+            @click="$router.push(`/notice/${j}`)">{{i.title}}</p>
         </div>
     </div>
 </div>
@@ -80,17 +81,17 @@ export default {
     padding-right : 4px;
 }
 
-.notice .notice-icon {
+.notice-icon {
     font-size : 14px;
     padding : 2px 10px;
     margin-bottom:14px;
     border-radius: 24px;
     color : var(--gray1);
-    width:70px;
+    width: 70px;
     height:28px;
     text-align: center;
     
-    padding : 4px 8px;
+    padding : 4px 4px;
     margin-right:12px;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
@@ -115,5 +116,7 @@ export default {
     display: -webkit-box;
 
     margin-bottom:18px;
+
+    cursor: pointer;
 }
 </style>
