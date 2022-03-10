@@ -3,6 +3,10 @@
 <div class="login">
     <!-- <img src="./../assets/sunrin.jpg" alt="배경" class="login-bg"> -->
     <div class="login-box">
+        <div class="logo">
+            <img class="logo_symbol" src="../assets/symbol.svg">
+            <img class="logo_text" src="../assets/logo.svg">
+        </div>
         <button @click="loginClick" class="login-btn">학교 계정으로 로그인</button>
     </div>
 
@@ -66,6 +70,17 @@ export default {
         bottom: 0px;
     } */
 
+    .logo{
+        display:Flex;
+        justify-content: center;
+    }
+    .logo_symbol{
+        width:70px;
+    }
+    .logo_text{
+        width:190px;
+    }
+
     .login .login-bg {
         width : 100%;
         height : 100vh;
@@ -74,9 +89,9 @@ export default {
 
     .login .login-box {
         width : 80%;
-        max-width: 700px;
-
-        padding : 20px;
+        max-width: 600px;
+        height:400px;
+        padding : 50px;
 
         font-size: 20px;
 
@@ -115,9 +130,6 @@ export default {
 
         font-size: 0.75em;
 
-        border : 1px solid var(--gray5);
-
-        background-color: var(--gray3);
     }
 
     .login .login-box input:valid{
@@ -143,11 +155,11 @@ export default {
 
 
     .login .login-btn {
-        padding : 20px;
-
-        font-size: 1em;
+        height:60px;
+        font-size: 20px;
         
         border-radius: 4px;
+        background-color: #4893ff;
     }
 
     .login .sign-up-goto-wrap{
