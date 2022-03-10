@@ -181,9 +181,9 @@ export default {
     color: #3d3d3d;
 
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
-    line-height: 1.6;
+    margin-top:1.5px;
 
     text-overflow: ellipsis;
     overflow:hidden;

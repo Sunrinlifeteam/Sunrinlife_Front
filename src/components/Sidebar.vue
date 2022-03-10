@@ -155,6 +155,10 @@ nav .menu_list a{
     font-weight: 700;
 }
 
+.router-link-exact-active img{
+    filter: invert(57%) sepia(64%) saturate(4033%) hue-rotate(198deg) brightness(102%) contrast(102%);
+}
+
 nav .menu_list a span{
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
