@@ -101,12 +101,12 @@ export default {
 }
 
 .club-name {
-    font-family: NotoSansKR;
+    font-family: 'Noto Sans KR', sans-serif;
     font-size: 20px;
 }
 
 .descriptions {
-    font-family: NotoSansKR;
+    font-family: 'Noto Sans KR', sans-serif;
     font-size: 14px;
     font-weight: bold;
     line-height: 1.43;
@@ -204,9 +204,14 @@ export default {
     color: #3d3d3d;
 }
 
-@media (max-width:1010px) {
-    .club-card{
-        width:513px;
+@media (max-width : 1100px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .sns-ranker-wrap, .curriculum-wrap {
+        padding : 0;
     }
 }
 </style>

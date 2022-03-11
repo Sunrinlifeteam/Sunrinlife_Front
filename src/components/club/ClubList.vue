@@ -43,7 +43,7 @@ export default {
     padding: 8px 26px;
     border-radius: 8px;
 
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap : 8px;
 
@@ -65,4 +65,5 @@ export default {
     font-weight: 500;
     font-size:16px;
 }
+
 </style>
