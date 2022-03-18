@@ -11,7 +11,7 @@
                     @click="isEditable = true"/>
                 <img class="correction-button-img" src="./../assets/user_profile_assets/checkIcon.svg"
                     v-else
-                    @click="isEditable = false"/>
+                    @click="editProfile"/>
             </div>
 
             <!-- 프로필 이미지 -->
@@ -43,7 +43,7 @@
                         </div>
                         <div v-else class="user-contact-item user-contact-club edit">
                             <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
-                            <input class="user-contact-text user-profile-edit-inout">
+                            <input v-model="editClubInfo" v class="user-contact-text user-profile-edit-inout">
                         </div>
 
                         <div class="user-contact-item">
@@ -58,7 +58,7 @@
                         </div>
                         <div v-else class="user-social-contact-item edit">
                             <img class="user-contact-icon" src="./../assets/user_profile_assets/githubIcon.svg"/>
-                            <input class="user-contact-text user-profile-edit-inout">
+                            <input v-model="editGithubLink" v class="user-contact-text user-profile-edit-inout">
                         </div>
 
                     </div>
@@ -72,7 +72,7 @@
                 </div>
                 <div v-else class="user-introduce-items edit">
                     <span class="user-introduce-title">소개</span>
-                    <textarea class="user-introduce-item user-profile-edit-inout" v-model="userData.description"></textarea>
+                    <textarea v class="user-introduce-item user-profile-edit-inout" v-model="editDescription"></textarea>
                 </div>
             </div>
 
@@ -87,6 +87,11 @@ export default {
     data() {
         return {
             isEditable : false,
+            editClubInfo : "",
+            editGithubLink : "",
+            editDescription : "",
+
+
             userInfo: {
                 userImg: './../assets/user_profile_assets/user_profile_img.png',
                 userName: '김병주',
@@ -102,12 +107,22 @@ export default {
             }
         } 
     },
+    methods: {
+        editProfile(){
+            this.isEditable = false
+        }
+    },
     components:{
         Sidebar
     },
     computed:{
         ...mapState(["userData", "department_map"])
-    }
+    },
+    mounted() {
+        this.editClubInfo = this.userData.clubInfo
+        this.editGithubLink = this.userData.githubLink
+        this.editDescription = this.userData.description
+    },
 }
 </script>
 
@@ -273,6 +288,7 @@ export default {
 
 
     .user-profile-edit-inout {
+        height : 40px;
         border : 0;
         padding: 8px 14px;
         border-radius: 8px;
