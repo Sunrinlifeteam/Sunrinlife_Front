@@ -8,7 +8,34 @@ axios.defaults.withCredentials = true;
 const store = createStore({
     state(){ return {
         authToken : null,
-        userData : null,
+        // userData : {
+        //     userImg: './../assets/user_profile_assets/user_profile_img.png',
+        //     userName: '김병주',
+        //     userClass: 2,
+        //     userNumber: 6,
+        //     userMajor: '소프트웨어',
+        //     userClub: 'App:ple Pi',
+        //     userEmail: 'kd531585@gmail.com',
+        //     userIntroduce: '세상 거지같네 세상 거지같네 세상 거지같네 세상 거지같네 세상 거지같네 세상 거지같네세상 거지같네 세상 거지같네 세상 거지같네 세상 거지같네 세상 거지같네 세상 거지같네 세상 거지같네 세상 거지같네 세상 거지같네 세상 거지같네 세상 거지같네 세상 거지같네',
+        //     userContact: {
+        //         userGithub: 'github.com/sh596',
+        //     }
+        // },
+        userData : {
+            id: "qwer1234",
+            email: "email@sunrint.hs.kr",
+            username: "박희찬",
+            department: "소프트웨어과",
+            grade: 1,
+            class: 4,
+            number: 13,
+            accountType: 0,
+            clubInfo : "EDCAN",
+            githubLink : "github.com/ckstmznf",
+            description : "대충 소개글 대충 소개글 대충 소개글 대충 소개글 대충 소개글 "
+        },
+
+        // 테스트로 임시로 넣어둔 유저 데이터
 
         navBarList,
         department_map,

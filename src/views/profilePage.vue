@@ -6,7 +6,12 @@
 
             <!-- 정보 수정 버튼 -->
             <div class="info-correcrion-button">
-                <img class="correction-button-img" src="./../assets/user_profile_assets/correctionIcon.svg"/>
+                <img class="correction-button-img" src="./../assets/user_profile_assets/correctionIcon.svg"
+                    v-if="!isEditable"
+                    @click="isEditable = true"/>
+                <img class="correction-button-img" src="./../assets/user_profile_assets/checkIcon.svg"
+                    v-else
+                    @click="isEditable = false"/>
             </div>
 
             <!-- 프로필 이미지 -->
@@ -22,7 +27,12 @@
                 <div class="user-basic-contact-items">
 
                     <!-- 이름, 번호, 학과 -->
-                    <div class="user-basic-items">
+                    <div v-if="!isEditable" class="user-basic-items">
+                        <span class="user-name-item">{{ userData.username }}</span>
+                        <span class="user-major-item">{{ department_map[userData.department] }}</span>
+                        <span class="user-number-item">{{ userData.grade }}학년 {{ userData.class }}반 {{ userData.number }}번</span>
+                    </div>
+                    <div v-else class="user-basic-items edit ">
                         <span class="user-name-item">{{ userData.username }}</span>
                         <span class="user-major-item">{{ department_map[userData.department] }}</span>
                         <span class="user-number-item">{{ userData.grade }}학년 {{ userData.class }}반 {{ userData.number }}번</span>
@@ -32,17 +42,26 @@
                     <div class="user-contact-items">
 
                         <!-- 동아리, 이메일 -->
-                        <div class="user-contact-item">
+                        <div v-if="!isEditable" class="user-contact-item">
                             <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
                             <span class="user-contact-text">{{ userData.clubInfo }}</span>
                         </div>
+                        <div v-else class="user-contact-item edit">
+                            <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
+                            <span class="user-contact-text">{{ userData.clubInfo }}</span>
+                        </div>
+
                         <div class="user-contact-item">
                             <img class="user-contact-icon" src="./../assets/user_profile_assets/emailIcon.svg"/>
                             <span class="user-contact-text">{{ userData.email }}</span>
                         </div>
 
                         <!-- 깃허브 계정 -->
-                        <div class="user-social-contact-item">
+                        <div v-if="!isEditable" class="user-social-contact-item">
+                            <img class="user-contact-icon" src="./../assets/user_profile_assets/githubIcon.svg"/>
+                            <span class="user-contact-text">{{ userData.githubLink }}</span>
+                        </div>
+                        <div v-else class="user-social-contact-item edit">
                             <img class="user-contact-icon" src="./../assets/user_profile_assets/githubIcon.svg"/>
                             <span class="user-contact-text">{{ userData.githubLink }}</span>
                         </div>
@@ -52,7 +71,11 @@
                 </div>
 
                 <!-- 소개 -->
-                <div class="user-introduce-items">
+                <div v-if="!isEditable" class="user-introduce-items">
+                    <span class="user-introduce-title">소개</span>
+                    <span class="user-introduce-item">{{ userData.description }}</span>
+                </div>
+                <div v-else class="user-introduce-items edit">
                     <span class="user-introduce-title">소개</span>
                     <span class="user-introduce-item">{{ userData.description }}</span>
                 </div>
@@ -68,6 +91,7 @@ import Sidebar from "./../components/Sidebar.vue"
 export default {
     data() {
         return {
+            isEditable : false,
             userInfo: {
                 userImg: './../assets/user_profile_assets/user_profile_img.png',
                 userName: '김병주',
