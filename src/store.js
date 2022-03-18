@@ -6,8 +6,7 @@ axios.defaults.withCredentials = true;
 
 const store = createStore({
     state(){ return {
-        isLogin : false,
-        userData : {},
+        userData : null,
         authToken : null,
 
         navBarList,

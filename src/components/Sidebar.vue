@@ -13,15 +13,26 @@
                     v-for="i, n in navBarList" :key="n"
                     :to="i.router"><img :src="i.img"><span>{{ i.name }}</span></router-link>
             </div>
-            <router-link class="list-user-profile" :to="profile">
-                
-                <img :src="currentUserData?.profileImg">
-                <span class="list_user_profile_text">
-                    <p class="list_user_profile_name">{{userData?.username}}</p>
-                    <p class="list_user_profile_department">{{userData?.department}}</p>
-                </span>
-                <!-- {{currentUserData}} -->
-            </router-link>
+            <template v-if="userData">
+                <router-link class="list-user-profile" :to="'profile'">
+                    
+                    <img :src="userData?.profileImg">
+                    <span class="list_user_profile_text">
+                        <p class="list_user_profile_name">{{userData?.username}}</p>
+                        <p class="list_user_profile_department">{{userData?.department}}</p>
+                    </span>
+                    <!-- {{currentUserData}} -->
+                </router-link>
+            </template>
+            <template v-else>
+                <div class="center">
+                    <span class="loading_one">
+                        <span class="loading_two">
+                            <span class="loading_three"></span>
+                        </span>
+                    </span>
+                </div>
+            </template>
         </div>
 
 
@@ -38,12 +49,11 @@
 <script>
 import { mapState } from "vuex"
 //import store from "../store.js"
-let profile = "profile"
 export default {
     name : "Sidebar",
     data(){
         return{
-            profile,
+            
         }
     },
     computed :{
@@ -199,6 +209,55 @@ nav .menu_list a:hover, nav a:active{
     bottom : 0px;
 
     cursor: pointer;
+
+    
+}
+
+.loading_one, .loading_two, .loading_three {
+  animation-name: rotate;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  position: absolute;
+  display: block;
+  width: 60px;
+  height: 60px;
+  border: 3px solid #111;
+  border-radius: 100%;
+}
+
+.loading_one {
+  animation-duration: 1500ms;
+}
+
+.loading_two {
+  animation-duration: 4500ms;
+  transform-origin: 63% 63%;
+  width: 40px;
+  height: 40px;
+}
+
+.loading_three {
+  animation-duration: 9000ms;
+  transform-origin: 74% 74%;
+  width: 20px;
+  height: 20px;
+}
+
+
+@keyframes rotate {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+.center {
+  position: absolute;
+  left: 50%;
+  margin-left: -33px;
+  bottom:130px;
 }
 
 @media (max-height:500px) {
