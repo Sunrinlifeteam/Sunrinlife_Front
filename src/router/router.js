@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router"
 
 import LoginPage from "./../views/LoginPage.vue"
+import Register from "./../views/RegisterPage.vue"
 import MainPage from "./../views/MainPage.vue"
 import ProfilePage from './../views/profilePage.vue';
 import ClubPage from "./../views/ClubPage.vue"
@@ -25,10 +26,17 @@ checkLogin
 const routes = [
     {
         path : "/login",
+        name: "login",
         component : LoginPage,
     },
     {
+        path : "/register",
+        name: "register",
+        component : Register,
+    },
+    {
         path : "/",
+        name: "main",
         component : MainPage,
         // beforeEnter: checkLogin
     },
@@ -38,19 +46,24 @@ const routes = [
     },
     {
         path : "/notice",
+        name: "notice",
         component : NoticePage,
     },
     {
         path : "/notice/:noticeId",
+        name: "noticeId",
         component : NoticeDetailPage,
     },
     {
         path : "/profile",
+        name: "profile",
         component : ProfilePage,
     },
     {
         path : "/club",
-        component : ClubPage
+        name: "club",
+        component : ClubPage,
+        props: true
     },
 ]
 

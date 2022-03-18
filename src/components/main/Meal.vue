@@ -77,4 +77,10 @@ export default {
     margin-left: 16px;
     margin-top:7px;
 }
+
+@media (max-width: 970px) {
+    .two_panel > p:last-child{
+        margin-bottom:10px;
+    }
+}
 </style>

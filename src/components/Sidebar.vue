@@ -15,10 +15,10 @@
             </div>
             <router-link class="list-user-profile" :to="profile">
                 
-                <img :src="currentUserData.profileImg">
+                <img :src="currentUserData?.profileImg">
                 <span class="list_user_profile_text">
-                    <p class="list_user_profile_name">{{currentUserData.name}}</p>
-                    <p class="list_user_profile_department">{{currentUserData.department}}</p>
+                    <p class="list_user_profile_name">{{userData?.username}}</p>
+                    <p class="list_user_profile_department">{{userData?.department}}</p>
                 </span>
                 <!-- {{currentUserData}} -->
             </router-link>
@@ -37,20 +37,25 @@
 
 <script>
 import { mapState } from "vuex"
+//import store from "../store.js"
 let profile = "profile"
 export default {
     name : "Sidebar",
     data(){
         return{
-            profile
+            profile,
         }
     },
     computed :{
-        ...mapState(['currentUserData', 'navBarList'])
+        ...mapState(['userData', 'navBarList']),
+        
         // store.js에 저장된 navBarList를 가져와서 목록으로 보여준다.
     },
     props : {
         // navState : Number
+    },
+    watch:{
+        
     }
 }
 </script>
@@ -114,6 +119,7 @@ nav .nav-list .list-user-profile img{
     width:36px;
     height:36px;
     border-radius: 100%;
+    filter:none;
 }
 
 nav .logo{

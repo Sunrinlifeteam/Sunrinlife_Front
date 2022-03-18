@@ -32,7 +32,7 @@
 }
 .schedule-item {
     display: grid;
-    grid-template-columns: repeat(7, 140px);
+    grid-template-columns: repeat(7, 148px);
     grid-gap: 22px;
     overflow: auto;
     padding-bottom:5px;
@@ -89,6 +89,7 @@
 
 .official{
     background-color:#ffcf49;
+    cursor:default;
 }
 .personal{
     background-color:#4992ff;

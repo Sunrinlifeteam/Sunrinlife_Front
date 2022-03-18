@@ -2,11 +2,9 @@
 <div class="today-schedule main-page-item">
     <div class="main-page-item-title"><h3>시간표</h3></div>
     <div class="main-page-item-content two_panel">
-        <div class="time-table">
             
-            <p v-for="i, n in timeTable" :key="n">{{ i }}</p>
+        <p v-for="i, n in timeTable" :key="n">{{ i }}</p>
 
-        </div>
     </div>
 </div>
 </template>
