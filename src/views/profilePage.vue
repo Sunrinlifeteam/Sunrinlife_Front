@@ -27,12 +27,7 @@
                 <div class="user-basic-contact-items">
 
                     <!-- 이름, 번호, 학과 -->
-                    <div v-if="!isEditable" class="user-basic-items">
-                        <span class="user-name-item">{{ userData.username }}</span>
-                        <span class="user-major-item">{{ department_map[userData.department] }}</span>
-                        <span class="user-number-item">{{ userData.grade }}학년 {{ userData.class }}반 {{ userData.number }}번</span>
-                    </div>
-                    <div v-else class="user-basic-items edit ">
+                    <div class="user-basic-items">
                         <span class="user-name-item">{{ userData.username }}</span>
                         <span class="user-major-item">{{ department_map[userData.department] }}</span>
                         <span class="user-number-item">{{ userData.grade }}학년 {{ userData.class }}반 {{ userData.number }}번</span>
@@ -42,13 +37,13 @@
                     <div class="user-contact-items">
 
                         <!-- 동아리, 이메일 -->
-                        <div v-if="!isEditable" class="user-contact-item">
+                        <div v-if="!isEditable" class="user-contact-item user-contact-club">
                             <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
                             <span class="user-contact-text">{{ userData.clubInfo }}</span>
                         </div>
-                        <div v-else class="user-contact-item edit">
+                        <div v-else class="user-contact-item user-contact-club edit">
                             <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
-                            <span class="user-contact-text">{{ userData.clubInfo }}</span>
+                            <input class="user-contact-text user-profile-edit-inout">
                         </div>
 
                         <div class="user-contact-item">
@@ -63,7 +58,7 @@
                         </div>
                         <div v-else class="user-social-contact-item edit">
                             <img class="user-contact-icon" src="./../assets/user_profile_assets/githubIcon.svg"/>
-                            <span class="user-contact-text">{{ userData.githubLink }}</span>
+                            <input class="user-contact-text user-profile-edit-inout">
                         </div>
 
                     </div>
@@ -77,7 +72,7 @@
                 </div>
                 <div v-else class="user-introduce-items edit">
                     <span class="user-introduce-title">소개</span>
-                    <span class="user-introduce-item">{{ userData.description }}</span>
+                    <textarea class="user-introduce-item user-profile-edit-inout" v-model="userData.description"></textarea>
                 </div>
             </div>
 
@@ -223,7 +218,9 @@ export default {
     }
 
     .user-introduce-items {
-        /*background-color: deeppink;*/
+        /* background-color: deeppink; */
+        /* position: relative; */
+        /* background-color: #f00; */
     }
     .user-introduce-title {
         height: 24px;
@@ -273,6 +270,33 @@ export default {
         height: 24px;
         margin: 6px;
     }
+
+
+    .user-profile-edit-inout {
+        border : 0;
+        padding: 8px 14px;
+        border-radius: 8px;
+        background-color: #f5f6f7;
+    }
+
+    .user-contact-club .user-profile-edit-inout {
+        width : 150px;
+    }
+
+    .user-social-contact-item .user-profile-edit-inout {
+        width : 300px;
+    }
+
+    textarea.user-profile-edit-inout {
+        width : 50%;
+        height: 7em;
+
+        margin : 0px;
+
+        border: none;
+        resize: none;
+    }
+
     @media (max-width:1200px) {
         .user-social-contact-item {
             display: block;
