@@ -86,10 +86,12 @@ import Sidebar from "./../components/Sidebar.vue"
 export default {
     data() {
         return {
-            isEditable : false,
+            isEditable : false, //현재 수정 모드인지 아닌지를 판단
+
             editClubInfo : "",
             editGithubLink : "",
             editDescription : "",
+            // 수정을 입력받은 데이터
 
 
             userInfo: {
@@ -110,6 +112,10 @@ export default {
     methods: {
         editProfile(){
             this.isEditable = false
+
+            //editClubInfo
+            //editGithubLink
+            //editDescription
         }
     },
     components:{
@@ -290,6 +296,9 @@ export default {
     .user-profile-edit-inout {
         height : 40px;
         border : 0;
+
+        color: #3d3d3d;
+
         padding: 8px 14px;
         border-radius: 8px;
         background-color: #f5f6f7;
