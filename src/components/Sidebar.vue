@@ -16,10 +16,10 @@
             <template v-if="userData">
                 <router-link class="list-user-profile" :to="'profile'">
                     
-                    <img :src="userData?.profileImg">
+                    <img :src="userData.profileImg">
                     <span class="list_user_profile_text">
-                        <p class="list_user_profile_name">{{userData?.username}}</p>
-                        <p class="list_user_profile_department">{{userData?.department}}</p>
+                        <p class="list_user_profile_name">{{userData.username}}</p>
+                        <p class="list_user_profile_department">{{department_map[userData.department]}}</p>
                     </span>
                     <!-- {{currentUserData}} -->
                 </router-link>
@@ -57,7 +57,7 @@ export default {
         }
     },
     computed :{
-        ...mapState(['userData', 'navBarList']),
+        ...mapState(['userData', 'navBarList', 'department_map']),
         
         // store.js에 저장된 navBarList를 가져와서 목록으로 보여준다.
     },
