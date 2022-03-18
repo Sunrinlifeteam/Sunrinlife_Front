@@ -15,7 +15,7 @@
 <script>
 
 import { mapActions } from "vuex"
-import axios from "axios"
+//import axios from "axios"
 
 export default {
     name : "Login",
@@ -28,11 +28,7 @@ export default {
 
         loginClick(){
 
-            axios.get("http://devapi.sunrint.life/auth/google/callback").then((res) => {
-                console.log(res)
-            }).catch((e)=>{
-                console.log(e)
-            })
+            window.location.href = "http://localhost:3000/auth/google";
 
             //this.login({ "email" : this.inputEmail, "password" : this.inputPassword})    
         }
@@ -48,7 +44,7 @@ export default {
     }
 }
 </script>
-<style>
+<style scoped>
     .login {
         width : 100%;
         height : 100vh;

@@ -122,4 +122,10 @@ export default {
         /* color : red; */
     }
 }
+
+@media (max-width: 970px) {
+    .next-time{
+        margin-bottom:10px;
+    }
+}
 </style>

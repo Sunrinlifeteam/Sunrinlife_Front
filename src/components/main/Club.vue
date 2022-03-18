@@ -4,7 +4,7 @@
         <h3>동아리</h3>
     </divc>
     <div class="main-page-item-content">
-        <router-link v-for="i, j in clubs" :key="j" class="club_panel" :class="j" :to="j"> <!-- 경로 수정해야함 -->
+        <router-link v-for="i, j in clubs" :key="j" class="club_panel" :class="j" :to="'/club'"> <!-- 경로 수정해야함 -->
             <p>{{i}}</p>
         </router-link>
     </div>
@@ -35,7 +35,7 @@ export default {
 
 .club .main-page-item-content {
     display: grid;
-    grid-template-columns: repeat(4, 140px);
+    grid-template-columns: repeat(4, 148px);
     grid-gap: 22px;
     overflow: auto;
     padding-bottom:5px;
@@ -65,4 +65,9 @@ export default {
     margin-top:190px;
 }
 
+@media (max-width: 970px) {
+    .club_panel p{
+        margin-bottom:20px;
+    }
+}
 </style>
