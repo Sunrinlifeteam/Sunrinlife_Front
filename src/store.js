@@ -7,11 +7,12 @@ axios.defaults.withCredentials = true;
 
 const store = createStore({
     state(){ return {
-        userData : null,
         authToken : null,
+        userData : null,
 
         navBarList,
-        department_map
+        department_map,
+        
     }
     },
     mutations :{

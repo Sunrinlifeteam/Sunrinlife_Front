@@ -15,7 +15,7 @@ export async function getAccessToken() {
 }
 
 export async function getUserData(){
-    let userData = await getAPI.get("/auth/user", {
+    let userData = await getAPI.get("/auth/user/club", {
         headers:{
             Authorization:store.getters.getAuthToken
         }

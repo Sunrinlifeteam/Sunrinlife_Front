@@ -15,8 +15,12 @@
             </div>
             <template v-if="userData">
                 <router-link class="list-user-profile" :to="'profile'">
-                    
-                    <img :src="userData.profileImg">
+                    <template v-if="userData.image !== null">
+                        <img :src="userData.image">
+                    </template>
+                    <template v-else>
+                        <img src="../assets/user_profile_assets/basic_profile_img.svg">
+                    </template>
                     <span class="list_user_profile_text">
                         <p class="list_user_profile_name">{{userData.username}}</p>
                         <p class="list_user_profile_department">{{department_map[userData.department]}}</p>

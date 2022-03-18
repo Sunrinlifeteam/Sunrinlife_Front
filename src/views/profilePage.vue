@@ -12,7 +12,8 @@
             <!-- 프로필 이미지 -->
             <div class="user-img-items">
                 <div class="user-img-item">
-                    <img class="user-img" src='./../assets/user_profile_assets/basic_profile_img.svg'/>
+                    <img v-if="userData.image !== null" class="user-img" :src="userData.image" />
+                    <img v-else class="user-img" src="../assets/user_profile_assets/basic_profile_img.svg" />
                 </div>
             </div>
 
@@ -33,7 +34,7 @@
                         <!-- 동아리, 이메일 -->
                         <div class="user-contact-item">
                             <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
-                            <span class="user-contact-text">{{ userInfo.userClub }}</span>
+                            <span class="user-contact-text">{{ userData.clubInfo }}</span>
                         </div>
                         <div class="user-contact-item">
                             <img class="user-contact-icon" src="./../assets/user_profile_assets/emailIcon.svg"/>
@@ -43,7 +44,7 @@
                         <!-- 깃허브 계정 -->
                         <div class="user-social-contact-item">
                             <img class="user-contact-icon" src="./../assets/user_profile_assets/githubIcon.svg"/>
-                            <span class="user-contact-text">{{ userInfo.userContact.userGithub }}</span>
+                            <span class="user-contact-text">{{ userData.githubLink }}</span>
                         </div>
 
                     </div>
@@ -53,7 +54,7 @@
                 <!-- 소개 -->
                 <div class="user-introduce-items">
                     <span class="user-introduce-title">소개</span>
-                    <span class="user-introduce-item">{{ userInfo.userIntroduce }}</span>
+                    <span class="user-introduce-item">{{ userData.description }}</span>
                 </div>
             </div>
 
