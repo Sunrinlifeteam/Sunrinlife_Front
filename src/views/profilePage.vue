@@ -6,7 +6,12 @@
 
             <!-- 정보 수정 버튼 -->
             <div class="info-correcrion-button">
-                <img class="correction-button-img" src="./../assets/user_profile_assets/correctionIcon.svg"/>
+                <img class="correction-button-img" src="./../assets/user_profile_assets/correctionIcon.svg"
+                    v-if="!isEditable"
+                    @click="isEditable = true"/>
+                <img class="correction-button-img" src="./../assets/user_profile_assets/checkIcon.svg"
+                    v-else
+                    @click="editProfile"/>
             </div>
 
             <!-- 프로필 이미지 -->
@@ -32,19 +37,28 @@
                     <div class="user-contact-items">
 
                         <!-- 동아리, 이메일 -->
-                        <div class="user-contact-item">
+                        <div v-if="!isEditable" class="user-contact-item user-contact-club">
                             <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
                             <span class="user-contact-text">{{ userData.clubInfo }}</span>
                         </div>
+                        <div v-else class="user-contact-item user-contact-club edit">
+                            <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
+                            <input v-model="editClubInfo" v class="user-contact-text user-profile-edit-inout">
+                        </div>
+
                         <div class="user-contact-item">
                             <img class="user-contact-icon" src="./../assets/user_profile_assets/emailIcon.svg"/>
                             <span class="user-contact-text">{{ userData.email }}</span>
                         </div>
 
                         <!-- 깃허브 계정 -->
-                        <div class="user-social-contact-item">
+                        <div v-if="!isEditable" class="user-social-contact-item">
                             <img class="user-contact-icon" src="./../assets/user_profile_assets/githubIcon.svg"/>
                             <span class="user-contact-text">{{ userData.githubLink }}</span>
+                        </div>
+                        <div v-else class="user-social-contact-item edit">
+                            <img class="user-contact-icon" src="./../assets/user_profile_assets/githubIcon.svg"/>
+                            <input v-model="editGithubLink" v class="user-contact-text user-profile-edit-inout">
                         </div>
 
                     </div>
@@ -52,9 +66,13 @@
                 </div>
 
                 <!-- 소개 -->
-                <div class="user-introduce-items">
+                <div v-if="!isEditable" class="user-introduce-items">
                     <span class="user-introduce-title">소개</span>
                     <span class="user-introduce-item">{{ userData.description }}</span>
+                </div>
+                <div v-else class="user-introduce-items edit">
+                    <span class="user-introduce-title">소개</span>
+                    <textarea v class="user-introduce-item user-profile-edit-inout" v-model="editDescription"></textarea>
                 </div>
             </div>
 
@@ -68,6 +86,14 @@ import Sidebar from "./../components/Sidebar.vue"
 export default {
     data() {
         return {
+            isEditable : false, //현재 수정 모드인지 아닌지를 판단
+
+            editClubInfo : "",
+            editGithubLink : "",
+            editDescription : "",
+            // 수정을 입력받은 데이터
+
+
             userInfo: {
                 userImg: './../assets/user_profile_assets/user_profile_img.png',
                 userName: '김병주',
@@ -83,12 +109,26 @@ export default {
             }
         } 
     },
+    methods: {
+        editProfile(){
+            this.isEditable = false
+
+            //editClubInfo
+            //editGithubLink
+            //editDescription
+        }
+    },
     components:{
         Sidebar
     },
     computed:{
         ...mapState(["userData", "department_map"])
-    }
+    },
+    mounted() {
+        this.editClubInfo = this.userData.clubInfo
+        this.editGithubLink = this.userData.githubLink
+        this.editDescription = this.userData.description
+    },
 }
 </script>
 
@@ -199,7 +239,9 @@ export default {
     }
 
     .user-introduce-items {
-        /*background-color: deeppink;*/
+        /* background-color: deeppink; */
+        /* position: relative; */
+        /* background-color: #f00; */
     }
     .user-introduce-title {
         height: 24px;
@@ -249,6 +291,37 @@ export default {
         height: 24px;
         margin: 6px;
     }
+
+
+    .user-profile-edit-inout {
+        height : 40px;
+        border : 0;
+
+        color: #3d3d3d;
+
+        padding: 8px 14px;
+        border-radius: 8px;
+        background-color: #f5f6f7;
+    }
+
+    .user-contact-club .user-profile-edit-inout {
+        width : 150px;
+    }
+
+    .user-social-contact-item .user-profile-edit-inout {
+        width : 300px;
+    }
+
+    textarea.user-profile-edit-inout {
+        width : 50%;
+        height: 7em;
+
+        margin : 0px;
+
+        border: none;
+        resize: none;
+    }
+
     @media (max-width:1200px) {
         .user-social-contact-item {
             display: block;
