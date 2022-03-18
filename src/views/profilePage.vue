@@ -22,9 +22,9 @@
 
                     <!-- 이름, 번호, 학과 -->
                     <div class="user-basic-items">
-                        <span class="user-name-item">{{ userInfo.userName }}</span>
-                        <span class="user-major-item">{{ userInfo.userMajor }}과</span>
-                        <span class="user-number-item">{{ userInfo.userClass }}학년 {{ userInfo.userNumber }}반</span>
+                        <span class="user-name-item">{{ userData.username }}</span>
+                        <span class="user-major-item">{{ department_map[userData.department] }}</span>
+                        <span class="user-number-item">{{ userData.grade }}학년 {{ userData.class }}반 {{ userData.number }}번</span>
                     </div>
 
                     <!-- 동아리, 이메일, 깃허브 -->
@@ -37,7 +37,7 @@
                         </div>
                         <div class="user-contact-item">
                             <img class="user-contact-icon" src="./../assets/user_profile_assets/emailIcon.svg"/>
-                            <span class="user-contact-text">{{ userInfo.userEmail }}</span>
+                            <span class="user-contact-text">{{ userData.email }}</span>
                         </div>
 
                         <!-- 깃허브 계정 -->
@@ -62,6 +62,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex"
 import Sidebar from "./../components/Sidebar.vue"
 export default {
     data() {
@@ -79,10 +80,13 @@ export default {
                     userGithub: 'github.com/sh596',
                 }
             }
-        }
+        } 
     },
     components:{
         Sidebar
+    },
+    computed:{
+        ...mapState(["userData", "department_map"])
     }
 }
 </script>
