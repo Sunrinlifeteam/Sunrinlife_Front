@@ -11,7 +11,7 @@
                     @click="isEditable = true"/>
                 <img class="correction-button-img" src="./../assets/user_profile_assets/checkIcon.svg"
                     v-else
-                    @click="editProfile"/>
+                    @click="updateProfile"/>
             </div>
 
             <!-- 프로필 이미지 -->
@@ -19,6 +19,7 @@
                 <div class="user-img-item">
                     <img v-if="userData.image !== null" class="user-img" :src="userData.image" />
                     <img v-else class="user-img" src="../assets/user_profile_assets/basic_profile_img.svg" />
+                    <input v-if="isEditable" type="file" ref="image" @change="uploadProfileImage">
                 </div>
             </div>
 
@@ -39,7 +40,7 @@
                         <!-- 동아리, 이메일 -->
                         <div v-if="!isEditable" class="user-contact-item user-contact-club">
                             <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
-                            <span class="user-contact-text">{{ userData.clubInfo }}</span>
+                            <span class="user-contact-text">{{ userData.clubInfo.name }}</span>
                         </div>
                         <div v-else class="user-contact-item user-contact-club edit">
                             <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
@@ -83,6 +84,7 @@
 <script>
 import { mapState } from "vuex"
 import Sidebar from "./../components/Sidebar.vue"
+import {editProfile} from "../api.js"
 export default {
     data() {
         return {
@@ -91,31 +93,26 @@ export default {
             editClubInfo : "",
             editGithubLink : "",
             editDescription : "",
+            editProfileImage : ""
             // 수정을 입력받은 데이터
+            
 
-
-            userInfo: {
-                userImg: './../assets/user_profile_assets/user_profile_img.png',
-                userName: '김병주',
-                userClass: 2,
-                userNumber: 6,
-                userMajor: '소프트웨어',
-                userClub: 'App:ple Pi',
-                userEmail: 'kd531585@gmail.com',
-                userIntroduce: '세상 거지같네 세상 거지같네 세상 거지같네 세상 거지같네 세상 거지같네 세상 거지같네세상 거지같네 세상 거지같네 세상 거지같네 세상 거지같네 세상 거지같네 세상 거지같네 세상 거지같네 세상 거지같네 세상 거지같네 세상 거지같네 세상 거지같네 세상 거지같네',
-                userContact: {
-                    userGithub: 'github.com/sh596',
-                }
-            }
+            
         } 
     },
     methods: {
-        editProfile(){
-            this.isEditable = false
+        uploadProfileImage(){
+            const reader = new FileReader()
 
-            //editClubInfo
-            //editGithubLink
-            //editDescription
+            reader.onloadend = () => {
+                this.editProfileImage = reader.result
+            }
+            reader.readAsDataURL(this.$refs.image.files[0]);
+            //console.log(this.editProfileImage)
+        },
+        updateProfile(){
+            this.isEditable = false
+            editProfile(this.editGithubLink, this.editProfileImage, this.editDescription, 5).then((res) => console.log(res))
         }
     },
     components:{
@@ -332,9 +329,9 @@ export default {
             margin-bottom:10px;
         }
     }
-    @media (max-width:1000px) {
+    @media (max-width:1049px) {
         .user-profile{
-            width:700px;
+            width:735px;
             margin-left:30px;
         }
     }

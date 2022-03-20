@@ -160,6 +160,7 @@
 </style>
 
 <script>
+import {getSchedule} from "../../../api.js"
 export default {
     name : "Schedule",
     data(){ return{
@@ -275,10 +276,16 @@ export default {
     components : {
     },
     computed:{
-        
+        getAuthToken(){
+            return this.$store.getters.getAuthToken
+        }
     },
     watch:{
-        
+        getAuthToken(){
+            getSchedule().then((data)=>{
+                console.log(data)
+            })
+        }
     },
     methods: {
         addTodo(schedule) {
