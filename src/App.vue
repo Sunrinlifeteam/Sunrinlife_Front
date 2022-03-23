@@ -5,9 +5,8 @@
 <script>
 //import { mapActions } from 'vuex'
 
-import {getAccessToken} from "./api.js"
+import {getAccessToken, getUserData, getScheduleOfficial, getSchedulePersonal} from "./api.js"
 import { useCookies } from "vue3-cookies";
-import { getUserData } from "./api.js";
 import store from "./store.js"
 
 export default {
@@ -35,6 +34,12 @@ export default {
         getAuthToken(){
             getUserData().then((data) => {
                 store.commit("setUserData", data)
+            }),
+            getScheduleOfficial().then((data)=>{
+                store.commit("getScheduleOfficial", data)
+            }),
+            getSchedulePersonal().then((data) =>{
+                store.commit("setSchedulePersonal", data)
             })
         }
     }

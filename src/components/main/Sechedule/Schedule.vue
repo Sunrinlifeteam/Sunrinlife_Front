@@ -3,7 +3,7 @@
     <h3>일정</h3>
 
     <div class="schedule-item">
-        <div class="schedule-items" v-for="task in tasks" :key="task">
+        <!-- <div class="schedule-items" v-for="task in tasks" :key="task">
             <div class="item-day">{{ task.day }}</div>
             <div v-for="(content, i) in task.schedule" :key="i" class="schedule_list_item">
                 <div class="schedule_box" v-if="!content.isEditable" v-bind:class="{official:content.official, personal:!content.official}">
@@ -20,11 +20,98 @@
             <div class="add_button_panel">
                 <img src="../../../assets/add.svg" class="add-button" @click.prevent="addTodo(task.schedule)">
             </div>
+        </div> -->
+        <div class="schedule-items" v-for="day in weeks" :key="day">
+            <div class="item-day">{{ day.date }}</div>
+            <template v-for="content in scheduleOfficial" :key="content">
+                <div v-if="day.date === content.date" class="schedule_list_item">
+                    <div class="schedule_box" :class="'official'">
+                        <div class="item-content">{{ content.name }}</div>
+                    </div>
+                </div>
+            </template>
+            <template v-for="content in getSchedulePersonal" :key="content">
+                <div v-if="day.date === content.date" class="schedule_list_item">
+                    <div class="schedule_box" :class="'personal'">
+                        <div class="item-content">{{ content.body }}</div>
+                    </div>
+                </div>
+                <div class="schedule_box_edit personal" v-if="content.isEditable">
+                    <input class="item-input" placeholder="추가할 내용 입력" v-model="content.content" @keyup.enter="editTodoComplete(task, i)" @blur="editTodoComplete(task, i)" autofocus/>
+                    <img src="../../../assets/delete.svg" class="item-button" @click.prevent="task.schedule.splice(i, 1)">
+                </div>
+            </template>
+            <div class="add_button_panel">
+                <img src="../../../assets/add.svg" class="add-button" @click.prevent="addTodo(day.date)">
+            </div>
         </div>
+        
+        
     </div>
     
 </div>
 </template>
+
+<script>
+import {mapState} from "vuex"
+export default {
+    name : "Schedule",
+    data(){ return{
+        weeks:this.getWeek(),
+        
+    }},
+    components : {
+
+    },
+    computed:{
+        ...mapState(["scheduleOfficial"]),
+        getSchedulePersonal: function(){
+            console.log(this.$store.getters.getSchedulePersonal)
+            return this.$store.getters.getSchedulePersonal
+        }
+    },
+    watch:{
+
+    },
+    methods: {
+        addTodo(date) {
+            let schedule = this.$store.getters.getSchedulePersonal
+            schedule.push({date:date, body: '', isEditable: true})
+            this.$store.dispatch("editSchedulePersonal", schedule)
+            //console.log(this.$store.getters.getSchedulePersonal)
+        },
+        editTodo(content) {
+            if(!content.official) content.isEditable=true
+        },
+        editTodoComplete(task, i){
+            task.schedule[i].isEditable=false
+            if(task.schedule[i].content === '') task.schedule.splice(i,1)
+        },
+        getWeek(){
+            function leftPad(value) {
+                if (value >= 10) {
+                    return value
+                }
+                return `0${value}`
+            }
+            function toStringByFormatting(source, delimiter = '-') {
+                const year = source.getFullYear(); const month = leftPad(source.getMonth() + 1)
+                const day = leftPad(source.getDate())
+                return [year, month, day].join(delimiter)
+            }
+            let week = []
+            let now
+            for(var i = 0; i < 7; i++){
+                now = new Date()
+                week.push({"date":toStringByFormatting(new Date(now.setDate(now.getDate() + i)))})
+            }
+            
+
+            return week
+        }
+    }
+}
+</script>
 
 <style>
 .schedule .main-page-item {
@@ -90,6 +177,9 @@
 .official{
     background-color:#ffcf49;
     cursor:default;
+}
+.official:hover{
+    grid-template-columns: none;
 }
 .personal{
     background-color:#4992ff;
@@ -159,138 +249,3 @@
 }
 </style>
 
-<script>
-export default {
-    name : "Schedule",
-    data(){ return{
-        tasks: [
-            //Mon
-            {
-                day: '3월 2일 수',
-                schedule: [
-                    {
-                        content: '(학교 대회)',
-                        official: true,
-                    },
-                    {
-                        content: 'UX 디자인',
-                        official: false,
-                    },
-                    {
-                        content: '학원 가기',
-                        official: false,
-                    },
-                    {
-                        content: '프로그래밍',
-                        official: false,
-                    }
-                ]
-            },
-            //Tue
-            {
-                day: '3월 3일 목',
-                schedule: [
-                    {
-                        content: '(행사)',
-                        official: true,
-                    },
-                    {
-                        content: '공모전 준비',
-                        official: false,
-                    }
-                ]
-            },
-            //Wed
-            {
-                day: '3월 4일 금',
-                schedule: [
-                    {
-                        content: '컴퓨터 수리',
-                        official: false,
-                    },
-                    {
-                        content: '공모전 준비 완료',
-                        official: false,
-                    }
-                ]
-            },
-            //Thu
-            {
-                day: '3월 5일 토',
-                schedule: [
-                    {
-                        content: '(대회)',
-                        official: true,
-                    },
-                    {
-                        content: '(대회)',
-                        official: true,
-                    }
-                ]
-            },
-            //Fri
-            {
-                day: '3월 6일 일',
-                schedule: [
-                    {
-                        content: '컴퓨터 수리',
-                        official: false,
-                    },
-                    {
-                        content: '공모전 준비',
-                        official: false,
-                    }
-                ]
-            },
-            //Sat
-            {
-                day: '3월 7일 월',
-                schedule: [
-                    {
-                        content: '컴퓨터 수리',
-                        official: false,
-                    },
-                    {
-                        content: '공모전 준비',
-                        official: false,
-                    }
-                ]
-            },
-            //Sun
-            {
-                day: '3월 8일 화',
-                schedule: [
-                    {
-                        content: '(행사)',
-                        official: true,
-                    },
-                    {
-                        content: '공모전 준비',
-                        official: false,
-                    }
-                ]
-            }
-        ]
-    }},
-    components : {
-    },
-    computed:{
-        
-    },
-    watch:{
-        
-    },
-    methods: {
-        addTodo(schedule) {
-            schedule.push({content: '', state: 'none', isCompleted: false, isEditable: true})
-        },
-        editTodo(content) {
-            if(!content.official) content.isEditable=true
-        },
-        editTodoComplete(task, i){
-            task.schedule[i].isEditable=false
-            if(task.schedule[i].content === '') task.schedule.splice(i,1)
-        }
-    }
-}
-</script>
