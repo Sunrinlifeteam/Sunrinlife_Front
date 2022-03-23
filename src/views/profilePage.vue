@@ -40,7 +40,7 @@
                         <!-- 동아리, 이메일 -->
                         <div v-if="!isEditable" class="user-contact-item user-contact-club">
                             <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
-                            <span class="user-contact-text">{{ userData.clubInfo.name }}</span>
+                            <span class="user-contact-text">{{ userData.clubInfo?userData.clubInfo.name:"" }}</span>
                         </div>
                         <div v-else class="user-contact-item user-contact-club edit">
                             <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
@@ -55,7 +55,7 @@
                         <!-- 깃허브 계정 -->
                         <div v-if="!isEditable" class="user-social-contact-item">
                             <img class="user-contact-icon" src="./../assets/user_profile_assets/githubIcon.svg"/>
-                            <span class="user-contact-text">{{ userData.githubLink }}</span>
+                            <span class="user-contact-text">{{ userData.githubLink?userData.githubLink:"" }}</span>
                         </div>
                         <div v-else class="user-social-contact-item edit">
                             <img class="user-contact-icon" src="./../assets/user_profile_assets/githubIcon.svg"/>
@@ -69,7 +69,7 @@
                 <!-- 소개 -->
                 <div v-if="!isEditable" class="user-introduce-items">
                     <span class="user-introduce-title">소개</span>
-                    <span class="user-introduce-item">{{ userData.description }}</span>
+                    <span class="user-introduce-item">{{ userData.description?userData.description:"" }}</span>
                 </div>
                 <div v-else class="user-introduce-items edit">
                     <span class="user-introduce-title">소개</span>
@@ -84,7 +84,8 @@
 <script>
 import { mapState } from "vuex"
 import Sidebar from "./../components/Sidebar.vue"
-import {editProfile} from "../api.js"
+import {editProfile, getUserData} from "../api.js"
+import store from "../store.js"
 export default {
     data() {
         return {
@@ -106,13 +107,18 @@ export default {
 
             reader.onloadend = () => {
                 this.editProfileImage = reader.result
+                
             }
             reader.readAsDataURL(this.$refs.image.files[0]);
             //console.log(this.editProfileImage)
         },
         updateProfile(){
             this.isEditable = false
+            console.log(this.editProfileImage)
             editProfile(this.editGithubLink, this.editProfileImage, this.editDescription, 5).then((res) => console.log(res))
+            getUserData().then((data) => {
+                store.commit("setUserData", data)
+            })
         }
     },
     components:{

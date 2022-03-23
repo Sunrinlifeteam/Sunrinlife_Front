@@ -1,16 +1,14 @@
 import { createStore } from "vuex"
-import axios from "axios"
-
 import navBarList from "./assets/navBarMenu.js"
 import {department_map} from "./assets/department.js"
-axios.defaults.withCredentials = true;
 
 const store = createStore({
     state(){ return {
         authToken : null,
-        // userData : null,
         userData : null,
-        // 테스트로 임시로 넣어둔 유저 데이터
+        scheduleOfficial:null,
+        schedulePersonal:null,
+
 
         navBarList,
         department_map,
@@ -23,11 +21,17 @@ const store = createStore({
         },
         setUserData(state, userData){
             state.userData = userData
-        }
+        },
+        getScheduleOfficial(state, scheduleOfficial){
+            state.scheduleOfficial = scheduleOfficial
+        },
+        setSchedulePersonal(state, schedulePersonal){
+            state.schedulePersonal = schedulePersonal
+        },
     },
     actions : {
-        getAccessToken_store(){
-            
+        editSchedulePersonal({commit}, schedule){
+            commit("setSchedulePersonal", schedule)
         }
     },
     computed:{
@@ -36,6 +40,9 @@ const store = createStore({
     getters:{
         getAuthToken(state){
             return state.authToken
+        },
+        getSchedulePersonal(state){
+            return state.schedulePersonal
         }
     },
     watch:{

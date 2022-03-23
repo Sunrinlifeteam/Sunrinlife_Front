@@ -19,8 +19,13 @@ export async function getUserData(){
     return userData
 }
 
-export async function getSchedule(){
+export async function getScheduleOfficial(){
     let schedule = await getAPI.get("/schedule/week").then((res) => res.data).catch((e) => console.log(e))
+    return schedule
+}
+
+export async function getSchedulePersonal(){
+    let schedule = await getAPI.get("/me/schedule").then((res) => res.data).catch((e) => console.log(e))
     return schedule
 }
 
