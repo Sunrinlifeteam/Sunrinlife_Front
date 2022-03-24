@@ -72,7 +72,7 @@ export default {
     left : 0px;
 }
 
-.current-major {
+.major-selecter .current-major {
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 16px;
     font-weight: 700;
@@ -81,11 +81,11 @@ export default {
     align-items: center;
 }
 
-.choice-major-wrap {
+.major-selecter .choice-major-wrap {
     align-items: stretch;
 }
 
-.choice-major-wrap .choice-major {
+.major-selecter .choice-major-wrap .choice-major {
     flex-grow: 1;
 
     display: flex;
@@ -94,7 +94,7 @@ export default {
 }
 
 
-.choice-major-wrap input {
+.major-selecter .choice-major-wrap input {
     display: none;
 }
 

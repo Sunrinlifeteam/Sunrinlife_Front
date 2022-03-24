@@ -55,13 +55,13 @@ export default {
     background-color: var(--gray1);
 }
 
-.club-icon {
+.club-list .club-icon {
     width: 24px;
     height: 24px;
     box-shadow: 1px 0 6px 0 rgba(0, 0, 0, 0.16);
 }
 
-.club-name{
+.club-list .club-name{
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
     font-size:16px;
