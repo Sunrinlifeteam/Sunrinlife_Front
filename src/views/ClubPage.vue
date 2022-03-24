@@ -8,6 +8,7 @@
             <div class="club-list-wrap">
                 <!-- 학과 선택창 -->
                 <div class="major-selecter neu-morphism-card">
+
                     <transition name="current-major-ani">
                         <div class="current-major" @click="isSelectMajor = true" v-if="!isSelectMajor" :class="{security:!selectMajorIdx, software:selectMajorIdx===1, ceo:selectMajorIdx===2, design:selectMajorIdx===3}">
                             <span v-if="selectMajorIdx == 0">정보보호과</span>
@@ -16,6 +17,7 @@
                             <span v-else-if="selectMajorIdx == 3">콘텐츠 디자인과</span>
                         </div>
                     </transition>
+
                     <transition name="choice-major-ani">
                         <div class="choice-major-wrap" v-if="isSelectMajor" @click="isSelectMajor = false">
                             <div class="choice-major security"
@@ -52,12 +54,10 @@
 
             <div class="club-card neu-morphism-card">
                 <div class="header">
-                    <img src="/edcan.png" alt="" class="logo">
+                    <img :src="selectCludData.logo_url" alt="" class="logo">
                     <div class="descriptions-wrap">
-                        <h2 class="club-name">EDCAN</h2>
-                        <p class="descriptions">
-                            EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야!
-                        </p>
+                        <h2 class="club-name">{{ selectCludData.name }}</h2>
+                        <p class="descriptions">{{ selectCludData.description }}</p>
                     </div>
                 </div>
 
@@ -66,27 +66,27 @@
                     <!-- ranker은 임원을 뜻하는 겁니다...... 영어를 못해서 죄송합니다.... -->
                     <div class="sns-wrap">
                         <!-- 페이스북 링크 -->
-                        <a class="sns-link facebook-link" href="https://www.facebook.com/edcancircle" target="_blank">
+                        <a class="sns-link facebook-link" :href="selectCludData.facebook" target="_blank">
                             <img src="/img/sns/facebook.svg" alt="Facebook 링크 아이콘" class="icon">
-                            <div class="url">facebook.com/edcancircle</div>
+                            <div class="url">{{ selectCludData.facebook }}</div>
                         </a>
 
                         <!-- 인스타 링크 -->
-                        <a class="sns-link insta-link" href="https://www.instagram.com/sunrin_edcan/" target="_blank">
+                        <a class="sns-link insta-link" :href="selectCludData.instagram" target="_blank">
                             <img src="/img/sns/facebook.svg" alt="Instagram 링크 아이콘" class="icon">
-                            <div class="url">@sunrin_edcan</div>
+                            <div class="url">{{ selectCludData.instagram }}</div>
                         </a>
 
                         <!-- 웹사이트 링크 -->
-                        <a class="sns-link web-link" href="https://edcan,kr" target="_blank">
+                        <a class="sns-link web-link" :href="selectCludData.url" target="_blank">
                             <img src="/img/sns/link.svg" alt="Web 링크 아이콘" class="icon">
-                            <div class="url">edcan.kr</div>
+                            <div class="url">{{ selectCludData.url }}</div>
                         </a>
 
                         <!-- 동아리 부실 -->
-                        <a class="sns-link location-link" href="#" target="_blank">
-                            <img src="/img/sns/location.svg" alt="붕아리 부실" class="icon">
-                            <div class="url">421실</div>
+                        <a class="sns-link location-link" href="#">
+                            <img src="/img/sns/location.svg" alt="동아리 부실" class="icon">
+                            <div class="url">{{ selectCludData.location }}</div>
                         </a>
                     </div>
 
@@ -94,30 +94,25 @@
                     <div class="ranker-wrap">
                         <div class="ranker">
                             <div class="position">부장</div>
-                            <div class="name">진다은</div>
+                            <div class="name">{{ selectCludData.leader }}</div>
                         </div>
                         <div class="ranker">
                             <div class="position">부부장</div>
-                            <div class="name">박희찬</div>
+                            <div class="name">{{ selectCludData.viceleader }}</div>
                         </div>
                     </div>
 
                 </div>
 
-                <div class="curriculum-wrap">
+                <div class="curriculum-wrap" v-if="selectCludData.curriculum != null && selectCludData.curriculum != '' ">
                     <h3>수업 커리큘럼</h3>
                     <ul class="curriculum">
-                        <li>Android Studio</li>
-                        <li>Vue.js</li>
-                        <li>Figma</li>
-                        <li>XD</li>
+                        <!-- <li>{{ selectCludData.curriculum }}</li> -->
+                        <li v-for="i, n in  selectCludData.curriculum.split('|')" :key="n">{{ i }}</li>
                     </ul>
                 </div>
+
             </div>
-            <!-- <ClubCard
-                :clubIdx="selectClubIdx"
-                :marorIdx="0"
-                /> -->
         </div>
     </div>
 </div>
@@ -131,16 +126,29 @@ import { JB, SW, it, de } from "./../components/club/TempClubData"
 export default {
     name : "Club Page",
     data(){return{
+        clubData : [JB, SW, it, de],
+
         selectClubIdx : 0,
         selectMajorIdx : 0,
+        selectCludData : {},
 
         isSelectMajor : false,
 
-        clubData : [JB, SW, it, de]
     }},
     components : {
         Sidebar,
-    }
+    },
+    watch : {
+        selectMajorIdx(){
+            this.selectClubIdx = 0
+        }
+    },
+    mounted() {
+        this.selectCludData = this.clubData[this.selectMajorIdx][this.selectClubIdx]
+    },
+    updated() {
+        this.selectCludData = this.clubData[this.selectMajorIdx][this.selectClubIdx]
+    },
 }
 </script>
 
@@ -153,7 +161,11 @@ export default {
 }
 
 .club-list-wrap{
-    width:195px
+    width : 195px
+}
+
+.club-list-wrap > * {
+    width : 100%;
 }
 
 @media (max-width : 1100px) {
@@ -304,6 +316,7 @@ export default {
 <style scoped>
 .club-card {
     width : 100%;
+    min-height: 500px;
 
     padding: 48px 32px;
 
@@ -346,6 +359,7 @@ export default {
     font-size: 14px;
     font-weight: bold;
     line-height: 1.43;
+    word-break : keep-all;
 }
 
 
