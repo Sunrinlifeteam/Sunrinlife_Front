@@ -29,6 +29,16 @@ export async function getSchedulePersonal(){
     return schedule
 }
 
+export async function addSchedulePersonal(value){
+    let schedule = await getAPI.post("/me/schedule/write", value).then((res) => res.data).catch((e) => console.log(e))
+    return schedule
+}
+
+export async function delSchedulePersonal(id){
+    let res = await getAPI.delete(`me/schedule/${id}`).then((res) => res.data).catch((e) => console.log(e))
+    return res
+}
+
 export async function editProfile(githubLink, image, description, clubInfo){
     let response = getAPI.put("/auth/user", {
         "githubLink":githubLink,
@@ -37,4 +47,14 @@ export async function editProfile(githubLink, image, description, clubInfo){
         "clubInfo":clubInfo
     }).then((res) => res.data).catch((e) => console.log(e))
     return response
+}
+
+export async function getMeal(){
+    let response = getAPI.get("/meal").then((res) => res.data).catch((e) => console.log(e))
+    return response
+}
+
+export async function getNotice(){
+    let res = getAPI.get("/notice/intranet/list?page=1").then((res) => res.data).catch((e) => console.log(e))
+    return res
 }
