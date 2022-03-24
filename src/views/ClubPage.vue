@@ -10,6 +10,7 @@
                     @clubListItemClick="selectClubIdx = $event"
                     :clubIdx="selectClubIdx"
                     :marorIdx="0"
+                    :clubList="SW"
                     />
             </div>
             <ClubCard
@@ -28,13 +29,17 @@ import MajorSelecter from "../components/club/MajorSelecter.vue"
 import ClubList from "./../components/club/ClubList.vue"
 import ClubCard from "./../components/club/ClubCard.vue"
 
+import { SW } from "./../components/club/TempClubData"
+
 export default {
     name : "Club Page",
     data(){return{
         selectClubIdx : 0,
         selectMajorIdx : 0,
 
-        isChoiceMajor : false
+        isChoiceMajor : false,
+
+        SW,
     }},
     components : {
         Sidebar,

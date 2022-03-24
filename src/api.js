@@ -38,3 +38,16 @@ export async function editProfile(githubLink, image, description, clubInfo){
     }).then((res) => res.data).catch((e) => console.log(e))
     return response
 }
+
+// 동아리 api
+export async function getClubAll(){
+    let clubData = await getAPI.get("/club/all")
+        .then((res) => {
+            // console.log("가져옴");
+            // console.log(res.data);
+            res.data
+        })
+        .catch(e => console.log(e))
+
+    return clubData
+}
