@@ -16,6 +16,7 @@
 <script>
 
 import Notice from "./../../Model/Notice.js"
+import {getNotice} from "../../api.js"
 
 let noticeData = [
     new Notice(
@@ -60,6 +61,9 @@ export default {
     methods :{
 
     },
+    mounted(){
+        getNotice().then((res) => console.log(res))
+    }
 }
 </script>
 
