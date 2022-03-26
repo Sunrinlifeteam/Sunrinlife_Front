@@ -126,10 +126,14 @@ import Sidebar from "./../components/Sidebar.vue"
 
 import { JB, SW, it, de } from "./../components/club/TempClubData"
 
+// import { getClubMajor } from "./../api.js"
+
 export default {
     name : "Club Page",
     data(){return{
         clubData : [JB, SW, it, de],
+
+        // clubData : [[], [], [], []],
 
         selectClubIdx : 0,
         selectMajorIdx : 0,
@@ -138,7 +142,6 @@ export default {
         clubInstagramId : "",
 
         isSelectMajor : false,
-
     }},
     components : {
         Sidebar,
@@ -149,6 +152,11 @@ export default {
         }
     },
     mounted() {
+        // this.clubData[0] = getClubMajor(0)
+        // this.clubData[1] = getClubMajor(1)
+        // this.clubData[2] = getClubMajor(2)
+        // this.clubData[3] = getClubMajor(3)
+
         this.selectCludData = this.clubData[this.selectMajorIdx][this.selectClubIdx]
         this.clubFacebookId = this.selectCludData.facebook.split("/")
         this.clubInstagramId = this.selectCludData.instagram.split("/")
