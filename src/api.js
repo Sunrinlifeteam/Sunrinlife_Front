@@ -85,7 +85,8 @@ export async function getClubGeneral() {
         .catch(console.log)
 
     return clubData
-  
+}
+
 //급식 API
 export async function getMeal(){
     let response = getAPI.get("/meal").then((res) => res.data).catch((e) => console.log(e))
