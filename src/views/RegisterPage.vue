@@ -31,6 +31,8 @@
                 <textarea class="user_introduce" placeholder="소개"></textarea>
             </div>
         </div>
+
+        <button class="register">선린 라이프 시작하기</button>
     </div>
 
 </div>
@@ -70,7 +72,7 @@
     .register_panel{
         width : 80%;
         max-width: 600px;
-        height:670px;
+        height: min-content;
         padding : 25px;
         padding-top:55px;
 
@@ -128,11 +130,41 @@
     .input_panel{
         text-align: left;
         display: inline-block;
-        
     }
     
     .introduce{
         grid-column:1/3;
     }
 
+    button.register {
+        width: 90%;
+
+        color: #fff;
+        
+        border-radius: 8px;
+        box-shadow: 1px 0 6px 0 rgba(0, 0, 0, 0.16);
+        background-color: #4893ff;
+
+        font-size: 20px;
+        font-weight: 500;
+        text-align: center;
+
+        padding: 7px;
+        margin: 28px auto;
+    }
+
+
+    @media (max-width : 700px) {
+        .register_panel {
+            margin : 100px 0;
+        }
+
+        .user_info_panel {
+            grid-template-columns: 1fr;
+        }
+
+        .introduce{
+            grid-column:1/2;
+        }
+    }
 </style>
