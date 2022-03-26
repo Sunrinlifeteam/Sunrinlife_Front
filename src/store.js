@@ -9,6 +9,7 @@ const store = createStore({
         scheduleOfficial:null,
         schedulePersonal:null,
 
+        isSidebarShow : true,
 
         navBarList,
         department_map,
@@ -27,6 +28,16 @@ const store = createStore({
         },
         setSchedulePersonal(state, schedulePersonal){
             state.schedulePersonal = schedulePersonal
+        },
+
+        sidebarOnOff(state){
+            state.isSidebarShow = !state.isSidebarShow
+        },
+        sidebarOn(state){
+            state.isSidebarShow = true
+        },
+        sidebarOff(state){
+            state.isSidebarShow = false
         },
     },
     actions : {

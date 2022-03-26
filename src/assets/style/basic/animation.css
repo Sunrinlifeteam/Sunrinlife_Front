@@ -1,6 +1,6 @@
 /* 메뉴바 애니메이션 */
 .nav-bar-enter-from, .nav-bar-leave-to{
-    transform: translateX(-50%);
+    transform: translateX(-100%);
 }
 
 .nav-bar-enter-active, .nav-bar-leave-active {

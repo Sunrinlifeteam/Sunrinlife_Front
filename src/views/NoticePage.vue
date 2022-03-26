@@ -1,5 +1,8 @@
 <template>
+
+<Header/>
 <Sidebar/>
+
 <div class="panel page notice-page">
     <div class="page-content">
         <div class="notice-content neu-morphism-card">
@@ -44,8 +47,10 @@
 </template>
 
 <script>
-import Notice from "./../Model/Notice.js"
 import Sidebar from "../components/Sidebar.vue"
+import Header from "../components/Header.vue"
+
+import Notice from "./../Model/Notice.js"
 
 let noticeData = [
     new Notice(
@@ -92,6 +97,7 @@ export default {
     }},
     components : {
         Sidebar,
+        Header,
     }
 }
 </script>

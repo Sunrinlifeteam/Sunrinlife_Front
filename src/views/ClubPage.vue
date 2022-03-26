@@ -1,4 +1,6 @@
 <template>
+
+<Header/>
 <Sidebar/>
 
 <div class="panel">
@@ -123,6 +125,7 @@
 
 <script>
 import Sidebar from "./../components/Sidebar.vue"
+import Header from "../components/Header.vue"
 
 import { JB, SW, it, de } from "./../components/club/TempClubData"
 
@@ -144,6 +147,7 @@ export default {
         isSelectMajor : false,
     }},
     components : {
+        Header,
         Sidebar,
     },
     watch : {

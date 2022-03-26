@@ -1,6 +1,6 @@
 <template>
 <transition name="nav-bar">
-    <nav>
+    <nav v-if="isSidebarShow">
     
         <div class="nav-list">
             <div class="logo">
@@ -25,7 +25,6 @@
                         <p class="list_user_profile_name">{{userData.username}}</p>
                         <p class="list_user_profile_department">{{department_map[userData.department]}}</p>
                     </span>
-                    <!-- {{currentUserData}} -->
                 </router-link>
             </template>
             <template v-else>
@@ -38,21 +37,19 @@
                 </div>
             </template>
         </div>
-
-
-        <!-- <div 
-            @click="$router.push('easterEgg')"
-            class="easter-egg">이스터에그</div> -->
     </nav>
 </transition>
 
-
+<transition name="nav-bg">
+    <div v-if="isSidebarShow" @click="$store.commit('sidebarOnOff')" class="sidebar-bg"></div>
+</transition>
 
 </template>
 
 <script>
-import { mapState } from "vuex"
-//import store from "../store.js"
+import { mapState, mapMutations } from "vuex"
+
+
 export default {
     name : "Sidebar",
     data(){
@@ -60,16 +57,31 @@ export default {
             
         }
     },
+    methods : {
+        ...mapMutations([ 'sidebarOff', 'sidebarOn' ])
+    },
     computed :{
-        ...mapState(['userData', 'navBarList', 'department_map']),
-        
+        ...mapState(['userData', 'navBarList', 'department_map', "isSidebarShow"]),
         // store.js에 저장된 navBarList를 가져와서 목록으로 보여준다.
     },
-    props : {
-        // navState : Number
-    },
-    watch:{
-        
+    mounted(){
+        if(window.innerWidth <= 970){
+            this.sidebarOff()
+        }
+        else {
+            this.sidebarOn()
+        }
+
+        window.addEventListener("resize", ()=>{
+            // console.log("윈도우 크기 변경");
+
+            if(window.innerWidth <= 970){
+                this.sidebarOff()
+            }
+            else {
+                this.sidebarOn()
+            }
+        })
     }
 }
 </script>
@@ -258,10 +270,30 @@ nav .menu_list a:hover, nav a:active{
 }
 
 .center {
-  position: absolute;
-  left: 50%;
-  margin-left: -33px;
-  bottom:130px;
+    position: absolute;
+    left: 50%;
+    margin-left: -33px;
+    bottom:130px;
+}
+
+.sidebar-bg {
+    width : 100%;
+    height: 100%;
+
+    background-color: #0000008c;
+
+    visibility: hidden;
+
+    position: absolute;
+    top : 0px;
+    left : 0px;
+    z-index: 1;
+}
+
+@media (max-width : 970px) {
+    .sidebar-bg {
+        visibility: visible;
+    }
 }
 
 @media (max-height:500px) {
