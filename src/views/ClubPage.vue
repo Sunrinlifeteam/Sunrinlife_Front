@@ -55,7 +55,11 @@
             </div>
 
             <ClubCard
+                    v-if="!isMobileWindow"
                     :selectCludData="clubData[selectMajorIdx][selectClubIdx]" />
+            <ClubCardMobile
+                    v-else
+                    :selectCludData="clubData[selectMajorIdx][selectClubIdx]"/>
         </div>
     </div>
 </div>
@@ -66,6 +70,7 @@ import Sidebar from "./../components/Sidebar.vue"
 import Header from "../components/Header.vue"
 
 import ClubCard from "../components/club/ClubCard.vue"
+import ClubCardMobile from "../components/club/ClubCardMobile.vue"
 
 
 
@@ -73,9 +78,12 @@ import { JB, SW, it, de } from "./../components/club/TempClubData"
 
 // import { getClubMajor } from "./../api.js"
 
+
+
 export default {
     name : "Club Page",
     data(){return{
+        isMobileWindow : true, // 현재 화면이 모바일 화면인지(970px 이하)
         clubData : [JB, SW, it, de],
 
         // clubData : [[], [], [], []],
@@ -89,6 +97,7 @@ export default {
         Header,
         Sidebar,
         ClubCard,
+        ClubCardMobile,
     },
     watch : {
         selectMajorIdx(){
@@ -96,6 +105,22 @@ export default {
         }
     },
     mounted() {
+        if(window.innerWidth <= 970){
+            this.isMobileWindow = true
+        }
+        else {
+            this.isMobileWindow = false
+        }
+
+        window.addEventListener("resize", ()=>{
+            if(window.innerWidth <= 970){
+                this.isMobileWindow = true
+            }
+            else {
+                this.isMobileWindow = false
+            }
+        })
+
         // this.clubData[0] = getClubMajor(0)
         // this.clubData[1] = getClubMajor(1)
         // this.clubData[2] = getClubMajor(2)
