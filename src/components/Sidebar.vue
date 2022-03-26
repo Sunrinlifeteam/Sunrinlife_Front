@@ -40,9 +40,9 @@
     </nav>
 </transition>
 
-<transition name="nav-bg">
+<!-- <transition name="nav-bg">
     <div v-if="isSidebarShow" @click="$store.commit('sidebarOnOff')" class="sidebar-bg"></div>
-</transition>
+</transition> -->
 
 </template>
 
