@@ -66,19 +66,22 @@
                     <!-- ranker은 임원을 뜻하는 겁니다...... 영어를 못해서 죄송합니다.... -->
                     <div class="sns-wrap">
                         <!-- 페이스북 링크 -->
-                        <a class="sns-link facebook-link" :href="selectCludData.facebook" target="_blank">
+                        <a class="sns-link facebook-link" :href="selectCludData.facebook" target="_blank"
+                            v-if="selectCludData.facebook != ''">
                             <img src="/img/sns/facebook.svg" alt="Facebook 링크 아이콘" class="icon">
-                            <div class="url">{{ selectCludData.facebook }}</div>
+                            <div class="url">www.facebook.com/{{ clubFacebookId.slice(-1)[0] }}</div>
                         </a>
 
                         <!-- 인스타 링크 -->
-                        <a class="sns-link insta-link" :href="selectCludData.instagram" target="_blank">
+                        <a class="sns-link insta-link" :href="selectCludData.instagram" target="_blank"
+                            v-if="selectCludData.instagram != ''">
                             <img src="/img/sns/facebook.svg" alt="Instagram 링크 아이콘" class="icon">
-                            <div class="url">{{ selectCludData.instagram }}</div>
+                            <div class="url">@ {{ clubInstagramId.slice(-1)[0] }}</div>
                         </a>
 
                         <!-- 웹사이트 링크 -->
-                        <a class="sns-link web-link" :href="selectCludData.url" target="_blank">
+                        <a class="sns-link web-link" :href="selectCludData.url" target="_blank"
+                            v-if="selectCludData.url != ''">
                             <img src="/img/sns/link.svg" alt="Web 링크 아이콘" class="icon">
                             <div class="url">{{ selectCludData.url }}</div>
                         </a>
@@ -131,6 +134,8 @@ export default {
         selectClubIdx : 0,
         selectMajorIdx : 0,
         selectCludData : {},
+        clubFacebookId : "",
+        clubInstagramId : "",
 
         isSelectMajor : false,
 
@@ -145,9 +150,13 @@ export default {
     },
     mounted() {
         this.selectCludData = this.clubData[this.selectMajorIdx][this.selectClubIdx]
+        this.clubFacebookId = this.selectCludData.facebook.split("/")
+        this.clubInstagramId = this.selectCludData.instagram.split("/")
     },
     updated() {
         this.selectCludData = this.clubData[this.selectMajorIdx][this.selectClubIdx]
+        this.clubFacebookId = this.selectCludData.facebook.split("/")
+        this.clubInstagramId = this.selectCludData.instagram.split("/")
     },
 }
 </script>
