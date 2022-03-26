@@ -1,73 +1,95 @@
 <template>
 <div class="club-card neu-morphism-card">
     <div class="header">
-        <img src="/edcan.png" alt="" class="logo">
+        <img :src="selectCludData.logo_url" alt="" class="logo">
         <div class="descriptions-wrap">
-            <h2 class="club-name">EDCAN</h2>
-            <p class="descriptions">
-                EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야! EDCAN은 정말 최고야!
-            </p>
+            <h2 class="club-name">{{ selectCludData.name }}</h2>
+            <p class="descriptions">{{ selectCludData.description }}</p>
         </div>
     </div>
 
     <div class="sns-ranker-wrap">
-        <!-- ranker은 임원을 끗하는 겁니다...... 영어를 못해서 죄송.. -->
+
+        <!-- ranker은 임원을 뜻하는 겁니다...... 영어를 못해서 죄송합니다.... -->
         <div class="sns-wrap">
-            <a class="sns-link facebook-link" href="https://www.facebook.com/edcancircle" target="_blank">
+            <!-- 페이스북 링크 -->
+            <a class="sns-link facebook-link" :href="selectCludData.facebook" target="_blank"
+                v-if="selectCludData.facebook != ''">
                 <img src="/img/sns/facebook.svg" alt="Facebook 링크 아이콘" class="icon">
-                <div class="url">facebook.com/edcancircle</div>
+                <div class="url">www.facebook.com/{{ clubFacebookId.slice(-1)[0] }}</div>
             </a>
-            <a class="sns-link insta-link" href="https://www.instagram.com/sunrin_edcan/" target="_blank">
-                <img src="/img/sns/facebook.svg" alt="Instagram 링크 아이콘" class="icon">
-                <div class="url">@sunrin_edcan</div>
+
+            <!-- 인스타 링크 -->
+            <a class="sns-link insta-link" :href="selectCludData.instagram" target="_blank"
+                v-if="selectCludData.instagram != ''">
+                <img src="/img/sns/instagram.svg" alt="Instagram 링크 아이콘" class="icon">
+                <div class="url">@ {{ clubInstagramId.slice(-1)[0] }}</div>
             </a>
-            <a class="sns-link web-link" href="https://edcan,kr" target="_blank">
+
+            <!-- 웹사이트 링크 -->
+            <a class="sns-link web-link" :href="selectCludData.url" target="_blank"
+                v-if="selectCludData.url != ''">
                 <img src="/img/sns/link.svg" alt="Web 링크 아이콘" class="icon">
-                <div class="url">edcan.kr</div>
+                <div class="url">{{ selectCludData.url }}</div>
             </a>
-            <a class="sns-link location-link" href="#" target="_blank">
-                <img src="/img/sns/location.svg" alt="붕아리 부실" class="icon">
-                <div class="url">421실</div>
+
+            <!-- 동아리 부실 -->
+            <a class="sns-link location-link" href="#">
+                <img src="/img/sns/location.svg" alt="동아리 부실" class="icon">
+                <div class="url">{{ selectCludData.location }}</div>
             </a>
         </div>
+
+        <!-- 임원 목록 -->
         <div class="ranker-wrap">
             <div class="ranker">
                 <div class="position">부장</div>
-                <div class="name">진다은</div>
+                <div class="name">{{ selectCludData.leader }}</div>
             </div>
             <div class="ranker">
                 <div class="position">부부장</div>
-                <div class="name">박희찬</div>
+                <div class="name">{{ selectCludData.viceleader }}</div>
             </div>
         </div>
     </div>
 
-    <div class="curriculum-wrap">
+    <div class="curriculum-wrap" v-if="selectCludData.curriculum != null && selectCludData.curriculum != '' ">
         <h3>수업 커리큘럼</h3>
-
         <ul class="curriculum">
-            <li>Android Studio</li>
-            <li>Vue.js</li>
-            <li>Figma</li>
-            <li>XD</li>
+            <!-- <li>{{ selectCludData.curriculum }}</li> -->
+            <li v-for="i, n in  selectCludData.curriculum.split('|')" :key="n">{{ i }}</li>
         </ul>
     </div>
+
 </div>
 </template>
 
 <script>
 export default {
     name : "Club card",
+    data(){return{
+        clubFacebookId : "",
+        clubInstagramId : "",
+    }},
     props : {
-        marorIdx : Number,
-        clubIdx : Number,
-    }
+        selectCludData : Object
+    },
+    mounted() {
+        this.clubFacebookId = this.selectCludData.facebook.split("/")
+        this.clubInstagramId = this.selectCludData.instagram.split("/")
+    },
+    updated() {
+        this.clubFacebookId = this.selectCludData.facebook.split("/")
+        this.clubInstagramId = this.selectCludData.instagram.split("/")
+    },
 }
 </script>
 
 <style scoped>
 .club-card {
     width : 100%;
+
+    min-height: 600px;
 
     padding: 48px 32px;
 

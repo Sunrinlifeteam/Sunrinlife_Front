@@ -21,6 +21,10 @@ header {
     position: absolute;
 }
 
+img {
+    cursor: pointer; 
+}
+
 @media (max-width : 970px) {
     header {
         visibility: visible;
