@@ -80,7 +80,6 @@ export async function getClubGeneral() {
         .catch(console.log)
 
     return clubData
-
   
 //급식 API
 export async function getMeal(){
