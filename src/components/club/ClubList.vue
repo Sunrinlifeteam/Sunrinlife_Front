@@ -5,7 +5,7 @@
         @click="$emit('clubListItemClick', n)"
         :class="{ 'seleted' : clubIdx == n}">
         <img src="/edcan.png" :alt="`${i} 동아리 로고`" class="club-icon">
-        <div class="club-name">{{ i }}</div>
+        <div class="club-name">{{ i.name }}</div>
     </li>
 </ul>
 </template>
@@ -14,18 +14,19 @@
 export default {
     name : "Cub list",
     data(){ return{
-        clubList : [
-            "AnA",
-            "App:ple Pi",
-            "EDCAN",
-            "IWOP",
-            "RG",
-            "zer0pen",
-        ]
+        // clubList : [
+        //     "AnA",
+        //     "App:ple Pi",
+        //     "EDCAN",
+        //     "IWOP",
+        //     "RG",
+        //     "zer0pen",
+        // ]
     }},
     props : {
         marorIdx : Number,
         clubIdx : Number,
+        clubList : Array,
     }
 }
 </script>
@@ -54,13 +55,13 @@ export default {
     background-color: var(--gray1);
 }
 
-.club-icon {
+.club-list .club-icon {
     width: 24px;
     height: 24px;
     box-shadow: 1px 0 6px 0 rgba(0, 0, 0, 0.16);
 }
 
-.club-name{
+.club-list .club-name{
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
     font-size:16px;

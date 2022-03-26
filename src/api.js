@@ -49,11 +49,46 @@ export async function editProfile(githubLink, image, description, clubInfo){
     return response
 }
 
+
+// 동아리 API
+
+// 전체 동아리 가져오기
+export async function getClubAll(){
+    let clubData = await getAPI.get("/club/all")
+        .then((res) => {
+            res.data
+        })
+        .catch(e => console.log(e))
+
+    return clubData
+}
+
+// 학과별 전공동아리 가져오기
+// 인자를 받아서 해당 학과의 전공 동아리를 가져옵니다.
+export async function getClubMajor(dep){
+    let clubData = await getAPI.get(`/club/department/${dep}/type/0`)
+        .then(res => res.data)
+        .catch(console.log)
+        
+    return clubData
+    }
+    
+// 일반동아리 가져오기
+export async function getClubGeneral() {
+    let clubData = await getAPI.get(`/club/type/1`)
+        .then(res => res.data)
+        .catch(console.log)
+
+    return clubData
+
+  
+//급식 API
 export async function getMeal(){
     let response = getAPI.get("/meal").then((res) => res.data).catch((e) => console.log(e))
     return response
 }
 
+//공지 API
 export async function getNotice(){
     let res = getAPI.get("/notice/intranet/list?page=1").then((res) => res.data).catch((e) => console.log(e))
     return res
