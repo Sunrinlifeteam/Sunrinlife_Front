@@ -30,15 +30,16 @@
                     </div>
                 </div>
             </template>
-            <template v-for="content in getSchedulePersonal" :key="content">
+            <template v-for="content, i in getSchedulePersonal" :key="content">
                 <div v-if="day.date === content.date" class="schedule_list_item">
-                    <div class="schedule_box" :class="'personal'">
-                        <div class="item-content">{{ content.body }}</div>
+                    <div class="schedule_box personal" v-if="!content.isEditable">
+                        <div class="item-content" @dblclick.prevent="content.isEditable=true">{{ content.body }}</div>
+                        <img src="../../../assets/delete.svg" class="item-button" @click.prevent="deleteTodo(getSchedulePersonal, i, content.id)">
                     </div>
-                </div>
-                <div class="schedule_box_edit personal" v-if="content.isEditable">
-                    <input class="item-input" placeholder="추가할 내용 입력" v-model="content.content" @keyup.enter="editTodoComplete(task, i)" @blur="editTodoComplete(task, i)" autofocus/>
-                    <img src="../../../assets/delete.svg" class="item-button" @click.prevent="task.schedule.splice(i, 1)">
+                    <div class="schedule_box_edit personal" v-if="day.date === content.date && content.isEditable">
+                        <input class="item-input" placeholder="추가할 내용 입력" v-model="content.body" @keyup.enter="editTodoComplete(getSchedulePersonal,content, i)" @blur="editTodoComplete(getSchedulePersonal, content, i)" autofocus/>
+                        <img src="../../../assets/delete.svg" class="item-button" @click.prevent="getSchedulePersonal.splice(i, 1)">
+                    </div>
                 </div>
             </template>
             <div class="add_button_panel">
@@ -54,6 +55,7 @@
 
 <script>
 import {mapState} from "vuex"
+import {addSchedulePersonal, delSchedulePersonal} from "../../../api.js"
 export default {
     name : "Schedule",
     data(){ return{
@@ -66,7 +68,6 @@ export default {
     computed:{
         ...mapState(["scheduleOfficial"]),
         getSchedulePersonal: function(){
-            console.log(this.$store.getters.getSchedulePersonal)
             return this.$store.getters.getSchedulePersonal
         }
     },
@@ -76,16 +77,23 @@ export default {
     methods: {
         addTodo(date) {
             let schedule = this.$store.getters.getSchedulePersonal
-            schedule.push({date:date, body: '', isEditable: true})
+            schedule.push({date:date, body: '', isEditable: true, type: "add"})
             this.$store.dispatch("editSchedulePersonal", schedule)
             //console.log(this.$store.getters.getSchedulePersonal)
         },
-        editTodo(content) {
-            if(!content.official) content.isEditable=true
+        editTodoComplete(get, self, index){
+            self.isEditable=false
+            if(self.body === '') get.splice(index,1)
+            else if(self.type === "add") {
+                delete self.type
+                addSchedulePersonal({date:self.date, body:self.body}).then((res)=>{
+                    self.id = res.id
+                })
+            }
         },
-        editTodoComplete(task, i){
-            task.schedule[i].isEditable=false
-            if(task.schedule[i].content === '') task.schedule.splice(i,1)
+        deleteTodo(get, i, id){
+            delSchedulePersonal(id)
+            get.splice(i, 1)
         },
         getWeek(){
             function leftPad(value) {
@@ -126,7 +134,9 @@ export default {
 }
 .schedule-item::-webkit-scrollbar {
     height: 5px;
+    width: 5px;
     margin-top:2px;
+    margin-left:2px;
 }
 .schedule-item::-webkit-scrollbar-track {
     background-color: none; 

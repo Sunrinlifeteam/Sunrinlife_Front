@@ -25,6 +25,8 @@
 //     }
 // })
 
+import {getMeal} from "../../api.js"
+
 const mealData = [
     "밥",
     "국",
@@ -45,6 +47,7 @@ export default {
         // setInterval(()=>{
         //     this.luanchRemainingTime = launchStartTime.diffTimeForNow
         // }, 500)
+        console.log(getMeal())
     }
 }
 </script>
