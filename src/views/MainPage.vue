@@ -1,5 +1,6 @@
 <template>
 
+<Header/>
 <Sidebar/>
 
 <div class="panel">
@@ -16,6 +17,7 @@
 </template>
 <script>
 import Sidebar from "../components/Sidebar.vue"
+import Header from "../components/Header.vue"
 
 import Notice from "../components/main/Notice.vue"
 import TodaySchedule from "../components/main/TodaySchedule.vue"
@@ -31,6 +33,7 @@ export default {
     },
     components : {
         Sidebar,
+        Header,
 
         Notice,
         TodaySchedule,

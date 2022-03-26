@@ -1,17 +1,10 @@
 <template>
-<div class="club-card nomal neu-morphism-card">
+<div class="club-card mobile">
     <div class="header">
         <img :src="selectCludData.logo_url" alt="" class="logo">
-        <div class="descriptions-wrap">
+        <div class="name-sns-wrap">
             <h2 class="club-name">{{ selectCludData.name }}</h2>
-            <p class="descriptions">{{ selectCludData.description }}</p>
-        </div>
-    </div>
-
-    <div class="sns-ranker-wrap">
-
-        <!-- ranker은 임원을 뜻하는 겁니다...... 영어를 못해서 죄송합니다.... -->
-        <div class="sns-wrap">
+            
             <!-- 페이스북 링크 -->
             <a class="sns-link facebook-link" :href="selectCludData.facebook" target="_blank"
                 v-if="selectCludData.facebook != ''">
@@ -39,24 +32,25 @@
                 <div class="url">{{ selectCludData.location }}</div>
             </a>
         </div>
+    </div>
 
-        <!-- 임원 목록 -->
-        <div class="ranker-wrap">
-            <div class="ranker">
-                <div class="position">부장</div>
-                <div class="name">{{ selectCludData.leader }}</div>
-            </div>
-            <div class="ranker">
-                <div class="position">부부장</div>
-                <div class="name">{{ selectCludData.viceleader }}</div>
-            </div>
+    <p class="descriptions">{{ selectCludData.description }}</p>
+
+    <!-- 임원 목록 -->
+    <div class="ranker-wrap">
+        <div class="ranker">
+            <div class="position">부장</div>
+            <div class="name">{{ selectCludData.leader }}</div>
+        </div>
+        <div class="ranker">
+            <div class="position">부부장</div>
+            <div class="name">{{ selectCludData.viceleader }}</div>
         </div>
     </div>
 
     <div class="curriculum-wrap" v-if="selectCludData.curriculum != null && selectCludData.curriculum != '' ">
         <h3>수업 커리큘럼</h3>
         <ul class="curriculum">
-            <!-- <li>{{ selectCludData.curriculum }}</li> -->
             <li v-for="i, n in  selectCludData.curriculum.split('|')" :key="n">{{ i }}</li>
         </ul>
     </div>
@@ -87,26 +81,17 @@ export default {
 
 <style scoped>
 .club-card {
-    width : 100%;
-
-    min-height: 600px;
-
-    padding: 48px 32px;
-
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
-    gap : 36px;
+    gap : 20px;
 }
 
-.club-card .header {
-    width : 100%;
+.header {
     display: flex;
-    align-items: center;
-    gap : 32px;
+    gap : 24px; 
 }
 
-.club-card .logo {
+.header .logo {
     width: 160px;
     height: 160px;
 
@@ -116,69 +101,52 @@ export default {
     padding: 29px;
 }
 
-.club-card .descriptions-wrap {
+.name-sns-wrap {
     display: flex;
     flex-direction: column;
-    gap : 12px;
+    gap : 8px;
 }
 
-.club-card .club-name {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 20px;
+.club-name {
+    font-size: 18px;
 }
 
-.club-card .descriptions {
-    font-family: 'Noto Sans KR', sans-serif;
+.sns-link {
+    display: flex;
+    align-items: center;
+    gap : 8px;
+}
+
+.sns-link .icon {
+    width : 16px;
+    height : 16px;
+}
+
+.sns-link .url {
+    font-weight: 500;
+    font-size: 12px;
+    color: #3d3d3d;
+}
+
+.descriptions {
     font-size: 14px;
     font-weight: bold;
     word-break : keep-all;
 }
 
 
-.club-card .sns-ranker-wrap {
-    padding : 0 24px;
-
-    display: flex;
-    flex-direction: column;
-    gap : 20px;
-}
-
-.club-card .sns-wrap {
-    display: flex;
-    flex-wrap: wrap;
-    gap : 16px;
-}
-
-.club-card .sns-link {
-    display: flex;
-    align-items: center;
-    gap : 8px;
-}
-
-.club-card .sns-link .icon {
-    width : 24px;
-    height : 24px;
-}
-
-.club-card .sns-link .url {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    color: #3d3d3d;
-}
-
-.club-card .ranker-wrap {
+.ranker-wrap {
     display: flex;
     gap : 36px;
 }
 
-.club-card .ranker {
+.ranker {
     display: flex;
     align-items: center;
     gap : 12px;
 }
 
-.club-card .ranker .position {
+.ranker .position {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
     font-size: 16px;
@@ -186,7 +154,7 @@ export default {
     color: var(--main-color4);
 }
 
-.club-card .ranker .name {
+.ranker .name {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
     font-size: 16px;
@@ -194,18 +162,17 @@ export default {
     /* color: #3d3d3d; */
 }
 
-.club-card .curriculum-wrap {
-    padding : 0 24px;
+.curriculum-wrap {
     display: flex;
     flex-direction: column;
     gap : 14px;
 }
 
-.club-card .curriculum {
+.curriculum {
     width : 100%;
     max-width : 200px;
 
-    background-color: var(--gray1);
+    background-color: var(--gray3);
     
     border-radius: 8px;
 
@@ -217,12 +184,11 @@ export default {
     gap : 12px;
 }
 
-.club-card .curriculum li {
-    font-family: 'Noto Sans KR', sans-serif;
+.curriculum li {
     font-weight: 500;
     font-size: 14px;
     font-weight: 500;
-    line-height: 1.43;
     color: #3d3d3d;
 }
+
 </style>

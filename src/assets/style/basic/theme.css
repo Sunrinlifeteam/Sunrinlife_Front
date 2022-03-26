@@ -137,3 +137,9 @@ button:active{
 .design:hover{
     background-color:#4982ff;
 }
+
+@media (max-width : 970px) {
+    .panel{
+        margin-left: 0;
+    }
+}
