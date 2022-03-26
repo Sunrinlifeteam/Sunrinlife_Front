@@ -77,14 +77,14 @@ export default {
     gap : 36px;
 }
 
-.header {
+.club-card .header {
     width : 100%;
     display: flex;
     align-items: center;
     gap : 32px;
 }
 
-.logo {
+.club-card .logo {
     width: 160px;
     height: 160px;
 
@@ -94,18 +94,18 @@ export default {
     padding: 29px;
 }
 
-.descriptions-wrap {
+.club-card .descriptions-wrap {
     display: flex;
     flex-direction: column;
     gap : 12px;
 }
 
-.club-name {
+.club-card .club-name {
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 20px;
 }
 
-.descriptions {
+.club-card .descriptions {
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 14px;
     font-weight: bold;
@@ -113,7 +113,7 @@ export default {
 }
 
 
-.sns-ranker-wrap {
+.club-card .sns-ranker-wrap {
     padding : 0 24px;
 
     display: flex;
@@ -121,42 +121,42 @@ export default {
     gap : 20px;
 }
 
-.sns-wrap {
+.club-card .sns-wrap {
     display: flex;
     flex-wrap: wrap;
     gap : 16px;
 }
 
-.sns-link {
+.club-card .sns-link {
     display: flex;
     align-items: center;
     gap : 8px;
 }
 
-.sns-link .icon {
+.club-card .sns-link .icon {
     width : 24px;
     height : 24px;
 }
 
-.sns-link .url {
+.club-card .sns-link .url {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
     font-size: 16px;
     color: #3d3d3d;
 }
 
-.ranker-wrap {
+.club-card .ranker-wrap {
     display: flex;
     gap : 36px;
 }
 
-.ranker {
+.club-card .ranker {
     display: flex;
     align-items: center;
     gap : 12px;
 }
 
-.ranker .position {
+.club-card .ranker .position {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
     font-size: 16px;
@@ -164,7 +164,7 @@ export default {
     color: var(--main-color4);
 }
 
-.ranker .name {
+.club-card .ranker .name {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
     font-size: 16px;
@@ -172,14 +172,14 @@ export default {
     /* color: #3d3d3d; */
 }
 
-.curriculum-wrap {
+.club-card .curriculum-wrap {
     padding : 0 24px;
     display: flex;
     flex-direction: column;
     gap : 14px;
 }
 
-.curriculum {
+.club-card .curriculum {
     width : 100%;
     max-width : 200px;
 
@@ -195,7 +195,7 @@ export default {
     gap : 12px;
 }
 
-.curriculum li {
+.club-card .curriculum li {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
     font-size: 14px;
@@ -205,12 +205,12 @@ export default {
 }
 
 @media (max-width : 1100px) {
-    .header {
+    .club-card .header {
         flex-direction: column;
         align-items: flex-start;
     }
 
-    .sns-ranker-wrap, .curriculum-wrap {
+    .club-card .sns-ranker-wrap, .curriculum-wrap {
         padding : 0;
     }
 }
