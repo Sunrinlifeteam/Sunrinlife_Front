@@ -35,7 +35,12 @@ export async function addSchedulePersonal(value){
 }
 
 export async function delSchedulePersonal(id){
-    let res = await getAPI.delete(`me/schedule/${id}`).then((res) => res.data).catch((e) => console.log(e))
+    let res = await getAPI.delete(`/me/schedule/${id}`).then((res) => res.data).catch((e) => console.log(e))
+    return res
+}
+
+export async function editSchedulePersonal(id, data){
+    let res = await getAPI.put(`/me/schedule/${id}`, data).then((res) => res.data).catch((e) => console.log(e))
     return res
 }
 

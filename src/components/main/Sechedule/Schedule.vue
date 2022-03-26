@@ -55,7 +55,7 @@
 
 <script>
 import {mapState} from "vuex"
-import {addSchedulePersonal, delSchedulePersonal} from "../../../api.js"
+import {addSchedulePersonal, delSchedulePersonal, editSchedulePersonal} from "../../../api.js"
 export default {
     name : "Schedule",
     data(){ return{
@@ -89,6 +89,9 @@ export default {
                 addSchedulePersonal({date:self.date, body:self.body}).then((res)=>{
                     self.id = res.id
                 })
+            }
+            else if(self.id !== undefined){
+                editSchedulePersonal(self.id, {date:self.date, body:self.body})
             }
         },
         deleteTodo(get, i, id){
