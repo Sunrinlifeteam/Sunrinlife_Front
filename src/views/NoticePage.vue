@@ -5,14 +5,12 @@
 
 <div class="panel page notice-page">
     <div class="page-content">
+        <div class="search-wrap">
+            <input type="text" placeholder="검색">
+            <img src="/img/search.svg" alt="검색 아이콘" class="search-button">
+        </div>
+
         <div class="notice-content neu-morphism-card">
-            <div class="hader">
-                <h6>공지</h6>
-                <div class="search-wrap">
-                    <input type="text" placeholder="검색">
-                    <img src="/img/search.svg" alt="검색 아이콘" class="search-button">
-                </div>
-            </div>
 
             <ul class="notice-list">
                 <li v-for="i, n in noticeData" :key="n"
@@ -25,7 +23,7 @@
             </ul>
 
             <div class="pagination-wrap">
-                <img src="./../assets/prev_arrow.svg" alt="" class="prev-btn"
+                <img src="./../assets/prev_arrow.svg" alt="" class="arrow prev-btn"
                     @click="()=>{ if(pageId > 1) pageId--}">
                 <div class="page-button-wrap">
                     <template v-for="i, n in pageList" :key="n">
@@ -38,7 +36,7 @@
                         </div>
                     </template>
                 </div>
-                <img src="./../assets/next_arrow.svg" alt="" class="next-btn"
+                <img src="./../assets/next_arrow.svg" alt="" class="arrow next-btn"
                     @click="()=>{ if(pageId < pageList.length) pageId++ }">
             </div>
         </div>
@@ -109,64 +107,57 @@ export default {
 }
 
 .notice-content {
+    min-height : 581px;
+
     padding : 16px;
 
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 20px;
 }
 
-.hader {
+.search-wrap {
+    width : 100%;
+    height: 50px;
+
+    margin-bottom : 16px;
+
+    padding: 13px 36px 13px 24px;
+    border-radius: 8px;
+    box-shadow: 1px 0 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: #fff;
+
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.hader h6 {
-    font-family: NotoSansKR;
-    font-size: 18px;
-    font-weight: bold;
-    color: #3d3d3d;
-}
-
-.hader .search-wrap {
-    width: 323px;
+    gap : 8px;
 
     position: relative;
 }
 
-.hader .search-wrap input {
-    width : 100%;
-
-    border: 0px;
-    border-radius: 8px;
-
-    background-color: #e6e6e6;
-
-    padding : 11px 16px;
-
+.search-wrap input {
+    height: 100%;
     flex : 1;
-}
 
-.hader .search-wrap input::placeholder {
-    color: #949494;
-
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
+
+    background-color: transparent;
+
+    border : 0px;
+    border-radius: 0px;
 }
 
-.hader .search-wrap .search-button {
+.search-wrap input::placeholder {
+    color: #b9b9b9;
+}
+
+.search-wrap .search-button {
     width : 20px;
     height : 20px;
 
-    position: absolute;
-    top : 50%;
-    right : 18px;
-    transform: translateY(-50%);
-
     cursor: pointer;
 }
+
 
 .notice-list {
     display: flex;
@@ -245,22 +236,20 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-
-    cursor: pointer;
 }
 
 .pagination-wrap .page-btn:hover {
-    /* color : white; */
-
     background-color: var(--gray1);
-
-    /* opacity: 0.5; */
 }
 
 .pagination-wrap .page-btn.current-page {
     color : white;
 
     background-color: var(--main-color4);
+}
+
+.pagination-wrap *  {
+    cursor: pointer;
 }
 
 </style>

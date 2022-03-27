@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex"
+import { mapState } from "vuex"
 
 
 export default {
@@ -58,30 +58,14 @@ export default {
         }
     },
     methods : {
-        ...mapMutations([ 'sidebarOff', 'sidebarOn' ])
+
     },
     computed :{
         ...mapState(['userData', 'navBarList', 'department_map', "isSidebarShow"]),
         // store.js에 저장된 navBarList를 가져와서 목록으로 보여준다.
     },
     mounted(){
-        if(window.innerWidth <= 970){
-            this.sidebarOff()
-        }
-        else {
-            this.sidebarOn()
-        }
 
-        window.addEventListener("resize", ()=>{
-            // console.log("윈도우 크기 변경");
-
-            if(window.innerWidth <= 970){
-                this.sidebarOff()
-            }
-            else {
-                this.sidebarOn()
-            }
-        })
     }
 }
 </script>

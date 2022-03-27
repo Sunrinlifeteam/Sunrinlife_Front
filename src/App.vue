@@ -46,17 +46,21 @@ export default {
     mounted() {
         if(window.innerWidth <= 970){
             this.$store.commit("setMobileUI")
+            this.$store.commit("sidebarOff")
         }
         else {
             this.$store.commit("setDesktopUI")
+            this.$store.commit("sidebarOn")
         }
 
         window.addEventListener("resize", ()=>{
-            if(window.innerWidth <= 970){
+            if(window.innerWidth <= 970 && !this.store.state.isMobileWindow){
                 this.$store.commit("setMobileUI")
+                this.$store.commit("sidebarOff")
             }
             else {
                 this.$store.commit("setDesktopUI")
+                this.$store.commit("sidebarOn")
             }
         })
     },
