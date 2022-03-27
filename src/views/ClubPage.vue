@@ -55,10 +55,10 @@
             </div>
 
             <ClubCard
-                    v-if="!isMobileWindow"
+                    v-if="!isMobileWindow && clubData[selectMajorIdx][selectClubIdx] != null"
                     :selectCludData="clubData[selectMajorIdx][selectClubIdx]" />
             <ClubCardMobile
-                    v-else
+                    v-else-if="isMobileWindow && clubData[selectMajorIdx][selectClubIdx] != null"
                     :selectCludData="clubData[selectMajorIdx][selectClubIdx]"/>
         </div>
     </div>
@@ -74,10 +74,10 @@ import ClubCardMobile from "../components/club/ClubCardMobile.vue"
 
 
 
-import { JB, SW, it, de } from "./../components/club/TempClubData"
+// import { JB, SW, it, de } from "./../components/club/TempClubData"
 import { mapState } from 'vuex'
 
-// import { getClubMajor } from "./../api.js"
+import { getClubMajor } from "./../api.js"
 
 
 
@@ -85,9 +85,9 @@ export default {
     name : "Club Page",
     data(){return{
         isMobileWindow : true, // 현재 화면이 모바일 화면인지(970px 이하)
-        clubData : [JB, SW, it, de],
+        // clubData : [JB, SW, it, de],
 
-        // clubData : [[], [], [], []],
+        clubData : [[], [], [], []],
 
         selectClubIdx : 0,
         selectMajorIdx : 0,
@@ -125,10 +125,11 @@ export default {
             }
         })
 
-        // this.clubData[0] = getClubMajor(0)
-        // this.clubData[1] = getClubMajor(1)
-        // this.clubData[2] = getClubMajor(2)
-        // this.clubData[3] = getClubMajor(3)
+
+        getClubMajor(0).then(res => { this.clubData[0] = res })
+        getClubMajor(1).then(res => { this.clubData[1] = res })
+        getClubMajor(2).then(res => { this.clubData[2] = res })
+        getClubMajor(3).then(res => { this.clubData[3] = res })
     },
 }
 </script>
