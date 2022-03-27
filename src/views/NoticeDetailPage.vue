@@ -1,12 +1,12 @@
 <template>
+    <Header/>
     <Sidebar/>
 
     <div class="panel">
         <div class="page-content">
             <div class="notice-detail-content neu-morphism-card">
                 <div class="header">
-                    <div v-if="noticeData.type === 'school'" class="notice-icon notice-school">학교</div>
-                    <div v-else-if="noticeData.type === 'intranet'" class="notice-icon notice-intranet">인트라넷</div>
+                    <NoticeIcon :type="noticeData.type"/>
 
                     <h3>{{ noticeData.title }}</h3>
                 </div>
@@ -21,6 +21,9 @@
 
 <script>
 import Sidebar from "../components/Sidebar.vue"
+import Header from "../components/Header.vue"
+
+import NoticeIcon from "./../components/NoticeIcon.vue"
 
 import Notice from "./../Model/Notice.js"
 
@@ -35,7 +38,10 @@ export default {
         ),
     }},
     components : {
-        Sidebar
+        Sidebar,
+        Header,
+
+        NoticeIcon
     }
 }
 </script>

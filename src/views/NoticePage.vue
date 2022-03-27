@@ -15,8 +15,7 @@
             <ul class="notice-list">
                 <li v-for="i, n in noticeData" :key="n"
                     @click="$router.push(`/notice/${n}`)">
-                    <div v-if="i.type === 'school'" class="notice-icon notice-school">학교</div>
-                    <div v-else-if="i.type === 'intranet'" class="notice-icon notice-intranet">인트라넷</div>
+                    <NoticeIcon :type="i.type"/>
 
                     <p class="notice-title">{{ i.title }}</p>
                 </li>
@@ -47,6 +46,8 @@
 <script>
 import Sidebar from "../components/Sidebar.vue"
 import Header from "../components/Header.vue"
+
+import NoticeIcon from "./../components/NoticeIcon.vue"
 
 import Notice from "./../Model/Notice.js"
 
@@ -96,6 +97,8 @@ export default {
     components : {
         Sidebar,
         Header,
+
+        NoticeIcon,
     }
 }
 </script>
