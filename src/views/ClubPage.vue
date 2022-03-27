@@ -5,7 +5,7 @@
 
 <div class="panel">
     <div class="clud-page">
-        <div class="page-content">
+        <div class="page-content" :class="{'mobile-ui' : isMobileWindow}">
 
             <div class="club-list-wrap">
                 <!-- 학과 선택창 -->
@@ -75,6 +75,7 @@ import ClubCardMobile from "../components/club/ClubCardMobile.vue"
 
 
 import { JB, SW, it, de } from "./../components/club/TempClubData"
+import { mapState } from 'vuex'
 
 // import { getClubMajor } from "./../api.js"
 
@@ -93,6 +94,9 @@ export default {
 
         isSelectMajor : false,
     }},
+    computed :{
+        ...mapState(["isMobileWindow"])
+    },
     components : {
         Header,
         Sidebar,

@@ -40,9 +40,9 @@
     </nav>
 </transition>
 
-<!-- <transition name="nav-bg">
+<transition name="nav-bg">
     <div v-if="isSidebarShow" @click="$store.commit('sidebarOnOff')" class="sidebar-bg"></div>
-</transition> -->
+</transition>
 
 </template>
 
@@ -207,17 +207,6 @@ nav .menu_list a:hover, nav a:active{
     background-color: var(--gray1);
 }
 
-.nav-bg {
-    width : 100%;
-    height: 100vh;
-    background-color: var(--bg-black);
-
-    position: fixed;
-    top : 0;
-    left : 0;
-    z-index: 1;
-}
-
 .easter-egg{
     color : #f2f2f2;
 
@@ -280,7 +269,7 @@ nav .menu_list a:hover, nav a:active{
     width : 100%;
     height: 100%;
 
-    background-color: #0000008c;
+    /* background-color: #0000008c; */
 
     visibility: hidden;
 
