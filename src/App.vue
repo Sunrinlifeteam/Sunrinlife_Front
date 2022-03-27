@@ -42,7 +42,24 @@ export default {
                 store.commit("setSchedulePersonal", data)
             })
         }
-    }
+    },
+    mounted() {
+        if(window.innerWidth <= 970){
+            this.$store.commit("setMobileUI")
+        }
+        else {
+            this.$store.commit("setDesktopUI")
+        }
+
+        window.addEventListener("resize", ()=>{
+            if(window.innerWidth <= 970){
+                this.$store.commit("setMobileUI")
+            }
+            else {
+                this.$store.commit("setDesktopUI")
+            }
+        })
+    },
 }
 </script>
 

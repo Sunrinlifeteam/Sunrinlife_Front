@@ -10,6 +10,7 @@ const store = createStore({
         schedulePersonal:null,
 
         isSidebarShow : true,
+        isMobileWindow : true, // 현재 화면이 모바일 화면인지(970px 이하)
 
         navBarList,
         department_map,
@@ -17,6 +18,7 @@ const store = createStore({
     }
     },
     mutations :{
+        // Auth
         changeAccessToken(state, accessToken){
             state.authToken = accessToken
         },
@@ -30,6 +32,7 @@ const store = createStore({
             state.schedulePersonal = schedulePersonal
         },
 
+        // Sidebar
         sidebarOnOff(state){
             state.isSidebarShow = !state.isSidebarShow
         },
@@ -38,6 +41,17 @@ const store = createStore({
         },
         sidebarOff(state){
             state.isSidebarShow = false
+        },
+
+        // Mobile UI
+        setMobileUI(state){
+            state.isMobileWindow = true
+        },
+        setDesktopUI(state){
+            state.isMobileWindow = false
+        },
+        changeMobileDesktopUI(state){
+            state.isMobileWindow = !state.isMobileWindow
         },
     },
     actions : {
