@@ -17,6 +17,7 @@
                             <span v-else-if="selectMajorIdx == 1">소프트웨어과</span>
                             <span v-else-if="selectMajorIdx == 2">IT경영과</span>
                             <span v-else-if="selectMajorIdx == 3">콘텐츠 디자인과</span>
+                            <span v-else-if="selectMajorIdx == 4">일반 동아리</span>
                         </div>
                     </transition>
 
@@ -37,6 +38,10 @@
                             <div class="choice-major design"
                                 @click="selectMajorIdx = 3">
                                 콘디
+                            </div>
+                            <div class="choice-major"
+                                @click="selectMajorIdx = 4">
+                                일반
                             </div>
                         </div>
                     </transition>
@@ -77,7 +82,7 @@ import ClubCardMobile from "../components/club/ClubCardMobile.vue"
 // import { JB, SW, it, de } from "./../components/club/TempClubData"
 import { mapState } from 'vuex'
 
-import { getClubMajor } from "./../api.js"
+import { getClubMajor, getClubGeneral } from "./../api.js"
 
 
 
@@ -87,7 +92,7 @@ export default {
         isMobileWindow : true, // 현재 화면이 모바일 화면인지(970px 이하)
         // clubData : [JB, SW, it, de],
 
-        clubData : [[], [], [], []],
+        clubData : [[], [], [], [], []],
 
         selectClubIdx : 0,
         selectMajorIdx : 0,
@@ -130,6 +135,8 @@ export default {
         getClubMajor(1).then(res => { this.clubData[1] = res })
         getClubMajor(2).then(res => { this.clubData[2] = res })
         getClubMajor(3).then(res => { this.clubData[3] = res })
+        getClubGeneral().then(res => { this.clubData[4] = res })
+        // getClubGeneral().then(console.log)
     },
 }
 </script>
