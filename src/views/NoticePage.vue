@@ -10,7 +10,7 @@
             <img src="/img/search.svg" alt="검색 아이콘" class="search-button">
         </div>
 
-        <div class="notice-content neu-morphism-card">
+        <div class="notice-content" :class="{'neu-morphism-card' : !($store.state.isMobileWindow)}">
 
             <ul class="notice-list">
                 <li v-for="i, n in noticeData" :key="n"

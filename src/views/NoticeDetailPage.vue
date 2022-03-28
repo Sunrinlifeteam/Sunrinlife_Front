@@ -61,20 +61,18 @@ export default {
 
 .header {
     display: flex;
-    flex-direction: column;
-    gap : 8px;
+    gap : 16px;
 }
 
 .header h3 {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     color: #3d3d3d;
 }
 
 .notice-content {
-    font-family: 'Noto Sans KR', sans-serif;
     font-size: 18px;
-    font-weight: 400;
+    font-weight: bold;
+    color: #3d3d3d;
 }
 </style>

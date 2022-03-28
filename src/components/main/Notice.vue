@@ -42,12 +42,6 @@ let noticeData = [
         "대충 내용",
         "대충 파일",
     ),
-    new Notice(
-        "school",
-        "2021 창의아이디어경진대회 교내대회 결과 발표",
-        "대충 내용",
-        "대충 파일",
-    ),
 ] //공지사항을 저장하는 리스트
 
 export default {
@@ -75,12 +69,17 @@ export default {
 }
 
 .notice .main-page-item-content{
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* gap : 14px; */
 }
 
 .title_list{
-    
+    height : 28px;
+
     display: flex;
+    gap : 12px;
 }
 
 .notice .icon-wrap {
@@ -98,7 +97,7 @@ export default {
     -webkit-box-orient: vertical;
     display: -webkit-box;
 
-    margin-bottom:18px;
+    /* margin-bottom:18px; */
 
     cursor: pointer;
     flex: 1;

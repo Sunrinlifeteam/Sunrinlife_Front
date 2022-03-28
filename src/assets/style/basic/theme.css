@@ -95,9 +95,9 @@ button:active{
     max-width: 1200px;
 
     margin : 0 auto;
-    margin-top : 70px;
     
     padding : 16px;
+    padding-top : 70px;
 }
 
 .panel{
