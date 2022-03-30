@@ -115,3 +115,8 @@ export async function getNoticePageCount(){
     res = Math.ceil(res / 10)
     return res
 }
+
+export async function getNoticeById(noticeId) {
+    let res = await getAPI.get(`/notice/${noticeId}`).then(res => res.data).catch(console.log)
+    return res
+}
