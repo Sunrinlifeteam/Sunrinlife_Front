@@ -55,7 +55,7 @@
 
 <script>
 import {mapState} from "vuex"
-import {addSchedulePersonal, delSchedulePersonal, editSchedulePersonal} from "../../../api.js"
+import {addSchedulePersonal, delSchedulePersonal, editSchedulePersonal } from "../../../api.js"
 export default {
     name : "Schedule",
     data(){ return{
@@ -69,10 +69,9 @@ export default {
         ...mapState(["scheduleOfficial"]),
         getSchedulePersonal: function(){
             return this.$store.getters.getSchedulePersonal
-        }
+        },
     },
     watch:{
-
     },
     methods: {
         addTodo(date) {

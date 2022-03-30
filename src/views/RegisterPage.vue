@@ -12,15 +12,15 @@
         <div class="user_info_panel">
             <div class="input_panel">
                 <p>이름</p>
-                <input class="user_name" placeholder="이름">
+                <input class="user_name" placeholder="이름" :value="userData?.username" readonly>
             </div>
             <div class="input_panel">
                 <p>학과</p>
-                <input class="user_department" placeholder="학과">
+                <input class="user_department" placeholder="학과" :value="department_map[userData?.department]" readonly>
             </div>
             <div class="input_panel">
                 <p>학번</p>
-                <input class="user_number" placeholder="학번">
+                <input class="user_number" placeholder="학번" :value="userData?.class" readonly>
             </div>
             <div class="input_panel">
                 <p>Github</p>
@@ -37,6 +37,40 @@
 
 </div>
 </template>
+<script>
+import { mapState } from 'vuex'
+export const department_map = {
+    "security" : "정보보호과",
+    "software" : "소프트웨어과",
+    "buisness" : "ceo",
+    "design" : "콘텐츠디자인과"
+}
+export default {
+    name:"register",
+    data(){return{
+        department_map
+    }},
+    setup() {
+        
+    },
+    mounted(){
+        if(this.$route.query.refresh !== undefined){
+            this.$cookies.set("Refresh", this.$route.query.refresh)
+            window.location.href = "/register"
+            //this.$router.go()
+        }
+    },
+    computed:{
+        ...mapState(["userData"])
+    },
+    methods:{
+        fillZero(width, str){
+            return str.length >= width ? str:new Array(width-str.length+1).join('0')+str;//남는 길이만큼 0으로 채움
+        }
+    }
+}
+</script>
+
 <style scoped>
     input, textarea{
         background-color:#f5f6f7;

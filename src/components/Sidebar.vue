@@ -27,15 +27,6 @@
                     </span>
                 </router-link>
             </template>
-            <template v-else>
-                <div class="center">
-                    <span class="loading_one">
-                        <span class="loading_two">
-                            <span class="loading_three"></span>
-                        </span>
-                    </span>
-                </div>
-            </template>
         </div>
     </nav>
 </transition>
@@ -217,48 +208,6 @@ nav .menu_list a:hover, nav a:active{
     left : 0;
     z-index: 1;
 }
-
-.easter-egg{
-    color : #f2f2f2;
-
-    position: absolute;
-    bottom : 0px;
-
-    cursor: pointer;
-
-    
-}
-
-.loading_one, .loading_two, .loading_three {
-  animation-name: rotate;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  position: absolute;
-  display: block;
-  width: 60px;
-  height: 60px;
-  border: 3px solid #111;
-  border-radius: 100%;
-}
-
-.loading_one {
-  animation-duration: 1500ms;
-}
-
-.loading_two {
-  animation-duration: 4500ms;
-  transform-origin: 63% 63%;
-  width: 40px;
-  height: 40px;
-}
-
-.loading_three {
-  animation-duration: 9000ms;
-  transform-origin: 74% 74%;
-  width: 20px;
-  height: 20px;
-}
-
 
 @keyframes rotate {
   0% {

@@ -13,10 +13,10 @@
                     <img src="/img/search.svg" alt="검색 아이콘" class="search-button">
                 </div>
             </div>
-
+            
             <ul class="notice-list">
-                <li v-for="i, n in noticeData" :key="n"
-                    @click="$router.push(`/notice/${n}`)">
+                <li v-for="i, n in notice[`${[pageId]}`]" :key="n"
+                    @click="$router.push(`/notice/${i.id}`)">
                     <div v-if="i.type === 'school'" class="notice-icon notice-school">학교</div>
                     <div v-else-if="i.type === 'intranet'" class="notice-icon notice-intranet">인트라넷</div>
 
@@ -28,18 +28,18 @@
                 <img src="./../assets/prev_arrow.svg" alt="" class="prev-btn"
                     @click="()=>{ if(pageId > 1) pageId--}">
                 <div class="page-button-wrap">
-                    <template v-for="i, n in pageList" :key="n">
+                    <template v-for="i in getNoticePageCount<5?getNoticePageCount:5" :key="i">
                         <div
-                            v-if="(pageId - 2 <= n + 1 && n + 1 <= pageId + 2) || (pageId <= 2 && n + 1 <= 5) || (pageId >= pageList.length - 2 && n + 1 >= pageList.length - 4)"
                             class="page-btn"
-                            :class="{'current-page' : pageId == n + 1}"
-                            @click="pageId = n + 1">
-                            {{ i }}
+                            :class="{'current-page' : pagination===1?pageId === i+(pageId-3):pagination===2?pageId === i+(pageId-4):pagination===3?pageId === i+(pageId-5):pageId === i}"
+                            @click="pagination===1?pageId = i+(pageId-3):pagination===2?pageId = i+(pageId-4):pagination===3?pageId = i+(pageId-5):pageId = i">
+                            {{ pagination===1?i+(pageId-3):pagination===2?i+(pageId-4):pagination===3?i+(pageId-5):i }}
                         </div>
                     </template>
                 </div>
+
                 <img src="./../assets/next_arrow.svg" alt="" class="next-btn"
-                    @click="()=>{ if(pageId < pageList.length) pageId++ }">
+                    @click="()=>{ if(pageId < 1) pageId++ }">
             </div>
         </div>
     </div>
@@ -49,55 +49,40 @@
 <script>
 import Sidebar from "../components/Sidebar.vue"
 import Header from "../components/Header.vue"
+import {mapState} from "vuex"
 
-import Notice from "./../Model/Notice.js"
 
-let noticeData = [
-    new Notice(
-        "intranet",
-        "2021 스마틴 앱 챌린지(STAC) - 본교 학생 최우수상 수상",
-        "대충 내용",
-        "대충 파일",
-    ),
-    new Notice(
-        "school",
-        "2021 전국기능경기대회 수상",
-        "대충 내용",
-        "대충 파일",
-    ),
-    new Notice(
-        "intranet",
-        "2021 서울시 직업계고 창의아이디어경진대회 수상",
-        "대충 내용",
-        "대충 파일",
-    ),
-    new Notice(
-        "school",
-        "2021 창의아이디어경진대회 교내대회 결과 발표",
-        "대충 내용",
-        "대충 파일",
-    ),
-    new Notice(
-        "school",
-        "2021 창의아이디어경진대회 교내대회 결과 발표",
-        "대충 내용",
-        "대충 파일",
-    ),
-]
-
-let pageList = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
 
 export default {
     naem : "Notice",
     data(){return{
-        noticeData,
-        pageList,
-
         pageId : 1,
+        pagination: 0
     }},
     components : {
         Sidebar,
         Header,
+    },
+    computed:{
+        ...mapState(["notice"]),
+        getNoticePageCount:function(){
+            return this.$store.getters.getNoticePageCount
+        },
+    },
+    watch:{
+        pageId:function(){
+            const getNoticePageCount = this.$store.getters.getNoticePageCount
+            if(getNoticePageCount < 6)
+                this.pagination = 0
+            else if(this.pageId > 2 && this.pageId < getNoticePageCount-1)
+                this.pagination = 1
+            else if(this.pageId === getNoticePageCount-1)
+                this.pagination = 2
+            else if(this.pageId === getNoticePageCount)
+                this.pagination = 3
+            else
+                this.pagination = 0
+        }
     }
 }
 </script>
@@ -110,10 +95,11 @@ export default {
 
 .notice-content {
     padding : 16px;
-
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    height:620px;
 }
 
 .hader {
@@ -213,10 +199,13 @@ export default {
 
 .pagination-wrap {
     height : 32px;
-
+    position: absolute;
     display: flex;
     justify-content: center;
     gap : 12px;
+    left:50%;
+    transform:translate(-50%,0);
+    bottom:10px;
 }
 
 .pagination-wrap img {
@@ -263,4 +252,7 @@ export default {
     background-color: var(--main-color4);
 }
 
+img:hover{
+    cursor:pointer;
+}
 </style>
