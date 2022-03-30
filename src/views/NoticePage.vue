@@ -14,7 +14,7 @@
 
             <ul class="notice-list">
                 <li v-for="i, n in noticeData" :key="n"
-                    @click="$router.push(`/notice/${n}`)">
+                    @click="$router.push(`/notice/${i.id}`)">
                     <NoticeIcon :type="i.type"/>
 
                     <p class="notice-title">{{ i.title }}</p>
@@ -25,7 +25,7 @@
                 <img src="./../assets/prev_arrow.svg" alt="" class="arrow prev-btn"
                     @click="()=>{ if(pageId > 1) pageId--}">
                 <div class="page-button-wrap">
-                    <template v-for="i in getNoticePageCount<5?getNoticePageCount:5" :key="i">
+                    <template v-for="i in getNoticePageCount < 5 ? getNoticePageCount : 5" :key="i">
                         <div
                             class="page-btn"
                             :class="{'current-page' : pagination===1?pageId === i+(pageId-3):pagination===2?pageId === i+(pageId-4):pagination===3?pageId === i+(pageId-5):pageId === i}"
@@ -48,7 +48,9 @@ import Header from "../components/Header.vue"
 
 import NoticeIcon from "./../components/NoticeIcon.vue"
 
-import {mapState} from "vuex"
+import { mapState } from "vuex"
+
+import { getNotice } from "./../api.js"
 
 
 
@@ -56,7 +58,9 @@ export default {
     naem : "Notice",
     data(){return{
         pageId : 1,
-        pagination: 0
+        pagination: 0,
+
+        noticeData : [],
     }},
     components : {
         Sidebar,
@@ -83,8 +87,13 @@ export default {
                 this.pagination = 3
             else
                 this.pagination = 0
+
+            getNotice(this.pageId).then(res => this.noticeData = res)
         }
-    }
+    },
+    mounted() {
+        getNotice(this.pageId).then(res => this.noticeData = res)
+    },
 }
 </script>
 
