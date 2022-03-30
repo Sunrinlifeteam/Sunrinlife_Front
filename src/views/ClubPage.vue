@@ -53,7 +53,9 @@
                         v-for="(i, n) in clubData[selectMajorIdx]" :key="n"
                         :class="{ 'seleted' : selectClubIdx == n}"
                         @click="selectClubIdx = n">
-                        <img :src="i.logo_url" :alt="`${i.name} 동아리 로고`" class="club-icon">
+                        <img v-if="i.logo_url != ''" :src="i.logo_url" :alt="`${i.name} 동아리 로고`" class="club-icon">
+                        <img v-else src="./../assets/symbol.svg" :alt="`동아리 로고 기본값`" class="club-icon">
+
                         <div v-if="!isMobileWindow" class="club-name">{{ i.name }}</div>
                     </li>
                 </ul>

@@ -106,6 +106,11 @@ button:active{
     color:#3d3d3d;
 }
 
+.two_panel{
+    background-color: #f5f6f7;
+    border-radius: 8px;
+}
+
 .security{
     background-color: #3d3d3d;
     color:white;

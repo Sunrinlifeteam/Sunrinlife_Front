@@ -35,7 +35,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .today-schedule{
 
 }
@@ -44,5 +44,16 @@ export default {
     
 }
 
+.today-schedule .main-page-item-content {
+    overflow-y: auto;
+}
+
+.two_panel {
+    padding : 8px 12px;
+
+    display: flex;
+    flex-direction: column;
+    gap : 5px;
+}
 
 </style>
