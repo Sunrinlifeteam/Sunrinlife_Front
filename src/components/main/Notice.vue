@@ -14,14 +14,13 @@
 import NoticeIcon from "./../NoticeIcon.vue"
 
 import { mapState } from "vuex"
+import { getNoticeMain } from "./../../api.js"
 
 export default {
     name : "Notice",
-    data(){
-        return {
-            
-        }
-    },
+    data(){ return {
+        noticeData : []
+    }},
     methods :{
 
     },
@@ -29,7 +28,9 @@ export default {
         NoticeIcon
     },
     mounted(){
-        
+        getNoticeMain().then(res => {
+            this.noticeData = res
+        })
     },
     computed:{
         ...mapState(["noticeMain"]),
