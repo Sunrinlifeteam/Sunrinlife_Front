@@ -8,26 +8,16 @@ import ClubPage from "./../views/ClubPage.vue"
 import NoticePage from "./../views/NoticePage.vue"
 import NoticeDetailPage from "./../views/NoticeDetailPage.vue"
 
-import easterEgg from "./../views/EasterEgg.vue"
-
-import store from "./../store.js"
-
-const checkLogin = (to, from, next) => {
-    console.log(store.state.isLogin);
-
-    if(store.state.isLogin){
-        return next()
-    }   else{
-        alert("로그인후 이용해주세요.")
-        return next("/login")
-    }
-}
-checkLogin
 const routes = [
     {
         path : "/login",
         name: "login",
         component : LoginPage,
+    },
+    {
+        path: "/login/token",
+        name: "token",
+        component: LoginPage
     },
     {
         path : "/register",
@@ -38,11 +28,6 @@ const routes = [
         path : "/",
         name: "main",
         component : MainPage,
-        // beforeEnter: checkLogin
-    },
-    {
-        path : "/easterEgg",
-        component : easterEgg
     },
     {
         path : "/notice",

@@ -19,28 +19,28 @@ import { mapActions } from "vuex"
 
 export default {
     name : "Login",
+    setup(){
+    },
     data(){return{
 
-        easterEggClickCount : 0,
     }},
     methods : {
         ...mapActions(["login", "getToken"]),
 
         loginClick(){
 
-            window.location.href = "http://localhost:3000/auth/google";
+            window.location.href = `${process.env.VUE_APP_API_URL}/auth/google`;
 
             //this.login({ "email" : this.inputEmail, "password" : this.inputPassword})    
         }
     },
-    watch : {
-
-        easterEggClickCount(it){
-            console.log(it);
-            if(it == 10){
-                this.$router.push('easterEgg')
-            }
+    mounted(){
+        if (window.location.href.includes("/login/token")){
+            this.$cookies.set("Refresh", this.$route.query.refresh)
+            window.location.href = "/"
         }
+    },
+    watch : {
     }
 }
 </script>

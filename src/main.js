@@ -3,7 +3,7 @@ import App from './App.vue'
 import mitt from "mitt"
 import router from './router/router.js'
 import store from "./store.js"
-
+import VueCookies from "vue3-cookies";
 
 import "./Model/Date.js"
 
@@ -19,7 +19,12 @@ Date.prototype.isTooDay = function(){
 
 let emitter = mitt()
 let app = createApp(App)
-
+app.use(VueCookies, {
+    expireTimes: "30d",
+    domain: "",
+    secure: false,
+    sameSite: "None"
+});
 app.config.globalProperties.emitter = emitter
 
 
