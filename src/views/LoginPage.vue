@@ -1,7 +1,10 @@
 <template>
 
 <div class="login">
-    <!-- <img src="./../assets/sunrin.jpg" alt="배경" class="login-bg"> -->
+
+    <div class="shape left"></div>
+    <div class="shape right"></div>
+
     <div class="login-box">
         <div class="logo">
             <img class="logo_symbol" src="../assets/symbol.svg">
@@ -49,22 +52,10 @@ export default {
         width : 100%;
         height : 100vh;
 
+        overflow: hidden;
+
         /* animation: login-bg-animation 10s infinite reverse; */
     }
-
-    /* .login::before {
-        content: "";
-        background: url(./../assets/sunrin.jpg);
-        background-size: cover;
-        background-position: center;
-        opacity: 0.5;
-
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        right: 0px;
-        bottom: 0px;
-    } */
 
     .logo{
         display:Flex;
@@ -184,5 +175,46 @@ export default {
         .login .login-box {
             font-size : 24px;
         }
+    }
+
+    .shape {
+        width: 1000px;
+        height: 290px;
+
+        /* padding : 50px; */
+
+        border-radius: 200px;
+        box-shadow: 1px 0 6px 0 rgba(0, 0, 0, 0.16);
+        background-color: #4893ff;
+
+        display: flex;
+
+        position: relative;
+
+        transform: rotateZ(-45deg);
+    }
+
+    .shape.left {
+        top : 300px;
+        left : -500px;
+    }
+
+    .shape.right {
+        bottom : -300px;
+        right : -900px;
+    }
+
+    .shape::before {
+        content: "";
+        width : 870px;
+        height : 190px;
+
+        border-radius: 200px;
+        background-color: #ecf0f3;
+
+        position: absolute;
+        top : 50%;
+        left : 50%;
+        transform: translate(-50%, -50%);
     }
 </style>
