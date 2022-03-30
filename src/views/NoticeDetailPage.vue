@@ -25,24 +25,22 @@ import Header from "../components/Header.vue"
 
 import NoticeIcon from "./../components/NoticeIcon.vue"
 
-import Notice from "./../Model/Notice.js"
+import { getNoticeById } from "./../api.js"
 
 export default {
     name : "Notice detail page",
     data(){return{
-        noticeData : new Notice(
-            "intranet",
-            "2021 스마틴 앱 챌린지(STAC) - 본교 학생 최우수상 수상",
-            "대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 ",
-            "대충 파일",
-        ),
+        noticeData : {},
     }},
     components : {
         Sidebar,
         Header,
 
         NoticeIcon
-    }
+    },
+    mounted() {
+        getNoticeById(this.$route.params.noticeId).then(res => this.noticeData = res)
+    },
 }
 </script>
 
