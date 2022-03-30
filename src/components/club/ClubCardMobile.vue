@@ -1,7 +1,9 @@
 <template>
 <div class="club-card mobile">
     <div class="header">
-        <img :src="selectCludData.logo_url" alt="" class="logo">
+        <img v-if="selectCludData.logo_url != ''" :src="selectCludData.logo_url" alt="" class="logo">
+            <img v-else src="./../../assets/symbol.svg" :alt="`동아리 로고 기본값`" class="logo">
+
         <div class="name-sns-wrap">
             <h2 class="club-name">{{ selectCludData.name }}</h2>
             
