@@ -200,8 +200,8 @@ export default {
     }
 
     .shape.right {
-        bottom : -300px;
-        right : -900px;
+        bottom : -72px;
+        right : -1025px;
     }
 
     .shape::before {
