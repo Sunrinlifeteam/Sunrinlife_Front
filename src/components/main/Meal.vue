@@ -44,7 +44,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .meal {
     
 }
@@ -60,17 +60,16 @@ export default {
     cursor: pointer;
 }
 
-.two_panel{
-    background-color: #f5f6f7;
-    border-radius: 8px;
-}
-
 .two_panel p{
     font-family: 'Noto Sans KR', sans-serif;
     font-weight:500;
     font-size:14px;
     margin-left: 16px;
     margin-top:7px;
+}
+
+.main-page-item-content {
+    overflow-y: auto;
 }
 
 @media (max-width: 970px) {

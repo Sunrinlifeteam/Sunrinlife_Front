@@ -238,6 +238,11 @@ export default {
     white-space: nowrap;
     overflow: hidden;
 }
+
+.item-input::placeholder {
+    color : rgb(228, 228, 228);
+}
+
 .item-button {
     height: 24px;
     margin-left:4px;
