@@ -3,29 +3,35 @@
     <div class="main-page-item-title"><h3>시간표</h3></div>
     <div class="main-page-item-content two_panel">
             
-        <p v-for="i, n in timeTable" :key="n">{{ i }}</p>
+        <p v-for="i, n in todaySchedule" :key="n">{{ i }}</p>
 
     </div>
 </div>
 </template>
 
 <script>
-
-const timeTable = [
-    "국어",
-    "수학",
-    "영어",
-    "프밍",
-    "정통",
-    "인공지능",
-    "에드캔",
-]
+import {getTodaySchedule} from "../../api.js"
+import {mapState} from "vuex"
 
 export default {
     name : "TodaySchedule",
     data(){return{
-        timeTable,
-    }}
+        
+    }},
+    computed:{
+        ...mapState(["todaySchedule"]),
+        getUserData(){
+            return this.$store.getters.getUserData
+        }
+    },
+    watch:{
+        getUserData(){
+            let userData = this.$store.getters.getUserData
+            getTodaySchedule(userData.grade, userData.class).then((data) => {
+                this.$store.commit("getTodaySchedule", data)
+            })
+        }
+    }
 }
 </script>
 

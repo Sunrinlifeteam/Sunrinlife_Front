@@ -2,8 +2,7 @@
 <div class="meal main-page-item">
     <div class="main-page-item-title"><h3>급식</h3></div>
     <div class="main-page-item-content two_panel">
-        
-        <p v-for="i, n in mealData" :key="n">{{i}}</p>
+        <p v-for="i, n in meal" :key="n">{{i.menu_name}}</p>
         
 
         <!-- <div class="meal-detail" @click="$router.push('meal')">세부 보기</div> -->
@@ -25,29 +24,22 @@
 //     }
 // })
 
-import {getMeal} from "../../api.js"
-
-const mealData = [
-    "밥",
-    "국",
-    "반찬",
-    "에드캔은",
-    "정말 최고야",
-    "후식",
-    "후식2"
-]
+import {mapState} from "vuex"
 
 export default {
     name : "Meal",
     data(){return{
-        mealData,
         //luanchRemainingTime,
     }},
     mounted(){
         // setInterval(()=>{
         //     this.luanchRemainingTime = launchStartTime.diffTimeForNow
         // }, 500)
-        console.log(getMeal())
+    },
+    computed:{
+        ...mapState(["meal"]),
+    },
+    watch:{
     }
 }
 </script>

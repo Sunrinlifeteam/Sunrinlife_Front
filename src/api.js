@@ -3,7 +3,7 @@ import store from "./store.js"
 
 const getAPI = axios.create({
     withCredentials: true,
-    baseURL: "http://localhost:3000",
+    baseURL: process.env.VUE_APP_API_URL,
 
 })
 
@@ -16,6 +16,7 @@ export async function getAccessToken() {
 
 export async function getUserData(){
     let userData = await getAPI.get("/auth/user/club").then((res) => res.data).catch((e) => console.log(e))
+    console.log(userData)
     return userData
 }
 
@@ -89,12 +90,28 @@ export async function getClubGeneral() {
 
 //급식 API
 export async function getMeal(){
-    let response = getAPI.get("/meal").then((res) => res.data).catch((e) => console.log(e))
+    let response = await getAPI.get("http://neis-api.sunrin.in/meal").then((res) => res.data).catch((e) => console.log(e))
     return response
 }
 
+export async function getTodaySchedule(grade, cl){
+    let res = await getAPI.get(`http://neis-api.sunrin.in/classSchedule/${grade}/${cl}`).then((res) => res.data).catch((e) => console.log(e))
+    return res
+}
+
 //공지 API
-export async function getNotice(){
-    let res = getAPI.get("/notice/intranet/list?page=1").then((res) => res.data).catch((e) => console.log(e))
+export async function getNoticeMain(){
+    let res = await getAPI.get("/notice").then((res) => res.data).catch((e) => console.log(e))
+    return res
+}
+
+export async function getNotice(page){
+    let res = await getAPI.get(`/notice?page=${page}&count=10`).then((res) => res.data).catch((e) => console.log(e))
+    return res
+}
+
+export async function getNoticePageCount(){
+    let res = await getAPI.get("/notice/count").then((res) => res.data).catch((e) => console.log(e))
+    res = Math.ceil(res / 10)
     return res
 }

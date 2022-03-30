@@ -11,44 +11,13 @@
 </template>
 
 <script>
-
-import Notice from "./../../Model/Notice.js"
-import NoticeIcon from "./../../components/NoticeIcon.vue"
-
-import { getNotice } from "../../api.js"
-
-let noticeData = [
-    new Notice(
-        "intranet",
-        "2021 스마틴 앱 챌린지(STAC) - 본교 학생 최우수상 수상",
-        "대충 내용",
-        "대충 파일",
-    ),
-    new Notice(
-        "school",
-        "2021 전국기능경기대회 수상",
-        "대충 내용",
-        "대충 파일",
-    ),
-    new Notice(
-        "intranet",
-        "2021 서울시 직업계고 창의아이디어경진대회 수상",
-        "대충 내용",
-        "대충 파일",
-    ),
-    new Notice(
-        "school",
-        "2021 창의아이디어경진대회 교내대회 결과 발표",
-        "대충 내용",
-        "대충 파일",
-    ),
-] //공지사항을 저장하는 리스트
+import { mapState } from "vuex"
 
 export default {
     name : "Notice",
     data(){
         return {
-            noticeData,
+            
         }
     },
     methods :{
@@ -58,8 +27,11 @@ export default {
         NoticeIcon
     },
     mounted(){
-        getNotice().then((res) => console.log(res))
-    }
+        
+    },
+    computed:{
+        ...mapState(["noticeMain"]),
+    },
 }
 </script>
 
