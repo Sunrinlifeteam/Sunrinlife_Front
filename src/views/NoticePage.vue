@@ -45,6 +45,9 @@
 <script>
 import Sidebar from "../components/Sidebar.vue"
 import Header from "../components/Header.vue"
+
+import NoticeIcon from "./../components/NoticeIcon.vue"
+
 import {mapState} from "vuex"
 
 
