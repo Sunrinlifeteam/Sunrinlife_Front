@@ -5,7 +5,7 @@
 
 <div class="panel">
     <div class="clud-page">
-        <div class="page-content">
+        <div class="page-content" :class="{'mobile-ui' : isMobileWindow}">
 
             <div class="club-list-wrap">
                 <!-- 학과 선택창 -->
@@ -49,16 +49,16 @@
                         :class="{ 'seleted' : selectClubIdx == n}"
                         @click="selectClubIdx = n">
                         <img :src="i.logo_url" :alt="`${i.name} 동아리 로고`" class="club-icon">
-                        <div class="club-name">{{ i.name }}</div>
+                        <div v-if="!isMobileWindow" class="club-name">{{ i.name }}</div>
                     </li>
                 </ul>
             </div>
 
             <ClubCard
-                    v-if="!isMobileWindow"
+                    v-if="!isMobileWindow && clubData[selectMajorIdx][selectClubIdx] != null"
                     :selectCludData="clubData[selectMajorIdx][selectClubIdx]" />
             <ClubCardMobile
-                    v-else
+                    v-else-if="isMobileWindow && clubData[selectMajorIdx][selectClubIdx] != null"
                     :selectCludData="clubData[selectMajorIdx][selectClubIdx]"/>
         </div>
     </div>
@@ -74,9 +74,10 @@ import ClubCardMobile from "../components/club/ClubCardMobile.vue"
 
 
 
-import { JB, SW, it, de } from "./../components/club/TempClubData"
+// import { JB, SW, it, de } from "./../components/club/TempClubData"
+import { mapState } from 'vuex'
 
-// import { getClubMajor } from "./../api.js"
+import { getClubMajor } from "./../api.js"
 
 
 
@@ -84,15 +85,18 @@ export default {
     name : "Club Page",
     data(){return{
         isMobileWindow : true, // 현재 화면이 모바일 화면인지(970px 이하)
-        clubData : [JB, SW, it, de],
+        // clubData : [JB, SW, it, de],
 
-        // clubData : [[], [], [], []],
+        clubData : [[], [], [], []],
 
         selectClubIdx : 0,
         selectMajorIdx : 0,
 
         isSelectMajor : false,
     }},
+    computed :{
+        ...mapState(["isMobileWindow"])
+    },
     components : {
         Header,
         Sidebar,
@@ -121,10 +125,11 @@ export default {
             }
         })
 
-        // this.clubData[0] = getClubMajor(0)
-        // this.clubData[1] = getClubMajor(1)
-        // this.clubData[2] = getClubMajor(2)
-        // this.clubData[3] = getClubMajor(3)
+
+        getClubMajor(0).then(res => { this.clubData[0] = res })
+        getClubMajor(1).then(res => { this.clubData[1] = res })
+        getClubMajor(2).then(res => { this.clubData[2] = res })
+        getClubMajor(3).then(res => { this.clubData[3] = res })
     },
 }
 </script>
@@ -137,7 +142,7 @@ export default {
     gap : 30px;
 }
 
-.club-list-wrap{
+.club-list-wrap {
     width : 195px
 }
 
@@ -145,7 +150,7 @@ export default {
     width : 100%;
 }
 
-@media (max-width : 1100px) {
+@media (max-width : 970px) {
     .page-content {
         grid-template-columns : unset;
         grid-template-rows: auto auto;
@@ -155,7 +160,7 @@ export default {
         width : 100%;
 
         display: flex;
-        flex-direction: column;
+        gap : 24px;
     }
 
     .club-card .header {
@@ -224,6 +229,13 @@ export default {
     display: none;
 }
 
+@media (max-width : 970px) {
+    .major-selecter {
+        height: 52px;
+        margin-bottom: 0px;
+    }
+}
+
 
 .current-major-ani-enter-from, .current-major-ani-leave-to {
     transform: translateY(-100%);
@@ -286,5 +298,24 @@ export default {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
     font-size:16px;
+}
+
+@media (max-width : 970px) {
+    .club-list {
+        padding: 8px;
+
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .club-list li {
+        flex : 1;
+
+        padding : 0px;
+
+        display: flex;
+        justify-content: center;
+        gap : 0px;
+    }
 }
 </style>

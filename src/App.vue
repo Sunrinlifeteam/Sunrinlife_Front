@@ -52,7 +52,24 @@ export default {
                 store.commit("getNotice", {id:1, data:data})
             })
         }
-    }
+    },
+    mounted() {
+        if(window.innerWidth <= 970){
+            this.$store.commit("setMobileUI")
+        }
+        else {
+            this.$store.commit("setDesktopUI")
+        }
+
+        window.addEventListener("resize", ()=>{
+            if(window.innerWidth <= 970){
+                this.$store.commit("setMobileUI")
+            }
+            else {
+                this.$store.commit("setDesktopUI")
+            }
+        })
+    },
 }
 </script>
 

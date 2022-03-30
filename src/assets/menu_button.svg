@@ -1,5 +1,14 @@
-<svg width="77" height="66" viewBox="0 0 77 66" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M7 7H70" stroke="#3D3D3D" stroke-width="10" stroke-linecap="round"/>
-    <path d="M7 33H70" stroke="#3D3D3D" stroke-width="10" stroke-linecap="round"/>
-    <path d="M7 59H70" stroke="#3D3D3D" stroke-width="10" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <defs>
+        <clipPath id="w9jf30t60a">
+            <path data-name="사각형 233" transform="translate(40 29)" style="stroke:#707070;fill:none" d="M0 0h24v24H0z"/>
+        </clipPath>
+    </defs>
+    <g data-name="마스크 그룹 54" transform="translate(-40 -29)" style="clip-path:url(#w9jf30t60a)">
+        <g data-name="그룹 117">
+            <path data-name="선 1" transform="translate(45.463 40.999)" style="stroke:#3d3d3d;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;fill:none" d="M0 0h13.072"/>
+            <path data-name="선 2" transform="translate(45.463 46.204)" style="stroke:#3d3d3d;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;fill:none" d="M0 0h13.072"/>
+            <path data-name="선 3" transform="translate(45.463 35.795)" style="stroke:#3d3d3d;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;fill:none" d="M0 0h13.072"/>
+        </g>
+    </g>
 </svg>
