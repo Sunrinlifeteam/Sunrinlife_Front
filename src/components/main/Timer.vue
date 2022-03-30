@@ -12,6 +12,7 @@
                 <span v-if="남은시간.hour < 10" class="zero">0</span>{{ 남은시간.hour }}시간
                 <span v-if="남은시간.minute < 10" class="zero">0</span>{{ 남은시간.minute }}분
                 <span v-if="남은시간.second < 10" class="zero">0</span>{{ 남은시간.second }}초
+                <!-- <span>전체</span>{{ 남은시간.allSecond }}초 -->
             </span>
 
         </div>
@@ -23,46 +24,53 @@
 import TimerData from "./../../assets/TimerData.js"
 import Time from "./../../Model/Time.js"
 
-let currentTime
-let nextTime
+// let currentTime
+// let nextTime
 
-let 남은시간
-let 남은시간_기준시간
+// let 남은시간
+// let 남은시간_기준시간
 
-for(let i = 0; i < TimerData.length; i++){
 
-    if(TimerData[i].isCurrentTime){
-        currentTime = TimerData[i]
-
-        if(i == TimerData.length - 1){
-            nextTime = TimerData[0]
-            남은시간_기준시간 = nextTime.endTime
-        }
-        // else if(currentTime.classType == "study"){
-        //     nextTime = TimerData[i + 2]
-        //     남은시간_기준시간 = nextTime.endTime
-        // } //3시만 되면 오류남
-        else{
-            nextTime = TimerData[i + 1]
-            남은시간_기준시간 = currentTime.endTime
-        }
-
-        남은시간 = new Time().diffTime(남은시간_기준시간)
-    }
-}
 
 export default {
     name : "Timer",
     data(){ return {
-        currentTime,
-        nextTime,
-        남은시간,
+        currentTime : {},
+        nextTime : {},
+        남은시간 : {},
+        남은시간_기준시간 : {},
         isTimeFew : false
     }},
+    methods: {
+        setTime(){
+            // alert(`${new Time().hour} : ${new Time().minute} : ${new Time().second}`)
+            for(let i = 0; i < TimerData.length; i++){
+
+                if(TimerData[i].isCurrentTime){
+                    this.currentTime = TimerData[i]
+
+                    if(i == TimerData.length - 1){
+                        this.nextTime = TimerData[0]
+                        this.남은시간_기준시간 = this.nextTime.endTime
+                    }
+                    else{
+                        this.nextTime = TimerData[i + 1]
+                        this.남은시간_기준시간 = this.currentTime.endTime
+                    }
+
+                    this.남은시간 = new Time().diffTime(this.남은시간_기준시간)
+                }
+            }
+        }
+    },
     mounted(){
+        this.setTime()
+
         setInterval(()=>{
-            this.남은시간 = new Time().diffTime(남은시간_기준시간)
+            this.남은시간 = new Time().diffTime(this.남은시간_기준시간)
             this.isTimeFew = this.남은시간.allSecond < 60
+
+            if(this.남은시간.allSecond == 0) location.reload()
         }, 500)
     }
 }

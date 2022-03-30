@@ -2,12 +2,9 @@
 <div class="notice main-page-item">
     <div class="main-page-item-title"><h3>공지</h3></div>
     <div class="main-page-item-content">
-        <div v-for="i, j, in noticeMain" :key="j" class="title_list">
-            <transition name="notice-icon">
-                <div v-if="i.type === 'school'" class="notice-icon notice-school">학교</div>
-                <div v-else-if="i.type === 'intranet'" class="notice-icon notice-intranet">인트라넷</div>
-            </transition>
-            <p class="title" @click="$router.push(`/notice/${i.id}`)">{{i.title}}</p>
+        <div v-for="i, j, in noticeData" :key="j" class="title_list">
+            <NoticeIcon :type="i.type"/>
+            <p class="title" @click="$router.push(`/notice/${j}`)">{{i.title}}</p>
         </div>
     </div>
 </div>
@@ -15,6 +12,7 @@
 
 <script>
 import { mapState } from "vuex"
+
 export default {
     name : "Notice",
     data(){
@@ -24,6 +22,9 @@ export default {
     },
     methods :{
 
+    },
+    components : {
+        NoticeIcon
     },
     mounted(){
         
@@ -40,41 +41,21 @@ export default {
 }
 
 .notice .main-page-item-content{
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* gap : 14px; */
 }
 
 .title_list{
-    
+    height : 28px;
+
     display: flex;
+    gap : 12px;
 }
 
 .notice .icon-wrap {
     padding-right : 4px;
-}
-
-.notice-icon {
-    font-size : 14px;
-    padding : 2px 10px;
-    margin-bottom:14px;
-    border-radius: 24px;
-    color : var(--gray1);
-    height:28px;
-    text-align: center;
-    
-    padding : 4px 4px;
-    margin-right:12px;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 700;
-}
-
-.notice-icon.notice-school {
-    background-color: #ffcf49;
-    width:50px;
-}
-
-.notice-icon.notice-intranet {
-    background-color: #4992ff;
-    width: 74px;
 }
 
 .title{
@@ -88,7 +69,7 @@ export default {
     -webkit-box-orient: vertical;
     display: -webkit-box;
 
-    margin-bottom:18px;
+    /* margin-bottom:18px; */
 
     cursor: pointer;
     flex: 1;

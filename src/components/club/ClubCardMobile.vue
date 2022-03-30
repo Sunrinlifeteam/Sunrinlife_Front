@@ -16,7 +16,7 @@
             <a class="sns-link insta-link" :href="selectCludData.instagram" target="_blank"
                 v-if="selectCludData.instagram != ''">
                 <img src="/img/sns/instagram.svg" alt="Instagram 링크 아이콘" class="icon">
-                <div class="url">@ {{ clubInstagramId.slice(-1)[0] }}</div>
+                <div class="url">{{ clubInstagramId.slice(-1)[0] }}</div>
             </a>
 
             <!-- 웹사이트 링크 -->
