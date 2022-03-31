@@ -2,92 +2,90 @@
     <Header/>
     <Sidebar/>
 
-    <template v-if="userData">
-        <div class="panel">
-            <div class="user-profile">
+    <div class="panel">
+        <div class="user-profile">
 
-                <!-- 정보 수정 버튼 -->
-                <div class="info-correcrion-button">
-                    <img class="correction-button-img" src="./../assets/user_profile_assets/correctionIcon.svg"
-                        v-if="!isEditable"
-                        @click="isEditable = true"/>
-                    <img class="correction-button-img" src="./../assets/user_profile_assets/checkIcon.svg"
-                        v-else
-                        @click="updateProfile"/>
-                </div>
-
-                <!-- 프로필 이미지 -->
-                <div class="user-img-items">
-                    <div class="user-img-item">
-                        <img v-if="isEditable" class="user-img" :src="editProfileImage" />
-                        <img v-else-if="userData.image" class="user-img" :src="userData.image" />
-                        <img v-else class="user-img" src="../assets/user_profile_assets/basic_profile_img.svg" />
-
-                        <input v-if="isEditable" type="file" ref="image" @change="uploadProfileImage" id="profile-img-choice">
-                        <label v-if="isEditable" for="profile-img-choice">
-                            <img src="./../assets/user_profile_assets/correctionIcon_white.svg" alt="">
-                        </label>
-                    </div>
-                </div>
-
-                <!-- 유저 정보(동아리, 이메일, 소개 등) -->
-                <div class="user-info-items">
-                    <div class="user-basic-contact-items">
-
-                        <!-- 이름, 번호, 학과 -->
-                        <div class="user-basic-items">
-                            <span class="user-name-item">{{ userData.username }}</span>
-                            <span class="user-major-item">{{ department_map[userData.department] }}</span>
-                            <span class="user-number-item">{{ userData.grade }}학년 {{ userData.class }}반 {{ userData.number }}번</span>
-                        </div>
-
-                        <!-- 동아리, 이메일, 깃허브 -->
-                        <div class="user-contact-items">
-
-                            <!-- 동아리, 이메일 -->
-                            <div v-if="!isEditable" class="user-contact-item user-contact-club">
-                                <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
-                                <span class="user-contact-text">{{ userData.clubInfo?userData.clubInfo.name:"" }}</span>
-                            </div>
-                            <div v-else class="user-contact-item user-contact-club edit">
-                                <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
-                                <input v-model="editClubInfo" v class="user-contact-text user-profile-edit-inout">
-                            </div>
-
-                            <div class="user-contact-item">
-                                <img class="user-contact-icon" src="./../assets/user_profile_assets/emailIcon.svg"/>
-                                <span class="user-contact-text">{{ userData.email }}</span>
-                            </div>
-
-                            <!-- 깃허브 계정 -->
-                            <div v-if="!isEditable && userData.githubLink != null" class="user-social-contact-item">
-                                <img class="user-contact-icon" src="./../assets/user_profile_assets/githubIcon.svg"/>
-                                <span class="user-contact-text">{{ userData.githubLink?userData.githubLink:"" }}</span>
-                            </div>
-                            <div v-else-if="isEditable" class="user-social-contact-item edit">
-                                <img class="user-contact-icon" src="./../assets/user_profile_assets/githubIcon.svg"/>
-                                <input v-model="editGithubLink" v class="user-contact-text user-profile-edit-inout">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <!-- 소개 -->
-                    <div v-if="!isEditable" class="user-introduce-items">
-                        <span class="user-introduce-title">소개</span>
-                        <span class="user-introduce-item">{{ userData.description?userData.description:"" }}</span>
-                    </div>
-                    <div v-else class="user-introduce-items edit">
-                        <span class="user-introduce-title">소개</span>
-                        <textarea v class="user-introduce-item user-profile-edit-inout" v-model="editDescription"></textarea>
-                    </div>
-                </div>
-
-                <span class="logout-btn" @click="logoutClick">로그아웃</span>
+            <!-- 정보 수정 버튼 -->
+            <div class="info-correcrion-button">
+                <img class="correction-button-img" src="./../assets/user_profile_assets/correctionIcon.svg"
+                    v-if="!isEditable"
+                    @click="isEditable = true"/>
+                <img class="correction-button-img" src="./../assets/user_profile_assets/checkIcon.svg"
+                    v-else
+                    @click="updateProfile"/>
             </div>
+
+            <!-- 프로필 이미지 -->
+            <div class="user-img-items">
+                <div class="user-img-item">
+                    <img v-if="isEditable" class="user-img" :src="editProfileImage" />
+                    <img v-else-if="userData.image" class="user-img" :src="userData.image" />
+                    <img v-else class="user-img" src="../assets/user_profile_assets/basic_profile_img.svg" />
+
+                    <input v-if="isEditable" type="file" ref="image" @change="uploadProfileImage" id="profile-img-choice">
+                    <label v-if="isEditable" for="profile-img-choice">
+                        <img src="./../assets/user_profile_assets/correctionIcon_white.svg" alt="">
+                    </label>
+                </div>
+            </div>
+
+            <!-- 유저 정보(동아리, 이메일, 소개 등) -->
+            <div class="user-info-items">
+                <div class="user-basic-contact-items">
+
+                    <!-- 이름, 번호, 학과 -->
+                    <div class="user-basic-items">
+                        <span class="user-name-item">{{ userData.username }}</span>
+                        <span class="user-major-item">{{ department_map[userData.department] }}</span>
+                        <span class="user-number-item">{{ userData.grade }}학년 {{ userData.class }}반 {{ userData.number }}번</span>
+                    </div>
+
+                    <!-- 동아리, 이메일, 깃허브 -->
+                    <div class="user-contact-items">
+
+                        <!-- 동아리, 이메일 -->
+                        <div v-if="!isEditable" class="user-contact-item user-contact-club">
+                            <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
+                            <span class="user-contact-text">{{ userData.clubInfo?userData.clubInfo.name:"" }}</span>
+                        </div>
+                        <div v-else class="user-contact-item user-contact-club edit">
+                            <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
+                            <input v-model="editClubInfo" v class="user-contact-text user-profile-edit-inout">
+                        </div>
+
+                        <div class="user-contact-item">
+                            <img class="user-contact-icon" src="./../assets/user_profile_assets/emailIcon.svg"/>
+                            <span class="user-contact-text">{{ userData.email }}</span>
+                        </div>
+
+                        <!-- 깃허브 계정 -->
+                        <div v-if="!isEditable && userData.githubLink != null" class="user-social-contact-item">
+                            <img class="user-contact-icon" src="./../assets/user_profile_assets/githubIcon.svg"/>
+                            <span class="user-contact-text">{{ userData.githubLink?userData.githubLink:"" }}</span>
+                        </div>
+                        <div v-else-if="isEditable" class="user-social-contact-item edit">
+                            <img class="user-contact-icon" src="./../assets/user_profile_assets/githubIcon.svg"/>
+                            <input v-model="editGithubLink" v class="user-contact-text user-profile-edit-inout">
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- 소개 -->
+                <div v-if="!isEditable" class="user-introduce-items">
+                    <span class="user-introduce-title">소개</span>
+                    <span class="user-introduce-item">{{ userData.description?userData.description:"" }}</span>
+                </div>
+                <div v-else class="user-introduce-items edit">
+                    <span class="user-introduce-title">소개</span>
+                    <textarea v class="user-introduce-item user-profile-edit-inout" v-model="editDescription"></textarea>
+                </div>
+            </div>
+
+            <span class="logout-btn" @click="logoutClick">로그아웃</span>
         </div>
-    </template>
+    </div>
 </template>
 
 <script>
@@ -152,11 +150,11 @@ export default {
     computed:{
         ...mapState(["userData", "department_map"])
     },
-    updated() {
-        this.editClubInfo = this.userData?.clubInfo.id
-        this.editGithubLink = this.userData?.githubLink
-        this.editDescription = this.userData?.description
-        this.editProfileImage = this.userData?.image
+    mounted() {
+        this.editClubInfo = this.userData.clubInfo.id
+        this.editGithubLink = this.userData.githubLink
+        this.editDescription = this.userData.description
+        this.editProfileImage = this.userData.image
     },
 }
 </script>
