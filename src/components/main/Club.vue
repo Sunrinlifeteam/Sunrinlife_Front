@@ -4,7 +4,7 @@
         <h3>동아리</h3>
     </divc>
     <div class="main-page-item-content">
-        <router-link v-for="i, j in clubs" :key="j" class="club_panel" :class="j" :to="'/club'"> <!-- 경로 수정해야함 -->
+        <router-link v-for="i, j in clubs" :key="j" class="club_panel" :class="j" :to="`/club?major=${j}`"> <!-- 경로 수정해야함 -->
             <p>{{i}}</p>
         </router-link>
     </div>
