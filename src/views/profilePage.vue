@@ -18,7 +18,8 @@
             <!-- 프로필 이미지 -->
             <div class="user-img-items">
                 <div class="user-img-item">
-                    <img v-if="userData.image" class="user-img" :src="userData.image" />
+                    <img v-if="isEditable" class="user-img" :src="editProfileImage" />
+                    <img v-else-if="userData.image" class="user-img" :src="userData.image" />
                     <img v-else class="user-img" src="../assets/user_profile_assets/basic_profile_img.svg" />
 
                     <input v-if="isEditable" type="file" ref="image" @change="uploadProfileImage" id="profile-img-choice">
@@ -112,18 +113,15 @@ export default {
 
             reader.onloadend = () => {
                 this.editProfileImage = reader.result
-                
             }
             reader.readAsDataURL(this.$refs.image.files[0]);
             //console.log(this.editProfileImage)
         },
-        updateProfile(){
-            this.isEditable = false
-            console.log(this.editProfileImage)
-            editProfile(this.editGithubLink, this.editProfileImage, this.editDescription, ).then((res) => console.log(res))
+        async updateProfile(){
+            await editProfile(this.editGithubLink, this.editProfileImage, this.editDescription, this.editClubInfo)
             getUserData().then((data) => {
                 store.commit("setUserData", data)
-            })
+            }).finally(() => this.isEditable = false)
         },
         logoutClick(){
             logout().then(res => {
@@ -139,9 +137,10 @@ export default {
         ...mapState(["userData", "department_map"])
     },
     mounted() {
-        this.editClubInfo = this.userData.clubInfo
+        this.editClubInfo = this.userData.clubInfo.id
         this.editGithubLink = this.userData.githubLink
         this.editDescription = this.userData.description
+        this.editProfileImage = this.userData.image
     },
 }
 </script>
