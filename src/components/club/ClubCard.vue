@@ -80,10 +80,6 @@ export default {
         this.clubFacebookId = this.selectCludData.facebook.split("/")
         this.clubInstagramId = this.selectCludData.instagram.split("/")
     },
-    updated() {
-        this.clubFacebookId = this.selectCludData.facebook.split("/")
-        this.clubInstagramId = this.selectCludData.instagram.split("/")
-    },
 }
 </script>
 
