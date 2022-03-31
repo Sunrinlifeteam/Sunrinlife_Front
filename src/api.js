@@ -59,11 +59,18 @@ export async function editSchedulePersonal(id, data){
 
 export async function editProfile(githubLink, image, description, clubInfo){
     let response = getAPI.put("/auth/user", {
-        "githubLink": githubLink || "",
-        "image": image || "",
-        "description": description || "",
-        "clubInfo": clubInfo || 0
+        "githubLink": githubLink,
+        "image": image,
+        "description": description,
+        "clubInfo": clubInfo
     }).then((res) => res.data).catch((e) => console.log(e))
+    return response
+}
+
+export async function editProfileData(data){
+    let response = getAPI.put("/auth/user", data)
+        .then((res) => res.data)
+        .catch((e) => console.log(e))
     return response
 }
 

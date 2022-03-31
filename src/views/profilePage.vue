@@ -93,7 +93,7 @@ import Sidebar from "./../components/Sidebar.vue"
 import Header from "./../components/Header.vue"
 
 import { mapState } from "vuex"
-import {editProfile, getUserData, logout} from "../api.js"
+import {editProfileData, getUserData, logout} from "../api.js"
 import store from "../store.js"
 export default {
     data() {
@@ -118,7 +118,16 @@ export default {
             //console.log(this.editProfileImage)
         },
         async updateProfile(){
-            await editProfile(this.editGithubLink, this.editProfileImage, this.editDescription, this.editClubInfo)
+            const update = {}
+            if (this.editGithubLink != this.userData.githubLink)
+                update["githubLink"] = this.editGithubLink;
+            if (this.editProfileImage != this.userData.image)
+                update["image"] = this.editProfileImage;
+            if (this.editDescription != this.userData.description)
+                update["description"] = this.editDescription;
+            if (this.editClubInfo != this.userData.clubInfo.id)
+                update["clubInfo"] = this.editClubInfo;
+            await editProfileData(update)
             getUserData().then((data) => {
                 store.commit("setUserData", data)
             }).finally(() => this.isEditable = false)
