@@ -120,17 +120,20 @@ export default {
         async updateProfile(){
             const update = {}
             if (this.editGithubLink != this.userData.githubLink)
-                update["githubLink"] = this.editGithubLink;
+                this.userData.githubLink = update["githubLink"] = this.editGithubLink;
             if (this.editProfileImage != this.userData.image)
-                update["image"] = this.editProfileImage;
+                this.userData.image = update["image"] = this.editProfileImage;
             if (this.editDescription != this.userData.description)
-                update["description"] = this.editDescription;
-            if (this.editClubInfo != this.userData.clubInfo.id)
-                update["clubInfo"] = this.editClubInfo;
+                this.userData.description = update["description"] = this.editDescription;
+            if (this.editClubInfo != this.userData.clubInfo.id){
+                this.userData.clubInfo.id = update["clubInfo"] = this.editClubInfo;
+                this.userData.clubInfo.name = "로딩중...";
+            }
+            this.isEditable = false
             await editProfileData(update)
             getUserData().then((data) => {
                 store.commit("setUserData", data)
-            }).finally(() => this.isEditable = false)
+            })
         },
         logoutClick(){
             logout().then(res => {
