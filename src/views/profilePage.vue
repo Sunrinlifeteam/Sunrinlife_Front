@@ -30,6 +30,7 @@
             </div>
 
             <!-- 유저 정보(동아리, 이메일, 소개 등) -->
+            <template v-if="userData">
             <div class="user-info-items">
                 <div class="user-basic-contact-items">
 
@@ -82,7 +83,7 @@
                     <textarea v class="user-introduce-item user-profile-edit-inout" v-model="editDescription"></textarea>
                 </div>
             </div>
-
+            </template>
             <span class="logout-btn" @click="logoutClick">로그아웃</span>
         </div>
     </div>
