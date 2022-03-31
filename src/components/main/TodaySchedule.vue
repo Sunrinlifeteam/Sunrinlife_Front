@@ -3,7 +3,7 @@
     <div class="main-page-item-title"><h3>시간표</h3></div>
     <div class="main-page-item-content two_panel">
             
-        <p v-for="i, n in todaySchedule" :key="n" class="text-truncated">{{ i }}</p>
+        <p v-for="i, n in todaySchedule" :key="n" class="text-truncated">{{ n + 1 }}. {{ i }}</p>
 
     </div>
 </div>
