@@ -42,7 +42,7 @@
                     </template>
                 </div>
                 <img src="./../assets/next_arrow.svg" alt="" class="arrow next-btn"
-                    @click="()=>{ if(pageId < getNoticePageCount - 1) pageId++ }">
+                    @click="()=>{ if(pageId < getNoticePageCount) pageId++ }">
             </div>
         </div>
     </div>
