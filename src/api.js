@@ -87,6 +87,15 @@ export async function getClubGeneral() {
 
     return clubData
 }
+    
+// 자율동아리 가져오기
+export async function getClubAutonomous() {
+    let clubData = await getAPI.get(`/club/type/2`)
+        .then(res => res.data)
+        .catch(console.log)
+
+    return clubData
+}
 
 //급식 API
 export async function getMeal(){
