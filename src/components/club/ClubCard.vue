@@ -18,14 +18,14 @@
             <a class="sns-link facebook-link" :href="selectCludData.facebook" target="_blank"
                 v-if="selectCludData.facebook != ''">
                 <img src="/img/sns/facebook.svg" alt="Facebook 링크 아이콘" class="icon">
-                <div class="url">www.facebook.com/{{ clubFacebookId.slice(-1)[0] }}</div>
+                <div class="url">{{ clubFacebookId }}</div>
             </a>
 
             <!-- 인스타 링크 -->
             <a class="sns-link insta-link" :href="selectCludData.instagram" target="_blank"
                 v-if="selectCludData.instagram != ''">
                 <img src="/img/sns/instagram.svg" alt="Instagram 링크 아이콘" class="icon">
-                <div class="url">{{ clubInstagramId.slice(-1)[0] }}</div>
+                <div class="url">{{ clubInstagramId }}</div>
             </a>
 
             <!-- 웹사이트 링크 -->
@@ -76,9 +76,9 @@ export default {
     props : {
         selectCludData : Object
     },
-    mounted() {
-        this.clubFacebookId = this.selectCludData.facebook.split("/")
-        this.clubInstagramId = this.selectCludData.instagram.split("/")
+    updated() {
+        this.clubFacebookId = this.selectCludData.facebook.split("/").pop()
+        this.clubInstagramId = this.selectCludData.instagram.split("/").pop()
     },
 }
 </script>
