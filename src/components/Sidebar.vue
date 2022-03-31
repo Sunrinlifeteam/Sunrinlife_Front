@@ -28,6 +28,8 @@
                 </router-link>
             </template>
         </div>
+
+        <span class="k" @click="$router.push('i_love_sunrin')">이스터에그</span>
     </nav>
 </transition>
 
@@ -61,7 +63,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 
 nav {
@@ -210,6 +212,20 @@ nav .menu_list a:hover, nav a:active{
     top : 0px;
     left : 0px;
     z-index: 1;
+}
+
+.k {
+    display: block;
+
+    text-align: center;
+
+    color : rgb(187 187 187 / 10%);
+    cursor: pointer;
+
+    position: absolute;
+    bottom : 12px;
+    left : 0px;
+    right : 0px;
 }
 
 @media (max-width : 970px) {
