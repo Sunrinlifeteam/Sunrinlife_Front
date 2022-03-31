@@ -32,6 +32,8 @@
             </div>
         </div>
 
+        <p class="rull">아래 단추를 눌러 계속하면 선린라이프에서 제공하는 <a href="https://legal.sunrint.life/privacy" target="_blank">개인정보처리방침</a>에 동의하는 것으로 간주됩니다.</p>
+
         <button class="register">선린 라이프 시작하기</button>
     </div>
 
@@ -185,6 +187,14 @@ export default {
 
         padding: 7px;
         margin: 28px auto;
+    }
+
+    .rull {
+        word-break: keep-all;
+    }
+
+    .rull a {
+        font-weight: bold;
     }
 
 
