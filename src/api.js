@@ -20,6 +20,13 @@ export async function getUserData(){
     return userData
 }
 
+export async function logout(){
+    store.commit("changeAccessToken", null)
+    store.commit("setUserData", null)
+
+    return await getAPI.delete("/auth").then(res => res.data).catch(console.log)
+}
+
 export async function getScheduleOfficial(){
     let schedule = await getAPI.get("/schedule/week").then((res) => res.data).catch((e) => console.log(e))
     return schedule
