@@ -125,7 +125,9 @@ export default {
                 this.userData.image = update["image"] = this.editProfileImage;
             if (this.editDescription != this.userData.description)
                 this.userData.description = update["description"] = this.editDescription;
-            if (this.editClubInfo != this.userData.clubInfo.id){
+            
+            if (!this.userData.clubInfo || this.editClubInfo != this.userData.clubInfo.id){
+                if (!this.userData.clubInfo) this.userData.clubInfo = {};
                 this.userData.clubInfo.id = update["clubInfo"] = this.editClubInfo;
                 this.userData.clubInfo.name = "로딩중...";
             }

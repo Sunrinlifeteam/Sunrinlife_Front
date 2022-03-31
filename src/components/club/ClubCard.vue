@@ -76,6 +76,10 @@ export default {
     props : {
         selectCludData : Object
     },
+    mounted() {
+        this.clubFacebookId = this.selectCludData.facebook.split("/").pop()
+        this.clubInstagramId = this.selectCludData.instagram.split("/").pop()
+    },
     updated() {
         this.clubFacebookId = this.selectCludData.facebook.split("/").pop()
         this.clubInstagramId = this.selectCludData.instagram.split("/").pop()
