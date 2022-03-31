@@ -20,7 +20,12 @@ export default {
         })
     },
     methods:{
-        
+        checkLogin(){
+            getAccessToken().then((status)=>{
+                if(status === 401) this.$router.replace("/login")
+                else setInterval(getAccessToken, 3600000)
+            })
+        }
     },
     computed:{
         getAuthToken(){
