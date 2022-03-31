@@ -17,7 +17,7 @@
                     @click="$router.push(`/notice/${i.id}`)">
                     <NoticeIcon :type="i.type"/>
 
-                    <p class="notice-title">{{ i.title }}</p>
+                    <p class="notice-title text-truncated">{{ i.title }}</p>
                 </li>
             </ul>
 
@@ -181,13 +181,6 @@ export default {
     font-size: 16px;
     font-weight: 500;
     margin-top:1.5px;
-
-    text-overflow: ellipsis;
-    overflow:hidden;
-    
-    -webkit-line-clamp: 1; 
-    -webkit-box-orient: vertical;
-    display: -webkit-box;
 
     flex: 1;
 }

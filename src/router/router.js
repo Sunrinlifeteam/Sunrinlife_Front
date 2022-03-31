@@ -8,6 +8,8 @@ import ClubPage from "./../views/ClubPage.vue"
 import NoticePage from "./../views/NoticePage.vue"
 import NoticeDetailPage from "./../views/NoticeDetailPage.vue"
 
+import EasterEggPage from "./../views/EasterEggPage.vue"
+
 const routes = [
     {
         path : "/login",
@@ -50,6 +52,12 @@ const routes = [
         component : ClubPage,
         props: true
     },
+
+    {
+        path : "/i_love_sunrin",
+        name : "easterEgg",
+        component : EasterEggPage,
+    }
 ]
 
 const router = createRouter({

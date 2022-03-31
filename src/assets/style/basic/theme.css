@@ -111,6 +111,18 @@ button:active{
     border-radius: 8px;
 }
 
+/* 문자 초과시 ...으로 줄임 */
+.text-truncated {
+    text-overflow: ellipsis;
+    overflow:hidden;
+    
+    -webkit-line-clamp: 1; 
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+}
+
+
+/* 학과별 컬러 설정 */
 .security{
     background-color: #3d3d3d;
     color:white;
