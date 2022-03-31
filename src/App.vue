@@ -15,12 +15,9 @@ export default {
         
     },
     beforeCreate(){
-        if(this.$cookies.get("Refresh") !== null){
-            getAccessToken()
+        getAccessToken().then(() => {
             setInterval(getAccessToken, 3600000)
-        }//else if(!window.location.href.includes("/login/token")){
-        //     this.$router.replace("/login")
-        // }
+        })
     },
     methods:{
         
