@@ -46,7 +46,7 @@ export default {
 .notice .main-page-item-content{
     display: flex;
     flex-direction: column;
-    gap : 12px;
+    
 }
 
 .title_list{
@@ -54,6 +54,7 @@ export default {
 
     display: flex;
     gap : 12px;
+    margin-bottom:14px;
 }
 
 .notice .icon-wrap {
