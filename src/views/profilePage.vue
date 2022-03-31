@@ -132,10 +132,13 @@ export default {
                 this.userData.clubInfo.name = "로딩중...";
             }
             this.isEditable = false
-            await editProfileData(update)
-            getUserData().then((data) => {
-                store.commit("setUserData", data)
-            })
+
+            if (Object.keys(update).length > 0){
+                await editProfileData(update)
+                getUserData().then((data) => {
+                    store.commit("setUserData", data)
+                })
+            }
         },
         logoutClick(){
             logout().then(res => {
