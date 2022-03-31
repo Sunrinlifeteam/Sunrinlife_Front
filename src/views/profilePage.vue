@@ -1,6 +1,7 @@
 <template>
-
+    <Header/>
     <Sidebar/>
+
     <div class="panel">
         <div class="user-profile">
 
@@ -19,7 +20,11 @@
                 <div class="user-img-item">
                     <img v-if="userData.image" class="user-img" :src="userData.image" />
                     <img v-else class="user-img" src="../assets/user_profile_assets/basic_profile_img.svg" />
-                    <input v-if="isEditable" type="file" ref="image" @change="uploadProfileImage">
+
+                    <input v-if="isEditable" type="file" ref="image" @change="uploadProfileImage" id="profile-img-choice">
+                    <label v-if="isEditable" for="profile-img-choice">
+                        <img src="./../assets/user_profile_assets/correctionIcon_white.svg" alt="">
+                    </label>
                 </div>
             </div>
 
@@ -53,11 +58,11 @@
                         </div>
 
                         <!-- 깃허브 계정 -->
-                        <div v-if="!isEditable" class="user-social-contact-item">
+                        <div v-if="!isEditable && userData.githubLink != null" class="user-social-contact-item">
                             <img class="user-contact-icon" src="./../assets/user_profile_assets/githubIcon.svg"/>
                             <span class="user-contact-text">{{ userData.githubLink?userData.githubLink:"" }}</span>
                         </div>
-                        <div v-else class="user-social-contact-item edit">
+                        <div v-else-if="isEditable" class="user-social-contact-item edit">
                             <img class="user-contact-icon" src="./../assets/user_profile_assets/githubIcon.svg"/>
                             <input v-model="editGithubLink" v class="user-contact-text user-profile-edit-inout">
                         </div>
@@ -77,14 +82,17 @@
                 </div>
             </div>
 
+            <span class="logout-btn" @click="logoutClick">로그아웃</span>
         </div>
     </div>
 </template>
 
 <script>
-import { mapState } from "vuex"
 import Sidebar from "./../components/Sidebar.vue"
-import {editProfile, getUserData} from "../api.js"
+import Header from "./../components/Header.vue"
+
+import { mapState } from "vuex"
+import {editProfile, getUserData, logout} from "../api.js"
 import store from "../store.js"
 export default {
     data() {
@@ -96,7 +104,6 @@ export default {
             editDescription : "",
             editProfileImage : ""
             // 수정을 입력받은 데이터
-            
         } 
     },
     methods: {
@@ -117,10 +124,16 @@ export default {
             getUserData().then((data) => {
                 store.commit("setUserData", data)
             })
+        },
+        logoutClick(){
+            logout().then(res => {
+                if(res == "success") this.$router.push("/login")
+            })
         }
     },
     components:{
-        Sidebar
+        Sidebar,
+        Header,
     },
     computed:{
         ...mapState(["userData", "department_map"])
@@ -137,15 +150,20 @@ export default {
     body {
         /*padding: 205px 231px;*/
     }
-    .user-profile {
-        width: 70vw;
+    .user-profile{
+        width: 90%;
         height: 350px;
+
+        max-width : 1040px;
+
         background-color: #fff;
-        /*margin: 205px 231px;*/
+        
         margin: 0 auto;
         margin-top:205px;
         border-radius: 8px;
         box-shadow: 1px 0 6px 0 rgba(0, 0, 0, 0.16);
+
+        position: relative;
     }
 
     .user-img-items {
@@ -160,11 +178,35 @@ export default {
         height: 152px;
         border-radius: 50%;
         background-color: #f5f6f7;
+
+        position: relative;
     }
     .user-img {
         width: 100px;
         height: 100px;
         margin: 26px;
+    }
+
+    
+    #profile-img-choice {
+        display: none;
+    }
+
+    label[for="profile-img-choice"]{
+        width: 36px;
+        height: 36px;
+        padding: 6px;
+
+        border-radius: 100%;
+        box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+        background-color: #4992ff;
+
+        position: absolute;
+        bottom : 0px;
+        right : 0px;
+
+        cursor: pointer;
+        z-index: 3;
     }
 
     .user-info-items {
@@ -323,6 +365,18 @@ export default {
         resize: none;
     }
 
+    .logout-btn {
+        font-size: 12px;
+        font-weight: 500;
+        color: #ff4949;
+
+        position: absolute;
+        bottom : 24px;
+        right : 24px;
+
+        cursor: pointer;
+    }
+
     @media (max-width:1200px) {
         .user-social-contact-item {
             display: block;
@@ -331,12 +385,6 @@ export default {
         .user-contact-item{
             display:block;
             margin-bottom:10px;
-        }
-    }
-    @media (max-width:1049px) {
-        .user-profile{
-            width:735px;
-            margin-left:30px;
         }
     }
 </style>
