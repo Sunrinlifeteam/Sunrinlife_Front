@@ -46,8 +46,7 @@ export default {
 .notice .main-page-item-content{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    /* gap : 14px; */
+    gap : 12px;
 }
 
 .title_list{
