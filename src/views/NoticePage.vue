@@ -5,12 +5,19 @@
 
 <div class="panel page notice-page">
     <div class="page-content">
-        <div class="search-wrap">
+        <!-- <div class="search-wrap">
             <input type="text" placeholder="검색">
             <img src="/img/search.svg" alt="검색 아이콘" class="search-button">
-        </div>
+        </div> -->
 
         <div class="notice-content" :class="{'neu-morphism-card' : !($store.state.isMobileWindow)}">
+            <div class="header">
+                <h3>공지</h3>
+                <div class="search-wrap">
+                    <input type="text" placeholder="검색">
+                    <img src="/img/search.svg" alt="검색 아이콘" class="search-button">
+                </div>
+            </div>
 
             <ul class="notice-list">
                 <li v-for="i, n in noticeData" :key="n"
@@ -115,16 +122,21 @@ export default {
     height:620px;
 }
 
-.search-wrap {
-    width : 100%;
-    height: 50px;
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-    margin-bottom : 16px;
+.search-wrap {
+    height: 40px;
+    max-width : 323px;
+    flex : 1;
 
     padding: 13px 36px 13px 24px;
     border-radius: 8px;
     box-shadow: 1px 0 6px 0 rgba(0, 0, 0, 0.16);
-    background-color: #fff;
+    background-color: #f5f6f7;
 
     display: flex;
     gap : 8px;
@@ -158,6 +170,8 @@ export default {
 
 
 .notice-list {
+    flex : 1;
+    
     display: flex;
     flex-direction: column;
     gap : 24px;
@@ -195,13 +209,10 @@ export default {
 
 .pagination-wrap {
     height : 32px;
-    position: absolute;
+
     display: flex;
     justify-content: center;
     gap : 12px;
-    left:50%;
-    transform:translate(-50%,0);
-    bottom:10px;
 }
 
 .pagination-wrap img {
