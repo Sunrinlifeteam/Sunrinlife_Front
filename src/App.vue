@@ -15,15 +15,20 @@ export default {
         
     },
     beforeCreate(){
-        if(this.$cookies.get("Refresh") !== null){
-            getAccessToken()
+        getAccessToken().then(() => {
             setInterval(getAccessToken, 3600000)
-        }//else if(!window.location.href.includes("/login/token")){
-        //     this.$router.replace("/login")
-        // }
+        }).catch((e) => {
+            if (window.location.pathname.trim() != "/login" && e.response.status == 401)
+                this.$router.replace("/login")
+        })
     },
     methods:{
-        
+        checkLogin(){
+            getAccessToken().then((status)=>{
+                if(status === 401) this.$router.replace("/login")
+                else setInterval(getAccessToken, 3600000)
+            })
+        }
     },
     computed:{
         getAuthToken(){

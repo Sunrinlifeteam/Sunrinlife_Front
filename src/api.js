@@ -8,10 +8,15 @@ const getAPI = axios.create({
 })
 
 export async function getAccessToken() {
-    let accessToken = await getAPI.get("/auth/refresh").then((res) => res.data.accessToken).catch((e) => console.log(e))
-    store.commit("changeAccessToken", accessToken)
-    getAPI.defaults.headers.common['Authorization'] = accessToken
-    return accessToken
+    return new Promise((resolve, reject) => {
+        getAPI.get("/auth/refresh")
+            .then((res) => {
+                store.commit("changeAccessToken", res.data.accessToken)
+                getAPI.defaults.headers.common['Authorization'] = res.data.accessToken
+                resolve(res.data.accessToken)
+            })
+            .catch((e) => reject(e))
+    })
 }
 
 export async function getUserData(){
