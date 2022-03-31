@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import TimerData from "./../../assets/TimerData.js"
+import TimerDatas from "./../../assets/TimerData.js"
 import Time from "./../../Model/Time.js"
 
 // let currentTime
@@ -31,6 +31,7 @@ import Time from "./../../Model/Time.js"
 // let 남은시간_기준시간
 
 
+let TimerData = TimerDatas[0]
 
 export default {
     name : "Timer",
@@ -72,6 +73,10 @@ export default {
 
             if(this.남은시간.allSecond == 0) location.reload()
         }, 500)
+
+        setTimeout(()=>{
+            TimerData = TimerDatas[this.$store.getters.getUserData.grade <= 2 ? 0 : 1]
+        }, 2000)
     }
 }
 </script>
