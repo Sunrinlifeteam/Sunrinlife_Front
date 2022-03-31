@@ -19,7 +19,11 @@
                 <div class="user-img-item">
                     <img v-if="userData.image !== null" class="user-img" :src="userData.image" />
                     <img v-else class="user-img" src="../assets/user_profile_assets/basic_profile_img.svg" />
-                    <input v-if="isEditable" type="file" ref="image" @change="uploadProfileImage">
+
+                    <input v-if="isEditable" type="file" ref="image" @change="uploadProfileImage" id="profile-img-choice">
+                    <label v-if="isEditable" for="profile-img-choice">
+                        <img src="./../assets/user_profile_assets/correctionIcon_white.svg" alt="">
+                    </label>
                 </div>
             </div>
 
@@ -162,11 +166,35 @@ export default {
         height: 152px;
         border-radius: 50%;
         background-color: #f5f6f7;
+
+        position: relative;
     }
     .user-img {
         width: 100px;
         height: 100px;
         margin: 26px;
+    }
+
+    
+    #profile-img-choice {
+        display: none;
+    }
+
+    label[for="profile-img-choice"]{
+        width: 36px;
+        height: 36px;
+        padding: 6px;
+
+        border-radius: 100%;
+        box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+        background-color: #4992ff;
+
+        position: absolute;
+        bottom : 0px;
+        right : 0px;
+
+        cursor: pointer;
+        z-index: 3;
     }
 
     .user-info-items {
