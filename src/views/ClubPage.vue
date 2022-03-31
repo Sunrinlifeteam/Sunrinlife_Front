@@ -12,12 +12,13 @@
                 <div class="major-selecter neu-morphism-card">
 
                     <transition name="current-major-ani">
-                        <div class="current-major" @click="isSelectMajor = true" v-if="!isSelectMajor" :class="{security:!selectMajorIdx, software:selectMajorIdx===1, ceo:selectMajorIdx===2, design:selectMajorIdx===3}">
+                        <div class="current-major" @click="isSelectMajor = true" v-if="!isSelectMajor" :class="{security:!selectMajorIdx || selectMajorIdx === 5, software:selectMajorIdx===1, ceo:selectMajorIdx===2, design:selectMajorIdx===3}">
                             <span v-if="selectMajorIdx == 0">정보보호과</span>
                             <span v-else-if="selectMajorIdx == 1">소프트웨어과</span>
                             <span v-else-if="selectMajorIdx == 2">IT경영과</span>
                             <span v-else-if="selectMajorIdx == 3">콘텐츠 디자인과</span>
                             <span v-else-if="selectMajorIdx == 4">일반 동아리</span>
+                            <span v-else-if="selectMajorIdx == 5">자율 동아리</span>
                         </div>
                     </transition>
 
@@ -42,6 +43,10 @@
                             <div class="choice-major"
                                 @click="selectMajorIdx = 4">
                                 일반
+                            </div>
+                            <div class="choice-major security"
+                                @click="selectMajorIdx = 5">
+                                자율
                             </div>
                         </div>
                     </transition>
@@ -84,7 +89,7 @@ import ClubCardMobile from "../components/club/ClubCardMobile.vue"
 // import { JB, SW, it, de } from "./../components/club/TempClubData"
 import { mapState } from 'vuex'
 
-import { getClubMajor, getClubGeneral } from "./../api.js"
+import { getClubMajor, getClubGeneral, getClubAutonomous } from "./../api.js"
 
 
 
@@ -94,7 +99,7 @@ export default {
         isMobileWindow : true, // 현재 화면이 모바일 화면인지(970px 이하)
         // clubData : [JB, SW, it, de],
 
-        clubData : [[], [], [], [], []],
+        clubData : [[], [], [], [], [], []],
 
         selectClubIdx : 0,
         selectMajorIdx : 0,
@@ -138,7 +143,7 @@ export default {
         getClubMajor(2).then(res => { this.clubData[2] = res })
         getClubMajor(3).then(res => { this.clubData[3] = res })
         getClubGeneral().then(res => { this.clubData[4] = res })
-        // getClubGeneral().then(console.log)
+        getClubAutonomous().then(res => {this.clubData[5] = res })
     },
 }
 </script>
@@ -152,7 +157,7 @@ export default {
 }
 
 .club-list-wrap {
-    width : 195px
+    width : 250px;
 }
 
 .club-list-wrap > * {
