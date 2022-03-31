@@ -4,7 +4,7 @@
     <div class="main-page-item-content">
         <div v-for="i, j, in noticeData" :key="j" class="title_list">
             <NoticeIcon :type="i.type"/>
-            <p class="title" @click="$router.push(`/notice/${j}`)">{{i.title}}</p>
+            <p class="title text-truncated" @click="$router.push(`/notice/${j}`)">{{i.title}}</p>
         </div>
     </div>
 </div>
@@ -64,13 +64,6 @@ export default {
 .title{
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
-    
-    text-overflow: ellipsis;
-    overflow:hidden;
-    
-    -webkit-line-clamp: 1; 
-    -webkit-box-orient: vertical;
-    display: -webkit-box;
 
     /* margin-bottom:18px; */
 

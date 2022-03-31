@@ -3,7 +3,7 @@
     <div class="main-page-item-title"><h3>시간표</h3></div>
     <div class="main-page-item-content two_panel">
             
-        <p v-for="i, n in todaySchedule" :key="n">{{ i }}</p>
+        <p v-for="i, n in todaySchedule" :key="n" class="text-truncated">{{ i }}</p>
 
     </div>
 </div>
@@ -46,6 +46,10 @@ export default {
 
 .today-schedule .main-page-item-content {
     overflow-y: auto;
+}
+
+.main-page-item-content p {
+    font-size: 14px;
 }
 
 .two_panel {
