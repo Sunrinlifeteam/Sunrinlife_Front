@@ -4,7 +4,7 @@
     <div class="main-page-item-content">
         <div v-for="i, j, in noticeData" :key="j" class="title_list">
             <NoticeIcon :type="i.type"/>
-            <p class="title text-truncated" @click="$router.push(`/notice/${j}`)">{{i.title}}</p>
+            <p class="title text-truncated" @click="$router.push(`/notice/${i.id}`)">{{i.title}}</p>
         </div>
     </div>
 </div>
