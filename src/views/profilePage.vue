@@ -19,7 +19,7 @@
                 <!-- 프로필 이미지 -->
                 <div class="user-img-items">
                     <div class="user-img-item">
-                        <img v-if="isEditable" class="user-img" :src="editProfileImage" />
+                        <img v-if="isEditable && editProfileImage" class="user-img" :src="editProfileImage" />
                         <img v-else-if="userData.image" class="user-img" :src="userData.image" />
                         <img v-else class="user-img" src="../assets/user_profile_assets/basic_profile_img.svg" />
 
@@ -117,7 +117,6 @@ export default {
                 this.editProfileImage = reader.result
             }
             reader.readAsDataURL(this.$refs.image.files[0]);
-            //console.log(this.editProfileImage)
         },
         async updateProfile(){
             const update = {}
@@ -128,10 +127,12 @@ export default {
             if (this.editDescription != this.userData.description)
                 this.userData.description = update["description"] = this.editDescription;
             
-            if (!this.userData.clubInfo || this.editClubInfo != this.userData.clubInfo.id){
-                if (!this.userData.clubInfo) this.userData.clubInfo = {};
-                this.userData.clubInfo.id = update["clubInfo"] = this.editClubInfo || 0;
-                this.userData.clubInfo.name = "로딩중...";
+            if (this.editClubInfo){
+                if (!this.userData.clubInfo || this.editClubInfo != this.userData.clubInfo.id){
+                    if (!this.userData.clubInfo) this.userData.clubInfo = {};
+                    this.userData.clubInfo.id = update["clubInfo"] = this.editClubInfo || 0;
+                    this.userData.clubInfo.name = "로딩중...";
+                }
             }
             this.isEditable = false
 
@@ -157,11 +158,17 @@ export default {
     },
     watch: {
         userData: function(val) {
-            this.editClubInfo = val.clubInfo.id
+            this.editClubInfo = val.clubInfo?.id
             this.editGithubLink = val.githubLink
             this.editDescription = val.description
             this.editProfileImage = val.image
         }
+    },
+    mounted() {
+        this.editClubInfo = this.userData?.clubInfo?.id
+        this.editGithubLink = this.userData?.githubLink
+        this.editDescription = this.userData?.description
+        this.editProfileImage = this.userData?.image
     }
 }
 </script>
