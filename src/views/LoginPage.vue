@@ -1,10 +1,6 @@
 <template>
 
 <div class="login">
-
-    <div class="shape left"></div>
-    <div class="shape right"></div>
-
     <div class="login-box">
         <div class="logo">
             <img class="logo_symbol" src="../assets/symbol.svg">
@@ -52,9 +48,14 @@ export default {
         width : 100%;
         height : 100vh;
 
+        background-image: url("/img/loginPageBg.png");
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+
         overflow: hidden;
 
-        /* animation: login-bg-animation 10s infinite reverse; */
+        position: relative;
     }
 
     .logo{
@@ -177,44 +178,4 @@ export default {
         }
     }
 
-    .shape {
-        width: 1000px;
-        height: 290px;
-
-        /* padding : 50px; */
-
-        border-radius: 200px;
-        box-shadow: 1px 0 6px 0 rgba(0, 0, 0, 0.16);
-        background-color: #4893ff;
-
-        display: flex;
-
-        position: relative;
-
-        transform: rotateZ(-45deg);
-    }
-
-    .shape.left {
-        top : 300px;
-        left : -500px;
-    }
-
-    .shape.right {
-        bottom : -72px;
-        right : -1025px;
-    }
-
-    .shape::before {
-        content: "";
-        width : 870px;
-        height : 190px;
-
-        border-radius: 200px;
-        background-color: #ecf0f3;
-
-        position: absolute;
-        top : 50%;
-        left : 50%;
-        transform: translate(-50%, -50%);
-    }
 </style>
