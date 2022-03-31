@@ -91,8 +91,6 @@ import { mapState } from 'vuex'
 
 import { getClubMajor, getClubGeneral, getClubAutonomous } from "./../api.js"
 
-
-
 export default {
     name : "Club Page",
     data(){return{
@@ -119,6 +117,13 @@ export default {
         selectMajorIdx(){
             this.selectClubIdx = 0
         }
+    },
+    created() {
+
+        if(this.$route.query.major == "security" || this.$route.query.major == undefined) this.selectMajorIdx = 0
+        else if(this.$route.query.major == "software") this.selectMajorIdx = 1
+        else if(this.$route.query.major == "ceo") this.selectMajorIdx = 2
+        else if(this.$route.query.major == "design") this.selectMajorIdx = 3
     },
     mounted() {
         if(window.innerWidth <= 970){
