@@ -17,7 +17,7 @@
             <!-- 프로필 이미지 -->
             <div class="user-img-items">
                 <div class="user-img-item">
-                    <img v-if="userData.image !== null" class="user-img" :src="userData.image" />
+                    <img v-if="userData.image" class="user-img" :src="userData.image" />
                     <img v-else class="user-img" src="../assets/user_profile_assets/basic_profile_img.svg" />
                     <input v-if="isEditable" type="file" ref="image" @change="uploadProfileImage">
                 </div>
@@ -97,8 +97,6 @@ export default {
             editProfileImage : ""
             // 수정을 입력받은 데이터
             
-
-            
         } 
     },
     methods: {
@@ -115,7 +113,7 @@ export default {
         updateProfile(){
             this.isEditable = false
             console.log(this.editProfileImage)
-            editProfile(this.editGithubLink, this.editProfileImage, this.editDescription, 5).then((res) => console.log(res))
+            editProfile(this.editGithubLink, this.editProfileImage, this.editDescription, ).then((res) => console.log(res))
             getUserData().then((data) => {
                 store.commit("setUserData", data)
             })

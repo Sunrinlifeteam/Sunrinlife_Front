@@ -15,7 +15,7 @@
             </div>
             <template v-if="userData">
                 <router-link class="list-user-profile" :to="'profile'">
-                    <template v-if="userData.image !== null">
+                    <template v-if="userData.image">
                         <img :src="userData.image">
                     </template>
                     <template v-else>
