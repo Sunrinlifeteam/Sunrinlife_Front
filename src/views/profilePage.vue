@@ -128,7 +128,7 @@ export default {
             
             if (!this.userData.clubInfo || this.editClubInfo != this.userData.clubInfo.id){
                 if (!this.userData.clubInfo) this.userData.clubInfo = {};
-                this.userData.clubInfo.id = update["clubInfo"] = this.editClubInfo;
+                this.userData.clubInfo.id = update["clubInfo"] = this.editClubInfo || 0;
                 this.userData.clubInfo.name = "로딩중...";
             }
             this.isEditable = false
