@@ -29,7 +29,7 @@
             </template>
         </div>
 
-        <span class="k" @click="$router.push('i_love_sunrin')">이스터에그</span>
+        <!-- <span class="k" @click="$router.push('i_love_sunrin')">이스터에그</span> -->
     </nav>
 </transition>
 
