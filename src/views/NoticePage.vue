@@ -131,6 +131,8 @@ export default {
         updateCount: async function(){
             if (this.searchQuery)
                 this.loadedPageCount = await getNoticePageCountWithSearch(this.searchQuery);
+            else
+                this.loadedPageCount = this.$store.getters.getNoticePageCount;
         }
     },
     mounted() {
