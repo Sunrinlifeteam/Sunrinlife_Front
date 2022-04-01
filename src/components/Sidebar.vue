@@ -3,7 +3,7 @@
     <nav v-if="isSidebarShow">
     
         <div class="nav-list">
-            <div class="logo">
+            <div class="logo" @click="$router.push('/')">
                 <img src="./../assets/symbol.svg" alt="Logo" class="logo_symbol">
                 <img src="./../assets/logo.svg" alt="Logo" class="logo_text">
             </div>
@@ -129,6 +129,7 @@ nav .logo{
     margin-top:64px;
     height:48px;
     display:inline-block;
+    cursor: pointer;
 }
 
 nav .logo .logo_symbol{
