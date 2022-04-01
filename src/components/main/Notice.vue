@@ -2,7 +2,7 @@
 <div class="notice main-page-item">
     <div class="main-page-item-title"><h3>공지</h3></div>
     <div class="main-page-item-content">
-        <div v-for="i, j, in noticeData" :key="j" class="title_list">
+        <div v-for="i, j, in noticeMain" :key="j" class="title_list">
             <NoticeIcon :type="i.type"/>
             <p class="title text-truncated" @click="$router.push(`/notice/${i.id}`)">{{i.title}}</p>
         </div>
@@ -15,12 +15,13 @@ import NoticeIcon from "./../NoticeIcon.vue"
 
 import { mapState } from "vuex"
 import { getNoticeMain } from "./../../api.js"
+import store from "../../store.js"
 
 export default {
     name : "Notice",
-    data(){ return {
-        noticeData : []
-    }},
+    data(){
+
+    },
     methods :{
 
     },
@@ -28,8 +29,8 @@ export default {
         NoticeIcon
     },
     mounted(){
-        getNoticeMain().then(res => {
-            this.noticeData = res
+        getNoticeMain().then((data) => {
+            store.commit("getNoticeMain", data)
         })
     },
     computed:{
