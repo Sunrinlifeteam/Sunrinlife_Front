@@ -20,8 +20,7 @@ export async function getAccessToken() {
 }
 
 export async function getUserData(){
-    let userData = await getAPI.get("/auth/user/club").then((res) => res.data).catch((e) => console.log(e))
-    console.log(userData)
+    let userData = await getAPI.get("/user/full").then((res) => res.data).catch((e) => console.log(e))
     return userData
 }
 
@@ -58,7 +57,7 @@ export async function editSchedulePersonal(id, data){
 }
 
 export async function editProfile(githubLink, image, description, clubInfo){
-    let response = getAPI.put("/auth/user", {
+    let response = getAPI.put("/user", {
         "githubLink": githubLink,
         "image": image,
         "description": description,
@@ -68,7 +67,7 @@ export async function editProfile(githubLink, image, description, clubInfo){
 }
 
 export async function editProfileData(data){
-    let response = getAPI.put("/auth/user", data)
+    let response = getAPI.put("/user", data)
         .then((res) => res.data)
         .catch((e) => console.log(e))
     return response
