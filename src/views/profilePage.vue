@@ -44,16 +44,17 @@
                         <!-- 동아리, 이메일, 깃허브 -->
                         <div class="user-contact-items">
 
-                            <!-- 동아리, 이메일 -->
+                            <!-- 동아리 -->
                             <div v-if="!isEditable" class="user-contact-item user-contact-club">
                                 <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
                                 <span class="user-contact-text">{{ userData.clubInfo?userData.clubInfo.name:"" }}</span>
                             </div>
                             <div v-else class="user-contact-item user-contact-club edit">
                                 <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
-                                <input v-model="editClubInfo" v class="user-contact-text user-profile-edit-inout">
+                                <input v-model="editClubInfo" class="user-contact-text user-profile-edit-inout">
                             </div>
 
+                            <!-- 이메일 -->
                             <div class="user-contact-item">
                                 <img class="user-contact-icon" src="./../assets/user_profile_assets/emailIcon.svg"/>
                                 <span class="user-contact-text">{{ userData.email }}</span>
@@ -62,7 +63,7 @@
                             <!-- 깃허브 계정 -->
                             <div v-if="!isEditable && userData.githubLink != null" class="user-social-contact-item">
                                 <img class="user-contact-icon" src="./../assets/user_profile_assets/githubIcon.svg"/>
-                                <span class="user-contact-text">{{ userData.githubLink?userData.githubLink:"" }}</span>
+                                <span class="user-contact-text">{{ userData.githubLink?githubID:"" }}</span>
                             </div>
                             <div v-else-if="isEditable" class="user-social-contact-item edit">
                                 <img class="user-contact-icon" src="./../assets/user_profile_assets/githubIcon.svg"/>
@@ -155,6 +156,9 @@ export default {
     },
     computed:{
         ...mapState(["userData", "department_map"]),
+        githubID: function() {
+            return this.userData?.githubLink.split('/').filter(x=>x).pop();
+        }
     },
     watch: {
         userData: function(val) {

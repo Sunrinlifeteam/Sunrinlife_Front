@@ -24,6 +24,12 @@ export async function getUserData(){
     return userData
 }
 
+export async function getUserDataAndCommit(){
+    let userData = await getAPI.get("/user/full").then((res) => res.data).catch((e) => console.log(e))
+    store.commit("setUserData", userData)
+    return userData
+}
+
 export async function logout(){
     store.commit("changeAccessToken", null)
     store.commit("setUserData", null)

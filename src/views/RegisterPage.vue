@@ -20,54 +20,68 @@
             </div>
             <div class="input_panel">
                 <p>학번</p>
-                <input class="user_number" placeholder="학번" :value="userData?.class" readonly>
+                <input class="user_number" placeholder="학번" :value="studentID" readonly>
             </div>
             <div class="input_panel">
                 <p>Github</p>
-                <input class="user_github" placeholder="Github">
+                <input class="user_github" placeholder="Github" v-model="editGithubLink">
             </div>
             <div class="input_panel introduce">
                 <p>소개</p>
-                <textarea class="user_introduce" placeholder="소개"></textarea>
+                <textarea class="user_introduce" placeholder="소개" v-model="editDescription"></textarea>
             </div>
         </div>
 
         <p class="rull">아래 단추를 눌러 계속하면 선린라이프에서 제공하는 <a href="https://legal.sunrint.life/privacy" target="_blank">개인정보처리방침</a>에 동의하는 것으로 간주됩니다.</p>
 
-        <button class="register">선린 라이프 시작하기</button>
+        <button class="register" @click="updateProfile">선린 라이프 시작하기</button>
     </div>
 
 </div>
 </template>
 <script>
 import { mapState } from 'vuex'
-export const department_map = {
-    "security" : "정보보호과",
-    "software" : "소프트웨어과",
-    "buisness" : "ceo",
-    "design" : "콘텐츠디자인과"
-}
+import { department_map } from '../store.js'
+import { editProfileData, getUserDataAndCommit } from '../api.js'
+
 export default {
     name:"register",
-    data(){return{
-        department_map
-    }},
+    data(){
+        return {
+            editGithubLink : "",
+            editDescription : "",
+        } 
+    },
     setup() {
         
     },
-    mounted(){
-        if(this.$route.query.refresh !== undefined){
-            this.$cookies.set("Refresh", this.$route.query.refresh)
-            window.location.href = "/register"
-            //this.$router.go()
-        }
+    updated(){
+
     },
     computed:{
-        ...mapState(["userData"])
+        ...mapState(["userData"]),
+        department_map: function() {
+            return department_map;
+        },
+        studentID: function() {
+            if (!this.userData) return null;
+            return this.userData?.grade
+                + this.fillZero(2, this.userData?.class)
+                + this.fillZero(2, this.userData?.number)
+        }
     },
     methods:{
         fillZero(width, str){
-            return str.length >= width ? str:new Array(width-str.length+1).join('0')+str;//남는 길이만큼 0으로 채움
+            if (!str) return null;
+            if (typeof str != "string") str = str.toString();
+            return '0'.repeat(Math.max(0, width-str?.length)) + str;//남는 길이만큼 0으로 채움
+        },
+        async updateProfile(){
+            editProfileData({
+                "githubLink": this.editGithubLink,
+                "description": this.editDescription
+            }).then(() => getUserDataAndCommit())
+            .then(() => this.$router.push("/"));
         }
     }
 }

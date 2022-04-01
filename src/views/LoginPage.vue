@@ -34,10 +34,7 @@ export default {
         }
     },
     mounted(){
-        if (window.location.href.includes("/login/token")){
-            this.$cookies.set("Refresh", this.$route.query.refresh)
-            window.location.href = "/"
-        }
+        
     },
     watch : {
     }
