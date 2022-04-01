@@ -14,8 +14,8 @@
             <div class="header">
                 <h3>공지</h3>
                 <div class="search-wrap">
-                    <input type="text" placeholder="검색">
-                    <img src="/img/search.svg" alt="검색 아이콘" class="search-button">
+                    <input v-model="searchQueryText" type="text" placeholder="검색" @keyup.enter="search()">
+                    <img src="/img/search.svg" alt="검색 아이콘" class="search-button" @click="search()">
                 </div>
             </div>
 
@@ -30,19 +30,19 @@
 
             <div class="pagination-wrap">
                 <img src="./../assets/prev_arrow.svg" alt="" class="arrow prev-btn"
-                    @click="()=>{ if(pageId > 1) pageId--}">
+                    @click="()=>{ if(pageId > 1) changePage(pageId-1) }">
                 <div class="page-button-wrap">
-                    <template v-for="i in getNoticePageCount < 5 ? getNoticePageCount : 5" :key="i">
+                    <template v-for="i in Math.min(noticePageCount, 5)" :key="i">
                         <div
                             class="page-btn"
-                            :class="{'current-page' : pagination===1?pageId === i+(pageId-3):pagination===2?pageId === i+(pageId-4):pagination===3?pageId === i+(pageId-5):pageId === i}"
-                            @click="pagination===1?pageId = i+(pageId-3):pagination===2?pageId = i+(pageId-4):pagination===3?pageId = i+(pageId-5):pageId = i">
-                            {{ pagination===1?i+(pageId-3):pagination===2?i+(pageId-4):pagination===3?i+(pageId-5):i }}
+                            :class="{'current-page' : (pageStart + i) === pageId}"
+                            @click="changePage(pageStart + i)">
+                            {{ pageStart + i }}
                         </div>
                     </template>
                 </div>
                 <img src="./../assets/next_arrow.svg" alt="" class="arrow next-btn"
-                    @click="()=>{ if(pageId < getNoticePageCount) pageId++ }">
+                    @click="()=>{ if(pageId < noticePageCount) changePage(pageId+1) }">
             </div>
         </div>
     </div>
@@ -57,15 +57,17 @@ import NoticeIcon from "./../components/NoticeIcon.vue"
 
 import { mapState } from "vuex"
 
-import { getNotice } from "./../api.js"
+import { getNotice, getNoticeSearch, getNoticePageCount, getNoticePageCountWithSearch } from "./../api.js"
+import store from "../store.js"
 
 
 
 export default {
     naem : "Notice",
     data(){return{
-        pageId : 1,
-        pagination: 0,
+        pageStart: 0,
+
+        searchQueryText: "",
 
         noticeData : [],
     }},
@@ -76,30 +78,56 @@ export default {
         NoticeIcon,
     },
     computed:{
-        ...mapState(["notice"]),
-        getNoticePageCount:function(){
-            return this.$store.getters.getNoticePageCount
+        ...mapState(["noticePageCount","notice"]),
+        pageId: function(){
+            return parseInt(this.$route.query.page) || 1;
         },
+        searchQuery: function(){
+            return this.$route.query.search;
+        }
     },
     watch:{
-        pageId:function(){
-            const getNoticePageCount = this.$store.getters.getNoticePageCount
-            if(getNoticePageCount < 6)
-                this.pagination = 0
-            else if(this.pageId > 2 && this.pageId < getNoticePageCount-1)
-                this.pagination = 1
-            else if(this.pageId === getNoticePageCount-1)
-                this.pagination = 2
-            else if(this.pageId === getNoticePageCount)
-                this.pagination = 3
+        noticePageCount: function() {
+            this.pageStart = Math.max(Math.min(this.pageId - 3, this.noticePageCount - 5), 0);
+        },
+        pageId: function(){
+            this.pageStart = Math.max(Math.min(this.pageId - 3, this.noticePageCount - 5), 0);
+            this.loadNotice();
+        }
+    },
+    methods: {
+        loadNotice: function() {
+            this.getNoticeTask().then(res => this.noticeData = res);
+        },
+        getNoticeTask: function(){
+            if (this.searchQuery)
+                return getNoticeSearch(this.pageId, this.searchQuery);
+            return getNotice(this.pageId);
+        },
+        changePage: async function(page) {
+            await this.$router.push({ path: 'notice', query: { ...this.$route.query, page }});
+        },
+        updatePagination: function(){
+            this.pageStart = Math.max(Math.min(this.pageId - 3, this.noticePageCount - 5), 0);
+            this.loadNotice();
+        },
+        search: async function(){
+            await this.$router.push({ path: 'notice', query: { search: this.searchQueryText }});
+            await this.updateCount();
+            this.loadNotice();
+        },
+        updateCount: async function(){
+            let pageCountData;
+            if (this.searchQuery)
+                pageCountData = await getNoticePageCountWithSearch(this.searchQuery);
             else
-                this.pagination = 0
-
-            getNotice(this.pageId).then(res => this.noticeData = res)
+                pageCountData = await getNoticePageCount();
+            await store.commit("setNoticePageCount", pageCountData);
         }
     },
     mounted() {
-        getNotice(this.pageId).then(res => this.noticeData = res)
+        this.updateCount();
+        this.loadNotice();
     },
 }
 </script>
