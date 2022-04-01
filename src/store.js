@@ -15,6 +15,7 @@ const store = createStore({
         schedulePersonal:null,
         noticeMain:null,
         notice:{},
+        noticePage:{},
         noticePageCount:null,
         meal:null,
         todaySchedule:null,
@@ -45,7 +46,10 @@ const store = createStore({
             state.noticeMain = notice
         },
         getNotice(state, notice){
-            state.notice[`${notice.id}`] = notice.data
+            state.notice[notice.id] = notice
+        },
+        getNoticePage(state, { page, ids }){
+            state.noticePage[page] = ids
         },
         setNoticePageCount(state, count){
             state.noticePageCount = count
@@ -93,6 +97,9 @@ const store = createStore({
         },
         getSchedulePersonal(state){
             return state.schedulePersonal
+        },
+        getNoticePage(state){
+            return state.noticePage
         },
         getNoticePageCount(state){
             return state.noticePageCount

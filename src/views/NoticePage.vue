@@ -20,7 +20,7 @@
             </div>
 
             <ul class="notice-list">
-                <li v-for="i, n in noticeData" :key="n"
+                <li v-for="i, n in loadedNoticeData" :key="n"
                     @click="$router.push(`/notice/${i.id}`)">
                     <NoticeIcon :type="i.type"/>
 
@@ -32,7 +32,7 @@
                 <img src="./../assets/prev_arrow.svg" alt="" class="arrow prev-btn"
                     @click="()=>{ if(pageId > 1) changePage(pageId-1) }">
                 <div class="page-button-wrap">
-                    <template v-for="i in Math.min(noticePageCount, 5)" :key="i">
+                    <template v-for="i in Math.min(loadedPageCount, 5)" :key="i">
                         <div
                             class="page-btn"
                             :class="{'current-page' : (pageStart + i) === pageId}"
@@ -42,7 +42,7 @@
                     </template>
                 </div>
                 <img src="./../assets/next_arrow.svg" alt="" class="arrow next-btn"
-                    @click="()=>{ if(pageId < noticePageCount) changePage(pageId+1) }">
+                    @click="()=>{ if(pageId < loadedPageCount) changePage(pageId+1) }">
             </div>
         </div>
     </div>
@@ -57,7 +57,7 @@ import NoticeIcon from "./../components/NoticeIcon.vue"
 
 import { mapState } from "vuex"
 
-import { getNotice, getNoticeSearch, getNoticePageCount, getNoticePageCountWithSearch } from "./../api.js"
+import { getNotice, getNoticeSearch, getNoticePageCountWithSearch } from "./../api.js"
 import store from "../store.js"
 
 
@@ -65,11 +65,9 @@ import store from "../store.js"
 export default {
     naem : "Notice",
     data(){return{
-        pageStart: 0,
-
+        loadedNoticeData: {},
+        loadedPageCount: 0,
         searchQueryText: "",
-
-        noticeData : [],
     }},
     components : {
         Sidebar,
@@ -78,26 +76,44 @@ export default {
         NoticeIcon,
     },
     computed:{
-        ...mapState(["noticePageCount","notice"]),
+        ...mapState(["noticePageCount", "noticePage", "notice"]),
         pageId: function(){
             return parseInt(this.$route.query.page) || 1;
         },
         searchQuery: function(){
             return this.$route.query.search;
+        },
+        pageStart: function(){
+            return Math.max(Math.min(this.pageId - 3, this.loadedPageCount - 5), 0);
+        },
+        savedPages: function(){
+            return Object.keys(this.$store.getters.getNoticePage || {}).map(x => parseInt(x)).filter(x => x);
         }
     },
     watch:{
         noticePageCount: function() {
-            this.pageStart = Math.max(Math.min(this.pageId - 3, this.noticePageCount - 5), 0);
+            this.loadedPageCount = this.$store.getters.getNoticePageCount;
         },
-        pageId: function(){
-            this.pageStart = Math.max(Math.min(this.pageId - 3, this.noticePageCount - 5), 0);
+        pageId: function() {
             this.loadNotice();
         }
     },
     methods: {
         loadNotice: function() {
-            this.getNoticeTask().then(res => this.noticeData = res);
+            if (!this.searchQuery && this.savedPages.includes(this.pageId)){
+                this.loadedNoticeData = this.noticePage[this.pageId].map(x => this.notice[x]);
+            }else{
+                this.getNoticeTask().then(res => {
+                    if (!this.searchQuery)
+                        store.commit("getNoticePage", {
+                            page: this.pageId,
+                            ids: res.map(x => x.id)
+                        })
+                    for (let data of res)
+                        store.commit("getNotice", data)
+                    this.loadedNoticeData = res;
+                });
+            }
         },
         getNoticeTask: function(){
             if (this.searchQuery)
@@ -107,22 +123,14 @@ export default {
         changePage: async function(page) {
             await this.$router.push({ path: 'notice', query: { ...this.$route.query, page }});
         },
-        updatePagination: function(){
-            this.pageStart = Math.max(Math.min(this.pageId - 3, this.noticePageCount - 5), 0);
-            this.loadNotice();
-        },
         search: async function(){
             await this.$router.push({ path: 'notice', query: { search: this.searchQueryText }});
             await this.updateCount();
             this.loadNotice();
         },
         updateCount: async function(){
-            let pageCountData;
             if (this.searchQuery)
-                pageCountData = await getNoticePageCountWithSearch(this.searchQuery);
-            else
-                pageCountData = await getNoticePageCount();
-            await store.commit("setNoticePageCount", pageCountData);
+                this.loadedPageCount = await getNoticePageCountWithSearch(this.searchQuery);
         }
     },
     mounted() {
@@ -237,10 +245,13 @@ export default {
 
 .pagination-wrap {
     height : 32px;
-
+    position: absolute;
     display: flex;
     justify-content: center;
     gap : 12px;
+    left:50%;
+    transform:translate(-50%,0);
+    bottom:10px;
 }
 
 .pagination-wrap img {

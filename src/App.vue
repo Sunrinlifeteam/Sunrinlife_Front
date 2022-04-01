@@ -5,7 +5,7 @@
 <script>
 //import { mapActions } from 'vuex'
 
-import {getAccessToken, getUserData, getMeal, getScheduleOfficial, getSchedulePersonal, getNoticeMain} from "./api.js"
+import {getAccessToken, getUserData, getMeal, getScheduleOfficial, getSchedulePersonal, getNoticeMain, getNoticePageCount} from "./api.js"
 import store from "./store.js"
 
 export default {
@@ -39,6 +39,9 @@ export default {
         getAuthToken(){
             getUserData().then((data) => {
                 store.commit("setUserData", data)
+            }),
+            getNoticePageCount().then((data) => {
+                store.commit("setNoticePageCount", data)
             }),
             getMeal().then((res)=>{store.commit("getMeal", res)}),
             getScheduleOfficial().then((data)=>{
