@@ -22,10 +22,13 @@ import Club from "../components/main/Club.vue"
 
 export default {
     name : "mainPage",
-    methods :{
+    data() {
+        return {}
+    },
+    methods: {
         
     },
-    components : {
+    components: {
         Notice,
         TodaySchedule,
         Timer,

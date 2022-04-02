@@ -68,10 +68,10 @@
 
             <ClubCard
                     v-if="!isMobileWindow && loadedClubData && loadedClubData[selectIndex]"
-                    :selectCludData="loadedClubData[selectIndex]" />
+                    :selectClubData="loadedClubData[selectIndex]" />
             <ClubCardMobile
                     v-else-if="isMobileWindow && loadedClubData && loadedClubData[selectIndex]"
-                    :selectCludData="loadedClubData[selectIndex]"/>
+                    :selectClubData="loadedClubData[selectIndex]"/>
         </div>
     </div>
 </div>
@@ -88,12 +88,12 @@ import { mapState } from 'vuex'
 
 export default {
     name : "Club Page",
-    data(){return{
-        isMobileWindow: true, // 현재 화면이 모바일 화면인지(970px 이하)
-        isShowDivisions: false,
-        
-        selectIndex: 0,
-    }},
+    data(){
+        return{
+            isShowDivisions: false,
+            selectIndex: 0,
+        }
+    },
     computed :{
         ...mapState(["isMobileWindow", "clubData"]),
         loadedClubData() {
@@ -111,23 +111,6 @@ export default {
         change(division) {
             this.$router.push({ path: 'club', query: { division }});
         }
-    },
-    mounted() {
-        if(window.innerWidth <= 970){
-            this.isMobileWindow = true
-        }
-        else {
-            this.isMobileWindow = false
-        }
-
-        window.addEventListener("resize", ()=>{
-            if(window.innerWidth <= 970){
-                this.isMobileWindow = true
-            }
-            else {
-                this.isMobileWindow = false
-            }
-        })
     },
 }
 </script>

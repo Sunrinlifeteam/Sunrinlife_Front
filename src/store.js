@@ -3,7 +3,7 @@ import navBarList from "./assets/navBarMenu.js"
 export const department_map = {
     "security" : "정보보호과",
     "software" : "소프트웨어과",
-    "buisness" : "ceo",
+    "buisness" : "IT경영과",
     "design" : "콘텐츠디자인과"
 }
 
@@ -116,6 +116,9 @@ const store = createStore({
         },
         getUserData(state){
             return state.userData
+        },
+        isMobileWindow(state){
+            return state.isMobileWindow;
         }
     },
     watch:{

@@ -1,14 +1,14 @@
 <template>
-    <Header v-if="showGlobalComponent"/>
-    <Sidebar v-if="showGlobalComponent"/>
+    <Header v-if="showGlobalComponent" />
+    <Sidebar v-if="showGlobalComponent" />
     <router-view></router-view>
 </template>
 
 <script>
 //import { mapActions } from 'vuex'
 
-import Sidebar from "./components/Sidebar.vue"
-import Header from "./components/Header.vue"
+import Sidebar from "./components/Sidebar.vue";
+import Header from "./components/Header.vue";
 
 import {
     getAccessToken,
@@ -29,10 +29,10 @@ export default {
     setup() {},
     data() {
         return {
-            showGlobalComponent: true
-        }
+            showGlobalComponent: true,
+        };
     },
-    components : {
+    components: {
         Header,
         Sidebar,
     },
@@ -50,7 +50,7 @@ export default {
             });
     },
     created() {
-        if (['/login', '/register'].includes(window.location.pathname.trim())){
+        if (["/login", "/register"].includes(window.location.pathname.trim())) {
             this.showGlobalComponent = false;
         }
     },
@@ -71,40 +71,40 @@ export default {
         getAuthToken() {
             getUserData().then((data) => {
                 store.commit("setUserData", data);
-            }),
-                getNoticePageCount().then((data) => {
-                    store.commit("setNoticePageCount", data);
-                }),
-                getMeal().then((res) => {
-                    store.commit("getMeal", res);
-                }),
-                getScheduleOfficial().then((data) => {
-                    store.commit("getScheduleOfficial", data);
-                }),
-                getSchedulePersonal().then((data) => {
-                    store.commit("setSchedulePersonal", data);
-                }),
-                getNoticeMain().then((data) => {
-                    store.commit("getNoticeMain", data);
-                }),
-                getClubMajor(0).then((data) => {
-					store.commit("setClubData", { id: "security", data });
-                }),
-                getClubMajor(1).then((data) => {
-					store.commit("setClubData", { id: "software", data });
-                }),
-                getClubMajor(2).then((data) => {
-					store.commit("setClubData", { id: "ceo", data });
-                }),
-                getClubMajor(3).then((data) => {
-					store.commit("setClubData", { id: "design", data });
-                }),
-                getClubGeneral().then((data) => {
-					store.commit("setClubData", { id: "general", data });
-                }),
-                getClubAutonomous().then((data) => {
-					store.commit("setClubData", { id: "autonomous", data });
-                })
+            });
+            getNoticePageCount().then((data) => {
+                store.commit("setNoticePageCount", data);
+            });
+            getMeal().then((res) => {
+                store.commit("getMeal", res);
+            });
+            getScheduleOfficial().then((data) => {
+                store.commit("getScheduleOfficial", data);
+            });
+            getSchedulePersonal().then((data) => {
+                store.commit("setSchedulePersonal", data);
+            });
+            getNoticeMain().then((data) => {
+                store.commit("getNoticeMain", data);
+            });
+            getClubMajor(0).then((data) => {
+                store.commit("setClubData", { id: "security", data });
+            });
+            getClubMajor(1).then((data) => {
+                store.commit("setClubData", { id: "software", data });
+            });
+            getClubMajor(2).then((data) => {
+                store.commit("setClubData", { id: "ceo", data });
+            });
+            getClubMajor(3).then((data) => {
+                store.commit("setClubData", { id: "design", data });
+            });
+            getClubGeneral().then((data) => {
+                store.commit("setClubData", { id: "general", data });
+            });
+            getClubAutonomous().then((data) => {
+                store.commit("setClubData", { id: "autonomous", data });
+            });
         },
     },
     mounted() {
@@ -117,7 +117,7 @@ export default {
         }
 
         window.addEventListener("resize", () => {
-            if (window.innerWidth <= 970 && !this.store.state.isMobileWindow) {
+            if (window.innerWidth <= 970 && !this.$store.getters.isMobileWindow) {
                 this.$store.commit("setMobileUI");
                 this.$store.commit("sidebarOff");
             } else {

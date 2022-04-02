@@ -20,7 +20,7 @@ import store from "../../store.js"
 export default {
     name : "Notice",
     data(){
-
+        return {}
     },
     methods :{
 

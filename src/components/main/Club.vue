@@ -1,8 +1,8 @@
 <template>
 <div class="club main-page-item">
-    <divc class="main-page-item-title">
+    <div class="main-page-item-title">
         <h3>동아리</h3>
-    </divc>
+    </div>
     <div class="main-page-item-content">
         <router-link v-for="i, j in clubs" :key="j" class="club_panel" :class="j" :to="`/club?major=${j}`"> <!-- 경로 수정해야함 -->
             <p>{{i}}</p>
@@ -12,17 +12,13 @@
 </template>
 
 <script>
-const clubs = {
-    "security":"정보보호과",
-    "software":"소프트웨어과",
-    "ceo":"IT경영과",
-    "design":"콘텐츠디자인과"
-}
+import { department_map } from "../../store.js";
+
 export default {
     name : "Club",
     data(){
         return{
-            clubs
+            clubs: department_map
         }
     }
 }
