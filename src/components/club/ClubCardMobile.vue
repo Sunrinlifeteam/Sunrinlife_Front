@@ -11,14 +11,14 @@
             <a class="sns-link facebook-link" :href="selectClubData.facebook" target="_blank"
                 v-if="selectClubData.facebook != ''">
                 <img src="/img/sns/facebook.svg" alt="Facebook 링크 아이콘" class="icon">
-                <div class="url">www.facebook.com/{{ clubFacebookId.slice(-1)[0] }}</div>
+                <div class="url">{{ clubFacebookId }}</div>
             </a>
 
             <!-- 인스타 링크 -->
             <a class="sns-link insta-link" :href="selectClubData.instagram" target="_blank"
                 v-if="selectClubData.instagram != ''">
                 <img src="/img/sns/instagram.svg" alt="Instagram 링크 아이콘" class="icon">
-                <div class="url">{{ clubInstagramId.slice(-1)[0] }}</div>
+                <div class="url">{{ clubInstagramId }}</div>
             </a>
 
             <!-- 웹사이트 링크 -->
@@ -62,19 +62,19 @@
 
 <script>
 export default {
-    name : "Club card",
+    name: "Club card",
     data(){
         return {}
     },
-    props : {
-        selectClubData : Object
+    props: {
+        selectClubData: Object
     },
     computed: {
         clubFacebookId() {
-            return this.selectClubData.facebook.split("/").pop();
+            return this.selectClubData.facebook.split("/").filter(x=>x).pop();
         },
         clubInstagramId() {
-            return this.selectClubData.instagram.split("/").pop();
+            return this.selectClubData.instagram.split("/").filter(x=>x).pop();
         }
     },
 }

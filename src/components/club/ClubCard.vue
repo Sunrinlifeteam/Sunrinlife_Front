@@ -73,10 +73,10 @@ export default {
     },
     computed: {
         clubFacebookId() {
-            return this.selectClubData.facebook.split("/").pop();
+            return this.selectClubData.facebook.split("/").filter(x=>x).pop();
         },
         clubInstagramId() {
-            return this.selectClubData.instagram.split("/").pop();
+            return this.selectClubData.instagram.split("/").filter(x=>x).pop();
         }
     },
     props : {
