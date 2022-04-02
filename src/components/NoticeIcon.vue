@@ -1,10 +1,10 @@
 <template>
 <div
     v-if="type === 'school'"
-    class="notice-icon notice-school">학교</div>
+    class="notice-icon notice-school none-dragging">학교</div>
 <div
     v-else-if="type === 'intranet'"
-    class="notice-icon notice-intranet">인트라넷</div>
+    class="notice-icon notice-intranet none-dragging">인트라넷</div>
 </template>
 
 <script>
