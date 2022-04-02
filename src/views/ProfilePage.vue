@@ -171,6 +171,7 @@ export default {
     },
     watch: {
         userData: function(val) {
+            if (!val) return;
             this.editClubInfo = val.clubInfo?.id
             this.editGithubLink = val.githubLink
             this.editDescription = val.description
