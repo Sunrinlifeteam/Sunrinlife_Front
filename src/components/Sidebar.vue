@@ -17,7 +17,7 @@
                 </router-link>
             </div>
             <template v-if="userData">
-                <router-link class="list-user-profile" :to="'profile'">
+                <router-link class="list-user-profile" :to="'profile'" @click="hideSidebarOnMobile()">
                     <template v-if="userData.image">
                         <img :src="userData.image">
                     </template>
