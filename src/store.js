@@ -8,25 +8,31 @@ export const department_map = {
 }
 
 const store = createStore({
-    state(){ return {
-        authToken : null,
-        userData : null,
-        scheduleOfficial:null,
-        schedulePersonal:null,
-        noticeMain:null,
-        notice:{},
-        noticePage:{},
-        noticePageCount:null,
-        meal:null,
-        todaySchedule:null,
+    state(){
+        return {
+            authToken: null,
+            userData: null,
 
-        isSidebarShow : true,
-        isMobileWindow : true, // 현재 화면이 모바일 화면인지(970px 이하)
+            todaySchedule: null,
+            scheduleOfficial: null,
+            schedulePersonal: null,
 
-        navBarList,
-        department_map,
-        
-    }
+            noticeMain: null,
+            notice: {},
+            noticePage: {},
+            noticePageCount: null,
+
+            meal: null,
+
+            clubData: [],
+
+            isSidebarShow: true,
+            isMobileWindow: true, // 현재 화면이 모바일 화면인지(970px 이하)
+
+            navBarList,
+            department_map,
+            
+        }
     },
     mutations :{
         // Auth
@@ -59,6 +65,11 @@ const store = createStore({
         },
         getTodaySchedule(state, todaySchedule){
             state.todaySchedule = todaySchedule
+        },
+
+        // ClubPage
+        setClubData(state, { id, data }) {
+            state.clubData[id] = data;
         },
 
         // Sidebar

@@ -12,40 +12,43 @@
                 <div class="major-selecter neu-morphism-card">
 
                     <transition name="current-major-ani">
-                        <div class="current-major" @click="isSelectMajor = true" v-if="!isSelectMajor" :class="{security:!selectMajorIdx || selectMajorIdx === 5, software:selectMajorIdx===1, ceo:selectMajorIdx===2, design:selectMajorIdx===3}">
-                            <span v-if="selectMajorIdx == 0">정보보호과</span>
-                            <span v-else-if="selectMajorIdx == 1">소프트웨어과</span>
-                            <span v-else-if="selectMajorIdx == 2">IT경영과</span>
-                            <span v-else-if="selectMajorIdx == 3">콘텐츠 디자인과</span>
-                            <span v-else-if="selectMajorIdx == 4">일반 동아리</span>
-                            <span v-else-if="selectMajorIdx == 5">자율 동아리</span>
+                        <div class="current-major"
+                            v-if="!isShowDivisions"
+                            @click="isShowDivisions = true" 
+                            :class="{ [division]: true }">
+                            <span v-if="division === 'security'">정보보호과</span>
+                            <span v-else-if="division === 'software'">소프트웨어과</span>
+                            <span v-else-if="division === 'ceo'">IT경영과</span>
+                            <span v-else-if="division === 'design'">콘텐츠 디자인과</span>
+                            <span v-else-if="division === 'general'">일반 동아리</span>
+                            <span v-else-if="division === 'autonomous'">자율 동아리</span>
                         </div>
                     </transition>
 
                     <transition name="choice-major-ani">
-                        <div class="choice-major-wrap" v-if="isSelectMajor" @click="isSelectMajor = false">
+                        <div class="choice-major-wrap" v-if="isShowDivisions" @click="isShowDivisions = false">
                             <div class="choice-major security"
-                                @click="selectMajorIdx = 0">
+                                @click="change('security')">
                                 정보
                             </div>
                             <div class="choice-major software"
-                                @click="selectMajorIdx = 1">
+                                @click="change('software')">
                                 솦과
                             </div>
                             <div class="choice-major ceo"
-                                @click="selectMajorIdx = 2">
+                                @click="change('ceo')">
                                 아경
                             </div>
                             <div class="choice-major design"
-                                @click="selectMajorIdx = 3">
+                                @click="change('design')">
                                 콘디
                             </div>
                             <div class="choice-major"
-                                @click="selectMajorIdx = 4">
+                                @click="change('general')">
                                 일반
                             </div>
                             <div class="choice-major security"
-                                @click="selectMajorIdx = 5">
+                                @click="change('autonomous')">
                                 자율
                             </div>
                         </div>
@@ -53,11 +56,11 @@
                 </div>
 
                 <!-- 동아리 리스트 -->
-                <ul class="club-list neu-morphism-card">
+                <ul v-if="loadedClubData" class="club-list neu-morphism-card">
                     <li
-                        v-for="(i, n) in clubData[selectMajorIdx]" :key="n"
-                        :class="{ 'seleted' : selectClubIdx == n}"
-                        @click="selectClubIdx = n">
+                        v-for="(i, n) in loadedClubData" :key="n"
+                        :class="{ 'seleted' : selectIndex == n}"
+                        @click="selectIndex = n">
                         <img v-if="i.logo_url != ''" :src="i.logo_url" :alt="`${i.name} 동아리 로고`" class="club-icon">
                         <img v-else src="./../assets/symbol.svg" :alt="`동아리 로고 기본값`" class="club-icon">
 
@@ -67,11 +70,11 @@
             </div>
 
             <ClubCard
-                    v-if="!isMobileWindow && clubData[selectMajorIdx][selectClubIdx] != null"
-                    :selectCludData="clubData[selectMajorIdx][selectClubIdx]" />
+                    v-if="!isMobileWindow && loadedClubData && loadedClubData[selectIndex]"
+                    :selectCludData="loadedClubData[selectIndex]" />
             <ClubCardMobile
-                    v-else-if="isMobileWindow && clubData[selectMajorIdx][selectClubIdx] != null"
-                    :selectCludData="clubData[selectMajorIdx][selectClubIdx]"/>
+                    v-else-if="isMobileWindow && loadedClubData && loadedClubData[selectIndex]"
+                    :selectCludData="loadedClubData[selectIndex]"/>
         </div>
     </div>
 </div>
@@ -89,23 +92,22 @@ import ClubCardMobile from "../components/club/ClubCardMobile.vue"
 // import { JB, SW, it, de } from "./../components/club/TempClubData"
 import { mapState } from 'vuex'
 
-import { getClubMajor, getClubGeneral, getClubAutonomous } from "./../api.js"
-
 export default {
     name : "Club Page",
     data(){return{
-        isMobileWindow : true, // 현재 화면이 모바일 화면인지(970px 이하)
-        // clubData : [JB, SW, it, de],
-
-        clubData : [[], [], [], [], [], []],
-
-        selectClubIdx : 0,
-        selectMajorIdx : 0,
-
-        isSelectMajor : false,
+        isMobileWindow: true, // 현재 화면이 모바일 화면인지(970px 이하)
+        isShowDivisions: false,
+        
+        selectIndex: 0,
     }},
     computed :{
-        ...mapState(["isMobileWindow"])
+        ...mapState(["isMobileWindow", "clubData"]),
+        loadedClubData() {
+            return this.clubData[this.division];
+        },
+        division() {
+            return this.$route.query.division || "security";
+        }
     },
     components : {
         Header,
@@ -113,17 +115,10 @@ export default {
         ClubCard,
         ClubCardMobile,
     },
-    watch : {
-        selectMajorIdx(){
-            this.selectClubIdx = 0
+    methods: {
+        change(division) {
+            this.$router.push({ path: 'club', query: { division }});
         }
-    },
-    created() {
-
-        if(this.$route.query.major == "security" || this.$route.query.major == undefined) this.selectMajorIdx = 0
-        else if(this.$route.query.major == "software") this.selectMajorIdx = 1
-        else if(this.$route.query.major == "ceo") this.selectMajorIdx = 2
-        else if(this.$route.query.major == "design") this.selectMajorIdx = 3
     },
     mounted() {
         if(window.innerWidth <= 970){
@@ -141,14 +136,6 @@ export default {
                 this.isMobileWindow = false
             }
         })
-
-
-        getClubMajor(0).then(res => { this.clubData[0] = res })
-        getClubMajor(1).then(res => { this.clubData[1] = res })
-        getClubMajor(2).then(res => { this.clubData[2] = res })
-        getClubMajor(3).then(res => { this.clubData[3] = res })
-        getClubGeneral().then(res => { this.clubData[4] = res })
-        getClubAutonomous().then(res => {this.clubData[5] = res })
     },
 }
 </script>
