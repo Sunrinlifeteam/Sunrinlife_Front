@@ -1,8 +1,5 @@
 <template>
 
-<Header/>
-<Sidebar/>
-
 <div class="panel">
     <main class="page-content">
         <Notice/>
@@ -16,9 +13,6 @@
 
 </template>
 <script>
-import Sidebar from "../components/Sidebar.vue"
-import Header from "../components/Header.vue"
-
 import Notice from "../components/main/Notice.vue"
 import TodaySchedule from "../components/main/TodaySchedule.vue"
 import Timer from "../components/main/Timer.vue"
@@ -32,9 +26,6 @@ export default {
         
     },
     components : {
-        Sidebar,
-        Header,
-
         Notice,
         TodaySchedule,
         Timer,

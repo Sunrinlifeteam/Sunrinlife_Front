@@ -1,8 +1,5 @@
 <template>
 
-<Sidebar/>
-<Header/>
-
 <div class="panel">
     <div class="easter-egg-page">
         <div class="page-content">
@@ -14,14 +11,10 @@
 </template>
 
 <script>
-import Sidebar from "./../components/Sidebar.vue"
-import Header from "../components/Header.vue"
 
 export default {
     name : "Easter egg page",
     components : {
-        Sidebar,
-        Header,
     }
 }
 </script>

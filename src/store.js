@@ -31,7 +31,6 @@ const store = createStore({
 
             navBarList,
             department_map,
-            
         }
     },
     mutations :{

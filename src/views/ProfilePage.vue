@@ -1,7 +1,4 @@
 <template>
-    <Header/>
-    <Sidebar/>
-
     <template v-if="userData">
         <div class="panel">
             <div class="user-profile">
@@ -102,9 +99,6 @@
 </template>
 
 <script>
-import Sidebar from "./../components/Sidebar.vue"
-import Header from "./../components/Header.vue"
-
 import { mapState } from "vuex"
 import {editProfileData, getUserData, logout} from "../api.js"
 import store from "../store.js"
@@ -168,10 +162,6 @@ export default {
                 if(res == "success") this.$router.push("/login")
             })
         }
-    },
-    components:{
-        Sidebar,
-        Header,
     },
     computed:{
         ...mapState(["userData", "department_map"]),

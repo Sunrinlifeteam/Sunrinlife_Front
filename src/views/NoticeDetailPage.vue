@@ -1,7 +1,4 @@
 <template>
-    <Header/>
-    <Sidebar/>
-
     <div class="panel">
         <div class="page-content">
             <div class="notice-detail-content neu-morphism-card">
@@ -20,9 +17,6 @@
 </template>
 
 <script>
-import Sidebar from "../components/Sidebar.vue"
-import Header from "../components/Header.vue"
-
 import NoticeIcon from "./../components/NoticeIcon.vue"
 
 import { getNoticeById } from "./../api.js"
@@ -33,9 +27,6 @@ export default {
         noticeData : {},
     }},
     components : {
-        Sidebar,
-        Header,
-
         NoticeIcon
     },
     mounted() {

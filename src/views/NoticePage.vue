@@ -1,8 +1,4 @@
 <template>
-
-<Header/>
-<Sidebar/>
-
 <div class="panel page notice-page">
     <div class="page-content">
         <!-- <div class="search-wrap">
@@ -50,9 +46,6 @@
 </template>
 
 <script>
-import Sidebar from "../components/Sidebar.vue"
-import Header from "../components/Header.vue"
-
 import NoticeIcon from "./../components/NoticeIcon.vue"
 
 import { mapState } from "vuex"
@@ -70,9 +63,6 @@ export default {
         searchQueryText: "",
     }},
     components : {
-        Sidebar,
-        Header,
-
         NoticeIcon,
     },
     computed:{

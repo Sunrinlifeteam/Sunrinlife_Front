@@ -1,8 +1,5 @@
 <template>
 
-<Header/>
-<Sidebar/>
-
 <div class="panel">
     <div class="clud-page">
         <div class="page-content" :class="{'mobile-ui' : isMobileWindow}">
@@ -81,9 +78,6 @@
 </template>
 
 <script>
-import Sidebar from "./../components/Sidebar.vue"
-import Header from "../components/Header.vue"
-
 import ClubCard from "../components/club/ClubCard.vue"
 import ClubCardMobile from "../components/club/ClubCardMobile.vue"
 
@@ -110,8 +104,6 @@ export default {
         }
     },
     components : {
-        Header,
-        Sidebar,
         ClubCard,
         ClubCardMobile,
     },

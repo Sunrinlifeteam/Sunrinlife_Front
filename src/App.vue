@@ -1,9 +1,14 @@
 <template>
+    <Header v-if="showGlobalComponent"/>
+    <Sidebar v-if="showGlobalComponent"/>
     <router-view></router-view>
 </template>
 
 <script>
 //import { mapActions } from 'vuex'
+
+import Sidebar from "./components/Sidebar.vue"
+import Header from "./components/Header.vue"
 
 import {
     getAccessToken,
@@ -22,6 +27,15 @@ import store from "./store.js";
 export default {
     name: "App",
     setup() {},
+    data() {
+        return {
+            showGlobalComponent: true
+        }
+    },
+    components : {
+        Header,
+        Sidebar,
+    },
     beforeCreate() {
         getAccessToken()
             .then(() => {
@@ -34,6 +48,11 @@ export default {
                 )
                     this.$router.replace("/login");
             });
+    },
+    created() {
+        if (['/login', '/register'].includes(window.location.pathname.trim())){
+            this.showGlobalComponent = false;
+        }
     },
     methods: {
         checkLogin() {

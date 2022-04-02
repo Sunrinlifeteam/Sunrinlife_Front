@@ -3,15 +3,18 @@
     <nav v-if="isSidebarShow">
     
         <div class="nav-list">
-            <div class="logo" @click="$router.push('/')">
+            <div class="logo" @click="hideSidebarOnMobile(); $router.push('/')">
                 <img src="./../assets/symbol.svg" alt="Logo" class="logo_symbol">
                 <img src="./../assets/logo.svg" alt="Logo" class="logo_text">
             </div>
 
             <div class="menu_list">
                 <router-link
-                    v-for="i, n in navBarList" :key="n"
-                    :to="i.router"><img :src="i.img"><span>{{ i.name }}</span></router-link>
+                    v-for="i, n in navBarList" :key="n" :to="i.router"
+                    @click="hideSidebarOnMobile()">
+                    <img :src="i.img">
+                    <span>{{ i.name }}</span>
+                </router-link>
             </div>
             <template v-if="userData">
                 <router-link class="list-user-profile" :to="'profile'">
@@ -51,10 +54,13 @@ export default {
         }
     },
     methods : {
-
+        hideSidebarOnMobile(){
+            if (this.isMobileWindow)
+                this.$store.commit('sidebarOff')
+        }
     },
     computed :{
-        ...mapState(['userData', 'navBarList', 'department_map', "isSidebarShow"]),
+        ...mapState(['userData', 'navBarList', 'department_map', "isSidebarShow", "isMobileWindow"]),
         // store.js에 저장된 navBarList를 가져와서 목록으로 보여준다.
     },
     mounted(){
