@@ -54,7 +54,7 @@
                             <!-- 부동아리 -->
                             <div v-if="!isEditable" class="user-contact-item user-contact-club">
                                 <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
-                                <span class="user-contact-text">{{ userData.subClubInfo.length?userData.subClubInfo.map(x => x.name).join(','):"" }}</span>
+                                <span class="user-contact-text">{{ userData.subClubInfo?.length?userData.subClubInfo.map(x => x.name).join(','):"" }}</span>
                             </div>
                             <div v-else class="user-contact-item user-contact-club edit">
                                 <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
@@ -176,7 +176,7 @@ export default {
             this.editGithubLink = val.githubLink
             this.editDescription = val.description
             this.editProfileImage = val.image
-            this.editSubClubInfo = val.subClubInfo.map(x => x.id).join(',')
+            this.editSubClubInfo = val.subClubInfo?.map(x => x.id).join(',')
         }
     },
     mounted() {
@@ -184,7 +184,7 @@ export default {
         this.editGithubLink = this.userData?.githubLink
         this.editDescription = this.userData?.description
         this.editProfileImage = this.userData?.image
-        this.editSubClubInfo = this.userData?.subClubInfo.map(x => x.id).join(',')
+        this.editSubClubInfo = this.userData?.subClubInfo?.map(x => x.id).join(',')
     }
 }
 </script>
