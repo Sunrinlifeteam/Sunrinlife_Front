@@ -1,6 +1,6 @@
 <template>
 <transition name="nav-bar">
-    <nav v-if="isSidebarShow">
+    <nav v-if="isSidebarShow" class="none-dragging">
     
         <div class="nav-list">
             <div class="logo" @click="hideSidebarOnMobile(); $router.push('/')">
