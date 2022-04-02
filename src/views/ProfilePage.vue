@@ -54,6 +54,16 @@
                                 <input v-model="editClubInfo" class="user-contact-text user-profile-edit-inout">
                             </div>
 
+                            <!-- 부동아리 -->
+                            <div v-if="!isEditable" class="user-contact-item user-contact-club">
+                                <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
+                                <span class="user-contact-text">{{ userData.subClubInfo.length?userData.subClubInfo.map(x => x.name).join(','):"" }}</span>
+                            </div>
+                            <div v-else class="user-contact-item user-contact-club edit">
+                                <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
+                                <input v-model="editSubClubInfo" class="user-contact-text user-profile-edit-inout">
+                            </div>
+
                             <!-- 이메일 -->
                             <div class="user-contact-item">
                                 <img class="user-contact-icon" src="./../assets/user_profile_assets/emailIcon.svg"/>
@@ -104,6 +114,7 @@ export default {
             isEditable : false, //현재 수정 모드인지 아닌지를 판단
 
             editClubInfo : "",
+            editSubClubInfo : "",
             editGithubLink : "",
             editDescription : "",
             editProfileImage : ""
@@ -131,13 +142,21 @@ export default {
             if (this.editClubInfo){
                 if (!this.userData.clubInfo || this.editClubInfo != this.userData.clubInfo.id){
                     if (!this.userData.clubInfo) this.userData.clubInfo = {};
-                    this.userData.clubInfo.id = update["clubInfo"] = this.editClubInfo || 0;
+                    update["clubInfo"] = this.editClubInfo || 0;
                     this.userData.clubInfo.name = "로딩중...";
                 }
+            }
+            if (this.editSubClubInfo){
+                if (!this.userData.subClubInfo) this.userData.subClubInfo = [];
+                update["subClubInfo"] = this.editSubClubInfo.split(',')
+                    .map(x => parseInt(x))
+                    .filter(x => x)
+                this.userData.subClubInfo = [{name: "로딩중..."}]
             }
             this.isEditable = false
 
             if (Object.keys(update).length > 0){
+                console.log(update)
                 await editProfileData(update)
                 getUserData().then((data) => {
                     store.commit("setUserData", data)
@@ -166,6 +185,7 @@ export default {
             this.editGithubLink = val.githubLink
             this.editDescription = val.description
             this.editProfileImage = val.image
+            this.editSubClubInfo = val.subClubInfo.map(x => x.id).join(',')
         }
     },
     mounted() {
@@ -173,6 +193,7 @@ export default {
         this.editGithubLink = this.userData?.githubLink
         this.editDescription = this.userData?.description
         this.editProfileImage = this.userData?.image
+        this.editSubClubInfo = this.userData?.subClubInfo.map(x => x.id).join(',')
     }
 }
 </script>
