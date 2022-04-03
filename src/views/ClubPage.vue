@@ -109,6 +109,7 @@ export default {
     },
     methods: {
         change(division) {
+            this.selectIndex = 0;
             this.$router.push({ path: 'club', query: { division }});
         }
     },
