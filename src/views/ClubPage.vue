@@ -15,7 +15,7 @@
                             :class="{ [division]: true }">
                             <span v-if="division === 'security'">정보보호과</span>
                             <span v-else-if="division === 'software'">소프트웨어과</span>
-                            <span v-else-if="division === 'ceo'">IT경영과</span>
+                            <span v-else-if="division === 'buisness'">IT경영과</span>
                             <span v-else-if="division === 'design'">콘텐츠 디자인과</span>
                             <span v-else-if="division === 'general'">일반 동아리</span>
                             <span v-else-if="division === 'autonomous'">자율 동아리</span>
@@ -33,7 +33,7 @@
                                 솦과
                             </div>
                             <div class="choice-major ceo"
-                                @click="change('ceo')">
+                                @click="change('buisness')">
                                 아경
                             </div>
                             <div class="choice-major design"

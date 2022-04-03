@@ -100,7 +100,7 @@ export default {
                 store.commit("setClubData", { id: "software", data });
             });
             getClubMajor(2).then((data) => {
-                store.commit("setClubData", { id: "ceo", data });
+                store.commit("setClubData", { id: "buisness", data });
             });
             getClubMajor(3).then((data) => {
                 store.commit("setClubData", { id: "design", data });
