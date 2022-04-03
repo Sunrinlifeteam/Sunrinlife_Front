@@ -11,7 +11,7 @@
                     <transition name="current-major-ani">
                         <div class="current-major"
                             v-if="!isShowDivisions"
-                            @click="isShowDivisions = true" 
+                            @click="isShowDivisions = true"
                             :class="{ [division]: true }">
                             <span v-if="division === 'security'">정보보호과</span>
                             <span v-else-if="division === 'software'">소프트웨어과</span>
@@ -110,6 +110,7 @@ export default {
     methods: {
         change(division) {
             this.$router.push({ path: 'club', query: { division }});
+            this.selectIndex = 0;
         }
     },
 }
@@ -165,7 +166,7 @@ export default {
     position: relative;
 
     overflow: hidden;
-    
+
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
 }
