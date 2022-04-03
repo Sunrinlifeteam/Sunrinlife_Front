@@ -122,6 +122,17 @@ button:active{
 }
 
 
+/*  */
+.none-dragging
+{
+    -ms-user-select: none; 
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+user-select: none;
+}
+
+
 /* 학과별 컬러 설정 */
 .security{
     background-color: #3d3d3d;

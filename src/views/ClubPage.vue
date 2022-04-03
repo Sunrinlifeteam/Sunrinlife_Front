@@ -6,7 +6,7 @@
 
             <div class="club-list-wrap">
                 <!-- 학과 선택창 -->
-                <div class="major-selecter neu-morphism-card">
+                <div class="major-selecter neu-morphism-card none-dragging">
 
                     <transition name="current-major-ani">
                         <div class="current-major"
@@ -23,7 +23,7 @@
                     </transition>
 
                     <transition name="choice-major-ani">
-                        <div class="choice-major-wrap" v-if="isShowDivisions" @click="isShowDivisions = false">
+                        <div class="choice-major-wrap none-dragging" v-if="isShowDivisions" @click="isShowDivisions = false">
                             <div class="choice-major security"
                                 @click="change('security')">
                                 정보
@@ -53,7 +53,7 @@
                 </div>
 
                 <!-- 동아리 리스트 -->
-                <ul v-if="loadedClubData" class="club-list neu-morphism-card">
+                <ul v-if="loadedClubData" class="club-list neu-morphism-card none-dragging">
                     <li
                         v-for="(i, n) in loadedClubData" :key="n"
                         :class="{ 'seleted' : selectIndex == n}"
