@@ -6,7 +6,7 @@
 
             <div class="club-list-wrap">
                 <!-- 학과 선택창 -->
-                <div class="major-selecter neu-morphism-card">
+                <div class="major-selecter neu-morphism-card none-dragging">
 
                     <transition name="current-major-ani">
                         <div class="current-major"
@@ -15,7 +15,7 @@
                             :class="{ [division]: true }">
                             <span v-if="division === 'security'">정보보호과</span>
                             <span v-else-if="division === 'software'">소프트웨어과</span>
-                            <span v-else-if="division === 'ceo'">IT경영과</span>
+                            <span v-else-if="division === 'buisness'">IT경영과</span>
                             <span v-else-if="division === 'design'">콘텐츠 디자인과</span>
                             <span v-else-if="division === 'general'">일반 동아리</span>
                             <span v-else-if="division === 'autonomous'">자율 동아리</span>
@@ -23,7 +23,7 @@
                     </transition>
 
                     <transition name="choice-major-ani">
-                        <div class="choice-major-wrap" v-if="isShowDivisions" @click="isShowDivisions = false">
+                        <div class="choice-major-wrap none-dragging" v-if="isShowDivisions" @click="isShowDivisions = false">
                             <div class="choice-major security"
                                 @click="change('security')">
                                 정보
@@ -33,7 +33,7 @@
                                 솦과
                             </div>
                             <div class="choice-major ceo"
-                                @click="change('ceo')">
+                                @click="change('buisness')">
                                 아경
                             </div>
                             <div class="choice-major design"
@@ -53,7 +53,7 @@
                 </div>
 
                 <!-- 동아리 리스트 -->
-                <ul v-if="loadedClubData" class="club-list neu-morphism-card">
+                <ul v-if="loadedClubData" class="club-list neu-morphism-card none-dragging">
                     <li
                         v-for="(i, n) in loadedClubData" :key="n"
                         :class="{ 'seleted' : selectIndex == n}"
@@ -109,6 +109,7 @@ export default {
     },
     methods: {
         change(division) {
+            this.selectIndex = 0;
             this.$router.push({ path: 'club', query: { division }});
             this.selectIndex = 0;
         }
