@@ -24,6 +24,8 @@ import {
 } from "./api.js";
 import store from "./store.js";
 
+import { EXCEPT_SIDEBAR } from './store.js';
+
 export default {
     name: "App",
     setup() {},
@@ -49,11 +51,6 @@ export default {
                     this.$router.replace("/login");
             });
     },
-    created() {
-        if (["/login", "/register"].includes(window.location.pathname.trim())) {
-            this.showGlobalComponent = false;
-        }
-    },
     methods: {
         checkLogin() {
             getAccessToken().then((status) => {
@@ -61,6 +58,12 @@ export default {
                 else setInterval(getAccessToken, 3600000);
             });
         },
+        checkSidebar() {
+            this.showGlobalComponent = true;
+            if (EXCEPT_SIDEBAR.includes(this.$route.name)) {
+                this.showGlobalComponent = false;
+            }
+        }
     },
     computed: {
         getAuthToken() {
@@ -68,6 +71,9 @@ export default {
         },
     },
     watch: {
+        '$route'(){
+            this.checkSidebar();
+        },
         getAuthToken() {
             getUserData().then((data) => {
                 store.commit("setUserData", data);
@@ -106,6 +112,9 @@ export default {
                 store.commit("setClubData", { id: "autonomous", data });
             });
         },
+    },
+    created() {
+        this.checkSidebar();
     },
     mounted() {
         if (window.innerWidth <= 970) {
