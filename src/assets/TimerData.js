@@ -5,7 +5,7 @@ const timeData1 = [
     new TimerItem(
         "등교전",
         new Time(0, 0, 0),
-        new Time(8, 29, 0),
+        new Time(8, 29, 59),
         "not study"
     ),
     new TimerItem(
@@ -17,18 +17,18 @@ const timeData1 = [
     new TimerItem(
         "1교시",
         new Time(8, 40, 0),
-        new Time(9, 20, 59),
+        new Time(9, 19, 59),
         "study"
     ),
     new TimerItem(
         "1교시 쉬는시간",
-        new Time(9, 30, 0),
-        new Time(9, 40, 59),
+        new Time(9, 20, 0),
+        new Time(9, 29, 59),
         "not study"
     ),
     new TimerItem(
         "2교시",
-        new Time(9, 41, 0),
+        new Time(9, 30, 0),
         new Time(10, 9, 59),
         "study"
     ),
@@ -104,7 +104,7 @@ const timeData2 = [
     new TimerItem(
         "등교전",
         new Time(0, 0, 0),
-        new Time(8, 29, 0),
+        new Time(8, 29, 59),
         "not study"
     ),
     new TimerItem(
@@ -116,18 +116,18 @@ const timeData2 = [
     new TimerItem(
         "1교시",
         new Time(8, 40, 0),
-        new Time(9, 20, 59),
+        new Time(9, 19, 59),
         "study"
     ),
     new TimerItem(
         "1교시 쉬는시간",
-        new Time(9, 30, 0),
-        new Time(9, 40, 59),
+        new Time(9, 20, 0),
+        new Time(9, 29, 59),
         "not study"
     ),
     new TimerItem(
         "2교시",
-        new Time(9, 41, 0),
+        new Time(9, 30, 0),
         new Time(10, 9, 59),
         "study"
     ),
@@ -147,19 +147,19 @@ const timeData2 = [
         "3교시 쉬는시간",
         new Time(11, 0, 0),
         new Time(11, 9, 59),
-        "not study"
+        "launch"
     ),
     new TimerItem(
         "4교시",
         new Time(11, 10, 0),
         new Time(11, 49, 59),
-        "launch"
+        "study"
     ),
     new TimerItem(
-        "점심시간",
+        "점심 시간",
         new Time(11, 50, 0),
         new Time(12, 49, 59),
-        "study"
+        "not study"
     ),
     new TimerItem(
         "5교시",

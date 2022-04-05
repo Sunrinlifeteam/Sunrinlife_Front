@@ -1,7 +1,7 @@
 <template>
 <header>
     <img @click="$store.commit('sidebarOnOff')" src="./../assets/menu_button.svg" alt="">
-    <span class="k" @click="$router.push('i_love_sunrin')">이스터에그</span>
+    <span class="k none-dragging" @click="$router.push('i_love_sunrin')">이스터에그</span>
 </header>
 </template>
 
@@ -34,7 +34,6 @@ img {
 
 .k {
     color : rgb(187 187 187 / 10%);
-    cursor: pointer;
 }
 
 @media (max-width : 970px) {
