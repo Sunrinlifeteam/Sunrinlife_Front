@@ -277,7 +277,7 @@ export default {
     cursor: pointer;
 }
 
-.club-list li.seleted {
+.club-list li.seleted, .club-list li:hover {
     background-color: var(--gray1);
 }
 
@@ -296,11 +296,12 @@ export default {
 @media (max-width : 970px) {
     .club-list {
         height: 52px;
-        
+
         padding: 8px;
 
         flex-direction: row;
         justify-content: space-around;
+        gap : 0;
     }
 
     .club-list li {
