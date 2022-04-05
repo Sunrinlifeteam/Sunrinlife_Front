@@ -23,7 +23,7 @@
                 <img src="./../assets/prev_arrow.svg" alt="" class="arrow prev-btn"
                     @click="()=>{ if(pageId > 1) changePage(pageId-1) }">
                 <div class="page-button-wrap">
-                    <template v-for="i in Math.min(loadedPageCount, 5)" :key="i">
+                    <template v-for="i in Math.min(loadedPageCount, 3)" :key="i">
                         <div
                             class="page-btn"
                             :class="{'current-page' : (pageStart + i) === pageId}"
@@ -293,7 +293,13 @@ export default {
 
 
 @media (max-width : 970px) {
+    .header h3 {
+        display: none;
+    }
+
     .search-wrap {
+        max-width: none;
+
         background-color: #fff;
     }
 }
