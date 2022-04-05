@@ -1,11 +1,6 @@
 <template>
 <div class="panel page notice-page">
     <div class="page-content">
-        <!-- <div class="search-wrap">
-            <input type="text" placeholder="검색">
-            <img src="/img/search.svg" alt="검색 아이콘" class="search-button">
-        </div> -->
-
         <div class="notice-content" :class="{'neu-morphism-card' : !($store.state.isMobileWindow)}">
             <div class="header">
                 <h3>공지</h3>
@@ -139,7 +134,7 @@ export default {
 }
 
 .notice-content {
-    min-height : 581px;
+    min-height : 660px;
 
     padding : 16px;
     position: relative;
@@ -156,14 +151,20 @@ export default {
     align-items: center;
 }
 
+.header h3 {
+    width : 35px;
+    text-align: center;
+
+    margin-right: 12px;
+}
+
 .search-wrap {
     height: 40px;
     max-width : 323px;
     flex : 1;
 
-    padding: 13px 36px 13px 24px;
+    padding: 8px 16px;
     border-radius: 8px;
-    box-shadow: 1px 0 6px 0 rgba(0, 0, 0, 0.16);
     background-color: #f5f6f7;
 
     display: flex;
@@ -199,6 +200,8 @@ export default {
 
 .notice-list {
     flex : 1;
+
+    padding : 4px 24px;
     
     display: flex;
     flex-direction: column;
@@ -237,13 +240,11 @@ export default {
 
 .pagination-wrap {
     height : 32px;
-    position: absolute;
+
+    /* margin-top : 32px; */
+
     display: flex;
     justify-content: center;
-    gap : 12px;
-    left:50%;
-    transform:translate(-50%,0);
-    bottom:10px;
 }
 
 .pagination-wrap img {
@@ -288,6 +289,13 @@ export default {
 
 .pagination-wrap *  {
     cursor: pointer;
+}
+
+
+@media (max-width : 970px) {
+    .search-wrap {
+        background-color: #fff;
+    }
 }
 
 </style>

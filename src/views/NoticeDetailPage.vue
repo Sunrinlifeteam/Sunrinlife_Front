@@ -4,7 +4,6 @@
             <div class="notice-detail-content neu-morphism-card">
                 <div class="header">
                     <NoticeIcon :type="noticeData.type"/>
-
                     <h3>{{ noticeData.title }}</h3>
                 </div>
 
@@ -41,7 +40,6 @@ export default {
 
     display: flex;
     flex-direction: column;
-    gap : 20px;
 }
 
 .notice-icon {
@@ -63,5 +61,7 @@ export default {
     font-size: 18px;
     font-weight: bold;
     color: #3d3d3d;
+
+    padding : 48px;
 }
 </style>

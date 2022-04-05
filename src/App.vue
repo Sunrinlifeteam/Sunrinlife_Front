@@ -126,7 +126,7 @@ export default {
         }
 
         window.addEventListener("resize", () => {
-            if (window.innerWidth <= 970 && !this.$store.getters.isMobileWindow) {
+            if (window.innerWidth <= 970) {
                 this.$store.commit("setMobileUI");
                 this.$store.commit("sidebarOff");
             } else {
