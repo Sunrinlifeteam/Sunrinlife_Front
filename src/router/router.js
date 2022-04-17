@@ -7,6 +7,7 @@ import ProfilePage from './../views/ProfilePage.vue';
 import ClubPage from "./../views/ClubPage.vue"
 import NoticePage from "./../views/NoticePage.vue"
 import NoticeDetailPage from "./../views/NoticeDetailPage.vue"
+import CommunityPage from "./../views/CommunityPage.vue"
 
 import EasterEggPage from "./../views/EasterEggPage.vue"
 
@@ -52,7 +53,12 @@ const routes = [
         component : ClubPage,
         props: true
     },
-
+    {
+        path : "/community",
+        name: "community",
+        component : CommunityPage,
+        props: true
+    },
     {
         path : "/i_love_sunrin",
         name : "easterEgg",
