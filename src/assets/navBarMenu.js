@@ -13,5 +13,10 @@ export default [
         name : "동아리",
         router : "/club",
         img:require("./../assets/sidebar/club.svg")
-    }
+    },
+    {
+        name : "게시판",
+        router : "/community",
+        img:require("./../assets/sidebar/club.svg")
+    },
 ]

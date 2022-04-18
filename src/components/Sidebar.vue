@@ -1,6 +1,8 @@
 <template>
 <transition name="nav-bar">
     <nav v-if="isSidebarShow" class="none-dragging">
+
+        <img src="./../assets/x_button.svg" alt="사이드바 닫기" class="close-sidebar" @click="$store.commit('sidebarOnOff')">
     
         <div class="nav-list">
             <div class="logo" @click="hideSidebarOnMobile(); $router.push('/')">
@@ -31,8 +33,6 @@
                 </router-link>
             </template>
         </div>
-
-        <!-- <span class="k" @click="$router.push('i_love_sunrin')">이스터에그</span> -->
     </nav>
 </transition>
 
@@ -82,6 +82,16 @@ nav {
     z-index: 2;
     background-color: white;
     box-shadow: 0px 0px 10px var(--gray5);
+}
+
+.close-sidebar {
+    display: none;
+
+    cursor: pointer;
+
+    position: absolute;
+    top : 14px;
+    right : 8px;
 }
 
 nav .nav-list {
@@ -213,7 +223,7 @@ nav .menu_list a:hover, nav a:active{
 
     /* background-color: #0000008c; */
 
-    visibility: hidden;
+    display: none;
 
     position: absolute;
     top : 0px;
@@ -221,23 +231,13 @@ nav .menu_list a:hover, nav a:active{
     z-index: 1;
 }
 
-.k {
-    display: block;
-
-    text-align: center;
-
-    color : rgb(187 187 187 / 10%);
-    cursor: pointer;
-
-    position: absolute;
-    bottom : 12px;
-    left : 0px;
-    right : 0px;
-}
-
 @media (max-width : 970px) {
+    .close-sidebar {
+        display: inline;
+    }
+    
     .sidebar-bg {
-        visibility: visible;
+        display: block;
     }
 }
 

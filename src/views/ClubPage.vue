@@ -155,6 +155,16 @@ export default {
         padding : 0;
     }
 }
+
+@media (max-width : 700px) {
+    .club-list-wrap {
+        width : 100%;
+
+        display: flex;
+        flex-direction: column;
+        gap : 24px;
+    }
+}
 </style>
 
 <!-- 학과 선택 -->
@@ -267,7 +277,7 @@ export default {
     cursor: pointer;
 }
 
-.club-list li.seleted {
+.club-list li.seleted, .club-list li:hover {
     background-color: var(--gray1);
 }
 
@@ -285,10 +295,13 @@ export default {
 
 @media (max-width : 970px) {
     .club-list {
+        height: 52px;
+
         padding: 8px;
 
         flex-direction: row;
         justify-content: space-around;
+        gap : 0;
     }
 
     .club-list li {

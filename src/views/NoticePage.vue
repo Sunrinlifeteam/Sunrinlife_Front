@@ -293,7 +293,13 @@ export default {
 
 
 @media (max-width : 970px) {
+    .header h3 {
+        display: none;
+    }
+
     .search-wrap {
+        max-width: none;
+
         background-color: #fff;
     }
 }

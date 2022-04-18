@@ -1,7 +1,7 @@
 <template>
     <div class="panel">
         <div class="page-content">
-            <div class="notice-detail-content neu-morphism-card">
+            <div class="notice-detail-content" :class="{'neu-morphism-card' : !$store.state.isMobileWindow}">
                 <div class="header">
                     <NoticeIcon :type="noticeData.type"/>
                     <h3>{{ noticeData.title }}</h3>
@@ -63,5 +63,17 @@ export default {
     color: #3d3d3d;
 
     padding : 48px;
+}
+
+
+@media (max-width : 970px) {
+    .header {
+        flex-direction: column-reverse;
+        gap : 8px;
+    }
+
+    .notice-content {
+        padding : 24px 36px;
+    }
 }
 </style>
