@@ -14,6 +14,13 @@
                 </div>
             </div>
 
+            <div class="field-name">
+                <div class="heart">추천</div>
+                <div class="title">제목</div>
+                <div class="writer">작성자</div>
+                <div class="date">작성일</div>
+            </div>
+
             <div class="hot-sunrin board-list">
                 <h3>핫선린</h3>
 
@@ -176,6 +183,21 @@ export default {
     height : 20px;
 
     cursor: pointer;
+}
+
+.field-name {
+    border-bottom: solid 1px #cdcdcd;
+
+    display: flex;
+    align-items: center;
+}
+
+.field-name * {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
+
+    padding: 8px 17px;
 }
 
 .board-list {
