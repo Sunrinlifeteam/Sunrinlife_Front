@@ -11,6 +11,7 @@ import CommunityPage from "./../views/CommunityPage.vue"
 
 import EasterEggPage from "./../views/EasterEggPage.vue"
 import PostCreatePage from "@/views/PostCreatePage";
+import PostDetailPage from "@/views/PostDetailPage";
 
 const routes = [
     {
@@ -64,6 +65,12 @@ const routes = [
         path : "/postCreate",
         name: "postCreate",
         component : PostCreatePage,
+        props: true
+    },
+    {
+        path : "/postDetail/:postId",
+        name: "postDetail",
+        component : PostDetailPage,
         props: true
     },
     {

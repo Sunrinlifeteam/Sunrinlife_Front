@@ -39,7 +39,7 @@
                         <div class="heart">
                             {{ i.heartCount }}
                         </div>
-                        <div class="title">
+                        <div class="title" @click="$router.push({ name : 'postDetail', params : { 'postId' : n } })">
                             {{ i.title }}
                             <img src="./../assets/community/eye_icon.svg" alt="" v-if="n % 3 == 0">
                         </div>
@@ -64,7 +64,7 @@
                         <div class="heart">
                             {{ i.heartCount }}
                         </div>
-                        <div class="title">
+                        <div class="title" @click="$router.push({ name : 'postDetail', params : { 'postId' : n } })">
                             {{ i.title }}
                             <img src="./../assets/community/eye_icon.svg" alt="" v-if="n % 3 == 0">
                         </div>
