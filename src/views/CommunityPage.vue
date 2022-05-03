@@ -12,6 +12,16 @@
                     <input v-model="searchQueryText" type="text" placeholder="검색">
                     <img src="/img/search.svg" alt="검색 아이콘" class="search-button">
                 </div>
+
+                <div class="filter-wrap">
+                    <select class="select-board-type">
+                        <option value="1">전체</option>
+                        <option value="2">핫선린</option>
+                        <option value="3">일반</option>
+                    </select>
+
+                    <img src="./../assets/community/select_arrow.svg" alt="실행">
+                </div>
             </div>
 
             <div class="field-name">
@@ -148,7 +158,7 @@ export default {
 
 .search-wrap {
     height: 40px;
-    max-width : 323px;
+    max-width : 430px;
     flex : 1;
 
     padding: 8px 16px;
@@ -183,6 +193,40 @@ export default {
     height : 20px;
 
     cursor: pointer;
+}
+
+.filter-wrap {
+    width: 97px;
+    height: 40px;
+
+    position: relative;
+}
+
+.select-board-type {
+    width: 100%;
+    padding: 10px 6px 6px 12px;
+
+    border: 0px;
+    border-radius: 8px;
+    background-color: #f5f6f7;
+
+    appearance:none
+}
+
+.filter-wrap img {
+    position: absolute;
+
+    top : 50%;
+    right : 6px;
+    transform: translateY(-50%);
+}
+
+.select-board-type::-ms-expand{
+    display:none;/*for IE10,11*/
+}
+
+.select-board-type:focus {
+    border: 0px;
 }
 
 .field-name {
