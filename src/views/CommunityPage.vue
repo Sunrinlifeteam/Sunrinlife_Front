@@ -12,47 +12,57 @@
                     <input v-model="searchQueryText" type="text" placeholder="검색">
                     <img src="/img/search.svg" alt="검색 아이콘" class="search-button">
                 </div>
-
-                <!-- <select name="" id=""></select> -->
             </div>
 
-            <ul class="hot-sunrin board-list">
-                <li v-for="i, n in boardData" :key="n">
-                    <div class="heart">
-                        <img src="./../assets/heart_red.svg" alt="">
-                        {{ i.heartCount }}
-                    </div>
-                    <div class="title">
-                        <span>{{ i.title }}</span>
-                        <img src="./../assets/symbol.svg" alt="" v-if="n % 3 == 0">
-                    </div>
-                    <div class="writer">
-                        {{ i.writer }}
-                    </div>
-                    <div class="date">
-                        {{ i.timeStamp.getMonth() + 1 }}-{{ i.timeStamp.getDay() }}
-                    </div>
-                </li>
-            </ul>
+            <div class="hot-sunrin board-list">
+                <h3>핫선린</h3>
 
-            <ul class="normal board-list">
-                <li v-for="i, n in boardData" :key="n">
-                    <div class="heart">
-                        <img src="./../assets/heart_blue.svg" alt="">
-                        {{ i.heartCount }}
-                    </div>
-                    <div class="title">
-                        <span>{{ i.title }}</span>
-                        <img src="./../assets/symbol.svg" alt="" v-if="n % 3 == 0">
-                    </div>
-                    <div class="writer">
-                        {{ i.writer }}
-                    </div>
-                    <div class="date">
-                        {{ i.timeStamp.getMonth() + 1 }}-{{ i.timeStamp.getDay() }}
-                    </div>
-                </li>
-            </ul>
+                <ul>
+                    <li v-for="i, n in boardData" :key="n" class="board-list-item">
+                        <div class="heart">
+                            {{ i.heartCount }}
+                        </div>
+                        <div class="title">
+                            {{ i.title }}
+                            <img src="./../assets/community/eye_icon.svg" alt="" v-if="n % 3 == 0">
+                        </div>
+                        <div class="writer">
+                            {{ i.writer }}
+                        </div>
+                        <div class="date">
+                            <span v-if="i.timeStamp.getMonth() < 9">0</span>
+                            {{ i.timeStamp.getMonth() + 1 }}-
+                            <span v-if="i.timeStamp.getDay() < 10">0</span>
+                            {{ i.timeStamp.getDay() }}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="normal board-list">
+                <h3>일반</h3>
+
+                <ul>
+                    <li v-for="i, n in boardData" :key="n" class="board-list-item">
+                        <div class="heart">
+                            {{ i.heartCount }}
+                        </div>
+                        <div class="title">
+                            {{ i.title }}
+                            <img src="./../assets/community/eye_icon.svg" alt="" v-if="n % 3 == 0">
+                        </div>
+                        <div class="writer">
+                            {{ i.writer }}
+                        </div>
+                        <div class="date">
+                            <span v-if="i.timeStamp.getMonth() < 9">0</span>
+                            {{ i.timeStamp.getMonth() + 1 }}-
+                            <span v-if="i.timeStamp.getDay() < 10">0</span>
+                            {{ i.timeStamp.getDay() }}
+                        </div>
+                    </li>
+                </ul>
+            </div>
 
         </div>
     </div>
@@ -169,62 +179,72 @@ export default {
 }
 
 .board-list {
-    padding : 10px 13px;
+    padding : 12px 15px;
 
     border-radius: 8px;
 
     display: flex;
     flex-direction: column;
-    gap : 22px;
+    gap : 15px;
 }
 
-.board-list li {
+.board-list h3 {
+    font-size: 16px;
+}
+
+.board-list ul {
     display: flex;
+    flex-direction: column;
     gap : 16px;
 }
 
-.board-list li .title {
-    flex : 1;
+.board-list-item {
+    display: flex;
+    gap : 21px;
 }
 
-.board-list li .heart{
-    font-size: 12px;
-    font-weight: 500;
-
+.board-list-item * {
     display: flex;
     align-items: center;
 }
 
-.board-list li .heart img {
+.board-list-item .heart{
+    text-align: left;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.board-list-item .heart img {
     width : 24px;
 
     padding: 4px;
 }
 
-
-.board-list li .title {
+.board-list-item .title {
     color: #3d3d3d;
 
     font-size: 14px;
     font-weight: 500;
 }
 
-.board-list li .title img {
+.board-list-item .title img {
     width: 24px;
 
     margin-left : 10px;
 }
 
-.board-list li .writer {
+.board-list-item .writer {
     color: #b9b9b9;
     font-size: 12px;
     font-weight: 500;
 }
 
-.board-list li .date{
+.board-list-item .date{
     color: #b9b9b9;
     font-size: 12px;
     font-weight: 500;
+
+    margin-left: 13px;
 }
 
 .hot-sunrin {
@@ -233,8 +253,16 @@ export default {
     background-color: hsla(0, 100%, 64%, 0.1);
 }
 
+.hot-sunrin h3 {
+    color: #ff4949;
+}
+
 .hot-sunrin li .heart {
     color: #ff4949;
+}
+
+.normal li .heart {
+    color: #4992ff;
 }
 
 </style>
