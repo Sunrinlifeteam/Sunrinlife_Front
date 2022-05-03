@@ -17,6 +17,6 @@ export default [
     {
         name : "게시판",
         router : "/community",
-        img:require("./../assets/sidebar/club.svg")
+        img:require("./../assets/sidebar/community.svg")
     },
 ]
