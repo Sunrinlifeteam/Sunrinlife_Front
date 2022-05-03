@@ -18,7 +18,7 @@
             </div>
             <div v-if="task.schedule.length == 0">Add Todos!</div>
             <div class="add_button_panel">
-                <img src="../../../assets/add.svg" class="add-button" @click.prevent="addTodo(task.schedule)">
+                <img src="../../../assets/image_add.svg" class="add-button" @click.prevent="addTodo(task.schedule)">
             </div>
         </div> -->
         <div class="schedule-items" v-for="day in weeks" :key="day">

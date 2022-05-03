@@ -4,7 +4,7 @@
         <div class="community-content neu-morphism-card">
             <div class="header">
                 <h2>일반 게시판 / 익명 게시판</h2>
-                <img src="./../assets/user_profile_assets/correctionIcon.svg" alt="">
+                <img src="@/assets/user_profile_assets/correctionIcon.svg" alt="" @click="$router.push({ name:'postCreate' })">
             </div>
 
             <div class="search-filter-wrap">
