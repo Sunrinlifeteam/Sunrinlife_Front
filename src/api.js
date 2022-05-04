@@ -133,7 +133,7 @@ export async function getTodaySchedule(grade, cl){
 }
 
 //공지 API
-export async function getNoticeMain(count = 5){
+export async function getNoticeMain(count = 3){
     let res = await getAPI.get(`/notice?count=${count}`).then((res) => res.data).catch((e) => console.log(e))
     return res
 }

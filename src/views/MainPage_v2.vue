@@ -122,4 +122,16 @@ main {
     display: inline;
     font-size: 18px;
 }
+
+@media (max-width: 970px) {
+    .main-page-items {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .main-page-items * {
+        grid-column: 1 / 2;
+        grid-row: unset;
+    }
+}
 </style>

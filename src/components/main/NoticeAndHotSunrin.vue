@@ -26,7 +26,7 @@
         </div>
 
         <div class="main-page-item-content">
-            <div v-for="(i, j) in boardData" :key="j" class="hotsunrin-list" @click="$router.push(`/postDetail/${j}`)">
+            <div v-for="(i, j) in boardData" :key="j" class="hotsunrin-list" @click="$router.push({ name : `post`, params : { 'postId' : j } })">
                 <div class="heart-count">{{ i.heartCount }}</div>
                 <p class="title text-truncated">{{i.title}}</p>
             </div>
