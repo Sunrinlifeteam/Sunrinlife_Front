@@ -43,7 +43,7 @@
                 </div>
             </template>
             <div class="add_button_panel">
-                <img src="../../../assets/add.svg" class="add-button" @click.prevent="addTodo(day.date)">
+                <img src="../../../assets/plus_icon.svg" class="add-button" @click.prevent="addTodo(day.date)">
             </div>
         </div>
         
@@ -258,6 +258,10 @@ export default {
 
 .add-button {
     height: 24px;
+
+    border-radius: 100%;
+    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.16);
+    background-color: #fff;
 }
 .add-button:hover {
     cursor: pointer;

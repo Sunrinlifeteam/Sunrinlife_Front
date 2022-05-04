@@ -14,7 +14,7 @@
             <Notice class="a2"/>
             <Meal class="meal"/>
             <TodaySchedule class="today-schedule"/>
-            <Notice class="a5"/>
+            <Schedule class="a5"/>
         </div>
     </main>
 </div>
@@ -25,6 +25,7 @@ import Notice from "../components/main/Notice.vue"
 import NoticeAndHotSunrin from "../components/main/NoticeAndHotSunrin.vue"
 import Meal from "../components/main/Meal.vue"
 import TodaySchedule from "../components/main/TodaySchedule"
+import Schedule from "@/components/main/Sechedule/Schedule";
 
 export default {
     name : "mainPage",
@@ -39,6 +40,7 @@ export default {
         Meal,
         TodaySchedule,
         NoticeAndHotSunrin,
+        Schedule,
     }
 }
 
@@ -129,7 +131,7 @@ main {
         grid-template-columns: 1fr;
     }
 
-    .main-page-items * {
+    .main-page-items > * {
         grid-column: 1 / 2;
         grid-row: unset;
     }
