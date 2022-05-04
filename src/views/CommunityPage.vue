@@ -15,6 +15,7 @@
 
                 <div class="filter-wrap">
                     <select class="select-board-type">
+                        <!-- todo 셀렉터 패딩 -->
                         <option value="1">전체</option>
                         <option value="2">핫선린</option>
                         <option value="3">일반</option>
@@ -66,6 +67,7 @@
                         </div>
                         <div class="title" @click="$router.push({ name : 'postDetail', params : { 'postId' : n } })">
                             {{ i.title }}
+                            <!-- todo 제목 짤림 -->
                             <img src="./../assets/community/eye_icon.svg" alt="" v-if="n % 3 == 0">
                         </div>
                         <div class="writer">

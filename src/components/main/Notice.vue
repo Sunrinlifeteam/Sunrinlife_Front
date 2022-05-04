@@ -1,8 +1,8 @@
 <template>
-<div class="notice main-page-item">
+<div class="notice-and-hot-sunrin main-page-item">
     <div class="main-page-item-title"><h3>공지</h3></div>
     <div class="main-page-item-content">
-        <div v-for="i, j, in noticeMain" :key="j" class="title_list">
+        <div v-for="i, j, in noticeMain" :key="j" class="notice-list">
             <NoticeIcon :type="i.type"/>
             <p class="title text-truncated" @click="$router.push(`/notice/${i.id}`)">{{i.title}}</p>
         </div>
@@ -29,7 +29,7 @@ export default {
         NoticeIcon
     },
     mounted(){
-        getNoticeMain().then((data) => {
+        getNoticeMain(3).then((data) => {
             store.commit("getNoticeMain", data)
         })
     },
@@ -39,18 +39,17 @@ export default {
 }
 </script>
 
-<style>
-.notice{
+<style scoped>
+.notice-and-hot-sunrin{
     
 }
 
-.notice .main-page-item-content{
+.notice-and-hot-sunrin .main-page-item-content{
     display: flex;
     flex-direction: column;
-    
 }
 
-.title_list{
+.notice-list{
     height : 28px;
 
     display: flex;
@@ -58,7 +57,7 @@ export default {
     margin-bottom:14px;
 }
 
-.notice .icon-wrap {
+.notice-and-hot-sunrin .icon-wrap {
     padding-right : 4px;
 }
 

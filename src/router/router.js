@@ -2,7 +2,7 @@ import { createWebHistory, createRouter } from "vue-router"
 
 import LoginPage from "./../views/LoginPage.vue"
 import Register from "./../views/RegisterPage.vue"
-import MainPage from "./../views/MainPage.vue"
+import MainPage from "./../views/MainPage_v2.vue"
 import ProfilePage from './../views/ProfilePage.vue';
 import ClubPage from "./../views/ClubPage.vue"
 import NoticePage from "./../views/NoticePage.vue"
@@ -68,7 +68,7 @@ const routes = [
         props: true
     },
     {
-        path : "/postDetail/:postId",
+        path : "/post/:postId",
         name: "postDetail",
         component : PostDetailPage,
         props: true
