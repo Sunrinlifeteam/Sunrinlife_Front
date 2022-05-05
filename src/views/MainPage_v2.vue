@@ -11,7 +11,7 @@
 
         <div class="main-page-items">
             <NoticeAndHotSunrin class="notice-and-hot-sunrin"/>
-            <Notice class="a2"/>
+            <Timer_v2 class="a2"/>
             <Meal class="meal"/>
             <TodaySchedule class="today-schedule"/>
             <Schedule class="a5"/>
@@ -21,11 +21,11 @@
 
 </template>
 <script>
-import Notice from "../components/main/Notice.vue"
 import NoticeAndHotSunrin from "../components/main/NoticeAndHotSunrin.vue"
 import Meal from "../components/main/Meal.vue"
 import TodaySchedule from "../components/main/TodaySchedule"
 import Schedule from "@/components/main/Sechedule/Schedule";
+import Timer_v2 from "@/components/main/Timer_v2";
 
 export default {
     name : "mainPage",
@@ -36,11 +36,11 @@ export default {
         
     },
     components: {
-        Notice,
         Meal,
         TodaySchedule,
         NoticeAndHotSunrin,
         Schedule,
+        Timer_v2,
     }
 }
 

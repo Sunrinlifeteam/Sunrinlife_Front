@@ -2,7 +2,7 @@
 <div class="schedule main-page-item">
     <h3>일정</h3>
 
-    <div class="schedule-item">
+    <div class="schedule-item scroll">
         <!-- <div class="schedule-items" v-for="task in tasks" :key="task">
             <div class="item-day">{{ task.day }}</div>
             <div v-for="(content, i) in task.schedule" :key="i" class="schedule_list_item">
@@ -134,19 +134,19 @@ export default {
     overflow: auto;
     padding-bottom:5px;
 }
-.schedule-item::-webkit-scrollbar {
-    height: 5px;
-    width: 5px;
-    margin-top:2px;
-    margin-left:2px;
-}
-.schedule-item::-webkit-scrollbar-track {
-    background-color: none; 
-}
+/*.schedule-item::-webkit-scrollbar {*/
+/*    height: 5px;*/
+/*    width: 5px;*/
+/*    margin-top:2px;*/
+/*    margin-left:2px;*/
+/*}*/
+/*.schedule-item::-webkit-scrollbar-track {*/
+/*    background-color: none; */
+/*}*/
 
-.schedule-item::-webkit-scrollbar-thumb {
-    background-color: #d3d3d3;
-}
+/*.schedule-item::-webkit-scrollbar-thumb {*/
+/*    background-color: #d3d3d3;*/
+/*}*/
 
 .schedule-items{
     padding: 8px;
