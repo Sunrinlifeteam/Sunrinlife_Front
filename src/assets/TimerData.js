@@ -93,8 +93,14 @@ const timeData1 = [
         "study"
     ),
     new TimerItem(
-        "방과후",
+        "방과후 1",
         new Time(15, 10, 0),
+        new Time(16, 49, 59),
+        "not study"
+    ),
+    new TimerItem(
+        "방과후",
+        new Time(16, 50, 0),
         new Time(23, 59, 59),
         "not study"
     ),
@@ -199,4 +205,4 @@ const timeData2 = [
     ),
 ]
 
-export default [timeData1, timeData2]
+export { timeData1, timeData2 }

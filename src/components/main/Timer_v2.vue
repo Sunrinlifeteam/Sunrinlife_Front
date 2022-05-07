@@ -4,7 +4,7 @@
     <div class="main-page-item-content">
         <div class="current-item">
             <span class="sub_title">현재</span>
-            <span class="font-bold className">5교시 국어</span>
+            <span class="font-bold className">{{ currentTime.className }}</span>
         </div>
         <div class="next-time">
             <span class="sub_title">남은 시간</span>
@@ -32,7 +32,8 @@
 </template>
 
 <script>
-import TimerDatas from "./../../assets/TimerData.js"
+// eslint-disable-next-line no-unused-vars
+import * as _TimerDatas from "./../../assets/TimerData.js"
 import { mapState } from "vuex";
 
 export default {
@@ -44,17 +45,66 @@ export default {
         남은시간_기준시간 : {},
         isTimeFew : false,
 
-        TimerDatas,
+        timerData : {},
     }},
     methods: {
+        setTime(){
+            for(let i = 0; i < this.timerData.length; i++){
+                const d = this.timerData[i];
 
+                if(d.isCurrentTime){
+                    this.currentTime = d;
+
+                    if(i == this.timerData.length - 1){
+                        this.남은시간_기준시간 = this.timerData[0].startTime;
+                    }
+                    else{
+                        this.남은시간_기준시간 = this.timerData[i + 1].startTime;
+                    }
+
+                    continue;
+                }
+            }
+        }
     },
     mounted(){
+        this.timerData = _TimerDatas.timeData1
 
+        this.setTime()
+        setInterval(()=>{
+            const 남은시간_time = this.남은시간_기준시간.diffTimeForNow
+
+            // this.allS = 남은시간_time.allSecond
+
+            this.남은시간.hour = 남은시간_time.hour
+            this.남은시간.minute = 남은시간_time.minute
+            this.남은시간.second = 남은시간_time.second
+
+            if(남은시간_time.allSecond <= 1) {
+                location.reload();
+                // setTimeout(()=>{
+                //     this.setTime()
+                // }, 1500)
+            }
+        }, 100)
     },
     computed:{
-        ...mapState(["noticeMain"]),
+        ...mapState(["noticeMain", "userData"]),
+        getUserData(){
+            return this.$store.getters.getUserData
+        }
     },
+    watch:{
+        getUserData(){
+            let userData = this.$store.getters.getUserData
+            if(userData["grade"] <= 2) {
+                this.timerData = _TimerDatas.timeData1
+            }
+            else {
+                this.timerData = _TimerDatas.timeData2
+            }
+        }
+    }
 }
 </script>
 
