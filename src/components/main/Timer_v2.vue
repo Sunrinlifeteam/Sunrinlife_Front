@@ -16,13 +16,15 @@
         </div>
         <div class="time-table-wrap scroll">
             <ul class="time-table">
-                <li v-for="i in 7" :key="i">
+                <li v-for="i, n in todaySchedule" :key="n">
                     <div class="top">
-                        <div class="class-name">인공지능과 미래사회</div>
-                        <div class="teacher">박예원 선생님</div>
+                        <div class="class-name">{{ i }}</div>
+<!--                        <div class="teacher">박예원 선생님</div>-->
                     </div>
                     <div class="bottom">
-                        <div class="start-time">08:40</div>
+                        <div class="start-time">
+<!--                            {{ getClassStartTime(n) }}-->
+                        </div>
                     </div>
                 </li>
             </ul>
@@ -35,6 +37,7 @@
 // eslint-disable-next-line no-unused-vars
 import * as _TimerDatas from "./../../assets/TimerData.js"
 import { mapState } from "vuex";
+import { getTodaySchedule } from "@/api";
 
 export default {
     name : "Timer",
@@ -65,6 +68,17 @@ export default {
                     continue;
                 }
             }
+        },
+
+        getClassStartTime(classNumber){
+            this.timerData.forEach((d)=>{
+                // console.log(d);
+                if(d.className === classNumber+"교시"){
+                    console.log(classNumber + "교시");
+                    return d;
+                }
+            })
+            return null
         }
     },
     mounted(){
@@ -89,7 +103,7 @@ export default {
         }, 100)
     },
     computed:{
-        ...mapState(["noticeMain", "userData"]),
+        ...mapState(["noticeMain", "userData", "todaySchedule"]),
         getUserData(){
             return this.$store.getters.getUserData
         }
@@ -97,12 +111,10 @@ export default {
     watch:{
         getUserData(){
             let userData = this.$store.getters.getUserData
-            if(userData["grade"] <= 2) {
-                this.timerData = _TimerDatas.timeData1
-            }
-            else {
-                this.timerData = _TimerDatas.timeData2
-            }
+
+            getTodaySchedule(userData.grade, userData.class).then((data) => {
+                this.$store.commit("getTodaySchedule", data)
+            })
         }
     }
 }
