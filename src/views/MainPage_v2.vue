@@ -4,8 +4,18 @@
     <main class="page-content">
         <div class="header">
             <div class="date-time-wrap">
-                <h2>2022년 04월 05일 화요일</h2>
-                <h3>오전 12시 47분</h3>
+                <h2>{{ nowDate.getFullYear() }}년
+                    <span v-if="nowDate.getMonth() < 9">0</span>{{ nowDate.getMonth() + 1 }}월
+                    <span v-if="nowDate.getDate() < 9">0</span>{{ nowDate.getDate() + 1 }}일
+                    {{ dateList[nowDate.getDay() - 1] }}요일
+                </h2>
+                <h3>
+                    <template v-if="nowDate.getHours() < 12">오전</template>
+                    <template v-else>오후 </template>
+
+                    <span v-if="nowDate.getHours() % 12 < 9">0</span>{{ nowDate.getHours() % 12 }}시
+                    <span v-if="nowDate.getMinutes() < 9">0</span>{{ nowDate.getMinutes() }}분
+                </h3>
             </div>
         </div>
 
@@ -30,7 +40,10 @@ import Timer_v2 from "@/components/main/Timer_v2";
 export default {
     name : "mainPage",
     data() {
-        return {}
+        return {
+            nowDate : new Date(),
+            dateList : [ "월", "화", "수", "목", "금", "토", "일" ]
+        }
     },
     methods: {
         
