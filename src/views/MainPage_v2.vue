@@ -13,8 +13,9 @@
                     <template v-if="nowDate.getHours() < 12">오전</template>
                     <template v-else>오후 </template>
 
-                    <span v-if="nowDate.getHours() % 12 < 9">0</span>{{ nowDate.getHours() % 12 }}시
-                    <span v-if="nowDate.getMinutes() < 9">0</span>{{ nowDate.getMinutes() }}분
+                    <span v-if="nowDate.getHours() % 12 <= 9">0</span>{{ nowDate.getHours() % 12 }}시
+                    <span v-if="nowDate.getMinutes() <= 9">0</span>{{ nowDate.getMinutes() }}분
+                    <span v-if="nowDate.getSeconds() <= 9">0</span>{{ nowDate.getSeconds() }}초
                 </h3>
             </div>
         </div>
@@ -46,7 +47,12 @@ export default {
         }
     },
     methods: {
-        
+
+    },
+    mounted() {
+        setInterval(()=>{
+            this.nowDate = new Date()
+        }, 1000)
     },
     components: {
         Meal,
@@ -64,12 +70,11 @@ main{
 
 }
 
-.main-page-item{
-    background-color: white;
+.main-page-item {
+    padding: 12px 16px;
     border-radius: 8px;
-    padding : 12px 16px;
-
-    box-shadow: 10px 10px 20px var(--gray4);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.16);
+    background-color: #fff;
 
     display: grid;
     grid-template-rows: auto 1fr;
