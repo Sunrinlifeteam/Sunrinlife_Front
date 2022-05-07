@@ -14,11 +14,11 @@
                 </div>
 
                 <div class="filter-wrap">
-                    <select class="select-board-type">
+                    <select class="select-board-type" v-model="filterSelect">
                         <!-- todo 셀렉터 패딩 -->
-                        <option value="1">전체</option>
-                        <option value="2">핫선린</option>
-                        <option value="3">일반</option>
+                        <option>전체</option>
+                        <option>핫선린</option>
+                        <option>일반</option>
                     </select>
 
                     <img src="./../assets/community/select_arrow.svg" alt="실행">
@@ -32,7 +32,7 @@
                 <div class="date">작성일</div>
             </div>
 
-            <div class="hot-sunrin board-list">
+            <div class="hot-sunrin board-list" v-if="filterSelect == '전체' || filterSelect == '핫선린'">
                 <h3>핫선린</h3>
 
                 <ul>
@@ -57,7 +57,7 @@
                 </ul>
             </div>
 
-            <div class="normal board-list">
+            <div class="normal board-list" v-if="filterSelect == '전체' || filterSelect == '일반'">
                 <h3>일반</h3>
 
                 <ul>
@@ -92,6 +92,8 @@
 export default {
     name : "CommunitPage",
     data(){ return {
+        filterSelect : "전체",
+
         boardData : [
             {
                 heartCount : 13,
@@ -206,7 +208,7 @@ export default {
 
 .select-board-type {
     width: 100%;
-    padding: 10px 6px 6px 12px;
+    padding: 10px 6px 10px 12px;
 
     border: 0px;
     border-radius: 8px;
