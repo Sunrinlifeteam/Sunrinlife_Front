@@ -238,6 +238,10 @@ export default {
     align-items: center;
 }
 
+.field-name .title {
+    flex : 1;
+}
+
 .field-name * {
     font-size: 12px;
     font-weight: bold;
@@ -289,6 +293,8 @@ export default {
 }
 
 .board-list-item .title {
+    flex : 1;
+
     color: #3d3d3d;
 
     font-size: 14px;
