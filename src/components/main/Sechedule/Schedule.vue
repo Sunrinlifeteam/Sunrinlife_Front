@@ -2,7 +2,7 @@
 <div class="schedule main-page-item">
     <h3>일정</h3>
 
-    <div class="schedule-item">
+    <div class="schedule-item scroll">
         <!-- <div class="schedule-items" v-for="task in tasks" :key="task">
             <div class="item-day">{{ task.day }}</div>
             <div v-for="(content, i) in task.schedule" :key="i" class="schedule_list_item">
@@ -18,7 +18,7 @@
             </div>
             <div v-if="task.schedule.length == 0">Add Todos!</div>
             <div class="add_button_panel">
-                <img src="../../../assets/add.svg" class="add-button" @click.prevent="addTodo(task.schedule)">
+                <img src="../../../assets/image_add.svg" class="add-button" @click.prevent="addTodo(task.schedule)">
             </div>
         </div> -->
         <div class="schedule-items" v-for="day in weeks" :key="day">
@@ -43,7 +43,7 @@
                 </div>
             </template>
             <div class="add_button_panel">
-                <img src="../../../assets/add.svg" class="add-button" @click.prevent="addTodo(day.date)">
+                <img src="../../../assets/plus_icon.svg" class="add-button" @click.prevent="addTodo(day.date)">
             </div>
         </div>
         
@@ -134,19 +134,19 @@ export default {
     overflow: auto;
     padding-bottom:5px;
 }
-.schedule-item::-webkit-scrollbar {
-    height: 5px;
-    width: 5px;
-    margin-top:2px;
-    margin-left:2px;
-}
-.schedule-item::-webkit-scrollbar-track {
-    background-color: none; 
-}
+/*.schedule-item::-webkit-scrollbar {*/
+/*    height: 5px;*/
+/*    width: 5px;*/
+/*    margin-top:2px;*/
+/*    margin-left:2px;*/
+/*}*/
+/*.schedule-item::-webkit-scrollbar-track {*/
+/*    background-color: none; */
+/*}*/
 
-.schedule-item::-webkit-scrollbar-thumb {
-    background-color: #d3d3d3;
-}
+/*.schedule-item::-webkit-scrollbar-thumb {*/
+/*    background-color: #d3d3d3;*/
+/*}*/
 
 .schedule-items{
     padding: 8px;
@@ -258,6 +258,10 @@ export default {
 
 .add-button {
     height: 24px;
+
+    border-radius: 100%;
+    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.16);
+    background-color: #fff;
 }
 .add-button:hover {
     cursor: pointer;

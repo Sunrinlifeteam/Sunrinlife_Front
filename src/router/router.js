@@ -2,7 +2,7 @@ import { createWebHistory, createRouter } from "vue-router"
 
 import LoginPage from "./../views/LoginPage.vue"
 import Register from "./../views/RegisterPage.vue"
-import MainPage from "./../views/MainPage.vue"
+import MainPage from "./../views/MainPage_v2.vue"
 import ProfilePage from './../views/ProfilePage.vue';
 import ClubPage from "./../views/ClubPage.vue"
 import NoticePage from "./../views/NoticePage.vue"
@@ -10,6 +10,8 @@ import NoticeDetailPage from "./../views/NoticeDetailPage.vue"
 import CommunityPage from "./../views/CommunityPage.vue"
 
 import EasterEggPage from "./../views/EasterEggPage.vue"
+import PostCreatePage from "@/views/PostCreatePage";
+import PostDetailPage from "@/views/PostDetailPage";
 
 const routes = [
     {
@@ -57,6 +59,18 @@ const routes = [
         path : "/community",
         name: "community",
         component : CommunityPage,
+        props: true
+    },
+    {
+        path : "/postCreate",
+        name: "postCreate",
+        component : PostCreatePage,
+        props: true
+    },
+    {
+        path : "/post/:postId",
+        name: "postDetail",
+        component : PostDetailPage,
         props: true
     },
     {

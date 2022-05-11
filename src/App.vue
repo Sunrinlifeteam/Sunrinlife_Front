@@ -140,4 +140,9 @@ export default {
 
 <style>
 @import "./assets/style/style.css";
+
+#app {
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
 </style>

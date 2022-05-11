@@ -129,7 +129,21 @@ button:active{
     -moz-user-select: -moz-none;
     -khtml-user-select: none;
     -webkit-user-select: none;
-user-select: none;
+    user-select: none;
+}
+
+.scroll::-webkit-scrollbar {
+    height: 5px;
+    width: 5px;
+    margin-top:2px;
+    margin-left:2px;
+}
+.scroll::-webkit-scrollbar-track {
+    background-color: none;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    background-color: #d3d3d3;
 }
 
 
