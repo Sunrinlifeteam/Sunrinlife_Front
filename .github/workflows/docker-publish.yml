@@ -96,4 +96,4 @@ jobs:
           content="${content//$'\n'/'@${{ steps.build-and-push.outputs.digest }}; cosign sign '}"
           content="${content//$'\r'/''}"
           echo "cosign sign $content"
-          echo "cosign sign $content" | /bin/bas
+          echo "cosign sign $content" | /bin/bash
