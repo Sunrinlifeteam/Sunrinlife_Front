@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <defs>
+        <clipPath id="7769r75j5a">
+            <path data-name="사각형 360" transform="translate(52 10)" style="stroke:#707070;fill:none" d="M0 0h24v24H0z"/>
+        </clipPath>
+    </defs>
+    <g data-name="마스크 그룹 110" transform="rotate(180 38 17)" style="clip-path:url(#7769r75j5a)">
+        <path data-name="패스 230" d="m502.053 867.145-5.569-5.569 5.569-5.569" transform="translate(-435.268 -839.576)" style="stroke:#4992ff;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;fill:none"/>
+    </g>
+</svg>
