@@ -16,7 +16,19 @@ export default [
     },
     {
         name : "게시판",
-        router : "/community",
-        img:require("./../assets/sidebar/community.svg")
+        router : "/community?type=public",
+        img:require("./../assets/sidebar/community.svg"),
+        option:[
+            {
+                name : "일반",
+                query : {type:"public"},
+                props: "public"
+            },
+            {
+                name : "익명",
+                query : {type:"anonymous"},
+                props: "anonymous"
+            },
+        ]
     },
 ]

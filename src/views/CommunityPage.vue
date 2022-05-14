@@ -3,7 +3,8 @@
     <div class="page-content">
         <div class="community-content neu-morphism-card">
             <div class="header">
-                <h2>일반 게시판 / 익명 게시판</h2>
+                <h2 v-if="isAnonymous()">익명 게시판</h2>
+                <h2 v-else>일반 게시판</h2>
                 <img src="@/assets/user_profile_assets/correctionIcon.svg" alt="" @click="$router.push({ name:'postCreate' })">
             </div>
 
@@ -28,11 +29,11 @@
             <div class="field-name">
                 <div class="heart">추천</div>
                 <div class="title">제목</div>
-                <div class="writer">작성자</div>
+                <div class="writer" v-if="!isAnonymous()">작성자</div>
                 <div class="date">작성일</div>
             </div>
 
-            <div class="hot-sunrin board-list" v-if="filterSelect == '전체' || filterSelect == '핫선린'">
+            <div class="hot-sunrin board-list" v-if="filterSelect === '전체' || filterSelect === '핫선린'">
                 <h3>핫선린</h3>
 
                 <ul>
@@ -44,7 +45,7 @@
                             {{ i.title }}
                             <img src="./../assets/community/eye_icon.svg" alt="" v-if="n % 3 == 0">
                         </div>
-                        <div class="writer">
+                        <div class="writer" v-if="!isAnonymous()">
                             {{ i.writer }}
                         </div>
                         <div class="date">
@@ -57,7 +58,7 @@
                 </ul>
             </div>
 
-            <div class="normal board-list" v-if="filterSelect == '전체' || filterSelect == '일반'">
+            <div class="normal board-list" v-if="filterSelect === '전체' || filterSelect === '일반'">
                 <h3>일반</h3>
 
                 <ul>
@@ -70,7 +71,7 @@
                             <!-- todo 제목 짤림 -->
                             <img src="./../assets/community/eye_icon.svg" alt="" v-if="n % 3 == 0">
                         </div>
-                        <div class="writer">
+                        <div class="writer" v-if="!isAnonymous()">
                             {{ i.writer }}
                         </div>
                         <div class="date">
@@ -126,13 +127,19 @@ export default {
                 timeStamp : new Date()
             },
         ]
-    }}
+    }},
+    methods:{
+        isAnonymous(){
+            return this.$route.query.type === 'anonymous'
+        }
+    }
 }
 </script>
 
 <style scoped>
+
 .community-content {
-    padding : 16px;
+    padding : 14px 24px;
 }
 
 .header, .search-filter-wrap {
@@ -243,17 +250,26 @@ export default {
 .field-name .title {
     flex : 1;
 }
+.field-name .heart{
+    padding-left:12px;
+}
+.field-name .writer{
+    padding-right: 25px;
+}
+.field-name .date{
+    padding-right:15px;
+}
 
 .field-name * {
     font-size: 12px;
     font-weight: bold;
     text-align: left;
 
-    padding: 8px 17px;
+    padding: 8px 8px;
 }
 
 .board-list {
-    padding : 12px 15px;
+    padding : 12px 16px;
 
     border-radius: 8px;
 
@@ -274,7 +290,7 @@ export default {
 
 .board-list-item {
     display: flex;
-    gap : 21px;
+    gap : 20px;
 }
 
 .board-list-item * {

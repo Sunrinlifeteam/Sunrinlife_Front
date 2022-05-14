@@ -5,7 +5,7 @@
         <div class="main-page-item-title">
             <h3>공지</h3>
 
-            <img src="@/assets/plus_icon.svg" alt="공지 더보기 버튼"
+            <img src="@/assets/more.svg" alt="공지 더보기 버튼"
                 @click="$router.push({ name:'notice' })">
         </div>
 
@@ -21,7 +21,7 @@
         <div class="main-page-item-title">
             <h3>핫선린</h3>
 
-            <img src="@/assets/plus_icon.svg" alt="핫선린 더보기 버튼"
+            <img src="@/assets/more.svg" alt="핫선린 더보기 버튼"
                 @click="$router.push({ name:'community' })">
         </div>
 
