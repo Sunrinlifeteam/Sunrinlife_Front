@@ -70,8 +70,6 @@ export default {
                     else{
                         this.남은시간_기준시간 = this.timerData[i + 1].startTime;
                     }
-
-                    break;
                 }
             }
         },
