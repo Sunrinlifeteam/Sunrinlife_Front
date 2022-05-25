@@ -225,6 +225,8 @@ export default {
 }
 
 .filter-wrap img {
+    pointer-events: none;
+
     position: absolute;
 
     top : 50%;
