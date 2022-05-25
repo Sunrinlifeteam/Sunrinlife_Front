@@ -152,7 +152,6 @@ export default {
 }
 
 .header h3 {
-    width : 35px;
     text-align: center;
 
     margin-right: 12px;
