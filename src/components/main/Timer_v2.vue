@@ -23,7 +23,7 @@
                     </div>
                     <div class="bottom">
                         <div class="start-time">
-<!--                            {{ getClassStartTime(n) }}-->
+                            <span v-if="startTimeList[n].hour < 10">0</span>{{ startTimeList[n].hour }} : <span v-if="startTimeList[n].minute < 10">0</span>{{ startTimeList[n].minute }}
                         </div>
                     </div>
                 </li>
@@ -49,37 +49,32 @@ export default {
         isTimeFew : false,
 
         timerData : {},
+
+        startTimeList : [],
     }},
     methods: {
         setTime(){
             for(let i = 0; i < this.timerData.length; i++){
                 const d = this.timerData[i];
 
+                if(d.classType == "study"){
+                    this.startTimeList.push(d.startTime)
+                }
+
                 if(d.isCurrentTime){
                     this.currentTime = d;
 
                     if(i == this.timerData.length - 1){
-                        this.남은시간_기준시간 = this.timerData[0].startTime;
+                        this.남은시간_기준시간 = this.timerData[0].endTime;
                     }
                     else{
                         this.남은시간_기준시간 = this.timerData[i + 1].startTime;
                     }
 
-                    continue;
+                    break;
                 }
             }
         },
-
-        getClassStartTime(classNumber){
-            this.timerData.forEach((d)=>{
-                // console.log(d);
-                if(d.className === classNumber+"교시"){
-                    console.log(classNumber + "교시");
-                    return d;
-                }
-            })
-            return null
-        }
     },
     mounted(){
         this.timerData = _TimerDatas.timeData1
