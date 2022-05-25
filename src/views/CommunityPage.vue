@@ -16,7 +16,6 @@
 
                 <div class="filter-wrap">
                     <select class="select-board-type" v-model="filterSelect">
-                        <!-- todo 셀렉터 패딩 -->
                         <option>전체</option>
                         <option>핫선린</option>
                         <option>일반</option>
@@ -84,6 +83,26 @@
                 </ul>
             </div>
 
+
+
+
+            <div class="pagination-wrap">
+                <img src="./../assets/prev_arrow.svg" alt="" class="arrow prev-btn"
+                    @click="() => {if(pageId - 1 >= 1) changePage(pageId - 1)}">
+                <div class="page-button-wrap">
+                    <template v-for="i in Math.min(loadedPageCount, 5)" :key="i">
+                        <div
+                            class="page-btn"
+                            :class="{'current-page' : (pageStart + i) === pageId}"
+                            @click="changePage(pageStart + i)">
+                            {{ pageStart + i }}
+                        </div>
+                    </template>
+                </div>
+                <img src="./../assets/next_arrow.svg" alt="" class="arrow next-btn"
+                     @click="() => {if(pageId + 1 <= loadedPageCount) changePage(pageId + 1)}">
+            </div>
+
         </div>
     </div>
 </div>
@@ -93,6 +112,10 @@
 export default {
     name : "CommunitPage",
     data(){ return {
+        loadedPageCount : 10,
+        pageStart : 0,
+        pageId : 1,
+
         filterSelect : "전체",
 
         boardData : [
@@ -131,6 +154,9 @@ export default {
     methods:{
         isAnonymous(){
             return this.$route.query.type === 'anonymous'
+        },
+        changePage(newPageId){
+            this.pageId = newPageId;
         }
     }
 }
@@ -357,6 +383,60 @@ export default {
 
 .normal li .heart {
     color: #4992ff;
+}
+
+
+.pagination-wrap {
+    height : 32px;
+
+    /* margin-top : 32px; */
+
+    display: flex;
+    justify-content: center;
+}
+
+.pagination-wrap img {
+    width : 32px;
+
+    padding : 8px;
+}
+
+.pagination-wrap .page-button-wrap {
+    display: flex;
+    gap : 4px;
+}
+
+.pagination-wrap .page-btn {
+    width : 32px;
+
+    color: #c9c9c9;
+
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    user-select: none;
+}
+
+.pagination-wrap .page-btn:hover {
+    background-color: var(--gray1);
+}
+
+.pagination-wrap .page-btn.current-page {
+    color : white;
+
+    background-color: var(--main-color4);
+}
+
+.pagination-wrap *  {
+    cursor: pointer;
 }
 
 </style>
