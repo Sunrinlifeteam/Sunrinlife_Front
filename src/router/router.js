@@ -56,7 +56,7 @@ const routes = [
         props: true
     },
     {
-        path : "/community",
+        path : "/community/",
         name: "community",
         component : CommunityPage,
         props: true

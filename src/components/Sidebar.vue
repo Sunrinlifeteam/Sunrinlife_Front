@@ -11,12 +11,19 @@
             </div>
 
             <div class="menu_list">
-                <router-link
-                    v-for="i, n in navBarList" :key="n" :to="i.router"
-                    @click="hideSidebarOnMobile()">
-                    <img :src="i.img">
-                    <span>{{ i.name }}</span>
-                </router-link>
+                <div v-for="i, n in navBarList" :key="n" :class="{options:i.option}">
+                    <router-link
+                        :to="i.router"
+                        @click="hideSidebarOnMobile()">
+                        <img :src="i.img">
+                        <span>{{ i.name }}</span>
+                    </router-link>
+                    <template v-if="i.option">
+                        <router-link v-for="j, n in i.option" :key="n" :to="{path:i.router, query:j.query}" class="router_option" :class="{router_option_current_query:checkQuery(j.props)}">
+                            <span>{{j.name}}</span>
+                        </router-link>
+                    </template>
+                </div>
             </div>
             <template v-if="userData">
                 <router-link class="list-user-profile" :to="'profile'" @click="hideSidebarOnMobile()">
@@ -57,6 +64,9 @@ export default {
         hideSidebarOnMobile(){
             if (this.isMobileWindow)
                 this.$store.commit('sidebarOff')
+        },
+        checkQuery(prop){
+            return prop === this.$route.query.type
         }
     },
     computed :{
@@ -165,25 +175,60 @@ nav .menu_list{
     flex-direction: column;
 }
 
+nav .menu_list .options:hover .router_option{
+    display:flex;
+}
+
 nav .menu_list a{
     font-size: 18px;
     padding : 8px 16px;
     padding-left:32px;
-    color:#d9d9d9;
+    color:#b9b9b9;
     display : flex;
-
     cursor: pointer;
 }
 
-.nav-list .router-link-exact-active{
+nav .menu_list .router_option:not(.router-link-exact-active){
+    display: none;
+}
+nav .menu_list .router_option{
+    font-size:15px;
+    padding:4px;
+    padding-left: 65px;
+}
+nav .menu_list .router_option span{
+    margin: 0;
+}
+
+nav .menu_list .options .router_option span::before{
+    content:"";
+    display:inline-block;
+    width:5px;
+    height:5px;
+    border-radius: 100%;
+    background-color: #b9b9b9;
+    vertical-align: middle;
+    margin-bottom:3px;
+    margin-right:12px;
+}
+
+.nav-list .router-link-exact-active:not(.router_option){
     color : #4992ff;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
 }
 
+.router_option_current_query{
+    color : #4992ff !important;
+}
+.router_option_current_query span::before{
+    background-color: #4992ff !important;
+}
+
 .router-link-exact-active img{
     filter: invert(57%) sepia(64%) saturate(4033%) hue-rotate(198deg) brightness(102%) contrast(102%);
 }
+
 
 nav .menu_list a span{
     font-family: 'Noto Sans KR', sans-serif;
