@@ -36,7 +36,7 @@ export default {
        postData : {
            "title" : "대충 " + this.$route.params.postId + "번째 게시물 제목",
            "content" : "대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 ",
-           "imgUrl" : "https://github.com/ckstmznf/2022-EDCAN-Web/blob/master/public/img/main_page_bg/_bg_8.jpg?raw=true",
+           "imgUrl" : "https://github.com/ckstmznf/2022-EDCAN-Web/blob/master/public/img/main_page_bg/bg_10.jpg?raw=true",
            "heartCount" : 13,
            "writer" : "강태영",
            "timeStamp" : new Date()
