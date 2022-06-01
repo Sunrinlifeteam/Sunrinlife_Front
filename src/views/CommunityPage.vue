@@ -2,6 +2,7 @@
 <div class="panel page community-page">
     <div class="page-content">
         <div class="community-content neu-morphism-card">
+            <div>
             <div class="header">
                 <h2 v-if="isAnonymous()">익명 게시판</h2>
                 <h2 v-else>일반 게시판</h2>
@@ -13,7 +14,6 @@
                     <input v-model="searchQueryText" type="text" placeholder="검색">
                     <img src="/img/search.svg" alt="검색 아이콘" class="search-button">
                 </div>
-
                 <div class="filter-wrap">
                     <select class="select-board-type" v-model="filterSelect">
                         <option>전체</option>
@@ -40,8 +40,8 @@
                         <div class="heart">
                             {{ i.heartCount }}
                         </div>
-                        <div class="title" @click="$router.push({ name : 'postDetail', params : { 'postId' : n } })">
-                            {{ i.title }}
+                        <div class="title">
+                            <p @click="$router.push({ name : 'postDetail', params : { 'postId' : n } })">{{ i.title }}</p>
                             <img src="./../assets/community/eye_icon.svg" alt="" v-if="n % 3 == 0">
                         </div>
                         <div class="writer" v-if="!isAnonymous()">
@@ -65,8 +65,8 @@
                         <div class="heart">
                             {{ i.heartCount }}
                         </div>
-                        <div class="title" @click="$router.push({ name : 'postDetail', params : { 'postId' : n } })">
-                            {{ i.title }}
+                        <div class="title">
+                            <p @click="$router.push({ name : 'postDetail', params : { 'postId' : n } })">{{ i.title }}</p>
                             <!-- todo 제목 짤림 -->
                             <img src="./../assets/community/eye_icon.svg" alt="" v-if="n % 3 == 0">
                         </div>
@@ -82,13 +82,10 @@
                     </li>
                 </ul>
             </div>
-
-
-
-
+</div>
             <div class="pagination-wrap">
                 <img src="./../assets/prev_arrow.svg" alt="" class="arrow prev-btn"
-                    @click="() => {if(pageId - 1 >= 1) changePage(pageId - 1)}">
+                    @click="()=>{ if(pageId > 1) changePage(pageId-1) }">
                 <div class="page-button-wrap">
                     <template v-for="i in Math.min(loadedPageCount, 5)" :key="i">
                         <div
@@ -100,7 +97,7 @@
                     </template>
                 </div>
                 <img src="./../assets/next_arrow.svg" alt="" class="arrow next-btn"
-                     @click="() => {if(pageId + 1 <= loadedPageCount) changePage(pageId + 1)}">
+                    @click="()=>{ if(pageId < loadedPageCount) changePage(pageId+1) }">
             </div>
 
         </div>
@@ -113,8 +110,8 @@ export default {
     name : "CommunitPage",
     data(){ return {
         loadedPageCount : 10,
-        pageStart : 0,
         pageId : 1,
+        searchQueryText: "",
 
         filterSelect : "전체",
 
@@ -149,8 +146,25 @@ export default {
                 writer : "송우진",
                 timeStamp : new Date()
             },
+            {
+                heartCount : 13,
+                title : "선린인터넷고등학교 인트라넷 오픈",
+                writer : "송우진",
+                timeStamp : new Date()
+            },
+            {
+                heartCount : 13,
+                title : "선린인터넷고등학교 인트라넷 오픈",
+                writer : "송우진",
+                timeStamp : new Date()
+            },
         ]
     }},
+    computed:{
+        pageStart: function(){
+            return Math.max(Math.min(this.pageId - 3, this.loadedPageCount - 5), 0);
+        },
+    },
     methods:{
         isAnonymous(){
             return this.$route.query.type === 'anonymous'
@@ -164,8 +178,13 @@ export default {
 
 <style scoped>
 
+
 .community-content {
     padding : 14px 24px;
+    height: 825px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .header, .search-filter-wrap {
@@ -347,6 +366,10 @@ export default {
     font-weight: 500;
 }
 
+.board-list-item .title p:hover{
+    cursor: pointer;
+}
+
 .board-list-item .title img {
     width: 24px;
 
@@ -390,7 +413,6 @@ export default {
     height : 32px;
 
     /* margin-top : 32px; */
-
     display: flex;
     justify-content: center;
 }

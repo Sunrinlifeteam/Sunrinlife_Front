@@ -20,9 +20,9 @@
     <div class="main-page-content-wrap hotsunrin">
         <div class="main-page-item-title">
             <h3>핫선린</h3>
-
-            <img src="@/assets/more.svg" alt="핫선린 더보기 버튼"
-                @click="$router.push({ name:'community' })">
+            <router-link :to="{name:'community', query:{type:'public'}}">
+                <img src="@/assets/more.svg" alt="핫선린 더보기 버튼">
+            </router-link>
         </div>
 
         <div class="main-page-item-content">
@@ -37,8 +37,7 @@
 
 <script>
 import NoticeIcon from "@/components/NoticeIcon";
-import { getNoticeMain } from "@/api";
-import store from "@/store";
+
 import { mapState } from "vuex";
 
 export default {
@@ -71,12 +70,11 @@ export default {
 
     },
     components : {
+        ...mapState(["noticeMain"]),
         NoticeIcon
     },
     mounted(){
-        getNoticeMain(3).then((data) => {
-            store.commit("getNoticeMain", data)
-        })
+        
     },
     computed:{
         ...mapState(["noticeMain"]),

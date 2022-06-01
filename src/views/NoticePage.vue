@@ -23,7 +23,7 @@
                 <img src="./../assets/prev_arrow.svg" alt="" class="arrow prev-btn"
                     @click="()=>{ if(pageId > 1) changePage(pageId-1) }">
                 <div class="page-button-wrap">
-                    <template v-for="i in Math.min(loadedPageCount, 5)" :key="i">
+                    <template v-for="i in Math.min(noticePageCount, 5)" :key="i">
                         <div
                             class="page-btn"
                             :class="{'current-page' : (pageStart + i) === pageId}"
@@ -33,7 +33,7 @@
                     </template>
                 </div>
                 <img src="./../assets/next_arrow.svg" alt="" class="arrow next-btn"
-                    @click="()=>{ if(pageId < loadedPageCount) changePage(pageId+1) }">
+                    @click="()=>{ if(pageId < noticePageCount) changePage(pageId+1) }">
             </div>
         </div>
     </div>
@@ -53,8 +53,8 @@ import store from "../store.js"
 export default {
     naem : "Notice",
     data(){return{
+        searchPageCount:null,
         loadedNoticeData: {},
-        loadedPageCount: 0,
         searchQueryText: "",
     }},
     components : {
@@ -69,16 +69,13 @@ export default {
             return this.$route.query.search;
         },
         pageStart: function(){
-            return Math.max(Math.min(this.pageId - 3, this.loadedPageCount - 5), 0);
+            return Math.max(Math.min(this.pageId - 3, this.noticePageCount - 5), 0);
         },
         savedPages: function(){
             return Object.keys(this.$store.getters.getNoticePage || {}).map(x => parseInt(x)).filter(x => x);
         }
     },
     watch:{
-        noticePageCount: function() {
-            this.loadedPageCount = this.$store.getters.getNoticePageCount;
-        },
         pageId: function() {
             this.loadNotice();
         }
@@ -115,13 +112,10 @@ export default {
         },
         updateCount: async function(){
             if (this.searchQuery)
-                this.loadedPageCount = await getNoticePageCountWithSearch(this.searchQuery);
-            else
-                this.loadedPageCount = this.$store.getters.getNoticePageCount;
+                this.searchPageCount = await getNoticePageCountWithSearch(this.searchQuery);
         }
     },
     mounted() {
-        this.updateCount();
         this.loadNotice();
     },
 }

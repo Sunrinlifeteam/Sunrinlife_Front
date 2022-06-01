@@ -117,9 +117,6 @@ const store = createStore({
         getNoticePage(state){
             return state.noticePage
         },
-        getNoticePageCount(state){
-            return state.noticePageCount
-        },
         getUserData(state){
             return state.userData
         },
