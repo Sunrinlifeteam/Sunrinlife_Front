@@ -14,8 +14,6 @@
 import NoticeIcon from "./../NoticeIcon.vue"
 
 import { mapState } from "vuex"
-import { getNoticeMain } from "./../../api.js"
-import store from "../../store.js"
 
 export default {
     name : "Notice",
@@ -29,9 +27,7 @@ export default {
         NoticeIcon
     },
     mounted(){
-        getNoticeMain(3).then((data) => {
-            store.commit("getNoticeMain", data)
-        })
+        
     },
     computed:{
         ...mapState(["noticeMain"]),

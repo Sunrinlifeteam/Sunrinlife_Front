@@ -37,7 +37,6 @@
 // eslint-disable-next-line no-unused-vars
 import * as _TimerDatas from "./../../assets/TimerData.js"
 import { mapState } from "vuex";
-import { getTodaySchedule } from "@/api";
 
 export default {
     name : "Timer",
@@ -97,18 +96,10 @@ export default {
     },
     computed:{
         ...mapState(["noticeMain", "userData", "todaySchedule"]),
-        getUserData(){
-            return this.$store.getters.getUserData
-        }
+        
     },
     watch:{
-        getUserData(){
-            let userData = this.$store.getters.getUserData
-
-            getTodaySchedule(userData.grade, userData.class).then((data) => {
-                this.$store.commit("getTodaySchedule", data)
-            })
-        }
+        
     }
 }
 </script>
