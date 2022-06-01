@@ -21,6 +21,7 @@ import {
     getClubMajor,
     getClubGeneral,
     getClubAutonomous,
+    getTodaySchedule
 } from "./api.js";
 import store from "./store.js";
 
@@ -32,6 +33,7 @@ export default {
     data() {
         return {
             showGlobalComponent: true,
+            userData:null
         };
     },
     components: {
@@ -76,6 +78,9 @@ export default {
         getAuthToken() {
             getUserData().then((data) => {
                 store.commit("setUserData", data);
+                getTodaySchedule(data.grade, data.class).then((data) => {
+                    this.$store.commit("getTodaySchedule", data)
+                })
             });
             getNoticePageCount().then((data) => {
                 store.commit("setNoticePageCount", data);

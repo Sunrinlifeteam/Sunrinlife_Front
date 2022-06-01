@@ -57,11 +57,11 @@ export default {
         }, 1000);
     },
     components: {
+        Timer_v2,
         Meal,
         TodaySchedule,
         NoticeAndHotSunrin,
         Schedule,
-        Timer_v2,
     },
 };
 </script>
@@ -73,13 +73,11 @@ main {
 .main-page-item {
     padding: 12px 16px;
     border-radius: 8px;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.16);
-    background-color: #fff;
-
+    background: white;
+    box-shadow: 10px 10px 20px 1px rgb(0 0 0/5%);
     display: grid;
     grid-template-rows: auto 1fr;
     grid-gap: 12px;
-
     transition: 500ms;
 }
 

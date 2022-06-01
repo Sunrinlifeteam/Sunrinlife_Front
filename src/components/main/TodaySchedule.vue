@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import { getTodaySchedule } from "../../api.js";
 import { mapState } from "vuex";
 
 export default {
@@ -24,14 +23,7 @@ export default {
             return this.$store.getters.getUserData;
         },
     },
-    watch: {
-        getUserData() {
-            let userData = this.$store.getters.getUserData;
-            getTodaySchedule(userData.grade, userData.class).then((data) => {
-                this.$store.commit("getTodaySchedule", data);
-            });
-        },
-    },
+    watch: {},
 };
 </script>
 

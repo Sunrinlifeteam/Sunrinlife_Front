@@ -15,16 +15,14 @@
 
                 <!-- 프로필 이미지 -->
                 <div class="user-img-items">
-                    <div class="user-img-item">
-                        <img v-if="isEditable && editProfileImage" class="user-img" :src="editProfileImage" />
-                        <img v-else-if="userData.image" class="user-img" :src="userData.image" />
-                        <img v-else class="user-img" src="../assets/user_profile_assets/basic_profile_img.svg" />
+                        <img v-if="isEditable && editProfileImage" class="user-img-item" :src="editProfileImage" />
+                        <img v-else-if="userData.image" class="user-img-item" :src="userData.image" />
+                        <img v-else class="user-img-item" src="../assets/user_profile_assets/basic_profile_img.svg" />
 
                         <input v-if="isEditable" type="file" ref="image" @change="uploadProfileImage" id="profile-img-choice">
                         <label v-if="isEditable" for="profile-img-choice">
                             <img src="./../assets/user_profile_assets/correctionIcon_white.svg" alt="">
                         </label>
-                    </div>
                 </div>
 
                 <!-- 유저 정보(동아리, 이메일, 소개 등) -->
@@ -49,16 +47,6 @@
                             <div v-else class="user-contact-item user-contact-club edit">
                                 <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
                                 <input v-model="editClubInfo" class="user-contact-text user-profile-edit-inout">
-                            </div>
-
-                            <!-- 부동아리 -->
-                            <div v-if="!isEditable" class="user-contact-item user-contact-club">
-                                <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
-                                <span class="user-contact-text">{{ userData.subClubInfo?.length?userData.subClubInfo.map(x => x.name).join(','):"" }}</span>
-                            </div>
-                            <div v-else class="user-contact-item user-contact-club edit">
-                                <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
-                                <input v-model="editSubClubInfo" class="user-contact-text user-profile-edit-inout">
                             </div>
 
                             <!-- 이메일 -->
