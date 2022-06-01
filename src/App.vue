@@ -43,10 +43,9 @@ export default {
             .then(() => {
                 setInterval(getAccessToken, 3600000);
             })
-            .catch((e) => {
+            .catch(() => {
                 if (
-                    window.location.pathname.trim() != "/login" &&
-                    e.response.status == 401
+                    window.location.pathname.trim() != "/login"
                 )
                     this.$router.replace("/login");
             });
