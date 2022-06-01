@@ -24,7 +24,6 @@
                     <li v-for="(i, n) in todaySchedule" :key="n">
                         <div class="top">
                             <div class="class-name">{{ i }}</div>
-                            <div class="test">{{ n }}</div>
                             <!--  <div class="teacher">박예원 선생님</div>-->
                         </div>
                         <div class="bottom">
