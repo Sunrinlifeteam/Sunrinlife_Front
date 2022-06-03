@@ -92,7 +92,7 @@ import {
 import store from "../store.js";
 
 export default {
-    naem: "Notice",
+    name: "Notice",
     data() {
         return {
             searchPageCount: null,

@@ -14,19 +14,20 @@
                 <div v-for="i, n in navBarList" :key="n" :class="{options:i.option}">
                     <router-link
                         :to="i.router"
-                        @click="hideSidebarOnMobile()">
+                        @click="hideSidebarOnMobile()"
+                        :class="{is_community:(isCommunity && checkCommunityRouter(i)) }">
                         <img :src="i.img">
                         <span>{{ i.name }}</span>
                     </router-link>
                     <template v-if="i.option">
-                        <router-link v-for="j, n in i.option" :key="n" :to="{path:i.router, query:j.query}" class="router_option" :class="{router_option_current_query:checkQuery(j.props)}">
+                        <router-link v-for="j, n in i.option" :key="n" :to="{path:j.path}" class="router_option">
                             <span>{{j.name}}</span>
                         </router-link>
                     </template>
                 </div>
             </div>
             <template v-if="userData">
-                <router-link class="list-user-profile" :to="'profile'" @click="hideSidebarOnMobile()">
+                <router-link class="list-user-profile" :to="{name:'profile'}" @click="hideSidebarOnMobile()">
                     <template v-if="userData.image">
                         <img :src="userData.image">
                     </template>
@@ -57,7 +58,7 @@ export default {
     name : "Sidebar",
     data(){
         return{
-            
+            isCommunity : window.location.href.indexOf("community") !== -1
         }
     },
     methods : {
@@ -65,13 +66,20 @@ export default {
             if (this.isMobileWindow)
                 this.$store.commit('sidebarOff')
         },
-        checkQuery(prop){
-            return prop === this.$route.query.type
+        checkCommunityRouter(e){
+            return e.router === "/community/public"
         }
     },
     computed :{
         ...mapState(['userData', 'navBarList', 'department_map', "isSidebarShow", "isMobileWindow"]),
         // store.js에 저장된 navBarList를 가져와서 목록으로 보여준다.
+        
+    },
+    watch:{
+        $route:function(){
+            if(window.location.href.indexOf("community") !== -1) this.isCommunity = true;
+            else this.isCommunity = false;
+        }
     },
     mounted(){
 
@@ -188,8 +196,11 @@ nav .menu_list a{
     cursor: pointer;
 }
 
-nav .menu_list .router_option:not(.router-link-exact-active){
+nav .menu_list .router_option{
     display: none;
+}
+.is_community ~ .router_option{
+    display: flex !important;
 }
 nav .menu_list .router_option{
     font-size:15px;
@@ -212,17 +223,28 @@ nav .menu_list .options .router_option span::before{
     margin-right:12px;
 }
 
-.nav-list .router-link-exact-active:not(.router_option){
+.is_community{
+    color : #4992ff !important;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+}
+
+.is_community img{
+    filter: invert(57%) sepia(64%) saturate(4033%) hue-rotate(198deg) brightness(102%) contrast(102%);
+}
+
+.router-link-active img{
+    filter: invert(57%) sepia(64%) saturate(4033%) hue-rotate(198deg) brightness(102%) contrast(102%);
+}
+
+.nav-list .router-link-exact-active{
     color : #4992ff;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
 }
 
-.router_option_current_query{
-    color : #4992ff !important;
-}
-.router_option_current_query span::before{
-    background-color: #4992ff !important;
+.router-link-exact-active span::before{
+    background-color:#4992ff !important;
 }
 
 .router-link-exact-active img{

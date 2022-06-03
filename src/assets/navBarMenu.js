@@ -16,18 +16,16 @@ export default [
     },
     {
         name : "게시판",
-        router : "/community?type=public",
+        router : "/community/public",
         img:require("./../assets/sidebar/community.svg"),
         option:[
             {
                 name : "일반",
-                query : {type:"public"},
-                props: "public"
+                path: "/community/public"
             },
             {
                 name : "익명",
-                query : {type:"anonymous"},
-                props: "anonymous"
+                path: "/community/anonymous"
             },
         ]
     },
