@@ -28,7 +28,7 @@
             <div class="main-page-item-title">
                 <h3>핫선린</h3>
                 <router-link
-                    :to="{ name: 'community', query: { type: 'public' } }"
+                    :to="{ name: 'publicCommunity'}"
                 >
                     <img src="@/assets/more.svg" alt="핫선린 더보기 버튼" />
                 </router-link>
@@ -110,6 +110,8 @@ export default {
 }
 
 .main-page-item-title img {
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.16);
+    border-radius: 50%;
     cursor: pointer;
 }
 

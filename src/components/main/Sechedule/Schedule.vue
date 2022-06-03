@@ -260,7 +260,7 @@ export default {
     height: 24px;
 
     border-radius: 100%;
-    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.16);
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.16);
     background-color: #fff;
 }
 .add-button:hover {

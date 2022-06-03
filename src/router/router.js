@@ -1,4 +1,5 @@
-import { createWebHistory, createRouter } from "vue-router"
+import { createWebHistory, createRouter, RouterView } from "vue-router"
+import { h } from 'vue'
 
 import LoginPage from "./../views/LoginPage.vue"
 import Register from "./../views/RegisterPage.vue"
@@ -36,13 +37,19 @@ const routes = [
     },
     {
         path : "/notice",
-        name: "notice",
-        component : NoticePage,
-    },
-    {
-        path : "/notice/:noticeId",
-        name: "noticeId",
-        component : NoticeDetailPage,
+        component: { render: () => h(RouterView) },
+        children: [
+            { 
+              path: '',
+              name: 'notice',
+              component : NoticePage,
+            },
+            { 
+              path: ':noticeId',
+              name: 'noticeId',
+              component : NoticeDetailPage,
+            }
+        ],
     },
     {
         path : "/profile",
@@ -56,8 +63,14 @@ const routes = [
         props: true
     },
     {
-        path : "/community",
-        name: "community",
+        path : "/community/public",
+        name: "publicCommunity",
+        component : CommunityPage,
+        props: true
+    },
+    {
+        path : "/community/anonymous",
+        name: "anonymousCommunity",
         component : CommunityPage,
         props: true
     },
@@ -68,8 +81,14 @@ const routes = [
         props: true
     },
     {
-        path : "/post/:postId",
-        name: "postDetail",
+        path : "/community/public/:postId",
+        name: "publicPostDetail",
+        component : PostDetailPage,
+        props: true
+    },
+    {
+        path : "/community/anonymous/:postId",
+        name: "publicPostDetail",
         component : PostDetailPage,
         props: true
     },

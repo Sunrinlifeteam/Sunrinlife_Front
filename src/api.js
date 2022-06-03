@@ -167,3 +167,9 @@ export async function getNoticeById(noticeId) {
     let res = await getAPI.get(`/notice/${noticeId}`).then(res => res.data).catch(console.log)
     return res
 }
+
+//게시판
+export async function getPublicBoard(pageId){
+    let res = await getAPI.get(`/board?offset=${pageId}&count=10&sort=DESC&orderType=created&type=0`)
+    return res
+}
