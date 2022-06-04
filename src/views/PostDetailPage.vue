@@ -1,5 +1,5 @@
 <template>
-    <div class="panel page post-create-page">
+    <div class="panel page post-create-page" v-if="postData">
         <div class="page-content">
             <div class="post-detail-content neu-morphism-card">
 
@@ -7,21 +7,17 @@
                     <h2>{{ postData.title }}</h2>
 
                     <div class="data-wrap">
-                        <div class="heart-count">추천 {{ postData.heartCount }}</div>
-                        <div class="writer">{{ postData.writer }}</div>
+                        <div class="heart-count">추천 {{ postData.likes }}</div>
+                        <div class="writer" @click="$router.push({ name: 'profile', query: { id: postData.author.id } })">{{ postData.author.username }}</div>
                         <div>|</div>
                         <div class="date">
-                            <span v-if="postData.timeStamp.getMonth() < 9">0</span>
-                            <span>{{ postData.timeStamp.getMonth() + 1 }}</span>
-                            <span>-</span>
-                            <span v-if="postData.timeStamp.getDay() < 10">0</span>
-                            <span>{{ postData.timeStamp.getDay() }}</span>
+                            <span>{{ this.formatTime(postData.created) }}</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="content">
-                    <img :src="postData.imgUrl" alt="본문 이미지">
+                    <img :src="null" alt="본문 이미지">
                     <p>{{ postData.content }}</p>
                 </div>
             </div>
@@ -30,18 +26,47 @@
 </template>
 
 <script>
+import { getBoardDetail } from '@/api';
+import { DateTime } from "luxon";
+
 export default {
     name: "PostDetailPage",
-    data(){return {
-       postData : {
-           "title" : "대충 " + this.$route.params.postId + "번째 게시물 제목",
-           "content" : "대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 대충 내용 ",
-           "imgUrl" : "https://github.com/ckstmznf/2022-EDCAN-Web/blob/master/public/img/main_page_bg/bg_10.jpg?raw=true",
-           "heartCount" : 13,
-           "writer" : "강태영",
-           "timeStamp" : new Date()
-       }
-    }},
+    data(){
+        return {
+            postData: null
+        }
+    },
+    computed: {
+        getAuthToken() {
+            return this.$store.getters.getAuthToken;
+        },
+    },
+    methods: {
+        formatTime(time) {
+            const date = DateTime.fromISO(time, "yyyy-MM-dd HH:mm:ss");
+            if (date.hasSame(DateTime.local(), "day")) {
+                return date.toFormat("HH:mm");
+            } else if (date.hasSame(DateTime.local(), "year")) {
+                return date.toFormat("MM-dd");
+            } else {
+                return date.toFormat("yyyy-MM-dd");
+            }
+        },
+    },
+    watch: {
+        getAuthToken() {
+            getBoardDetail(this.$route.params.postId).then(res => {
+                this.postData = res.data;
+            });
+        }
+    },
+    mounted() {
+        if (this.$store.getters.getAuthToken !== null) {
+            getBoardDetail(this.$route.params.postId).then(res => {
+                this.postData = res.data;
+            }).catch(() => {});
+        }
+    }
 };
 </script>
 
@@ -85,6 +110,7 @@ export default {
 
     .data-wrap .writer {
         margin-right: 8px;
+        cursor: pointer;
     }
 
     .data-wrap .date {

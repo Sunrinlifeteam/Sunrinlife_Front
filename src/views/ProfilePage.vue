@@ -1,10 +1,10 @@
 <template>
-    <template v-if="userData">
+    <template v-if="userInfo">
         <div class="panel">
             <div class="user-profile">
 
                 <!-- 정보 수정 버튼 -->
-                <div class="info-correcrion-button">
+                <div v-if="isMyProfile" class="info-correcrion-button">
                     <img class="correction-button-img" src="@/assets/user_profile_assets/correctionIcon.svg"
                         v-if="!isEditable"
                         @click="isEditable = true"/>
@@ -16,7 +16,7 @@
                 <!-- 프로필 이미지 -->
                 <div class="user-img-items">
                         <img v-if="isEditable && editProfileImage" class="user-img-item" :src="editProfileImage" />
-                        <img v-else-if="userData.image" class="user-img-item" :src="userData.image" />
+                        <img v-else-if="userInfo.image" class="user-img-item" :src="userInfo.image" />
                         <img v-else class="user-img-item" src="../assets/user_profile_assets/basic_profile_img.svg" />
 
                         <input v-if="isEditable" type="file" ref="image" @change="uploadProfileImage" id="profile-img-choice">
@@ -31,9 +31,9 @@
 
                         <!-- 이름, 번호, 학과 -->
                         <div class="user-basic-items">
-                            <span class="user-name-item">{{ userData.username }}</span>
-                            <span class="user-major-item">{{ department_map[userData.department] }}</span>
-                            <span class="user-number-item">{{ userData.grade }}학년 {{ userData.class }}반 {{ userData.number }}번</span>
+                            <span class="user-name-item">{{ userInfo.username }}</span>
+                            <span class="user-major-item">{{ department_map[userInfo.department] }}</span>
+                            <span class="user-number-item">{{ userInfo.grade }}학년 {{ userInfo.class }}반 {{ userInfo.number }}번</span>
                         </div>
 
                         <!-- 동아리, 이메일, 깃허브 -->
@@ -42,7 +42,7 @@
                             <!-- 동아리 -->
                             <div v-if="!isEditable" class="user-contact-item user-contact-club">
                                 <img class="user-contact-icon" src="@/assets/user_profile_assets/clubIcon.svg"/>
-                                <span class="user-contact-text">{{ userData.clubInfo?userData.clubInfo.name:"" }}</span>
+                                <span class="user-contact-text">{{ userInfo.clubInfo?userInfo.clubInfo.name:"" }}</span>
                             </div>
                             <div v-else class="user-contact-item user-contact-club edit">
                                 <img class="user-contact-icon" src="@/assets/user_profile_assets/clubIcon.svg"/>
@@ -52,13 +52,13 @@
                             <!-- 이메일 -->
                             <div class="user-contact-item">
                                 <img class="user-contact-icon" src="@/assets/user_profile_assets/emailIcon.svg"/>
-                                <span class="user-contact-text">{{ userData.email }}</span>
+                                <span class="user-contact-text">{{ userInfo.email }}</span>
                             </div>
 
                             <!-- 깃허브 계정 -->
-                            <div v-if="!isEditable && userData.githubLink != null" class="user-social-contact-item">
+                            <div v-if="!isEditable && userInfo.githubLink != null" class="user-social-contact-item">
                                 <img class="user-contact-icon" src="@/assets/user_profile_assets/githubIcon.svg"/>
-                                <span class="user-contact-text">{{ userData.githubLink?githubID:"" }}</span>
+                                <span class="user-contact-text">{{ userInfo.githubLink?githubID:"" }}</span>
                             </div>
                             <div v-else-if="isEditable" class="user-social-contact-item edit">
                                 <img class="user-contact-icon" src="@/assets/user_profile_assets/githubIcon.svg"/>
@@ -72,7 +72,7 @@
                     <!-- 소개 -->
                     <div v-if="!isEditable" class="user-introduce-items">
                         <span class="user-introduce-title">소개</span>
-                        <span class="user-introduce-item">{{ userData.description?userData.description:"" }}</span>
+                        <span class="user-introduce-item">{{ userInfo.description?userInfo.description:"" }}</span>
                     </div>
                     <div v-else class="user-introduce-items edit">
                         <span class="user-introduce-title">소개</span>
@@ -80,7 +80,7 @@
                     </div>
                 </div>
 
-                <span class="logout-btn" @click="logoutClick">로그아웃</span>
+                <span v-if="isMyProfile" class="logout-btn" @click="logoutClick">로그아웃</span>
             </div>
         </div>
     </template>
@@ -88,7 +88,7 @@
 
 <script>
 import { mapState } from "vuex"
-import {editProfileData, getUserData, logout} from "../api.js"
+import { editProfileData, getUserData, getUserDataById, logout } from "../api.js"
 import store from "../store.js"
 export default {
     data() {
@@ -99,7 +99,9 @@ export default {
             editSubClubInfo : "",
             editGithubLink : "",
             editDescription : "",
-            editProfileImage : ""
+            editProfileImage : "",
+
+            userInfo: null
             // 수정을 입력받은 데이터
         } 
     },
@@ -114,26 +116,26 @@ export default {
         },
         async updateProfile(){
             const update = {}
-            if (this.editGithubLink != this.userData.githubLink)
-                this.userData.githubLink = update["githubLink"] = this.editGithubLink;
-            if (this.editProfileImage != this.userData.image)
-                this.userData.image = update["image"] = this.editProfileImage;
-            if (this.editDescription != this.userData.description)
-                this.userData.description = update["description"] = this.editDescription;
+            if (this.editGithubLink != this.userInfo.githubLink)
+                this.userInfo.githubLink = update["githubLink"] = this.editGithubLink;
+            if (this.editProfileImage != this.userInfo.image)
+                this.userInfo.image = update["image"] = this.editProfileImage;
+            if (this.editDescription != this.userInfo.description)
+                this.userInfo.description = update["description"] = this.editDescription;
             
             if (this.editClubInfo){
-                if (!this.userData.clubInfo || this.editClubInfo != this.userData.clubInfo.id){
-                    if (!this.userData.clubInfo) this.userData.clubInfo = {};
+                if (!this.userInfo.clubInfo || this.editClubInfo != this.userInfo.clubInfo.id){
+                    if (!this.userInfo.clubInfo) this.userInfo.clubInfo = {};
                     update["clubInfo"] = this.editClubInfo || 0;
-                    this.userData.clubInfo.name = "로딩중...";
+                    this.userInfo.clubInfo.name = "로딩중...";
                 }
             }
             if (this.editSubClubInfo){
-                if (!this.userData.subClubInfo) this.userData.subClubInfo = [];
+                if (!this.userInfo.subClubInfo) this.userInfo.subClubInfo = [];
                 update["subClubInfo"] = this.editSubClubInfo.split(',')
                     .map(x => parseInt(x))
                     .filter(x => x)
-                this.userData.subClubInfo = [{name: "로딩중..."}]
+                this.userInfo.subClubInfo = [{name: "로딩중..."}]
             }
             this.isEditable = false
 
@@ -141,7 +143,7 @@ export default {
                 console.log(update)
                 await editProfileData(update)
                 getUserData().then((data) => {
-                    store.commit("setUserData", data)
+                    store.commit("setuserInfo", data)
                 })
             }
         },
@@ -149,30 +151,51 @@ export default {
             logout().then(res => {
                 if(res == "success") this.$router.push("/login")
             })
+        },
+        setEditData(val){
+            if (!val) return;
+            this.editClubInfo = val.clubInfo?.id;
+            this.editGithubLink = val.githubLink;
+            this.editDescription = val.description;
+            this.editProfileImage = val.image;
+            this.editSubClubInfo = val.subClubInfo?.map(x => x.id).join(',');
+        },
+        async loadData(){
+            if (this.isMyProfile)
+                this.userInfo = this.userData;
+            else
+                this.userInfo = await getUserDataById(this.userId);
         }
     },
     computed:{
         ...mapState(["userData", "department_map"]),
         githubID: function() {
-            return this.userData?.githubLink.split('/').filter(x=>x).pop();
+            return this.userInfo?.githubLink.split('/').filter(x=>x).pop();
+        },
+        userId() {
+            return this.$route.query.id;
+        },
+        isMyProfile() {
+            return this.userId === undefined;
         }
     },
     watch: {
-        userData: function(val) {
-            if (!val) return;
-            this.editClubInfo = val.clubInfo?.id
-            this.editGithubLink = val.githubLink
-            this.editDescription = val.description
-            this.editProfileImage = val.image
-            this.editSubClubInfo = val.subClubInfo?.map(x => x.id).join(',')
+        userData: function(){
+            if (this.isMyProfile)
+                this.userInfo = this.userData;
+        },
+        userInfo: function(val) {
+            this.setEditData(val);
+        },
+        '$route'() {
+            this.loadData();
+        },
+        '$store.getters.getAuthToken'() {
+            this.loadData();
         }
     },
     mounted() {
-        this.editClubInfo = this.userData?.clubInfo?.id
-        this.editGithubLink = this.userData?.githubLink
-        this.editDescription = this.userData?.description
-        this.editProfileImage = this.userData?.image
-        this.editSubClubInfo = this.userData?.subClubInfo?.map(x => x.id).join(',')
+        if (this.$store.getters.getAuthToken !== null) this.loadData();
     }
 }
 </script>

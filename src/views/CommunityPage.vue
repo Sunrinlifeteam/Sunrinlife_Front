@@ -9,7 +9,7 @@
                         <img
                             src="@/assets/user_profile_assets/correctionIcon.svg"
                             alt=""
-                            @click="$router.push({ name: 'postCreate' })"
+                            @click="$router.push({ name: 'postCreate', query: { ...isAnonymous() && { type: 'anonymous'} } })"
                         />
                     </div>
 
@@ -117,14 +117,14 @@
                                 class="board-list-item"
                             >
                                 <div class="heart">
-                                    {{ i.heartCount || n + 8 }}
+                                    {{ i.likes }}
                                 </div>
                                 <div class="title">
                                     <p
                                         @click="
                                             $router.push({
-                                                name: 'postDetail',
-                                                params: { postId: n },
+                                                name: `${ isAnonymous ? 'anonymous' : 'public' }PostDetail`,
+                                                params: { postId: i.id },
                                             })
                                         "
                                     >
