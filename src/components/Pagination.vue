@@ -6,16 +6,16 @@
             class="arrow prev-btn"
             @click="
                 () => {
-                    if (pageId > 1) $emit('changePage', pageId - 1);
+                    if (pageId > 1) changePage(pageId - 1);
                 }
             "
         />
         <div class="page-button-wrap">
-            <template v-for="i in Math.min(loadedPageCount, 5)" :key="i">
+            <template v-for="i in Math.min(pageCount, 5)" :key="i">
                 <div
                     class="page-btn"
                     :class="{ 'current-page': pageStart + i === pageId }"
-                    @click="$emit('changePage', pageStart + i)"
+                    @click="changePage(pageStart + i)"
                 >
                     {{ pageStart + i }}
                 </div>
@@ -27,8 +27,8 @@
             class="arrow next-btn"
             @click="
                 () => {
-                    if (pageId < loadedPageCount)
-                        $emit('changePage', pageId + 1);
+                    if (pageId < pageCount)
+                        changePage(pageId + 1);
                 }
             "
         />
@@ -37,14 +37,31 @@
 
 <script>
 export default {
-    name: "PageNation",
+    name: "Pagination",
     data() {
         return {};
     },
     props: {
-        pageId: Number,
-        loadedPageCount: Number,
-        pageStart: Number,
+        pageCount: Number,
+    },
+    computed: {
+        pageId: function () {
+            return parseInt(this.$route.query.page) || 1;
+        },
+        pageStart: function () {
+            return Math.max(
+                Math.min(this.pageId - 3, this.pageCount - 5),
+                0
+            );
+        },
+    },
+    methods: {
+        changePage: async function (page) {
+            await this.$router.push({
+                name: this.$route.name,
+                query: { ...this.$route.query, page },
+            });
+        },
     },
 };
 </script>

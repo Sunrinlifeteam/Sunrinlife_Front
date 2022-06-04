@@ -32,7 +32,7 @@
                     <div class="date">작성일</div>
                 </div>
 
-                <div class="hot-sunrin board-list" v-if="filterSelect === '전체' || filterSelect === '핫선린'">
+                <div class="hot-sunrin board-list" v-if="(filterSelect === '전체' && pageId === 1) || filterSelect === '핫선린'">
                     <h3>핫선린</h3>
 
                     <ul>
@@ -83,33 +83,20 @@
                     </ul>
                 </div>
             </div>
-            <div class="pagination-wrap">
-                <img src="./../assets/prev_arrow.svg" alt="" class="arrow prev-btn"
-                    @click="()=>{ if(pageId > 1) changePage(pageId-1) }">
-                <div class="page-button-wrap">
-                    <template v-for="i in Math.min(loadedPageCount, 5)" :key="i">
-                        <div
-                            class="page-btn"
-                            :class="{'current-page' : (pageStart + i) === pageId}"
-                            @click="changePage(pageStart + i)">
-                            {{ pageStart + i }}
-                        </div>
-                    </template>
-                </div>
-                <img src="./../assets/next_arrow.svg" alt="" class="arrow next-btn"
-                    @click="()=>{ if(pageId < loadedPageCount) changePage(pageId+1) }">
-            </div>
 
+            <Pagination v-bind:page-count="pageCount" />
         </div>
     </div>
 </div>
 </template>
 
 <script>
+import Pagination from '@/components/Pagination.vue'
+
 export default {
     name : "CommunitPage",
     data(){ return {
-        loadedPageCount : 10,
+        pageCount : 10,
         pageId : 1,
         searchQueryText: "",
 
@@ -204,6 +191,9 @@ export default {
             
         ]
     }},
+    components: {
+        Pagination
+    },
     computed:{
         pageStart: function(){
             return Math.max(Math.min(this.pageId - 3, this.loadedPageCount - 5), 0);
