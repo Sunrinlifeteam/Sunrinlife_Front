@@ -61,7 +61,7 @@
                     <h3>일반</h3>
 
                     <ul>
-                        <li v-for="i, n in boardData" :key="n" class="board-list-item">
+                        <li v-for="i, n in boardDataR" :key="n" class="board-list-item">
                             <div class="heart">
                                 {{ i.heartCount }}
                             </div>
@@ -139,17 +139,24 @@ export default {
         pageId: function () {
             return parseInt(this.$route.query.page) || 1;
         },
-        
+        boardDataR(){
+            console.log(this.boardData)
+            return this.boardData
+        }
     },
     watch:{
         getAuthToken(){
-            getPublicBoard(this.pageId - 1).then(async (res)=>{
-                await this.setBoardData(res)
+            let data = new Promise((resolve, reject)=>{
+                getPublicBoard(this.pageId - 1).then((res)=>{
+                    resolve(res.data)
+                }).catch((e)=>reject(e))
             })
-            console.log(this.boardData)
+            this.boardData = data
         },
         pageId: function(){
-            getPublicBoard(this.pageId - 1).then((res)=>console.log(res))
+            getPublicBoard(this.pageId - 1).then((res)=>{
+                this.boardData = res.data["0"]
+            }).catch((e)=>console.log(e))
         }
     },
     methods:{
@@ -159,9 +166,6 @@ export default {
         getPageCount(){
             
         },
-        setBoardData(e){
-            this.boardData = e
-        }
     },
 }
 </script>
