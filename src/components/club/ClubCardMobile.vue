@@ -2,7 +2,7 @@
 <div class="club-card mobile">
     <div class="header">
         <img v-if="selectClubData.logo_url != ''" :src="selectClubData.logo_url" alt="" class="logo">
-            <img v-else src="./../../assets/symbol.svg" :alt="`동아리 로고 기본값`" class="logo">
+            <img v-else src="@/assets/symbol.svg" :alt="`동아리 로고 기본값`" class="logo">
 
         <div class="name-sns-wrap">
             <h2 class="club-name">{{ selectClubData.name }}</h2>

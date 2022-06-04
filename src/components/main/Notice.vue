@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import NoticeIcon from "./../NoticeIcon.vue"
+import NoticeIcon from "@/NoticeIcon.vue"
 
 import { mapState } from "vuex"
 

@@ -2,12 +2,12 @@
 <transition name="nav-bar">
     <nav v-if="isSidebarShow" class="none-dragging">
 
-        <img src="./../assets/x_button.svg" alt="사이드바 닫기" class="close-sidebar" @click="$store.commit('sidebarOnOff')">
+        <img src="@/assets/x_button.svg" alt="사이드바 닫기" class="close-sidebar" @click="$store.commit('sidebarOnOff')">
     
         <div class="nav-list">
             <div class="logo" @click="hideSidebarOnMobile(); $router.push('/')">
-                <img src="./../assets/symbol.svg" alt="Logo" class="logo_symbol">
-                <img src="./../assets/logo.svg" alt="Logo" class="logo_text">
+                <img src="@/assets/symbol.svg" alt="Logo" class="logo_symbol">
+                <img src="@/assets/logo.svg" alt="Logo" class="logo_text">
             </div>
 
             <div class="menu_list">

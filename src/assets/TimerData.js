@@ -1,5 +1,5 @@
-import Time from "./../Model/Time.js"
-import TimerItem from "./../Model/TimerItem.js"
+import Time from "@/Model/Time.js"
+import TimerItem from "@/Model/TimerItem.js"
 
 const timeData1 = [
     new TimerItem(

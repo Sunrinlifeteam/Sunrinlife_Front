@@ -5,10 +5,10 @@
 
                 <!-- 정보 수정 버튼 -->
                 <div class="info-correcrion-button">
-                    <img class="correction-button-img" src="./../assets/user_profile_assets/correctionIcon.svg"
+                    <img class="correction-button-img" src="@/assets/user_profile_assets/correctionIcon.svg"
                         v-if="!isEditable"
                         @click="isEditable = true"/>
-                    <img class="correction-button-img" src="./../assets/user_profile_assets/checkIcon.svg"
+                    <img class="correction-button-img" src="@/assets/user_profile_assets/checkIcon.svg"
                         v-else
                         @click="updateProfile"/>
                 </div>
@@ -21,7 +21,7 @@
 
                         <input v-if="isEditable" type="file" ref="image" @change="uploadProfileImage" id="profile-img-choice">
                         <label v-if="isEditable" for="profile-img-choice">
-                            <img src="./../assets/user_profile_assets/correctionIcon_white.svg" alt="">
+                            <img src="@/assets/user_profile_assets/correctionIcon_white.svg" alt="">
                         </label>
                 </div>
 
@@ -41,27 +41,27 @@
 
                             <!-- 동아리 -->
                             <div v-if="!isEditable" class="user-contact-item user-contact-club">
-                                <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
+                                <img class="user-contact-icon" src="@/assets/user_profile_assets/clubIcon.svg"/>
                                 <span class="user-contact-text">{{ userData.clubInfo?userData.clubInfo.name:"" }}</span>
                             </div>
                             <div v-else class="user-contact-item user-contact-club edit">
-                                <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
+                                <img class="user-contact-icon" src="@/assets/user_profile_assets/clubIcon.svg"/>
                                 <input v-model="editClubInfo" class="user-contact-text user-profile-edit-inout">
                             </div>
 
                             <!-- 이메일 -->
                             <div class="user-contact-item">
-                                <img class="user-contact-icon" src="./../assets/user_profile_assets/emailIcon.svg"/>
+                                <img class="user-contact-icon" src="@/assets/user_profile_assets/emailIcon.svg"/>
                                 <span class="user-contact-text">{{ userData.email }}</span>
                             </div>
 
                             <!-- 깃허브 계정 -->
                             <div v-if="!isEditable && userData.githubLink != null" class="user-social-contact-item">
-                                <img class="user-contact-icon" src="./../assets/user_profile_assets/githubIcon.svg"/>
+                                <img class="user-contact-icon" src="@/assets/user_profile_assets/githubIcon.svg"/>
                                 <span class="user-contact-text">{{ userData.githubLink?githubID:"" }}</span>
                             </div>
                             <div v-else-if="isEditable" class="user-social-contact-item edit">
-                                <img class="user-contact-icon" src="./../assets/user_profile_assets/githubIcon.svg"/>
+                                <img class="user-contact-icon" src="@/assets/user_profile_assets/githubIcon.svg"/>
                                 <input v-model="editGithubLink" v class="user-contact-text user-profile-edit-inout">
                             </div>
 
