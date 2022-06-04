@@ -65,9 +65,9 @@ export default {
         };
     },
     components: {
-    NoticeIcon,
-    Pagination
-},
+        NoticeIcon,
+        Pagination
+    },
     computed: {
         ...mapState(["noticePageCount", "noticePage", "notice"]),
         pageId: function () {

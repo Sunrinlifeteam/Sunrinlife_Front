@@ -169,6 +169,12 @@ export async function getNoticeById(noticeId) {
 }
 
 //게시판
+export async function getPublicBoardPageCount(){
+    let res = await getAPI.get("/board/count?type=0")
+    res = Math.ceil(res.data / 10)
+    return res
+}
+
 export async function getPublicBoard(pageId = 0){
     let res = await getAPI.get(`/board?offset=${pageId}&count=10&sort=DESC&orderType=created&type=0`)
     return res

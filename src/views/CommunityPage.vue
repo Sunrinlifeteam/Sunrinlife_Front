@@ -61,9 +61,9 @@
                     <h3>일반</h3>
 
                     <ul>
-                        <li v-for="i, n in boardDataR" :key="n" class="board-list-item">
+                        <li v-for="i, n in boardData" :key="n" class="board-list-item">
                             <div class="heart">
-                                {{ i.heartCount }}
+                                {{ i.heartCount || n + 8 }}
                             </div>
                             <div class="title">
                                 <p @click="$router.push({ name : 'postDetail', params : { 'postId' : n } })">{{ i.title }}</p>
@@ -74,16 +74,12 @@
                                 {{ i.writer }}
                             </div>
                             <div class="date">
-                                <span v-if="i.timeStamp.getMonth() < 9">0</span>
-                                {{ i.timeStamp.getMonth() + 1 }}-
-                                <span v-if="i.timeStamp.getDay() < 10">0</span>
-                                {{ i.timeStamp.getDay() }}
+                                <span>{{parsingTime(i.created)}}</span>
                             </div>
                         </li>
                     </ul>
                 </div>
             </div>
-
             <Pagination v-bind:page-count="pageCount" />
         </div>
     </div>
@@ -92,12 +88,13 @@
 
 <script>
 import Pagination from '@/components/Pagination.vue'
-import {getPublicBoard} from "../api.js"
+import { DateTime } from "luxon"
+import { getPublicBoard, getPublicBoardPageCount} from "../api.js"
 
 export default {
     name : "CommunitPage",
     data(){ return {
-        pageCount : 10,
+        pageCount : null,
         searchQueryText: "",
 
         filterSelect : "전체",
@@ -139,23 +136,19 @@ export default {
         pageId: function () {
             return parseInt(this.$route.query.page) || 1;
         },
-        boardDataR(){
-            console.log(this.boardData)
-            return this.boardData
-        }
     },
     watch:{
         getAuthToken(){
-            let data = new Promise((resolve, reject)=>{
-                getPublicBoard(this.pageId - 1).then((res)=>{
-                    resolve(res.data)
-                }).catch((e)=>reject(e))
+            getPublicBoard(this.pageId - 1).then((res)=>{
+                this.boardData = res.data
+            }).catch((e)=>console.log(e))
+            getPublicBoardPageCount().then((res) =>{
+                this.pageCount = res
             })
-            this.boardData = data
         },
         pageId: function(){
             getPublicBoard(this.pageId - 1).then((res)=>{
-                this.boardData = res.data["0"]
+                this.boardData = res.data
             }).catch((e)=>console.log(e))
         }
     },
@@ -163,10 +156,23 @@ export default {
         isAnonymous(){
             return location.href.indexOf("anonymous") !== -1;
         },
+        parsingTime(time){
+            return DateTime.fromSQL(time)
+        },
         getPageCount(){
             
         },
     },
+    mounted(){
+        if(this.$store.getters.getAuthToken !== null) {
+            getPublicBoard(this.pageId - 1).then((res)=>{
+                this.boardData = res.data
+            }).catch((e)=>console.log(e))
+            getPublicBoardPageCount().then((res) =>{
+                this.pageCount = res
+            })
+        }
+    }
 }
 </script>
 
@@ -331,7 +337,7 @@ export default {
 
 .board-list-item {
     display: flex;
-    gap : 20px;
+
 }
 
 .board-list-item * {
