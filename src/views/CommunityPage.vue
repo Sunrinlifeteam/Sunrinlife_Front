@@ -215,7 +215,7 @@ export default {
 
 .community-content {
     padding : 14px 24px;
-    height: 825px;
+    height: 85vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
