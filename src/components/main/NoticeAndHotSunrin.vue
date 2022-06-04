@@ -146,6 +146,10 @@ export default {
     cursor: pointer;
 }
 
+.hotsunrin-list .title:hover {
+    text-decoration: underline;
+}
+
 .hotsunrin-list .heart-count {
     color: #ff4949;
     font-size: 12px;
