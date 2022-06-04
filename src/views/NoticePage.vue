@@ -50,6 +50,7 @@ import {
     getNotice,
     getNoticeSearch,
     getNoticePageCountWithSearch,
+    getNoticePageCount
 } from "./../api.js";
 import store from "../store.js";
 import Pagination from "../components/Pagination.vue";
@@ -126,6 +127,9 @@ export default {
     },
     mounted() {
         this.loadNotice();
+        getNoticePageCount().then((data) => {
+            store.commit("setNoticePageCount", data);
+        });
     },
 };
 </script>

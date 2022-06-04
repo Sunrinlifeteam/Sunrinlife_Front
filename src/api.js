@@ -169,7 +169,7 @@ export async function getNoticeById(noticeId) {
 }
 
 //게시판
-export async function getPublicBoard(pageId){
+export async function getPublicBoard(pageId = 0){
     let res = await getAPI.get(`/board?offset=${pageId}&count=10&sort=DESC&orderType=created&type=0`)
     return res
 }

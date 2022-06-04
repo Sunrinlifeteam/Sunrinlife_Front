@@ -92,12 +92,12 @@
 
 <script>
 import Pagination from '@/components/Pagination.vue'
+import {getPublicBoard} from "../api.js"
 
 export default {
     name : "CommunitPage",
     data(){ return {
         pageCount : 10,
-        pageId : 1,
         searchQueryText: "",
 
         filterSelect : "전체",
@@ -127,86 +127,42 @@ export default {
                 timeStamp : new Date()
             },
         ],
-        boardData : [
-            {
-                heartCount : 13,
-                title : "선린인터넷고등학교 인트라넷 오픈",
-                writer : "송우진",
-                timeStamp : new Date()
-            },
-            {
-                heartCount : 13,
-                title : "선린인터넷고등학교 인트라넷 오픈",
-                writer : "송우진",
-                timeStamp : new Date()
-            },
-            {
-                heartCount : 13,
-                title : "선린인터넷고등학교 인트라넷 오픈",
-                writer : "송우진",
-                timeStamp : new Date()
-            },
-            {
-                heartCount : 13,
-                title : "선린인터넷고등학교 인트라넷 오픈",
-                writer : "송우진",
-                timeStamp : new Date()
-            },
-            {
-                heartCount : 13,
-                title : "선린인터넷고등학교 인트라넷 오픈",
-                writer : "송우진",
-                timeStamp : new Date()
-            },
-            {
-                heartCount : 13,
-                title : "선린인터넷고등학교 인트라넷 오픈",
-                writer : "송우진",
-                timeStamp : new Date()
-            },
-            {
-                heartCount : 13,
-                title : "선린인터넷고등학교 인트라넷 오픈",
-                writer : "송우진",
-                timeStamp : new Date()
-            },
-            {
-                heartCount : 13,
-                title : "선린인터넷고등학교 인트라넷 오픈",
-                writer : "송우진",
-                timeStamp : new Date()
-            },
-            {
-                heartCount : 13,
-                title : "선린인터넷고등학교 인트라넷 오픈",
-                writer : "송우진",
-                timeStamp : new Date()
-            },
-            {
-                heartCount : 13,
-                title : "선린인터넷고등학교 인트라넷 오픈",
-                writer : "송우진",
-                timeStamp : new Date()
-            },
-            
-        ]
+        boardData:[],
     }},
     components: {
         Pagination
     },
     computed:{
-        pageStart: function(){
-            return Math.max(Math.min(this.pageId - 3, this.loadedPageCount - 5), 0);
+        getAuthToken() {
+            return this.$store.getters.getAuthToken;
         },
+        pageId: function () {
+            return parseInt(this.$route.query.page) || 1;
+        },
+        
+    },
+    watch:{
+        getAuthToken(){
+            getPublicBoard(this.pageId - 1).then(async (res)=>{
+                await this.setBoardData(res)
+            })
+            console.log(this.boardData)
+        },
+        pageId: function(){
+            getPublicBoard(this.pageId - 1).then((res)=>console.log(res))
+        }
     },
     methods:{
         isAnonymous(){
             return location.href.indexOf("anonymous") !== -1;
         },
-        changePage(newPageId){
-            this.pageId = newPageId;
+        getPageCount(){
+            
+        },
+        setBoardData(e){
+            this.boardData = e
         }
-    }
+    },
 }
 </script>
 
@@ -215,7 +171,7 @@ export default {
 
 .community-content {
     padding : 14px 24px;
-    height: 85vh;
+    height: 825px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

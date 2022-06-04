@@ -17,7 +17,6 @@ import {
     getScheduleOfficial,
     getSchedulePersonal,
     getNoticeMain,
-    getNoticePageCount,
     getClubMajor,
     getClubGeneral,
     getClubAutonomous,
@@ -81,9 +80,6 @@ export default {
                 getTodaySchedule(data.grade, data.class).then((data) => {
                     this.$store.commit("getTodaySchedule", data)
                 })
-            });
-            getNoticePageCount().then((data) => {
-                store.commit("setNoticePageCount", data);
             });
             getMeal().then((res) => {
                 store.commit("getMeal", res);
