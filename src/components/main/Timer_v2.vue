@@ -47,7 +47,7 @@
 
 <script>
 // eslint-disable-next-line no-unused-vars
-import * as _TimerDatas from "./../../assets/TimerData.js";
+import * as _TimerDatas from "@/assets/TimerData.js";
 import { mapState } from "vuex";
 
 export default {

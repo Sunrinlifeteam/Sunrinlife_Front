@@ -1,193 +1,248 @@
 <template>
-<div class="panel page community-page">
-    <div class="page-content">
-        <div class="community-content neu-morphism-card">
-            <div>
-                <div class="header">
-                    <h2 v-if="isAnonymous()">익명 게시판</h2>
-                    <h2 v-else>일반 게시판</h2>
-                    <img src="@/assets/user_profile_assets/correctionIcon.svg" alt="" @click="$router.push({ name:'postCreate' })">
-                </div>
-
-                <div class="search-filter-wrap">
-                    <div class="search-wrap">
-                        <input v-model="searchQueryText" type="text" placeholder="검색">
-                        <img src="/img/search.svg" alt="검색 아이콘" class="search-button">
+    <div class="panel page community-page">
+        <div class="page-content">
+            <div class="community-content neu-morphism-card">
+                <div>
+                    <div class="header">
+                        <h2 v-if="isAnonymous()">익명 게시판</h2>
+                        <h2 v-else>일반 게시판</h2>
+                        <img
+                            src="@/assets/user_profile_assets/correctionIcon.svg"
+                            alt=""
+                            @click="$router.push({ name: 'postCreate' })"
+                        />
                     </div>
-                    <div class="filter-wrap">
-                        <select class="select-board-type" v-model="filterSelect">
-                            <option>전체</option>
-                            <option>핫선린</option>
-                            <option>일반</option>
-                        </select>
 
-                        <img src="./../assets/community/select_arrow.svg" alt="실행">
+                    <div class="search-filter-wrap">
+                        <div class="search-wrap">
+                            <input
+                                v-model="searchQuery"
+                                type="text"
+                                placeholder="검색"
+                            />
+                            <img
+                                src="/img/search.svg"
+                                alt="검색 아이콘"
+                                class="search-button"
+                            />
+                        </div>
+                        <div class="filter-wrap">
+                            <select
+                                class="select-board-type"
+                                v-model="filterSelect"
+                            >
+                                <option>전체</option>
+                                <option>핫선린</option>
+                                <option>일반</option>
+                            </select>
+
+                            <img
+                                src="./../assets/community/select_arrow.svg"
+                                alt="실행"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="field-name">
+                        <div class="heart">추천</div>
+                        <div class="title">제목</div>
+                        <div class="writer" v-if="!isAnonymous()">작성자</div>
+                        <div class="date">작성일</div>
+                    </div>
+
+                    <div
+                        class="hot-sunrin board-list"
+                        v-if="
+                            (filterSelect === '전체' && pageId === 1) ||
+                            filterSelect === '핫선린'
+                        "
+                    >
+                        <h3>핫선린</h3>
+
+                        <ul>
+                            <li
+                                v-for="(i, n) in hotData"
+                                :key="n"
+                                class="board-list-item"
+                            >
+                                <div class="heart">
+                                    {{ i.heartCount }}
+                                </div>
+                                <div class="title">
+                                    <p
+                                        @click="
+                                            $router.push({
+                                                name: 'postDetail',
+                                                params: { postId: n },
+                                            })
+                                        "
+                                    >
+                                        {{ i.title }}
+                                    </p>
+                                    <img
+                                        src="./../assets/community/eye_icon.svg"
+                                        alt=""
+                                        v-if="n % 3 == 0"
+                                    />
+                                </div>
+                                <div class="writer" v-if="!isAnonymous()">
+                                    {{ i.writer }}
+                                </div>
+                                <div class="date">
+                                    <span v-if="i.timeStamp.getMonth() < 9"
+                                        >0</span
+                                    >
+                                    {{ i.timeStamp.getMonth() + 1 }}-
+                                    <span v-if="i.timeStamp.getDay() < 10"
+                                        >0</span
+                                    >
+                                    {{ i.timeStamp.getDay() }}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div
+                        class="normal board-list"
+                        v-if="
+                            filterSelect === '전체' || filterSelect === '일반'
+                        "
+                    >
+                        <h3>일반</h3>
+
+                        <ul>
+                            <li
+                                v-for="(i, n) in boardData"
+                                :key="n"
+                                class="board-list-item"
+                            >
+                                <div class="heart">
+                                    {{ i.heartCount || n + 8 }}
+                                </div>
+                                <div class="title">
+                                    <p
+                                        @click="
+                                            $router.push({
+                                                name: 'postDetail',
+                                                params: { postId: n },
+                                            })
+                                        "
+                                    >
+                                        {{ i.title }}
+                                    </p>
+                                    <!-- todo 제목 짤림 -->
+                                    <img
+                                        src="./../assets/community/eye_icon.svg"
+                                        alt=""
+                                        v-if="n % 3 == 0"
+                                    />
+                                </div>
+                                <div class="writer" v-if="!isAnonymous()">
+                                    {{ i.writer }}
+                                </div>
+                                <div class="date">
+                                    <span>{{ parsingTime(i.created) }}</span>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-
-                <div class="field-name">
-                    <div class="heart">추천</div>
-                    <div class="title">제목</div>
-                    <div class="writer" v-if="!isAnonymous()">작성자</div>
-                    <div class="date">작성일</div>
-                </div>
-
-                <div class="hot-sunrin board-list" v-if="(filterSelect === '전체' && pageId === 1) || filterSelect === '핫선린'">
-                    <h3>핫선린</h3>
-
-                    <ul>
-                        <li v-for="i, n in hotData" :key="n" class="board-list-item">
-                            <div class="heart">
-                                {{ i.heartCount }}
-                            </div>
-                            <div class="title">
-                                <p @click="$router.push({ name : 'postDetail', params : { 'postId' : n } })">{{ i.title }}</p>
-                                <img src="./../assets/community/eye_icon.svg" alt="" v-if="n % 3 == 0">
-                            </div>
-                            <div class="writer" v-if="!isAnonymous()">
-                                {{ i.writer }}
-                            </div>
-                            <div class="date">
-                                <span v-if="i.timeStamp.getMonth() < 9">0</span>
-                                {{ i.timeStamp.getMonth() + 1 }}-
-                                <span v-if="i.timeStamp.getDay() < 10">0</span>
-                                {{ i.timeStamp.getDay() }}
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="normal board-list" v-if="filterSelect === '전체' || filterSelect === '일반'">
-                    <h3>일반</h3>
-
-                    <ul>
-                        <li v-for="i, n in boardData" :key="n" class="board-list-item">
-                            <div class="heart">
-                                {{ i.heartCount || n + 8 }}
-                            </div>
-                            <div class="title">
-                                <p @click="$router.push({ name : 'postDetail', params : { 'postId' : n } })">{{ i.title }}</p>
-                                <!-- todo 제목 짤림 -->
-                                <img src="./../assets/community/eye_icon.svg" alt="" v-if="n % 3 == 0">
-                            </div>
-                            <div class="writer" v-if="!isAnonymous()">
-                                {{ i.writer }}
-                            </div>
-                            <div class="date">
-                                <span>{{parsingTime(i.created)}}</span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                <Pagination v-bind:page-count="pageCount" />
             </div>
-            <Pagination v-bind:page-count="pageCount" />
         </div>
     </div>
-</div>
 </template>
 
 <script>
-import Pagination from '@/components/Pagination.vue'
-import { DateTime } from "luxon"
-import { getPublicBoard, getPublicBoardPageCount} from "../api.js"
+import Pagination from "@/components/Pagination.vue";
+import { DateTime } from "luxon";
+import { getPublicBoard, getPublicBoardPageCount } from "../api.js";
 
 export default {
-    name : "CommunitPage",
-    data(){ return {
-        pageCount : null,
-        searchQueryText: "",
-
-        filterSelect : "전체",
-        hotData:[
-            {
-                heartCount : 13,
-                title : "선린인터넷고등학교 인트라넷 오픈",
-                writer : "송우진",
-                timeStamp : new Date()
-            },
-            {
-                heartCount : 13,
-                title : "선린인터넷고등학교 인트라넷 오픈",
-                writer : "송우진",
-                timeStamp : new Date()
-            },
-            {
-                heartCount : 13,
-                title : "선린인터넷고등학교 인트라넷 오픈",
-                writer : "송우진",
-                timeStamp : new Date()
-            },
-            {
-                heartCount : 13,
-                title : "선린인터넷고등학교 인트라넷 오픈",
-                writer : "송우진",
-                timeStamp : new Date()
-            },
-        ],
-        boardData:[],
-    }},
-    components: {
-        Pagination
+    name: "CommunitPage",
+    data() {
+        return {
+            pageCount: 0,
+        };
     },
-    computed:{
+    components: {
+        Pagination,
+    },
+    computed: {
         getAuthToken() {
             return this.$store.getters.getAuthToken;
         },
         pageId: function () {
             return parseInt(this.$route.query.page) || 1;
         },
-    },
-    watch:{
-        getAuthToken(){
-            getPublicBoard(this.pageId - 1).then((res)=>{
-                this.boardData = res.data
-            }).catch((e)=>console.log(e))
-            getPublicBoardPageCount().then((res) =>{
-                this.pageCount = res
-            })
+        searchQuery: function () {
+            return this.$route.query.search || "";
         },
-        pageId: function(){
-            getPublicBoard(this.pageId - 1).then((res)=>{
-                this.boardData = res.data
-            }).catch((e)=>console.log(e))
+        filterSelect: function () {
+            return this.$route.query.filter || "전체";
+        },
+    },
+    watch: {
+        getAuthToken() {
+            getPublicBoard(this.pageId - 1)
+                .then((res) => {
+                    this.boardData = res.data;
+                })
+                .catch((e) => console.log(e));
+            getPublicBoardPageCount().then((res) => {
+                this.pageCount = res;
+            });
+        },
+        pageId: function () {
+            getPublicBoard(this.pageId - 1)
+                .then((res) => {
+                    this.boardData = res.data;
+                })
+                .catch((e) => console.log(e));
+        },
+    },
+    methods: {
+        isAnonymous() {
+            return this.$route.name === "anonymousCommunity";
+        },
+        parsingTime(time) {
+            const date = DateTime.fromISO(time, "yyyy-MM-dd HH:mm:ss");
+            if (date.hasSame(DateTime.local(), "day")) {
+                return date.toFormat("HH:mm");
+            } else if (date.hasSame(DateTime.local(), "year")) {
+                return date.toFormat("MM-dd");
+            } else {
+                return date.toFormat("yyyy-MM-dd");
+            }
+        },
+        getPageCount() {},
+    },
+    mounted() {
+        if (this.$store.getters.getAuthToken !== null) {
+            getPublicBoard(this.pageId - 1)
+                .then((res) => {
+                    this.boardData = res.data;
+                })
+                .catch((e) => console.log(e));
+            getPublicBoardPageCount().then((res) => {
+                this.pageCount = res;
+            });
         }
     },
-    methods:{
-        isAnonymous(){
-            return location.href.indexOf("anonymous") !== -1;
-        },
-        parsingTime(time){
-            return DateTime.fromSQL(time)
-        },
-        getPageCount(){
-            
-        },
-    },
-    mounted(){
-        if(this.$store.getters.getAuthToken !== null) {
-            getPublicBoard(this.pageId - 1).then((res)=>{
-                this.boardData = res.data
-            }).catch((e)=>console.log(e))
-            getPublicBoardPageCount().then((res) =>{
-                this.pageCount = res
-            })
-        }
-    }
-}
+};
 </script>
 
 <style scoped>
-
-
 .community-content {
-    padding : 14px 24px;
+    padding: 14px 24px;
     height: 825px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.header, .search-filter-wrap {
+.header,
+.search-filter-wrap {
     display: flex;
     justify-content: space-between;
 }
@@ -204,39 +259,39 @@ export default {
     padding: 6px;
     background-color: #f5f6f7;
     border-radius: 50%;
-    
+
     cursor: pointer;
 }
 
 .search-filter-wrap {
-    margin-top : 15px;
+    margin-top: 15px;
 }
 
 .search-wrap {
     height: 40px;
-    max-width : 430px;
-    flex : 1;
+    max-width: 430px;
+    flex: 1;
 
     padding: 8px 16px;
     border-radius: 8px;
     background-color: #f5f6f7;
 
     display: flex;
-    gap : 8px;
+    gap: 8px;
 
     position: relative;
 }
 
 .search-wrap input {
     height: 100%;
-    flex : 1;
+    flex: 1;
 
     font-size: 16px;
     font-weight: 500;
 
     background-color: transparent;
 
-    border : 0px;
+    border: 0px;
     border-radius: 0px;
 }
 
@@ -245,8 +300,8 @@ export default {
 }
 
 .search-wrap .search-button {
-    width : 20px;
-    height : 20px;
+    width: 20px;
+    height: 20px;
 
     cursor: pointer;
 }
@@ -266,7 +321,7 @@ export default {
     border-radius: 8px;
     background-color: #f5f6f7;
 
-    appearance:none
+    appearance: none;
 }
 
 .filter-wrap img {
@@ -274,13 +329,13 @@ export default {
 
     position: absolute;
 
-    top : 50%;
-    right : 6px;
+    top: 50%;
+    right: 6px;
     transform: translateY(-50%);
 }
 
-.select-board-type::-ms-expand{
-    display:none;/*for IE10,11*/
+.select-board-type::-ms-expand {
+    display: none; /*for IE10,11*/
 }
 
 .select-board-type:focus {
@@ -295,16 +350,16 @@ export default {
 }
 
 .field-name .title {
-    flex : 1;
+    flex: 1;
 }
-.field-name .heart{
-    padding-left:12px;
+.field-name .heart {
+    padding-left: 12px;
 }
-.field-name .writer{
+.field-name .writer {
     padding-right: 25px;
 }
-.field-name .date{
-    padding-right:15px;
+.field-name .date {
+    padding-right: 15px;
 }
 
 .field-name * {
@@ -316,13 +371,13 @@ export default {
 }
 
 .board-list {
-    padding : 12px 16px;
+    padding: 12px 16px;
 
     border-radius: 8px;
 
     display: flex;
     flex-direction: column;
-    gap : 15px;
+    gap: 15px;
 }
 
 .board-list h3 {
@@ -332,12 +387,11 @@ export default {
 .board-list ul {
     display: flex;
     flex-direction: column;
-    gap : 16px;
+    gap: 16px;
 }
 
 .board-list-item {
     display: flex;
-
 }
 
 .board-list-item * {
@@ -345,20 +399,20 @@ export default {
     align-items: center;
 }
 
-.board-list-item .heart{
+.board-list-item .heart {
     text-align: left;
     font-size: 12px;
     font-weight: 500;
 }
 
 .board-list-item .heart img {
-    width : 24px;
+    width: 24px;
 
     padding: 4px;
 }
 
 .board-list-item .title {
-    flex : 1;
+    flex: 1;
 
     color: #3d3d3d;
 
@@ -366,14 +420,14 @@ export default {
     font-weight: 500;
 }
 
-.board-list-item .title p:hover{
+.board-list-item .title p:hover {
     cursor: pointer;
 }
 
 .board-list-item .title img {
     width: 24px;
 
-    margin-left : 10px;
+    margin-left: 10px;
 }
 
 .board-list-item .writer {
@@ -382,7 +436,7 @@ export default {
     font-weight: 500;
 }
 
-.board-list-item .date{
+.board-list-item .date {
     color: #b9b9b9;
     font-size: 12px;
     font-weight: 500;
@@ -392,7 +446,7 @@ export default {
 
 .hot-sunrin {
     margin-top: 16px;
-    
+
     background-color: hsla(0, 100%, 64%, 0.1);
 }
 
@@ -408,9 +462,8 @@ export default {
     color: #4992ff;
 }
 
-
 .pagination-wrap {
-    height : 32px;
+    height: 32px;
 
     /* margin-top : 32px; */
     display: flex;
@@ -418,22 +471,22 @@ export default {
 }
 
 .pagination-wrap img {
-    width : 32px;
+    width: 32px;
 
-    padding : 8px;
+    padding: 8px;
 }
 
 .pagination-wrap .page-button-wrap {
     display: flex;
-    gap : 4px;
+    gap: 4px;
 }
 
 .pagination-wrap .page-btn {
-    width : 32px;
+    width: 32px;
 
     color: #c9c9c9;
 
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: "Noto Sans KR", sans-serif;
 
     font-size: 14px;
     font-weight: 500;
@@ -452,13 +505,12 @@ export default {
 }
 
 .pagination-wrap .page-btn.current-page {
-    color : white;
+    color: white;
 
     background-color: var(--main-color4);
 }
 
-.pagination-wrap *  {
+.pagination-wrap * {
     cursor: pointer;
 }
-
 </style>

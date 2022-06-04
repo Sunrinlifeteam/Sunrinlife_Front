@@ -1,16 +1,16 @@
 import { createWebHistory, createRouter, RouterView } from "vue-router"
 import { h } from 'vue'
 
-import LoginPage from "./../views/LoginPage.vue"
-import Register from "./../views/RegisterPage.vue"
-import MainPage from "./../views/MainPage_v2.vue"
+import LoginPage from "@/views/LoginPage.vue"
+import Register from "@/views/RegisterPage.vue"
+import MainPage from "@/views/MainPage_v2.vue"
 import ProfilePage from './../views/ProfilePage.vue';
-import ClubPage from "./../views/ClubPage.vue"
-import NoticePage from "./../views/NoticePage.vue"
-import NoticeDetailPage from "./../views/NoticeDetailPage.vue"
-import CommunityPage from "./../views/CommunityPage.vue"
+import ClubPage from "@/views/ClubPage.vue"
+import NoticePage from "@/views/NoticePage.vue"
+import NoticeDetailPage from "@/views/NoticeDetailPage.vue"
+import CommunityPage from "@/views/CommunityPage.vue"
 
-import EasterEggPage from "./../views/EasterEggPage.vue"
+import EasterEggPage from "@/views/EasterEggPage.vue"
 import PostCreatePage from "@/views/PostCreatePage";
 import PostDetailPage from "@/views/PostDetailPage";
 

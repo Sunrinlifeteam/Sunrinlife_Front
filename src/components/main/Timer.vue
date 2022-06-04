@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import TimerDatas from "./../../assets/TimerData.js"
-import Time from "./../../Model/Time.js"
+import TimerDatas from "@/../assets/TimerData.js"
+import Time from "@/../Model/Time.js"
 
 // let currentTime
 // let nextTime
