@@ -88,6 +88,7 @@ import {
     getNotice,
     getNoticeSearch,
     getNoticePageCountWithSearch,
+    getNoticePageCount
 } from "./../api.js";
 import store from "../store.js";
 
@@ -174,6 +175,9 @@ export default {
     },
     mounted() {
         this.loadNotice();
+        getNoticePageCount().then((data) => {
+            store.commit("setNoticePageCount", data);
+        });
     },
 };
 </script>

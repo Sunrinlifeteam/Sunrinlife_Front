@@ -110,7 +110,6 @@ export default {
     name : "CommunitPage",
     data(){ return {
         loadedPageCount : 10,
-        pageId : 1,
         searchQueryText: "",
 
         filterSelect : "전체",
@@ -208,14 +207,29 @@ export default {
         pageStart: function(){
             return Math.max(Math.min(this.pageId - 3, this.loadedPageCount - 5), 0);
         },
+        pageId: function () {
+            return parseInt(this.$route.query.page) || 1;
+        },
+    },
+    watch:{
+
     },
     methods:{
         isAnonymous(){
             return location.href.indexOf("anonymous") !== -1;
         },
-        changePage(newPageId){
-            this.pageId = newPageId;
-        }
+        changePage: async function (page) {
+            if(location.href.indexOf("public") !== -1)
+                await this.$router.push({
+                    path: "public",
+                    query: { ...this.$route.query, page },
+                });
+            else
+                await this.$router.push({
+                    path: "anonymous",
+                    query: { ...this.$route.query, page },
+                });
+        },
     }
 }
 </script>

@@ -30,6 +30,7 @@ const store = createStore({
 
             community:{},
             communityPage:{},
+            communityPageCount:null,
 
             meal: null,
 
