@@ -28,10 +28,6 @@ const store = createStore({
             noticePage: {},
             noticePageCount: null,
 
-            community:{},
-            communityPage:{},
-            communityPageCount:null,
-
             meal: null,
 
             clubData: [],
