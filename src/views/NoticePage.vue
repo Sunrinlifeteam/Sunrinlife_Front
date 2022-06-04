@@ -35,45 +35,7 @@
                     </li>
                 </ul>
 
-                <div class="pagination-wrap">
-                    <img
-                        src="./../assets/prev_arrow.svg"
-                        alt=""
-                        class="arrow prev-btn"
-                        @click="
-                            () => {
-                                if (pageId > 1) changePage(pageId - 1);
-                            }
-                        "
-                    />
-                    <div class="page-button-wrap">
-                        <template
-                            v-for="i in Math.min(noticePageCount, 5)"
-                            :key="i"
-                        >
-                            <div
-                                class="page-btn"
-                                :class="{
-                                    'current-page': pageStart + i === pageId,
-                                }"
-                                @click="changePage(pageStart + i)"
-                            >
-                                {{ pageStart + i }}
-                            </div>
-                        </template>
-                    </div>
-                    <img
-                        src="./../assets/next_arrow.svg"
-                        alt=""
-                        class="arrow next-btn"
-                        @click="
-                            () => {
-                                if (pageId < noticePageCount)
-                                    changePage(pageId + 1);
-                            }
-                        "
-                    />
-                </div>
+                <Pagination v-bind:page-count="noticePageCount" />
             </div>
         </div>
     </div>
@@ -91,6 +53,7 @@ import {
     getNoticePageCount
 } from "./../api.js";
 import store from "../store.js";
+import Pagination from "../components/Pagination.vue";
 
 export default {
     name: "Notice",
@@ -102,8 +65,9 @@ export default {
         };
     },
     components: {
-        NoticeIcon,
-    },
+    NoticeIcon,
+    Pagination
+},
     computed: {
         ...mapState(["noticePageCount", "noticePage", "notice"]),
         pageId: function () {
@@ -111,12 +75,6 @@ export default {
         },
         searchQuery: function () {
             return this.$route.query.search;
-        },
-        pageStart: function () {
-            return Math.max(
-                Math.min(this.pageId - 3, this.noticePageCount - 5),
-                0
-            );
         },
         savedPages: function () {
             return Object.keys(this.$store.getters.getNoticePage || {})
@@ -151,12 +109,6 @@ export default {
             if (this.searchQuery)
                 return getNoticeSearch(this.pageId, this.searchQuery);
             return getNotice(this.pageId);
-        },
-        changePage: async function (page) {
-            await this.$router.push({
-                path: "notice",
-                query: { ...this.$route.query, page },
-            });
         },
         search: async function () {
             await this.$router.push({
