@@ -37,7 +37,7 @@
                             </select>
 
                             <img
-                                src="./../assets/community/select_arrow.svg"
+                                src="@/assets/community/select_arrow.svg"
                                 alt="실행"
                             />
                         </div>
@@ -80,7 +80,7 @@
                                         {{ i.title }}
                                     </p>
                                     <img
-                                        src="./../assets/community/eye_icon.svg"
+                                        src="@/assets/community/eye_icon.svg"
                                         alt=""
                                         v-if="n % 3 == 0"
                                     />
@@ -132,7 +132,7 @@
                                     </p>
                                     <!-- todo 제목 짤림 -->
                                     <img
-                                        src="./../assets/community/eye_icon.svg"
+                                        src="@/assets/community/eye_icon.svg"
                                         alt=""
                                         v-if="n % 3 == 0"
                                     />

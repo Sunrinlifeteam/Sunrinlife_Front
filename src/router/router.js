@@ -4,7 +4,7 @@ import { h } from 'vue'
 import LoginPage from "@/views/LoginPage.vue"
 import Register from "@/views/RegisterPage.vue"
 import MainPage from "@/views/MainPage_v2.vue"
-import ProfilePage from './../views/ProfilePage.vue';
+import ProfilePage from '@/views/ProfilePage.vue';
 import ClubPage from "@/views/ClubPage.vue"
 import NoticePage from "@/views/NoticePage.vue"
 import NoticeDetailPage from "@/views/NoticeDetailPage.vue"

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { department_map } from "../../store.js";
+import { department_map } from "@/store.js";
 
 export default {
     name : "Club",

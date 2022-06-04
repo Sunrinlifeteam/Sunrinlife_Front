@@ -11,8 +11,8 @@
 </template>
 
 <script>
-//import TimeTableData from "../../assets/TimerData.js"
-// import Time from "./../../../Model/Time.js"
+//import TimeTableData from "@/assets/TimerData.js"
+// import Time from "@/@/Model/Time.js"
 
 //let luanchRemainingTime
 //let launchStartTime

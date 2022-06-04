@@ -40,5 +40,5 @@ export default {
 
 </script>
 <style>
-@import "./../assets/style/mainPage/mainPage.css";
+@import "@/assets/style/mainPage/mainPage.css";
 </style>
