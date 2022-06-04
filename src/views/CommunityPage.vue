@@ -26,10 +26,14 @@
                 </div>
 
                 <div class="field-name">
-                    <div class="heart">추천</div>
-                    <div class="title">제목</div>
-                    <div class="writer" v-if="!isAnonymous()">작성자</div>
-                    <div class="date">작성일</div>
+                    <div>
+                        <div class="heart">추천</div>
+                        <div class="title">제목</div>
+                    </div>
+                    <div>
+                        <div class="writer" v-if="!isAnonymous()">작성자</div>
+                        <div class="date">작성일</div>
+                    </div>
                 </div>
 
                 <div class="hot-sunrin board-list" v-if="(filterSelect === '전체' && pageId === 1) || filterSelect === '핫선린'">
@@ -37,21 +41,25 @@
 
                     <ul>
                         <li v-for="i, n in hotData" :key="n" class="board-list-item">
-                            <div class="heart">
-                                {{ i.heartCount }}
+                            <div>
+                                <div class="heart">
+                                    {{ i.heartCount }}
+                                </div>
+                                <div class="title">
+                                    <p @click="$router.push({ name : 'postDetail', params : { 'postId' : n } })">{{ i.title }}</p>
+                                    <img src="./../assets/community/eye_icon.svg" alt="" v-if="n % 3 == 0">
+                                </div>
                             </div>
-                            <div class="title">
-                                <p @click="$router.push({ name : 'postDetail', params : { 'postId' : n } })">{{ i.title }}</p>
-                                <img src="./../assets/community/eye_icon.svg" alt="" v-if="n % 3 == 0">
-                            </div>
-                            <div class="writer" v-if="!isAnonymous()">
-                                {{ i.writer }}
-                            </div>
-                            <div class="date">
-                                <span v-if="i.timeStamp.getMonth() < 9">0</span>
-                                {{ i.timeStamp.getMonth() + 1 }}-
-                                <span v-if="i.timeStamp.getDay() < 10">0</span>
-                                {{ i.timeStamp.getDay() }}
+                            <div>
+                                <div class="writer" v-if="!isAnonymous()">
+                                    {{ i.writer }}
+                                </div>
+                                <div class="date">
+                                    <span v-if="i.timeStamp.getMonth() < 9">0</span>
+                                    {{ i.timeStamp.getMonth() + 1 }}-
+                                    <span v-if="i.timeStamp.getDay() < 10">0</span>
+                                    {{ i.timeStamp.getDay() }}
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -63,7 +71,7 @@
                     <ul>
                         <li v-for="i, n in boardData" :key="n" class="board-list-item">
                             <div class="heart">
-                                {{ i.heartCount || n + 8 }}
+                                {{ i.likes }}
                             </div>
                             <div class="title">
                                 <p @click="$router.push({ name : 'postDetail', params : { 'postId' : n } })">{{ i.title }}</p>
@@ -292,19 +300,25 @@ export default {
 
     display: flex;
     align-items: center;
+
+    justify-content: space-between;
+}
+
+.field-name div{
+    display: inline;
 }
 
 .field-name .title {
-    flex : 1;
+    
 }
 .field-name .heart{
-    padding-left:12px;
+    
 }
 .field-name .writer{
-    padding-right: 25px;
+    
 }
 .field-name .date{
-    padding-right:15px;
+    
 }
 
 .field-name * {
@@ -358,7 +372,6 @@ export default {
 }
 
 .board-list-item .title {
-    flex : 1;
 
     color: #3d3d3d;
 
