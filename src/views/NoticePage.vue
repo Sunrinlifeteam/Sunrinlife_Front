@@ -34,9 +34,7 @@
                         <p class="notice-title text-truncated">{{ i.title }}</p>
                     </li>
                 </ul>
-
-                <Pagination v-bind:page-count="isSearch()" />
-                
+                <Pagination v-bind:page-count="loadedPageCount" />
             </div>
         </div>
     </div>
@@ -60,8 +58,8 @@ export default {
     name: "Notice",
     data() {
         return {
+            loadedPageCount: null,
             loadedNoticeData: {},
-            loadedPageCount: 0,
             searchQueryText: "",
         };
     },
@@ -78,18 +76,17 @@ export default {
             return this.$route.query.search;
         },
         savedPages: function () {
-            return Object.keys(this.noticePage || {})
+            return Object.keys(this.$store.getters.getNoticePage || {})
                 .map((x) => parseInt(x))
                 .filter((x) => x);
         },
     },
     watch: {
-        noticePageCount: function() {
-            this.loadedPageCount = this.noticePageCount;
-            console.log(this.loadedPageCount);
-        },
         pageId: function () {
             this.loadNotice();
+        },
+        noticePageCount: function() {
+            this.loadedPageCount = this.noticePageCount;
         },
     },
     methods: {
@@ -123,17 +120,15 @@ export default {
             await this.updateCount();
             this.loadNotice();
         },
-        isSearch(){
-            return this.$route.query.search?this.searchPageCount:this.noticePageCount
-        },
         updateCount: async function () {
             if (this.searchQuery)
-                this.searchPageCount = await getNoticePageCountWithSearch(this.searchQuery);
+                this.loadedPageCount = await getNoticePageCountWithSearch(this.searchQuery);
+            else this.loadedPageCount = this.noticePageCount
         },
     },
     mounted() {
-        this.updateCount();
         this.loadNotice();
+        this.updateCount();
         getNoticePageCount().then((data) => {
             store.commit("setNoticePageCount", data);
         });
