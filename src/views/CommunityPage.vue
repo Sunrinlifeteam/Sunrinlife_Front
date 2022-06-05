@@ -103,7 +103,7 @@
 <script>
 import Pagination from "@/components/Pagination.vue";
 import { DateTime } from "luxon";
-import { getBoardList, getBoardPageCount } from "../api.js";
+import { getPublicBoardList, getPublicBoardPageCount } from "../api.js";
 
 export default {
     name: "CommunitPage",
@@ -161,32 +161,32 @@ export default {
     },
     watch: {
         getAuthToken() {
-            getBoardList(this.pageId - 1, this.isAnonymous?1:0)
+            getPublicBoardList(this.pageId - 1)
                 .then((res) => {
                     this.boardData = res.data;
                 })
                 .catch((e) => console.log(e));
-            getBoardPageCount(this.isAnonymous?1:0).then((res) => {
+            getPublicBoardPageCount(this.isAnonymous?1:0).then((res) => {
                 this.pageCount = res;
             });
         },
         pageId: function () {
-            getBoardList(this.pageId - 1, this.isAnonymous?1:0)
+            getPublicBoardList(this.pageId - 1)
                 .then((res) => {
                     this.boardData = res.data;
                 })
                 .catch((e) => console.log(e));
-            getBoardPageCount(this.isAnonymous?1:0).then((res) => {
+            getPublicBoardPageCount(this.isAnonymous?1:0).then((res) => {
                 this.pageCount = res;
             });
         },
         $route:function(){
-            getBoardList(this.pageId - 1, this.isAnonymous?1:0)
+            getPublicBoardList(this.pageId - 1)
                 .then((res) => {
                     this.boardData = res.data;
                 })
                 .catch((e) => console.log(e));
-            getBoardPageCount(this.isAnonymous?1:0).then((res) => {
+            getPublicBoardPageCount(this.isAnonymous?1:0).then((res) => {
                 this.pageCount = res;
             });
         }
@@ -206,12 +206,12 @@ export default {
     },
     mounted() {
         if (this.$store.getters.getAuthToken !== null) {
-            getBoardList(this.pageId - 1, this.isAnonymous?1:0)
+            getPublicBoardList(this.pageId - 1)
                 .then((res) => {
                     this.boardData = res.data;
                 })
                 .catch((e) => console.log(e));
-            getBoardPageCount(this.isAnonymous?1:0).then((res) => {
+            getPublicBoardPageCount(this.isAnonymous?1:0).then((res) => {
                 this.pageCount = res;
             });
         }

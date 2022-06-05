@@ -35,7 +35,7 @@
                     </li>
                 </ul>
 
-                <Pagination v-bind:page-count="noticePageCount" />
+                <Pagination v-bind:page-count="isSearch()" />
             </div>
         </div>
     </div>
@@ -118,18 +118,23 @@ export default {
             await this.updateCount();
             this.loadNotice();
         },
+        isSearch(){
+            return this.$route.query.search?this.searchPageCount:this.noticePageCount
+        },
         updateCount: async function () {
             if (this.searchQuery)
-                this.searchPageCount = await getNoticePageCountWithSearch(
-                    this.searchQuery
-                );
+                this.searchPageCount = await getNoticePageCountWithSearch(this.searchQuery);
         },
     },
     mounted() {
         this.loadNotice();
+        this.updateCount();
         getNoticePageCount().then((data) => {
             store.commit("setNoticePageCount", data);
         });
+        if(this.$route.query.search){
+            this.searchQueryText = this.$route.query.search
+        }
     },
 };
 </script>
