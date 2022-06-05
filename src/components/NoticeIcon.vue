@@ -32,8 +32,6 @@ export default {
     text-align: center;
 
     padding: 4px 4px;
-
-    font-family: "Noto Sans KR", sans-serif;
     font-weight: 600;
 }
 

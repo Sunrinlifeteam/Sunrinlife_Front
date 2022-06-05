@@ -292,7 +292,6 @@ export default {
         margin-bottom: 7px;
     }
     .user-major-item, .user-number-item {
-        font-family: 'Noto Sans KR', sans-serif;
         font-size: 16px;
         font-weight: 500;
         font-stretch: normal;
@@ -318,7 +317,6 @@ export default {
         margin-right: 12px;
     }
     .user-contact-text {
-        font-family: 'Noto Sans KR', sans-serif;
         font-size: 16px;
         font-weight: 500;
         font-stretch: normal;
@@ -342,7 +340,6 @@ export default {
     }
     .user-introduce-title {
         height: 24px;
-        font-family: 'Noto Sans KR', sans-serif;
         font-size: 16px;
         font-weight: bold;
         font-stretch: normal;
@@ -356,7 +353,6 @@ export default {
         /*background-color: #1e7edd;*/
         display: block;
         padding: 8px 16px;
-        font-family: 'Noto Sans KR', sans-serif;
         font-size: 16px;
         font-weight: 500;
         font-stretch: normal;

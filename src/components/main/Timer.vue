@@ -113,7 +113,6 @@ export default {
 }
 
 .timer span{
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
 }
 
