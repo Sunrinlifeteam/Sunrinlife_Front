@@ -239,6 +239,10 @@ nav .menu_list .options .router_option span::before{
     font-weight: 700;
 }
 
+.router-link-active span::before{
+    background-color:#4992ff !important;
+}
+
 .router-link-active img{
     filter: invert(57%) sepia(64%) saturate(4033%) hue-rotate(198deg) brightness(102%) contrast(102%);
 }

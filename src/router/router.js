@@ -11,8 +11,8 @@ import NoticeDetailPage from "@/views/NoticeDetailPage.vue"
 import CommunityPage from "@/views/CommunityPage.vue"
 
 import EasterEggPage from "@/views/EasterEggPage.vue"
-import PostCreatePage from "@/views/PostCreatePage";
-import PostDetailPage from "@/views/PostDetailPage";
+import CommunityPostCreatePage from "@/views/CommunityPostCreatePage";
+import CommunityPostDetailPage from "@/views/CommunityPostDetailPage";
 
 const routes = [
     {
@@ -64,32 +64,40 @@ const routes = [
     },
     {
         path : "/community/public",
-        name: "publicCommunity",
-        component : CommunityPage,
-        props: true
+        component: { render: () => h(RouterView) },
+        children: [
+            { 
+              path: '',
+              name: 'publicCommunity',
+              component : CommunityPage,
+            },
+            { 
+              path: ':postId',
+              name: 'publicCommunityPostDetail',
+              component : CommunityPostDetailPage,
+            }
+        ],
     },
     {
         path : "/community/anonymous",
-        name: "anonymousCommunity",
-        component : CommunityPage,
-        props: true
+        component: { render: () => h(RouterView) },
+        children: [
+            { 
+              path: '',
+              name: 'anonymousCommunity',
+              component : CommunityPage,
+            },
+            { 
+              path: ':postId',
+              name: 'anonymousCommunityPostDetail',
+              component : CommunityPostDetailPage,
+            }
+        ],
     },
     {
         path : "/postCreate",
         name: "postCreate",
-        component : PostCreatePage,
-        props: true
-    },
-    {
-        path : "/community/public/:postId",
-        name: "publicPostDetail",
-        component : PostDetailPage,
-        props: true
-    },
-    {
-        path : "/community/anonymous/:postId",
-        name: "anonymousPostDetail",
-        component : PostDetailPage,
+        component : CommunityPostCreatePage,
         props: true
     },
     {
