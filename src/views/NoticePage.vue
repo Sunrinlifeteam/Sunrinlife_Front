@@ -36,6 +36,7 @@
                 </ul>
 
                 <Pagination v-bind:page-count="isSearch()" />
+                
             </div>
         </div>
     </div>
@@ -59,8 +60,8 @@ export default {
     name: "Notice",
     data() {
         return {
-            searchPageCount: null,
             loadedNoticeData: {},
+            loadedPageCount: 0,
             searchQueryText: "",
         };
     },
@@ -77,12 +78,16 @@ export default {
             return this.$route.query.search;
         },
         savedPages: function () {
-            return Object.keys(this.$store.getters.getNoticePage || {})
+            return Object.keys(this.noticePage || {})
                 .map((x) => parseInt(x))
                 .filter((x) => x);
         },
     },
     watch: {
+        noticePageCount: function() {
+            this.loadedPageCount = this.noticePageCount;
+            console.log(this.loadedPageCount);
+        },
         pageId: function () {
             this.loadNotice();
         },
@@ -127,8 +132,8 @@ export default {
         },
     },
     mounted() {
-        this.loadNotice();
         this.updateCount();
+        this.loadNotice();
         getNoticePageCount().then((data) => {
             store.commit("setNoticePageCount", data);
         });

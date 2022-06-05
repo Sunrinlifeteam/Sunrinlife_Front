@@ -55,13 +55,19 @@ export default {
                 return date.toFormat("yyyy-MM-dd");
             }
         },
+        authorDetail(data) {
+            if (!this.isAnonymous) this.$router.push({ name: 'profile', query: { id: data.author.id } });
+        }
     },
     watch: {
         getAuthToken() {
             getPublicBoardDetail(this.$route.params.postId).then(res => {
                 this.postData = res.data;
             });
-        }
+        },
+        postData() {
+
+        },
     },
     mounted() {
         if (this.$store.getters.getAuthToken !== null) {
