@@ -19,6 +19,11 @@ export async function getAccessToken() {
     })
 }
 
+export async function getUserDataById(id){
+    let userData = await getAPI.get(`/user/${id}/full`).then((res) => res.data).catch((e) => console.log(e))
+    return userData
+}
+
 export async function getUserData(){
     let userData = await getAPI.get("/user/full").then((res) => res.data).catch((e) => console.log(e))
     return userData
@@ -178,4 +183,8 @@ export async function getPublicBoardPageCount(){
 export async function getPublicBoard(pageId = 0){
     let res = await getAPI.get(`/board?offset=${pageId}&count=10&sort=DESC&orderType=created&type=0`)
     return res
+}
+
+export async function getBoardDetail(id){
+    return await getAPI.get(`/board/${id}`);
 }

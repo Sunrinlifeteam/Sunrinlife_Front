@@ -6,7 +6,7 @@
                     <div class="header">
                         <h2 v-if="isAnonymous()">익명 게시판</h2>
                         <h2 v-else>일반 게시판</h2>
-                        <img src="@/assets/user_profile_assets/correctionIcon.svg" alt="" @click="$router.push({ name: 'postCreate' })"/>
+                        <img src="@/assets/user_profile_assets/correctionIcon.svg" alt="" @click="$router.push({ name: 'postCreate', query: { ...isAnonymous() && { type: 'anonymous'} } })"/>
                     </div>
 
                     <div class="search-filter-wrap">
@@ -77,7 +77,7 @@
                                         {{ i.likes }}
                                     </div>
                                     <div class="title">
-                                        <p @click="$router.push({ name: 'postDetail', params: { postId: n }, })">{{ i.title }}</p>
+                                        <p @click="$router.push({ name: `${ isAnonymous ? 'anonymous' : 'public' }PostDetail`, params: { postId: i.id }, })">{{ i.title }}</p>
                                         <!-- todo 제목 짤림 -->
                                         <img src="@/assets/community/eye_icon.svg" alt="" v-if="n % 3 == 0"/>
                                     </div>

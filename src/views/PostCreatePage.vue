@@ -4,13 +4,13 @@
         <div class="post-create-content neu-morphism-card">
 
             <div class="header">
-                <img src="@/assets/prev_arrow.svg" alt="">
-                <h2>일반 게시판 / 익명 게시판</h2>
+                <img src="@/assets/prev_arrow.svg" alt="<" @click="$router.back();">
+                <h2>{{ isAnonymous ? "익명": "일반" }} 게시글 작성</h2>
             </div>
 
             <div class="title-wrap input-wrap">
                 <h3>제목</h3>
-                <input type="text" placeholder="제목">
+                <input type="text" placeholder="제목" v-model="title">
             </div>
 
             <label class="image-add">
@@ -20,7 +20,7 @@
 
             <div class="content-wrap input-wrap">
                 <h3>내용</h3>
-                <textarea placeholder="내용"></textarea>
+                <textarea placeholder="내용" v-model="content"></textarea>
             </div>
 
             <div class="create-post-wrap">
@@ -33,7 +33,18 @@
 
 <script>
 export default {
-    name: "PostCreatePage"
+    name: "PostCreatePage",
+    data() {
+        return {
+            title: "",
+            content: "",
+        }
+    },
+    computed: {
+        isAnonymous() {
+            return this.$route.query.type === "anonymous";
+        }
+    }
 };
 </script>
 

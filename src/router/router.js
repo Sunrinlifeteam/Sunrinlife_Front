@@ -88,7 +88,7 @@ const routes = [
     },
     {
         path : "/community/anonymous/:postId",
-        name: "publicPostDetail",
+        name: "anonymousPostDetail",
         component : PostDetailPage,
         props: true
     },
