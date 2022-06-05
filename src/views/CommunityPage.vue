@@ -4,9 +4,9 @@
             <div class="community-content neu-morphism-card">
                 <div>
                     <div class="header">
-                        <h2 v-if="isAnonymous()">익명 게시판</h2>
+                        <h2 v-if="isAnonymous">익명 게시판</h2>
                         <h2 v-else>일반 게시판</h2>
-                        <img src="@/assets/user_profile_assets/correctionIcon.svg" alt="" @click="$router.push({ name: 'postCreate', query: { ...isAnonymous() && { type: 'anonymous'} } })"/>
+                        <img src="@/assets/user_profile_assets/correctionIcon.svg" alt="" @click="$router.push({ name: 'postCreate', query: { ...isAnonymous && { type: 'anonymous'} } })"/>
                     </div>
 
                     <div class="search-filter-wrap">
@@ -31,7 +31,7 @@
                             <div class="title">제목</div>
                         </div>
                         <div>
-                            <div class="writer" v-if="!isAnonymous()">작성자</div>
+                            <div class="writer" v-if="!isAnonymous">작성자</div>
                             <div class="date">작성일</div>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="writer" v-if="!isAnonymous()">
+                                    <div class="writer" v-if="!isAnonymous">
                                         {{ i.writer }}
                                     </div>
                                     <div class="date">
@@ -77,13 +77,13 @@
                                         {{ i.likes }}
                                     </div>
                                     <div class="title">
-                                        <p @click="$router.push({ name: `${ isAnonymous ? 'anonymous' : 'public' }PostDetail`, params: { postId: i.id }, })">{{ i.title }}</p>
+                                        <p @click="$router.push({ name: `${ isAnonymous ? 'anonymous' : 'public' }CommunityPostDetail`, params: { postId: i.id }, })">{{ i.title }}</p>
                                         <!-- todo 제목 짤림 -->
                                         <img src="@/assets/community/eye_icon.svg" alt="" v-if="n % 3 == 0"/>
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="writer" v-if="!isAnonymous()">
+                                    <div class="writer" v-if="!isAnonymous">
                                         {{ i.author.username }}
                                     </div>
                                     <div class="date">
@@ -103,7 +103,7 @@
 <script>
 import Pagination from "@/components/Pagination.vue";
 import { DateTime } from "luxon";
-import { getPublicBoard, getPublicBoardPageCount } from "../api.js";
+import { getBoardList, getBoardPageCount } from "../api.js";
 
 export default {
     name: "CommunitPage",
@@ -146,6 +146,9 @@ export default {
         getAuthToken() {
             return this.$store.getters.getAuthToken;
         },
+        isAnonymous:function() {
+            return this.$route.name === "anonymousCommunity";
+        },
         pageId: function () {
             return parseInt(this.$route.query.page) || 1;
         },
@@ -158,27 +161,37 @@ export default {
     },
     watch: {
         getAuthToken() {
-            getPublicBoard(this.pageId - 1)
+            getBoardList(this.pageId - 1, this.isAnonymous?1:0)
                 .then((res) => {
                     this.boardData = res.data;
                 })
                 .catch((e) => console.log(e));
-            getPublicBoardPageCount().then((res) => {
+            getBoardPageCount(this.isAnonymous?1:0).then((res) => {
                 this.pageCount = res;
             });
         },
         pageId: function () {
-            getPublicBoard(this.pageId - 1)
+            getBoardList(this.pageId - 1, this.isAnonymous?1:0)
                 .then((res) => {
                     this.boardData = res.data;
                 })
                 .catch((e) => console.log(e));
+            getBoardPageCount(this.isAnonymous?1:0).then((res) => {
+                this.pageCount = res;
+            });
         },
+        $route:function(){
+            getBoardList(this.pageId - 1, this.isAnonymous?1:0)
+                .then((res) => {
+                    this.boardData = res.data;
+                })
+                .catch((e) => console.log(e));
+            getBoardPageCount(this.isAnonymous?1:0).then((res) => {
+                this.pageCount = res;
+            });
+        }
     },
     methods: {
-        isAnonymous() {
-            return this.$route.name === "anonymousCommunity";
-        },
         parsingTime(time) {
             const date = DateTime.fromISO(time, "yyyy-MM-dd HH:mm:ss");
             if (date.hasSame(DateTime.local(), "day")) {
@@ -193,12 +206,12 @@ export default {
     },
     mounted() {
         if (this.$store.getters.getAuthToken !== null) {
-            getPublicBoard(this.pageId - 1)
+            getBoardList(this.pageId - 1, this.isAnonymous?1:0)
                 .then((res) => {
                     this.boardData = res.data;
                 })
                 .catch((e) => console.log(e));
-            getPublicBoardPageCount().then((res) => {
+            getBoardPageCount(this.isAnonymous?1:0).then((res) => {
                 this.pageCount = res;
             });
         }
