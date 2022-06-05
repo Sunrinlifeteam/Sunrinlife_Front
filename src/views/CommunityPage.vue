@@ -6,48 +6,34 @@
                     <div class="header">
                         <h2 v-if="isAnonymous()">익명 게시판</h2>
                         <h2 v-else>일반 게시판</h2>
-                        <img
-                            src="@/assets/user_profile_assets/correctionIcon.svg"
-                            alt=""
-                            @click="$router.push({ name: 'postCreate' })"
-                        />
+                        <img src="@/assets/user_profile_assets/correctionIcon.svg" alt="" @click="$router.push({ name: 'postCreate' })"/>
                     </div>
 
                     <div class="search-filter-wrap">
                         <div class="search-wrap">
-                            <input
-                                v-model="searchQuery"
-                                type="text"
-                                placeholder="검색"
-                            />
-                            <img
-                                src="/img/search.svg"
-                                alt="검색 아이콘"
-                                class="search-button"
-                            />
+                            <input v-model="searchQuery" type="text" placeholder="검색"/>
+                            <img src="/img/search.svg" alt="검색 아이콘" class="search-button"/>
                         </div>
                         <div class="filter-wrap">
-                            <select
-                                class="select-board-type"
-                                v-model="filterSelect"
-                            >
+                            <select class="select-board-type" v-model="filterSelect">
                                 <option>전체</option>
                                 <option>핫선린</option>
                                 <option>일반</option>
                             </select>
 
-                            <img
-                                src="@/assets/community/select_arrow.svg"
-                                alt="실행"
-                            />
+                            <img src="@/assets/community/select_arrow.svg" alt="실행"/>
                         </div>
                     </div>
 
                     <div class="field-name">
-                        <div class="heart">추천</div>
-                        <div class="title">제목</div>
-                        <div class="writer" v-if="!isAnonymous()">작성자</div>
-                        <div class="date">작성일</div>
+                        <div>
+                            <div class="heart">추천</div>
+                            <div class="title">제목</div>
+                        </div>
+                        <div>
+                            <div class="writer" v-if="!isAnonymous()">작성자</div>
+                            <div class="date">작성일</div>
+                        </div>
                     </div>
 
                     <div class="hot-sunrin board-list" v-if="(filterSelect === '전체' && pageId === 1) || filterSelect === '핫선린'">
@@ -55,23 +41,27 @@
 
                         <ul>
                             <li v-for="(i, n) in hotData" :key="n" class="board-list-item">
-                                <div class="heart">
-                                    {{ i.heartCount }}
+                                <div>
+                                    <div class="heart">
+                                        {{ i.heartCount }}
+                                    </div>
+                                    <div class="title">
+                                        <p @click="$router.push({ name: 'postDetail', params: { postId: n }, })">
+                                            {{ i.title }}
+                                        </p>
+                                        <img src="@/assets/community/eye_icon.svg" alt="" v-if="n % 3 == 0" />
+                                    </div>
                                 </div>
-                                <div class="title">
-                                    <p @click="$router.push({ name: 'postDetail', params: { postId: n }, })">
-                                        {{ i.title }}
-                                    </p>
-                                    <img src="@/assets/community/eye_icon.svg" alt="" v-if="n % 3 == 0" />
-                                </div>
-                                <div class="writer" v-if="!isAnonymous()">
-                                    {{ i.writer }}
-                                </div>
-                                <div class="date">
-                                    <span v-if="i.timeStamp.getMonth() < 9">0</span>
-                                    {{ i.timeStamp.getMonth() + 1 }}-
-                                    <span v-if="i.timeStamp.getDay() < 10">0</span>
-                                    {{ i.timeStamp.getDay() }}
+                                <div>
+                                    <div class="writer" v-if="!isAnonymous()">
+                                        {{ i.writer }}
+                                    </div>
+                                    <div class="date">
+                                        <span v-if="i.timeStamp.getMonth() < 9">0</span>
+                                        {{ i.timeStamp.getMonth() + 1 }}-
+                                        <span v-if="i.timeStamp.getDay() < 10">0</span>
+                                        {{ i.timeStamp.getDay() }}
+                                    </div>
                                 </div>
                             </li>
                         </ul>
@@ -84,7 +74,7 @@
                             <li v-for="i, n in boardData" :key="n" class="board-list-item">
                                 <div>
                                     <div class="heart">
-                                        {{ i.heartCount || n + 8 }}
+                                        {{ i.likes }}
                                     </div>
                                     <div class="title">
                                         <p @click="$router.push({ name: 'postDetail', params: { postId: n }, })">{{ i.title }}</p>
@@ -93,9 +83,9 @@
                                     </div>
                                 </div>
                                 <div>
-                                <div class="writer" v-if="!isAnonymous()">
-                                    {{ i.writer }}
-                                </div>
+                                    <div class="writer" v-if="!isAnonymous()">
+                                        {{ i.author.username }}
+                                    </div>
                                     <div class="date">
                                         <span>{{ parsingTime(i.created) }}</span>
                                     </div>
@@ -120,6 +110,33 @@ export default {
     data() {
         return {
             pageCount: 0,
+            hotData:[
+                {
+                    heartCount : 13,
+                    title : "선린인터넷고등학교 인트라넷 오픈",
+                    writer : "송우진",
+                    timeStamp : new Date()
+                },
+                {
+                    heartCount : 13,
+                    title : "선린인터넷고등학교 인트라넷 오픈",
+                    writer : "송우진",
+                    timeStamp : new Date()
+                },
+                {
+                    heartCount : 13,
+                    title : "선린인터넷고등학교 인트라넷 오픈",
+                    writer : "송우진",
+                    timeStamp : new Date()
+                },
+                {
+                    heartCount : 13,
+                    title : "선린인터넷고등학교 인트라넷 오픈",
+                    writer : "송우진",
+                    timeStamp : new Date()
+                },
+            ],
+            boardData:[],
         };
     },
     components: {
@@ -355,6 +372,7 @@ export default {
 
 .board-list-item {
     display: flex;
+    justify-content: space-between;
 }
 
 .board-list-item * {
@@ -362,10 +380,17 @@ export default {
     align-items: center;
 }
 
+.board-list-item div{
+
+}
+
 .board-list-item .heart {
-    text-align: left;
+    display:block;
+    width:22px;
+    text-align: center;
     font-size: 12px;
     font-weight: 500;
+    margin-right: 16px;
 }
 
 .board-list-item .heart img {
@@ -403,7 +428,7 @@ export default {
     font-size: 12px;
     font-weight: 500;
 
-    margin-left: 13px;
+    margin-left: 17px;
 }
 
 .hot-sunrin {
