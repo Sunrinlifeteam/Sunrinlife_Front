@@ -8,7 +8,9 @@
 
                     <div class="data-wrap">
                         <div class="heart-count">추천 {{ postData.likes }}</div>
-                        <div class="writer" @click="$router.push({ name: 'profile', query: { id: postData.author.id } })">{{ postData.author.username }}</div>
+                        <div class="writer" @click="authorDetail()">
+                            {{ postData.author?.username || "익명" }}
+                        </div>
                         <div>|</div>
                         <div class="date">
                             <span>{{ this.formatTime(postData.created) }}</span>
@@ -40,6 +42,9 @@ export default {
         getAuthToken() {
             return this.$store.getters.getAuthToken;
         },
+        isAnonymous() {
+            return this.postData.type;
+        },
     },
     methods: {
         formatTime(time) {
@@ -52,13 +57,19 @@ export default {
                 return date.toFormat("yyyy-MM-dd");
             }
         },
+        authorDetail(data) {
+            if (!this.isAnonymous) this.$router.push({ name: 'profile', query: { id: data.author.id } });
+        }
     },
     watch: {
         getAuthToken() {
             getBoardDetail(this.$route.params.postId).then(res => {
                 this.postData = res.data;
             });
-        }
+        },
+        postData() {
+
+        },
     },
     mounted() {
         if (this.$store.getters.getAuthToken !== null) {
