@@ -140,6 +140,12 @@ main {
     font-size: 18px;
 }
 
+@media (min-width: 970px){
+    body{
+        overflow-y: hidden;
+    }
+}
+
 @media (max-width: 970px) {
     .main-page-items {
         display: grid;
