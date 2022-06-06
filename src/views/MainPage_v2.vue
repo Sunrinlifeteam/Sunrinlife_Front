@@ -141,6 +141,9 @@ main {
 }
 
 @media (max-width: 970px) {
+    body{
+        overflow-y: hidden;
+    }
     .main-page-items {
         display: grid;
         grid-template-columns: 1fr;
