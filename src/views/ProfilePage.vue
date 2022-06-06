@@ -192,11 +192,17 @@ export default {
     body {
         /*padding: 205px 231px;*/
     }
+    .panel {
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        height:100vh;
+    }
     .user-profile{
-        width: 556px;
+        width: 700px;
         height: 541px;
         margin: 0 auto;
-        margin-top:205px;
+
         border-radius: 8px;
         box-shadow: 1px 0 6px 0 rgba(0, 0, 0, 0.16);
         display: flex;
