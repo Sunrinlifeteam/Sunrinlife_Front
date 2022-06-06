@@ -43,7 +43,7 @@
                         <div class="vertical">
                             <div class="user-info-group">
                                 <div class="user-info-label">학과</div>
-                                <div class="user-info-content">{{department_map[userInfo.department]}}</div>
+                                <div class="user-info-content">{{ department_map[userInfo.department] }}</div>
                             </div>
                             <div class="user-info-group">
                                 <div class="user-info-label">학년/반/번호</div>
@@ -51,18 +51,18 @@
                             </div>
                             <div class="user-info-group">
                                 <div class="user-info-label">전공/일반 동아리</div>
-                                <div class="user-info-content">IWOP</div>
+                                <div class="user-info-content">{{ userInfo.clubInfo.name }}</div>
                             </div>
                         </div>
 
                         <div class="vertical">
                             <div class="user-info-group">
                                 <div class="user-info-label">GITHUB</div>
-                                <div class="user-info-content">https://github.com/wugusaud77</div>
+                                <div class="user-info-content">{{ userInfo.githubLink }}</div>
                             </div>
                                  <div class="user-info-group">
                                 <div class="user-info-label">INSTAGRAM</div>
-                                <div class="user-info-content">https://instagram.com/zxx_wise</div>
+                                <div class="user-info-content"></div>
                             </div>
                         </div>
                     </div>
