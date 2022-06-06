@@ -35,7 +35,8 @@
                     </li>
                 </ul>
 
-                <Pagination v-bind:page-count="noticePageCount" />
+                <Pagination v-bind:page-count="isSearch()" />
+                
             </div>
         </div>
     </div>
@@ -59,8 +60,8 @@ export default {
     name: "Notice",
     data() {
         return {
-            searchPageCount: null,
             loadedNoticeData: {},
+            loadedPageCount: 0,
             searchQueryText: "",
         };
     },
@@ -77,12 +78,16 @@ export default {
             return this.$route.query.search;
         },
         savedPages: function () {
-            return Object.keys(this.$store.getters.getNoticePage || {})
+            return Object.keys(this.noticePage || {})
                 .map((x) => parseInt(x))
                 .filter((x) => x);
         },
     },
     watch: {
+        noticePageCount: function() {
+            this.loadedPageCount = this.noticePageCount;
+            console.log(this.loadedPageCount);
+        },
         pageId: function () {
             this.loadNotice();
         },
@@ -118,18 +123,23 @@ export default {
             await this.updateCount();
             this.loadNotice();
         },
+        isSearch(){
+            return this.$route.query.search?this.searchPageCount:this.noticePageCount
+        },
         updateCount: async function () {
             if (this.searchQuery)
-                this.searchPageCount = await getNoticePageCountWithSearch(
-                    this.searchQuery
-                );
+                this.searchPageCount = await getNoticePageCountWithSearch(this.searchQuery);
         },
     },
     mounted() {
+        this.updateCount();
         this.loadNotice();
         getNoticePageCount().then((data) => {
             store.commit("setNoticePageCount", data);
         });
+        if(this.$route.query.search){
+            this.searchQueryText = this.$route.query.search
+        }
     },
 };
 </script>

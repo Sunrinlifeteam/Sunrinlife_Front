@@ -157,14 +157,14 @@ export async function getNoticeSearch(page, search){
 
 export async function getNoticePageCountWithSearch(search){
     let res = await getAPI.get(`/notice/count?search=${encodeURI(search)}`).then((res) => res.data).catch((e) => console.log(e))
-    res = Math.ceil(res / 10)
+    res = Math.ceil(res / 10) || 1
     console.log(res)
     return res
 }
 
 export async function getNoticePageCount(){
     let res = await getAPI.get("/notice/count").then((res) => res.data).catch((e) => console.log(e))
-    res = Math.ceil(res / 10)
+    res = Math.ceil(res / 10) || 1
     return res
 }
 
@@ -174,17 +174,17 @@ export async function getNoticeById(noticeId) {
 }
 
 //게시판
-export async function getBoardPageCount(type){
-    let res = await getAPI.get(`/board/count?type=${type}`)
-    res = Math.ceil(res.data / 10)
+export async function getPublicBoardPageCount(){
+    let res = await getAPI.get(`/board/named/count`)
+    res = Math.ceil(res.data / 10) || 1
     return res
 }
 
-export async function getBoardList(pageId = 0, type){
-    let res = await getAPI.get(`/board?offset=${pageId}&count=10&sort=DESC&orderType=created&type=${type}`)
+export async function getPublicBoardList(pageId = 0){
+    let res = await getAPI.get(`/board/named?offset=${pageId}&count=10&sort=DESC&orderType=created`)
     return res
 }
 
-export async function getBoardDetail(id){
-    return await getAPI.get(`/board/${id}`);
+export async function getPublicBoardDetail(id){
+    return await getAPI.get(`/board/named/${id}`);
 }
