@@ -25,10 +25,8 @@ export default {
 <style scoped>
 .notice-icon {
     font-size: 14px;
-    padding: 2px 10px;
     border-radius: 10px;
     color: #4992ff;
-    height: 28px;
     text-align: center;
 
     padding: 4px 4px;
