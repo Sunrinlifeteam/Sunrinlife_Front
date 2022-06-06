@@ -24,7 +24,7 @@
             </div>
 
             <div class="create-post-wrap">
-                <button class="create-post">작성 완료</button>
+                <button class="create-post" @click="createPost()">작성 완료</button>
             </div>
         </div>
     </div>
@@ -32,12 +32,33 @@
 </template>
 
 <script>
+import { writePublicBoard } from '../api';
+
 export default {
     name: "PostCreatePage",
     data() {
         return {
             title: "",
             content: "",
+        }
+    },
+    methods: {
+        createPost() {
+            if(this.title.length == 0) {
+                alert("제목을 입력해주세요.");
+                return;
+            }
+            if(this.content.length == 0) {
+                alert("내용을 입력해주세요.");
+                return;
+            }
+            writePublicBoard(this.title, this.content, [])
+                .then(() => {
+                    this.$router.push({ name: "publicCommunity" });
+                })
+                .catch(err => {
+                    alert(err.message);
+                });
         }
     },
     computed: {
