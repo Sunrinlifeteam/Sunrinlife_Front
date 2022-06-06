@@ -179,6 +179,10 @@ export async function getPublicBoardPageCount(){
     return res
 }
 
+export async function getPublicHotBoardList(){
+    return await getAPI.get("/board/named/top")
+}
+
 export async function getPublicBoardList(pageId = 0){
     let res = await getAPI.get(`/board/named?offset=${pageId}&count=10&sort=DESC&orderType=created`)
     return res
@@ -188,7 +192,28 @@ export async function getPublicBoardDetail(id){
     return await getAPI.get(`/board/named/${id}`);
 }
 
-// 게시판 글 쓰기
 export async function writePublicBoard(title, content, attachments) {
     return await getAPI.post(`/board/named`, { title, content, attachments });
+}
+
+export async function getAnonymousBoardPageCount(){
+    let res = await getAPI.get(`/board/anonymous/count`)
+    res = Math.ceil(res.data / 10) || 1
+    return res
+}
+
+export async function getAnonymousBoardList(pageId = 0){
+    return await getAPI.get(`/board/anonymous?offset=${pageId}&count=10&sort=DESC&orderType=created`)
+}
+
+export async function getAnonymousHotBoardList(){
+    return await getAPI.get("/board/anonymous/top")
+}
+
+export async function getAnonymousBoardDetail(id){
+    return await getAPI.get(`/board/anonymous/${id}`);
+}
+
+export async function writeAnonymousBoard(title, content, attachments){
+    return await getAPI.post("/board/anonymous", {title, content, attachments})
 }
