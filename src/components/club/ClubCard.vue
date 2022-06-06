@@ -123,12 +123,10 @@ export default {
 }
 
 .club-card .club-name {
-    font-family: 'Noto Sans KR', sans-serif;
     font-size: 20px;
 }
 
 .club-card .descriptions {
-    font-family: 'Noto Sans KR', sans-serif;
     font-size: 14px;
     font-weight: bold;
     word-break : keep-all;
@@ -161,7 +159,6 @@ export default {
 }
 
 .club-card .sns-link .url {
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
     font-size: 16px;
     color: #3d3d3d;
@@ -179,7 +176,6 @@ export default {
 }
 
 .club-card .ranker .position {
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
     font-size: 16px;
     font-weight: bold;
@@ -187,7 +183,6 @@ export default {
 }
 
 .club-card .ranker .name {
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
     font-size: 16px;
     font-weight: 500;
@@ -218,7 +213,6 @@ export default {
 }
 
 .club-card .curriculum li {
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
     font-size: 14px;
     font-weight: 500;

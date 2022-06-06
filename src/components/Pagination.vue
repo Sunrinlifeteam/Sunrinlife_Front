@@ -92,7 +92,6 @@ export default {
 
     color: #c9c9c9;
 
-    font-family: "Noto Sans KR", sans-serif;
 
     font-size: 14px;
     font-weight: 500;

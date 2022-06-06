@@ -237,7 +237,6 @@ export default {
 .notice-list .notice-title {
     color: #3d3d3d;
 
-    font-family: "Noto Sans KR", sans-serif;
     font-size: 16px;
     font-weight: 500;
     margin-top: 1.5px;
@@ -248,7 +247,6 @@ export default {
 .notice-list .writer {
     color: #b9b9b9;
 
-    font-family: "Noto Sans KR", sans-serif;
     font-size: 12px;
     font-weight: 500;
 }
@@ -278,7 +276,6 @@ export default {
 
     color: #c9c9c9;
 
-    font-family: "Noto Sans KR", sans-serif;
 
     font-size: 14px;
     font-weight: 500;
