@@ -6,7 +6,7 @@
                     <div class="header">
                         <h2 v-if="isAnonymous">익명 게시판</h2>
                         <h2 v-else>일반 게시판</h2>
-                        <img src="@/assets/user_profile_assets/correctionIcon.svg" alt="" @click="$router.push({ name: 'postCreate', query: { ...isAnonymous && { type: 'anonymous'} } })"/>
+                        <img src="@/assets/user_profile_assets/correctionIcon.svg" alt="글쓰기" @click="$router.push({ name: 'postCreate', query: { ...isAnonymous && { type: 'anonymous'} } })"/>
                     </div>
 
                     <div class="search-filter-wrap">

@@ -173,7 +173,7 @@ export async function getNoticeById(noticeId) {
     return res
 }
 
-//게시판
+// 게시판
 export async function getPublicBoardPageCount(){
     let res = await getAPI.get(`/board/named/count`)
     res = Math.ceil(res.data / 10) || 1
@@ -187,4 +187,9 @@ export async function getPublicBoardList(pageId = 0){
 
 export async function getPublicBoardDetail(id){
     return await getAPI.get(`/board/named/${id}`);
+}
+
+// 게시판 글 쓰기
+export async function writePublicBoard(title, content, attachments) {
+    return await getAPI.post(`/board/named`, { title, content, attachments });
 }
