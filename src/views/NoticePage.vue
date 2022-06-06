@@ -141,7 +141,7 @@ export default {
 
 <style scoped>
 .page-content {
-    height: 100%;
+    margin-top:-100px;
 }
 
 .notice-content {
