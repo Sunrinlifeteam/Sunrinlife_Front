@@ -4,7 +4,7 @@
         <div class="main-page-item-content">
             <div class="current-item">
                 <span class="sub_title">현재</span>
-                <span class="font-bold className">{{
+                <span class="className">{{
                     currentTime.className
                 }}</span>
             </div>
