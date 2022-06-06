@@ -73,6 +73,9 @@ main {
 }
 
 @media (min-width: 970px) {
+    body{
+        overflow-y: hidden;
+    }
     main {
         display: grid;
         height: 750px;
