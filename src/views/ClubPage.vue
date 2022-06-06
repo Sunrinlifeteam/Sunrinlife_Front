@@ -274,7 +274,6 @@ export default {
 .club-list .club-icon {
     width: 24px;
     height: 24px;
-    box-shadow: 1px 0 6px 0 rgba(0, 0, 0, 0.16);
 }
 
 .club-list .club-name{
