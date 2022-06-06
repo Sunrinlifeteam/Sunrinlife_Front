@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { writePublicBoard } from '../api';
+import { writePublicBoard, writeAnonymousBoard } from '../api';
 
 export default {
     name: "PostCreatePage",
@@ -52,7 +52,8 @@ export default {
                 alert("내용을 입력해주세요.");
                 return;
             }
-            writePublicBoard(this.title, this.content, [])
+            if(this.isAnonymous) writeAnonymousBoard(this.title, this.content, []).then(()=>this.$router.push({name:"anonymousCommunity"}))
+            else writePublicBoard(this.title, this.content, [])
                 .then(() => {
                     this.$router.push({ name: "publicCommunity" });
                 })
@@ -63,7 +64,7 @@ export default {
     },
     computed: {
         isAnonymous() {
-            return this.$route.query.type === "anonymous";
+            return this.$route.name === "anonymousCommunityWrite";
         }
     }
 };

@@ -6,7 +6,7 @@
                     <div class="header">
                         <h2 v-if="isAnonymous">익명 게시판</h2>
                         <h2 v-else>일반 게시판</h2>
-                        <img src="@/assets/user_profile_assets/correctionIcon.svg" alt="글쓰기" @click="$router.push({ name: 'postCreate', query: { ...isAnonymous && { type: 'anonymous'} } })"/>
+                        <img src="@/assets/user_profile_assets/correctionIcon.svg" alt="글쓰기" @click="$router.push({ name: `${isAnonymous ? 'anonymous' : 'public'}CommunityWrite`})"/>
                     </div>
 
                     <div class="search-filter-wrap">
@@ -43,24 +43,21 @@
                             <li v-for="(i, n) in hotData" :key="n" class="board-list-item">
                                 <div>
                                     <div class="heart">
-                                        {{ i.heartCount }}
+                                        {{ i.likes }}
                                     </div>
                                     <div class="title">
-                                        <p @click="$router.push({ name: 'postDetail', params: { postId: n }, })">
+                                        <p @click="$router.push({ name: `${ isAnonymous ? 'anonymous' : 'public' }CommunityPostDetail`, params: { postId: i.id }, })">
                                             {{ i.title }}
                                         </p>
                                         <img src="@/assets/community/eye_icon.svg" alt="" v-if="n % 3 == 0" />
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="writer" v-if="!isAnonymous">
-                                        {{ i.writer }}
+                                    <div class="writer" v-if="!isAnonymous" @click="$router.push({ name: 'otherProfile', params: { profileId: i.author.id } })">
+                                        {{ i.author.username }}
                                     </div>
                                     <div class="date">
-                                        <span v-if="i.timeStamp.getMonth() < 9">0</span>
-                                        {{ i.timeStamp.getMonth() + 1 }}-
-                                        <span v-if="i.timeStamp.getDay() < 10">0</span>
-                                        {{ i.timeStamp.getDay() }}
+                                        <span>{{ parsingTime(i.created) }}</span>
                                     </div>
                                 </div>
                             </li>
@@ -83,7 +80,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="writer" v-if="!isAnonymous">
+                                    <div class="writer" v-if="!isAnonymous" @click="$router.push({ name: 'otherProfile', params: { profileId: i.author.id } })">
                                         {{ i.author.username }}
                                     </div>
                                     <div class="date">
@@ -103,39 +100,14 @@
 <script>
 import Pagination from "@/components/Pagination.vue";
 import { DateTime } from "luxon";
-import { getPublicBoardList, getPublicBoardPageCount } from "../api.js";
+import { getPublicHotBoardList, getPublicBoardList, getPublicBoardPageCount, getAnonymousBoardPageCount, getAnonymousBoardList, getAnonymousHotBoardList } from "../api.js";
 
 export default {
     name: "CommunitPage",
     data() {
         return {
             pageCount: 0,
-            hotData:[
-                {
-                    heartCount : 13,
-                    title : "선린인터넷고등학교 인트라넷 오픈",
-                    writer : "송우진",
-                    timeStamp : new Date()
-                },
-                {
-                    heartCount : 13,
-                    title : "선린인터넷고등학교 인트라넷 오픈",
-                    writer : "송우진",
-                    timeStamp : new Date()
-                },
-                {
-                    heartCount : 13,
-                    title : "선린인터넷고등학교 인트라넷 오픈",
-                    writer : "송우진",
-                    timeStamp : new Date()
-                },
-                {
-                    heartCount : 13,
-                    title : "선린인터넷고등학교 인트라넷 오픈",
-                    writer : "송우진",
-                    timeStamp : new Date()
-                },
-            ],
+            hotData:[],
             boardData:[],
         };
     },
@@ -161,34 +133,13 @@ export default {
     },
     watch: {
         getAuthToken() {
-            getPublicBoardList(this.pageId - 1)
-                .then((res) => {
-                    this.boardData = res.data;
-                })
-                .catch((e) => console.log(e));
-            getPublicBoardPageCount(this.isAnonymous?1:0).then((res) => {
-                this.pageCount = res;
-            });
+            this.loadData()
         },
         pageId: function () {
-            getPublicBoardList(this.pageId - 1)
-                .then((res) => {
-                    this.boardData = res.data;
-                })
-                .catch((e) => console.log(e));
-            getPublicBoardPageCount(this.isAnonymous?1:0).then((res) => {
-                this.pageCount = res;
-            });
+            this.loadData()
         },
         $route:function(){
-            getPublicBoardList(this.pageId - 1)
-                .then((res) => {
-                    this.boardData = res.data;
-                })
-                .catch((e) => console.log(e));
-            getPublicBoardPageCount(this.isAnonymous?1:0).then((res) => {
-                this.pageCount = res;
-            });
+            this.loadData()
         }
     },
     methods: {
@@ -202,18 +153,33 @@ export default {
                 return date.toFormat("yyyy-MM-dd");
             }
         },
-        getPageCount() {},
+        loadData(){
+            if(this.isAnonymous){
+                if(this.pageId === 1) getAnonymousHotBoardList().then(res => this.hotData = res.data);
+                getAnonymousBoardList(this.pageId - 1).then(res => this.boardData = res.data);
+                getAnonymousBoardPageCount().then(res => this.pageCount = res);
+            }
+            else{
+                if(this.pageId === 1) getPublicHotBoardList().then((res)=>this.hotData = res.data);
+                getPublicBoardList(this.pageId - 1)
+                    .then((res) => {
+                        this.boardData = res.data;
+                    })
+                    .catch((e) => console.log(e));
+                getPublicBoardPageCount().then((res) => {
+                    this.pageCount = res;
+                });
+            }
+            
+        },
+        postWrite(){
+            if(this.isAnonymous) this.$router.push({ name: 'anonymousCommunityWrite'} )
+            else this.$router.push({ name: 'publicCommunityWrite'} )
+        }
     },
     mounted() {
         if (this.$store.getters.getAuthToken !== null) {
-            getPublicBoardList(this.pageId - 1)
-                .then((res) => {
-                    this.boardData = res.data;
-                })
-                .catch((e) => console.log(e));
-            getPublicBoardPageCount(this.isAnonymous?1:0).then((res) => {
-                this.pageCount = res;
-            });
+            this.loadData()
         }
     },
 };
@@ -434,6 +400,7 @@ export default {
     color: #b9b9b9;
     font-size: 12px;
     font-weight: 500;
+    cursor: pointer;
 }
 
 .board-list-item .date {

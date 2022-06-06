@@ -156,18 +156,24 @@ export default {
         }
     },
     computed:{
+        getAuthToken() {
+            return this.$store.getters.getAuthToken;
+        },
         ...mapState(["userData", "department_map"]),
         githubID: function() {
             return this.userInfo?.githubLink.split('/').filter(x=>x).pop();
         },
         userId() {
-            return this.$route.query.id;
+            return this.$route.params.profileId;
         },
         isMyProfile() {
             return this.userId === undefined;
         }
     },
     watch: {
+        getAuthToken() {
+            this.loadData()
+        },
         userData: function(){
             if (this.isMyProfile)
                 this.userInfo = this.userData;
@@ -175,12 +181,9 @@ export default {
         userInfo: function(val) {
             this.setEditData(val);
         },
-        '$route'() {
+        $route() {
             this.loadData();
         },
-        '$store.getters.getAuthToken'() {
-            this.loadData();
-        }
     },
     mounted() {
         if (this.$store.getters.getAuthToken !== null) this.loadData();

@@ -57,6 +57,11 @@ const routes = [
         component : ProfilePage,
     },
     {
+        path:"/profile/:profileId",
+        name: "otherProfile",
+        component: ProfilePage
+    },
+    {
         path : "/club",
         name: "club",
         component : ClubPage,
@@ -75,7 +80,12 @@ const routes = [
               path: ':postId',
               name: 'publicCommunityPostDetail',
               component : CommunityPostDetailPage,
-            }
+            },
+            {
+                path : "write",
+                name: "publicCommunityWrite",
+                component : CommunityPostCreatePage,
+            },
         ],
     },
     {
@@ -91,14 +101,14 @@ const routes = [
               path: ':postId',
               name: 'anonymousCommunityPostDetail',
               component : CommunityPostDetailPage,
-            }
+            },
+            {
+                path : "write",
+                name: "anonymousCommunityWrite",
+                component : CommunityPostCreatePage,
+            },
+            
         ],
-    },
-    {
-        path : "/postCreate",
-        name: "postCreate",
-        component : CommunityPostCreatePage,
-        props: true
     },
     {
         path : "/i_love_sunrin",

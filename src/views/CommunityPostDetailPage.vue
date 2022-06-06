@@ -8,7 +8,7 @@
 
                     <div class="data-wrap">
                         <div class="heart-count">추천 {{ postData.likes }}</div>
-                        <div class="writer" v-if="!isAnonymous" @click="$router.push({ name: 'profile', query: { id: postData.author.id } })">{{ postData.author?.username || "익명"}}</div>
+                        <div class="writer" v-if="!isAnonymous" @click="$router.push({ name: 'otherProfile', params: { profileId: postData.author.id } })">{{ postData.author.username }}</div>
                         <div v-if="!isAnonymous">|</div>
                         <div class="date">
                             <span>{{ this.formatTime(postData.created) }}</span>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { getPublicBoardDetail } from '@/api';
+import { getPublicBoardDetail,getAnonymousBoardDetail } from '@/api';
 import { DateTime } from "luxon";
 
 export default {
@@ -57,23 +57,23 @@ export default {
         },
         authorDetail(data) {
             if (!this.isAnonymous) this.$router.push({ name: 'profile', query: { id: data.author.id } });
+        },
+        loadData(){
+            if(this.isAnonymous) getAnonymousBoardDetail(this.$route.params.postId).then(res => this.postData = res.data);
+            else getPublicBoardDetail(this.$route.params.postId).then(res => {
+                this.postData = res.data;
+            }).catch(() => {});
         }
     },
     watch: {
         getAuthToken() {
-            getPublicBoardDetail(this.$route.params.postId).then(res => {
-                this.postData = res.data;
-            });
+            this.loadData();
         },
-        postData() {
-
-        },
+        
     },
     mounted() {
         if (this.$store.getters.getAuthToken !== null) {
-            getPublicBoardDetail(this.$route.params.postId).then(res => {
-                this.postData = res.data;
-            }).catch(() => {});
+            this.loadData();
         }
     }
 };
