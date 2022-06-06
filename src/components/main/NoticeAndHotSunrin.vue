@@ -131,6 +131,7 @@ export default {
 
 .notice-list .title {
     flex: 1;
+    font-weight:500;
 }
 .notice-list .title:hover {
     text-decoration: underline;
@@ -142,7 +143,7 @@ export default {
     display: flex;
     align-items: center;
     gap: 10px;
-
+    font-weight:500;
     cursor: pointer;
 }
 
