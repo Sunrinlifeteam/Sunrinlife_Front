@@ -158,7 +158,6 @@ export async function getNoticeSearch(page, search){
 export async function getNoticePageCountWithSearch(search){
     let res = await getAPI.get(`/notice/count?search=${encodeURI(search)}`).then((res) => res.data).catch((e) => console.log(e))
     res = Math.ceil(res / 10) || 1
-    console.log(res)
     return res
 }
 
