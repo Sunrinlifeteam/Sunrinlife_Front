@@ -103,6 +103,7 @@ jobs:
           echo "cosign sign $content"
           echo "cosign sign $content" | /bin/bash
   deploy:
+    if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     steps:
