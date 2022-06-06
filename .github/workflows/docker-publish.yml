@@ -15,6 +15,11 @@ on:
   pull_request:
     branches: [ master ]
   workflow_dispatch:
+    inputs:
+      docker-name:
+          description: 'Service name for pulling & publishing'     
+          required: true
+          default: 'frontend'
 
 env:
   # Use docker.io for Docker Hub if empty
@@ -97,3 +102,20 @@ jobs:
           content="${content//$'\r'/''}"
           echo "cosign sign $content"
           echo "cosign sign $content" | /bin/bash
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: pulling & publishing
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_IP }}
+          username: ${{ secrets.REMOTE_SSH_ID }}
+          key: ${{ secrets.REMOTE_SSH_KEY }}
+          port: ${{ secrets.REMOTE_SSH_PORT }}
+          passphrase: ${{ secrets.REMOTE_SSH_PASSPHRASE }}
+          script: |
+            cd Sunrinlife_Docker/
+            docker-compose pull ${{ github.event.inputs.docker-name }}
+            docker-compose up -d ${{ github.event.inputs.docker-name }}
