@@ -171,14 +171,9 @@ export default {
 <style scoped>
 .major-selecter {
     height: 44px;
-
     margin-bottom : 24px;
-
     position: relative;
-
     overflow: hidden;
-
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
 }
 
@@ -189,19 +184,15 @@ export default {
 .major-selecter > div {
     width : 100%;
     height : 100%;
-
     display: flex;
-
     position: absolute;
     top : 0px;
     left : 0px;
 }
 
 .major-selecter .current-major {
-    font-family: 'Noto Sans KR', sans-serif;
     font-size: 16px;
     font-weight: 700;
-
     justify-content: center;
     align-items: center;
 }
@@ -212,7 +203,6 @@ export default {
 
 .major-selecter .choice-major-wrap .choice-major {
     flex-grow: 1;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -284,11 +274,9 @@ export default {
 .club-list .club-icon {
     width: 24px;
     height: 24px;
-    box-shadow: 1px 0 6px 0 rgba(0, 0, 0, 0.16);
 }
 
 .club-list .club-name{
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
     font-size:16px;
 }

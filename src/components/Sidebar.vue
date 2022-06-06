@@ -225,7 +225,6 @@ nav .menu_list .options .router_option span::before{
 
 .is_community{
     color : #4992ff !important;
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
 }
 
@@ -235,7 +234,6 @@ nav .menu_list .options .router_option span::before{
 
 .nav-list .router-link-active {
     color : #4992ff;
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
 }
 
@@ -249,7 +247,6 @@ nav .menu_list .options .router_option span::before{
 
 .nav-list .router-link-exact-active{
     color : #4992ff;
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
 }
 
@@ -263,7 +260,6 @@ nav .menu_list .options .router_option span::before{
 
 
 nav .menu_list a span{
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
     margin-left:10px;
     display: block;

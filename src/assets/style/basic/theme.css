@@ -1,68 +1,60 @@
 :root {
-    --main-color1 : #3ebbf1;
-    --main-color2 : #1fa2fe;
-    --main-color3 : #2b63ef;
-    --main-color4 : #4992ff;
+    --main-color1: #3ebbf1;
+    --main-color2: #1fa2fe;
+    --main-color3: #2b63ef;
+    --main-color4: #4992ff;
 
-    --sub-color1 : #d9f4ff;
-    --sub-color2 : #bde4ff;
-    --sub-color3 : #cfdcff;
-    
-    --main-btn-border-color : #3ebbf1;
-    
-    --gray0 : #f8f9fa;
-    --gray1 : #f1f3f5;
-    --gray2 : #e9ecef;
-    --gray3 : #dee2e6;
-    --gray4 : #ced4da;
-    --gray5 : #adb5bd;
-    --gray6 : #868e96;
-    --gray7 : #495057;
-    --gray8 : #343a40;
-    --gray9 : #212529;
+    --sub-color1: #d9f4ff;
+    --sub-color2: #bde4ff;
+    --sub-color3: #cfdcff;
 
-    --bg-black : #000000ab;
+    --main-btn-border-color: #3ebbf1;
 
-    --flat-purple : #6c63ff;
-    --flat-blue : #536dfe;
-    --flat-light-blue : #00b0ff;
-    --flat-green : #1abc9c;
-    --flat-yellow : #f1c40f;
-    --flat-red : #e74c32;
-    --flat-black : #121212;
+    --gray0: #f8f9fa;
+    --gray1: #f1f3f5;
+    --gray2: #e9ecef;
+    --gray3: #dee2e6;
+    --gray4: #ced4da;
+    --gray5: #adb5bd;
+    --gray6: #868e96;
+    --gray7: #495057;
+    --gray8: #343a40;
+    --gray9: #212529;
+
+    --bg-black: #000000ab;
+
+    --flat-purple: #6c63ff;
+    --flat-blue: #536dfe;
+    --flat-light-blue: #00b0ff;
+    --flat-green: #1abc9c;
+    --flat-yellow: #f1c40f;
+    --flat-red: #e74c32;
+    --flat-black: #121212;
 }
 
-body{
+body {
     background-color: #ecf0f3;
 }
-/* 제목 태그 테마 */
-h1, h2, h3, h4, h5, h6, b {
-    font-family: 'Noto Sans KR', sans-serif;
-}
-
 /* 입력 요소 테마 */
 input {
-    font-family: 'Noto Sans KR', sans-serif;
     background-color: gainsboro;
 
-    border : 2px solid gray;
+    border: 2px solid gray;
     border-radius: 12px;
 }
 
-input:focus{
+input:focus {
     outline: none !important;
     border-color: var(--main-btn-border-color);
 }
 
 /* 버튼 테마 */
 button {
-    font-family: 'Noto Sans KR', sans-serif;
-
-    color : white;
+    color: white;
     background-color: var(--main-color1);
 
     /* border : 2px solid var(--main-btn-border-color); */
-    border : 0px;
+    border: 0px;
     border-radius: 12px;
 
     cursor: pointer;
@@ -70,12 +62,12 @@ button {
     transition: 0.1s;
 }
 
-button:hover{
+button:hover {
     background-color: var(--main-color2);
     transform: scale(1.01);
 }
 
-button:active{
+button:active {
     transform: scale(0.99);
 }
 
@@ -91,22 +83,22 @@ button:active{
 }
 
 .page-content {
-    width : 100%;
+    width: 100%;
     max-width: 1200px;
 
-    margin : 0 auto;
-    margin-top : 50px;
-    
-    padding : 16px;
+    margin: 0 auto;
+    margin-top: 50px;
+
+    padding: 16px;
 }
 
-.panel{
+.panel {
     height: 100%;
-    margin-left:240px;
-    color:#3d3d3d;
+    margin-left: 240px;
+    color: #3d3d3d;
 }
 
-.two_panel{
+.two_panel {
     background-color: #f5f6f7;
     border-radius: 8px;
 }
@@ -114,18 +106,16 @@ button:active{
 /* 문자 초과시 ...으로 줄임 */
 .text-truncated {
     text-overflow: ellipsis;
-    overflow:hidden;
-    
-    -webkit-line-clamp: 1; 
+    overflow: hidden;
+
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     display: -webkit-box;
 }
 
-
 /*  */
-.none-dragging
-{
-    -ms-user-select: none; 
+.none-dragging {
+    -ms-user-select: none;
     -moz-user-select: -moz-none;
     -khtml-user-select: none;
     -webkit-user-select: none;
@@ -135,8 +125,8 @@ button:active{
 .scroll::-webkit-scrollbar {
     height: 5px;
     width: 5px;
-    margin-top:2px;
-    margin-left:2px;
+    margin-top: 2px;
+    margin-left: 2px;
 }
 .scroll::-webkit-scrollbar-track {
     background-color: none;
@@ -146,42 +136,41 @@ button:active{
     background-color: #d3d3d3;
 }
 
-
 /* 학과별 컬러 설정 */
-.security{
+.security {
     background-color: #3d3d3d;
-    color:white;
+    color: white;
 }
-.security:hover{
+.security:hover {
     background-color: #4d4d4d;
 }
 
-.software{
-    background-color:#ffcf49;
-    color:white;
+.software {
+    background-color: #ffcf49;
+    color: white;
 }
-.software:hover{
-    background-color:#ffbf49;
+.software:hover {
+    background-color: #ffbf49;
 }
 
-.ceo{
+.ceo {
     background-color: #f5f7f5;
-    color:#3d3d3d;
+    color: #3d3d3d;
 }
-.ceo:hover{
+.ceo:hover {
     background-color: #eaeaea;
 }
 
-.design{
-    background-color:#4992ff;
-    color:white;
+.design {
+    background-color: #4992ff;
+    color: white;
 }
-.design:hover{
-    background-color:#4982ff;
+.design:hover {
+    background-color: #4982ff;
 }
 
-@media (max-width : 970px) {
-    .panel{
+@media (max-width: 970px) {
+    .panel {
         margin-left: 0;
     }
 }
