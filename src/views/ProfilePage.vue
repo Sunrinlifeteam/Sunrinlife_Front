@@ -1,6 +1,6 @@
 <template>
     <template v-if="userInfo">
-        <div class="panel">
+        <div class="panel panel-profile">
             <div class="user-profile">
 
                 <div class="user-profile-background"></div>
@@ -195,7 +195,7 @@ export default {
     body {
         /*padding: 205px 231px;*/
     }
-    .panel {
+    .panel-profile {
         display:flex;
         justify-content: center;
         align-items: center;
