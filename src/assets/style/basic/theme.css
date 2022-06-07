@@ -87,9 +87,11 @@ button:active {
     max-width: 1200px;
 
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 5vh;
     padding: 16px;
 }
+
+
 
 .panel {
     height: 100%;
