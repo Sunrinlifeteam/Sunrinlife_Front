@@ -192,6 +192,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height: 90vh;
 }
 
 .header,
@@ -346,7 +347,7 @@ export default {
 .board-list ul {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 1vh;
 }
 
 .board-list-item {
