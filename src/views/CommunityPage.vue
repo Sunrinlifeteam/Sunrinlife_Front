@@ -477,4 +477,13 @@ export default {
 .pagination-wrap * {
     cursor: pointer;
 }
+
+@media(max-height:800px){
+.community-content{
+    height:90vh;
+}
+.board-list ul{
+    gap: 1vh;
+}
+}
 </style>
