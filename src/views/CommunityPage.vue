@@ -192,7 +192,6 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 90vh;
 }
 
 .header,
@@ -347,7 +346,7 @@ export default {
 .board-list ul {
     display: flex;
     flex-direction: column;
-    gap: 1vh;
+    gap: 16px;
 }
 
 .board-list-item {
@@ -477,5 +476,14 @@ export default {
 
 .pagination-wrap * {
     cursor: pointer;
+}
+
+@media(max-height:800px){
+.community-content{
+    height:90vh;
+}
+.board-list ul{
+    gap: 1vh;
+}
 }
 </style>
