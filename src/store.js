@@ -122,6 +122,9 @@ const store = createStore({
         },
         isMobileWindow(state){
             return state.isMobileWindow;
+        },
+        getNoticePageCount(state){
+            return state.noticePageCount;
         }
     },
     watch:{

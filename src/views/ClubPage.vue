@@ -85,6 +85,11 @@ import ClubCardMobile from "../components/club/ClubCardMobile.vue"
 
 // import { JB, SW, it, de } from "@/components/club/TempClubData"
 import { mapState } from 'vuex'
+import {
+    getClubMajor,
+    getClubGeneral,
+    getClubAutonomous,} from "@/api"
+import store from "@/store"
 
 export default {
     name : "Club Page",
@@ -96,11 +101,19 @@ export default {
     },
     computed :{
         ...mapState(["isMobileWindow", "clubData"]),
+        getAuthToken() {
+            return this.$store.getters.getAuthToken;
+        },
         loadedClubData() {
             return this.clubData[this.division];
         },
         division() {
             return this.$route.query.division || "security";
+        }
+    },
+    watch:{
+        getAuthToken(){
+            this.loadData();
         }
     },
     components : {
@@ -112,8 +125,31 @@ export default {
             this.selectIndex = 0;
             this.$router.push({ path: 'club', query: { division }});
             this.selectIndex = 0;
+        },
+        loadData(){
+            getClubMajor(0).then((data) => {
+                store.commit("setClubData", { id: "security", data });
+            });
+            getClubMajor(1).then((data) => {
+                store.commit("setClubData", { id: "software", data });
+            });
+            getClubMajor(2).then((data) => {
+                store.commit("setClubData", { id: "buisness", data });
+            });
+            getClubMajor(3).then((data) => {
+                store.commit("setClubData", { id: "design", data });
+            });
+            getClubGeneral().then((data) => {
+                store.commit("setClubData", { id: "general", data });
+            });
+            getClubAutonomous().then((data) => {
+                store.commit("setClubData", { id: "autonomous", data });
+            });
         }
     },
+    mounted(){
+        if (this.$store.getters.getAuthToken !== null) this.loadData();
+    }
 }
 </script>
 
@@ -123,6 +159,7 @@ export default {
     display: grid;
     grid-template-columns: auto 1fr;
     gap : 30px;
+    margin-top:120px;
 }
 
 .club-list-wrap {

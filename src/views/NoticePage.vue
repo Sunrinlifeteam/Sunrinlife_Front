@@ -69,6 +69,9 @@ export default {
     },
     computed: {
         ...mapState(["noticePageCount", "noticePage", "notice"]),
+        getAuthToken() {
+            return this.$store.getters.getAuthToken;
+        },
         pageId: function () {
             return parseInt(this.$route.query.page) || 1;
         },
@@ -82,11 +85,14 @@ export default {
         },
     },
     watch: {
+        getAuthToken(){
+            getNoticePageCount().then(res=>store.commit("setNoticePageCount", res));
+        },
         pageId: function () {
             this.loadNotice();
         },
         noticePageCount: function() {
-            this.loadedPageCount = this.noticePageCount;
+            this.loadedPageCount = this.$store.getters.getNoticePageCount;
         },
     },
     methods: {
@@ -123,15 +129,13 @@ export default {
         updateCount: async function () {
             if (this.searchQuery)
                 this.loadedPageCount = await getNoticePageCountWithSearch(this.searchQuery);
-            else this.loadedPageCount = this.noticePageCount
+            else this.loadedPageCount = this.$store.getters.getNoticePageCount
         },
     },
     mounted() {
         this.loadNotice();
         this.updateCount();
-        getNoticePageCount().then((data) => {
-            store.commit("setNoticePageCount", data);
-        });
+        if(this.$store.getters.getNoticePageCount === null) getNoticePageCount().then(res=>store.commit("setNoticePageCount", res));
         if(this.$route.query.search){
             this.searchQueryText = this.$route.query.search
         }
@@ -141,7 +145,7 @@ export default {
 
 <style scoped>
 .page-content {
-    margin-top:-100px;
+    
 }
 
 .notice-content {
