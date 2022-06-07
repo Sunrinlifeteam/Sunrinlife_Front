@@ -69,6 +69,9 @@ export default {
     },
     computed: {
         ...mapState(["noticePageCount", "noticePage", "notice"]),
+        getAuthToken() {
+            return this.$store.getters.getAuthToken;
+        },
         pageId: function () {
             return parseInt(this.$route.query.page) || 1;
         },
@@ -82,11 +85,14 @@ export default {
         },
     },
     watch: {
+        getAuthToken(){
+            getNoticePageCount().then(res=>store.commit("setNoticePageCount", res));
+        },
         pageId: function () {
             this.loadNotice();
         },
         noticePageCount: function() {
-            this.loadedPageCount = this.noticePageCount;
+            this.loadedPageCount = this.$store.getters.getNoticePageCount;
         },
     },
     methods: {
@@ -129,9 +135,6 @@ export default {
     mounted() {
         this.loadNotice();
         this.updateCount();
-        getNoticePageCount().then((data) => {
-            store.commit("setNoticePageCount", data);
-        });
         if(this.$route.query.search){
             this.searchQueryText = this.$route.query.search
         }
