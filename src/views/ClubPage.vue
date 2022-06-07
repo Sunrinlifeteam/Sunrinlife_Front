@@ -159,7 +159,7 @@ export default {
     display: grid;
     grid-template-columns: auto 1fr;
     gap : 30px;
-    margin-top:120px;
+    margin-top:90px;
 }
 
 .club-list-wrap {
