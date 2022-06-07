@@ -51,7 +51,7 @@
                             </div>
                             <div class="user-info-group">
                                 <div class="user-info-label">전공/일반 동아리</div>
-                                <div class="user-info-content">{{ userInfo.clubInfo.name }}</div>
+                                <div class="user-info-content">{{ userInfo.clubInfo?.name }}</div>
                             </div>
                         </div>
 

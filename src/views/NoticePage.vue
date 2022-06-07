@@ -129,12 +129,13 @@ export default {
         updateCount: async function () {
             if (this.searchQuery)
                 this.loadedPageCount = await getNoticePageCountWithSearch(this.searchQuery);
-            else this.loadedPageCount = this.noticePageCount
+            else this.loadedPageCount = this.$store.getters.getNoticePageCount
         },
     },
     mounted() {
         this.loadNotice();
         this.updateCount();
+        if(this.$store.getters.getNoticePageCount === null) getNoticePageCount().then(res=>store.commit("setNoticePageCount", res));
         if(this.$route.query.search){
             this.searchQueryText = this.$route.query.search
         }
@@ -144,7 +145,7 @@ export default {
 
 <style scoped>
 .page-content {
-    margin-top:-100px;
+    
 }
 
 .notice-content {
