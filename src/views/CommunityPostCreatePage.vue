@@ -14,10 +14,10 @@
                 </div>
 
                 <ul class="selected-img-list">
-                    <img v-for="i in images" :key="i" :src="i" />
+                    <img v-for="i in images" :key="i" :src="i" class="post-image"/>
                 </ul>
 
-                <label class="image-add">
+                <label class="image-add post-image">
                     <input type="file" class="image" @change="addFile">
                     <img src="@/assets/community/image_add.svg" alt="" srcset="">
                 </label>
@@ -115,32 +115,25 @@ export default {
     color: #3d3d3d;
 }
 
-.selected-img-list {
-    /*display: inline-block;*/
-}
-
-.selected-img-list>img {
-    width: 90px;
-    height: 90px;
-
-    margin: 0 12px;
-
-    padding: 4px;
-    border: 2px solid black;
-    border-radius: 8px;
-}
-
-
-.image-add {
+.post-image {
     width: 90px;
     height: 90px;
 
     margin: 0 15px;
-    padding: 13px;
+
     border-radius: 8px;
     background-color: #f5f6f7;
 
     cursor: pointer;
+}
+
+.selected-img-list {
+    /*display: inline-block;*/
+}
+
+.image-add {
+    padding: 13px;
+    border-radius: 8px;
 }
 
 .image-add input {
