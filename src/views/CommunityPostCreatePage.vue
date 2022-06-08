@@ -17,7 +17,7 @@
                     <img v-for="i in images" :key="i" :src="i" class="post-image" />
 
                     <label class="image-add post-image">
-                        <input type="file" class="image" @change="addFile">
+                        <input type="file" class="image" multiple @change="addFile">
                         <img src="@/assets/community/image_add.svg" alt="" srcset="">
                     </label>
                 </ul>
@@ -58,7 +58,10 @@ export default {
                 alert("내용을 입력해주세요.");
                 return;
             }
-            this.uploadFiles().then(this.writeBoard);
+            (async () => {
+                this.uploadFiles();
+                this.writeBoard();
+            })();
         },
         async uploadFiles() {
             let ids = [];
@@ -84,15 +87,9 @@ export default {
                 });
         },
         addFile(event) {
-            this.files.push(...event.target.files);
             for (let file of event.target.files) {
+                this.files.push(file);
                 this.images.push(URL.createObjectURL(file));
-                console.log(file);
-                // let reader = new FileReader();
-                // reader.onload = (e) => {
-                //     this.images.push(e.target.result);
-                // };
-                // reader.readAsDataURL(file);
             }
         }
     },
