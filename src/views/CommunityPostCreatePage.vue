@@ -13,6 +13,10 @@
                     <input type="text" placeholder="제목" v-model="title">
                 </div>
 
+                <ul class="selected-img-list">
+                    <img v-for="i in images" :key="i" :src="i" />
+                </ul>
+
                 <label class="image-add">
                     <input type="file" class="image" @change="addFile">
                     <img src="@/assets/community/image_add.svg" alt="" srcset="">
@@ -41,6 +45,7 @@ export default {
             title: "",
             content: "",
             files: [],
+            images: [],
         }
     },
     methods: {
@@ -70,7 +75,7 @@ export default {
             for (let file of this.files) {
                 let reader = new FileReader();
                 reader.onload = (e) => {
-                    this.files.push(e.target.result);
+                    this.images.push(e.target.result);
                 };
                 reader.readAsDataURL(file);
             }
@@ -108,6 +113,22 @@ export default {
     font-weight: bold;
     color: #3d3d3d;
 }
+
+.selected-img-list {
+    /*display: inline-block;*/
+}
+
+.selected-img-list>img {
+    width: 90px;
+    height: 90px;
+
+    margin: 0 12px;
+
+    padding: 4px;
+    border: 2px solid black;
+    border-radius: 8px;
+}
+
 
 .image-add {
     width: 90px;
@@ -162,12 +183,5 @@ export default {
 
     border-radius: 8px;
     background-color: #4893ff;
-}
-
-.files-invisible {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
 }
 </style>
