@@ -115,6 +115,8 @@ export default {
         width: 90px;
         height: 90px;
 
+        margin : 0 12px;
+
         padding: 4px;
         border: 2px solid black;
         border-radius: 8px;
