@@ -1,34 +1,34 @@
 <template>
-<div class="panel page post-create-page">
-    <div class="page-content">
-        <div class="post-create-content neu-morphism-card">
+    <div class="panel page post-create-page">
+        <div class="page-content">
+            <div class="post-create-content neu-morphism-card">
 
-            <div class="header">
-                <img src="@/assets/prev_arrow.svg" alt="<" @click="$router.back();">
-                <h2>{{ isAnonymous ? "익명": "일반" }} 게시글 작성</h2>
-            </div>
+                <div class="header">
+                    <img src="@/assets/prev_arrow.svg" alt="<" @click="$router.back();">
+                    <h2>{{ isAnonymous ? "익명" : "일반" }} 게시글 작성</h2>
+                </div>
 
-            <div class="title-wrap input-wrap">
-                <h3>제목</h3>
-                <input type="text" placeholder="제목" v-model="title">
-            </div>
+                <div class="title-wrap input-wrap">
+                    <h3>제목</h3>
+                    <input type="text" placeholder="제목" v-model="title">
+                </div>
 
-            <label class="image-add">
-                <input type="file" class="image">
-                <img src="@/assets/community/image_add.svg" alt="" srcset="">
-            </label>
+                <label class="image-add">
+                    <input type="file" class="image" @change="addFile">
+                    <img src="@/assets/community/image_add.svg" alt="" srcset="">
+                </label>
 
-            <div class="content-wrap input-wrap">
-                <h3>내용</h3>
-                <textarea placeholder="내용" v-model="content"></textarea>
-            </div>
+                <div class="content-wrap input-wrap">
+                    <h3>내용</h3>
+                    <textarea placeholder="내용" v-model="content"></textarea>
+                </div>
 
-            <div class="create-post-wrap">
-                <button class="create-post" @click="createPost()">작성 완료</button>
+                <div class="create-post-wrap">
+                    <button class="create-post" @click="createPost()">작성 완료</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </template>
 
 <script>
@@ -40,19 +40,23 @@ export default {
         return {
             title: "",
             content: "",
+            files: [],
         }
     },
     methods: {
         createPost() {
-            if(this.title.length == 0) {
+            if (this.title.length == 0) {
                 alert("제목을 입력해주세요.");
                 return;
             }
-            if(this.content.length == 0) {
+            if (this.content.length == 0) {
                 alert("내용을 입력해주세요.");
                 return;
             }
-            if(this.isAnonymous) writeAnonymousBoard(this.title, this.content, []).then(()=>this.$router.push({name:"anonymousCommunity"}))
+            this.writeBoard();
+        },
+        writeBoard() {
+            if (this.isAnonymous) writeAnonymousBoard(this.title, this.content, []).then(() => this.$router.push({ name: "anonymousCommunity" }))
             else writePublicBoard(this.title, this.content, [])
                 .then(() => {
                     this.$router.push({ name: "publicCommunity" });
@@ -60,6 +64,16 @@ export default {
                 .catch(err => {
                     alert(err.message);
                 });
+        },
+        addFile(event) {
+            this.files.push(...event.target.files);
+            for (let file of this.files) {
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                    this.files.push(e.target.result);
+                };
+                reader.readAsDataURL(file);
+            }
         }
     },
     computed: {
@@ -71,81 +85,89 @@ export default {
 </script>
 
 <style scoped>
-    .post-create-content {
-        padding: 36px 24px;
+.post-create-content {
+    padding: 36px 24px;
 
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
 
-    .header {
-        display: flex;
+.header {
+    display: flex;
 
-        gap : 8px;
-    }
+    gap: 8px;
+}
 
-    .header img {
-        cursor: pointer;
-    }
+.header img {
+    cursor: pointer;
+}
 
-    .header h2 {
-        font-size: 18px;
-        font-weight: bold;
-        color: #3d3d3d;
-    }
+.header h2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #3d3d3d;
+}
 
-    .image-add {
-        width: 90px;
-        height: 90px;
+.image-add {
+    width: 90px;
+    height: 90px;
 
-        margin: 0 15px;
-        padding: 13px;
-        border-radius: 8px;
-        background-color: #f5f6f7;
+    margin: 0 15px;
+    padding: 13px;
+    border-radius: 8px;
+    background-color: #f5f6f7;
 
-        cursor: pointer;
-    }
+    cursor: pointer;
+}
 
-    .image-add input {
-        display: none;
-    }
+.image-add input {
+    display: none;
+}
 
-    .input-wrap h3 {
-        font-size: 14px;
-        color: #3d3d3d;
-    }
+.input-wrap h3 {
+    font-size: 14px;
+    color: #3d3d3d;
+}
 
-    .input-wrap input, .input-wrap textarea {
-        width: 100%;
-        margin: 8px 0 20px;
-        padding: 12px 16px;
+.input-wrap input,
+.input-wrap textarea {
+    width: 100%;
+    margin: 8px 0 20px;
+    padding: 12px 16px;
 
-        border: 0px;
-        border-radius: 8px;
-        background-color: #f5f6f7;
-    }
+    border: 0px;
+    border-radius: 8px;
+    background-color: #f5f6f7;
+}
 
-    .input-wrap textarea {
-        height: 180px;
+.input-wrap textarea {
+    height: 180px;
 
-        resize: none;
-    }
+    resize: none;
+}
 
-    .create-post-wrap {
-        margin-top: 91px;
+.create-post-wrap {
+    margin-top: 91px;
 
-        text-align: right;
-    }
+    text-align: right;
+}
 
-    .create-post-wrap .create-post {
-        color: #fff;
-        font-size: 16px;
-        font-weight: bold;
+.create-post-wrap .create-post {
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
 
-        padding: 6px 30px;
+    padding: 6px 30px;
 
-        border-radius: 8px;
-        background-color: #4893ff;
-    }
+    border-radius: 8px;
+    background-color: #4893ff;
+}
+
+.files-invisible {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 </style>
