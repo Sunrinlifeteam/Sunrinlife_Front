@@ -13,8 +13,12 @@
                 <input type="text" placeholder="제목" v-model="title">
             </div>
 
+            <ul class="selected-img-list">
+                <img v-for="i in selectedImgUrlList" :key="i" :src="i"/>
+            </ul>
+
             <label class="image-add">
-                <input type="file" class="image">
+                <input type="file" class="image" @change="selectedImage">
                 <img src="@/assets/community/image_add.svg" alt="" srcset="">
             </label>
 
@@ -40,6 +44,8 @@ export default {
         return {
             title: "",
             content: "",
+            selectedImgList : [],
+            selectedImgUrlList : [],
         }
     },
     methods: {
@@ -60,7 +66,13 @@ export default {
                 .catch(err => {
                     alert(err.message);
                 });
-        }
+        },
+
+        selectedImage(event){
+            let img = event.target.files[0]
+            this.selectedImgList.push(img)
+            this.selectedImgUrlList.push(URL.createObjectURL(img))
+        },
     },
     computed: {
         isAnonymous() {
@@ -94,6 +106,22 @@ export default {
         font-weight: bold;
         color: #3d3d3d;
     }
+
+    .selected-img-list {
+        /*display: inline-block;*/
+    }
+
+    .selected-img-list > img {
+        width: 90px;
+        height: 90px;
+
+        margin : 0 12px;
+
+        padding: 4px;
+        border: 2px solid black;
+        border-radius: 8px;
+    }
+
 
     .image-add {
         width: 90px;
