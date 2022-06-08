@@ -131,6 +131,10 @@ export default {
     /*display: inline-block;*/
 }
 
+.selected-img-list > img {
+    object-fit: cover;
+}
+
 .image-add {
     padding: 13px;
     border-radius: 8px;
