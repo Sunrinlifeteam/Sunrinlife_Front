@@ -72,7 +72,7 @@ export default {
         },
         addFile(event) {
             this.files.push(...event.target.files);
-            for (let file of this.files) {
+            for (let file of event.target.files) {
                 this.images.push(URL.createObjectURL(file));
                 // let reader = new FileReader();
                 // reader.onload = (e) => {
