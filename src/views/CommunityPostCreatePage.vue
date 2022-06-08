@@ -73,11 +73,12 @@ export default {
         addFile(event) {
             this.files.push(...event.target.files);
             for (let file of this.files) {
-                let reader = new FileReader();
-                reader.onload = (e) => {
-                    this.images.push(e.target.result);
-                };
-                reader.readAsDataURL(file);
+                this.images.push(URL.createObjectURL(file));
+                // let reader = new FileReader();
+                // reader.onload = (e) => {
+                //     this.images.push(e.target.result);
+                // };
+                // reader.readAsDataURL(file);
             }
         }
     },
