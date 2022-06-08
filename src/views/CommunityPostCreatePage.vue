@@ -15,12 +15,12 @@
 
                 <ul class="selected-img-list">
                     <img v-for="i in images" :key="i" :src="i" class="post-image"/>
-                </ul>
 
-                <label class="image-add post-image">
-                    <input type="file" class="image" @change="addFile">
-                    <img src="@/assets/community/image_add.svg" alt="" srcset="">
-                </label>
+                    <label class="image-add post-image">
+                        <input type="file" class="image" @change="addFile">
+                        <img src="@/assets/community/image_add.svg" alt="" srcset="">
+                    </label>
+                </ul>
 
                 <div class="content-wrap input-wrap">
                     <h3>내용</h3>
@@ -128,7 +128,8 @@ export default {
 }
 
 .selected-img-list {
-    /*display: inline-block;*/
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .selected-img-list > img {
@@ -138,6 +139,10 @@ export default {
 .image-add {
     padding: 13px;
     border-radius: 8px;
+
+    display: inline-block;
+
+    cursor: pointer;
 }
 
 .image-add input {
