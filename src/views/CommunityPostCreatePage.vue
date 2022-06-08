@@ -14,7 +14,7 @@
                 </div>
 
                 <ul class="selected-img-list">
-                    <img v-for="i in images" :key="i" :src="i" class="post-image"/>
+                    <img v-for="i in images" :key="i" :src="i" class="post-image" />
 
                     <label class="image-add post-image">
                         <input type="file" class="image" @change="addFile">
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { writePublicBoard, writeAnonymousBoard } from '../api';
+import { writePublicBoard, writeAnonymousBoard, uploadSingleFile } from '../api';
 
 export default {
     name: "PostCreatePage",
@@ -58,11 +58,24 @@ export default {
                 alert("내용을 입력해주세요.");
                 return;
             }
-            this.writeBoard();
+            this.uploadFiles().then(this.writeBoard);
         },
-        writeBoard() {
-            if (this.isAnonymous) writeAnonymousBoard(this.title, this.content, []).then(() => this.$router.push({ name: "anonymousCommunity" }))
-            else writePublicBoard(this.title, this.content, [])
+        async uploadFiles() {
+            let ids = [];
+            for (let i = 0; i < this.files.length; i++) {
+                try {
+                    let { data } = await uploadSingleFile(this.files[i], this.files[i].type);
+                    ids.push(data.id);
+                } catch (e) {
+                    alert("업로드 실패");
+                    return;
+                }
+            }
+            return ids;
+        },
+        writeBoard(attachmentIds) {
+            if (this.isAnonymous) writeAnonymousBoard(this.title, this.content, attachmentIds).then(() => this.$router.push({ name: "anonymousCommunity" }))
+            else writePublicBoard(this.title, this.content, attachmentIds)
                 .then(() => {
                     this.$router.push({ name: "publicCommunity" });
                 })
@@ -74,6 +87,7 @@ export default {
             this.files.push(...event.target.files);
             for (let file of event.target.files) {
                 this.images.push(URL.createObjectURL(file));
+                console.log(file);
                 // let reader = new FileReader();
                 // reader.onload = (e) => {
                 //     this.images.push(e.target.result);
@@ -119,7 +133,7 @@ export default {
     width: 90px;
     height: 90px;
 
-    margin: 0 15px;
+    margin-right: 15px;
 
     border-radius: 8px;
     background-color: #f5f6f7;
@@ -132,7 +146,7 @@ export default {
     flex-wrap: wrap;
 }
 
-.selected-img-list > img {
+.selected-img-list>img {
     object-fit: cover;
 }
 

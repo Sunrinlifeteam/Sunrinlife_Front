@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="content">
-                    <img :src="null" alt="본문 이미지">
+                    <img class="content-image"  v-for="item in postData.attachments" :key="item.id" :src="imageUrl(item)" alt="본문 이미지">
                     <p>{{ postData.content }}</p>
                 </div>
             </div>
@@ -63,6 +63,11 @@ export default {
             else getPublicBoardDetail(this.$route.params.postId).then(res => {
                 this.postData = res.data;
             }).catch(() => {});
+        },
+        imageUrl(file) {
+            if (!file) return null;
+            const baseUrl = process.env.VUE_APP_API_URL;
+            return `${baseUrl}/upload/view/${file.id}`;
         }
     },
     watch: {
@@ -134,7 +139,9 @@ export default {
 
     .content img {
         width : 100%;
-        max-width: 623px;
+        max-width: 200px;
+        max-height: 200px;
+        object-fit: contain;
     }
 
     .content p {
