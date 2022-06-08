@@ -14,9 +14,9 @@
                 </div>
 
                 <ul class="selected-img-list">
-                    <img v-for="i in images" :key="i" :src="i" />
+                    <img v-for="i in images" :key="i" :src="i" class="post-image"/>
 
-                    <label class="image-add">
+                    <label class="image-add post-image">
                         <input type="file" class="image" @change="addFile">
                         <img src="@/assets/community/image_add.svg" alt="" srcset="">
                     </label>
@@ -72,7 +72,7 @@ export default {
         },
         addFile(event) {
             this.files.push(...event.target.files);
-            for (let file of this.files) {
+            for (let file of event.target.files) {
                 this.images.push(URL.createObjectURL(file));
                 // let reader = new FileReader();
                 // reader.onload = (e) => {
@@ -115,27 +115,26 @@ export default {
     color: #3d3d3d;
 }
 
+.post-image {
+    width: 90px;
+    height: 90px;
+
+    margin: 0 15px;
+
+    border-radius: 8px;
+    background-color: #f5f6f7;
+
+    cursor: pointer;
+}
+
 .selected-img-list {
     display: flex;
     flex-wrap: wrap;
 }
 
-.selected-img-list > *{
-    width: 90px;
-    height: 90px;
-
-    margin: 0 15px 15px 0;
-    border-radius: 8px;
-}
-
-.selected-img-list>img {
-    padding: 4px;
-    border: 2px solid black;
-}
-
 .image-add {
     padding: 13px;
-    background-color: #f5f6f7;
+    border-radius: 8px;
 
     display: inline-block;
 
