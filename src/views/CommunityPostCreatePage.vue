@@ -15,12 +15,12 @@
 
                 <ul class="selected-img-list">
                     <img v-for="i in images" :key="i" :src="i" />
-                </ul>
 
-                <label class="image-add">
-                    <input type="file" class="image" @change="addFile">
-                    <img src="@/assets/community/image_add.svg" alt="" srcset="">
-                </label>
+                    <label class="image-add">
+                        <input type="file" class="image" @change="addFile">
+                        <img src="@/assets/community/image_add.svg" alt="" srcset="">
+                    </label>
+                </ul>
 
                 <div class="content-wrap input-wrap">
                     <h3>내용</h3>
@@ -72,7 +72,7 @@ export default {
         },
         addFile(event) {
             this.files.push(...event.target.files);
-            for (let file of this.files) {
+            for (let file of event.target.files) {
                 this.images.push(URL.createObjectURL(file));
                 // let reader = new FileReader();
                 // reader.onload = (e) => {
@@ -116,29 +116,28 @@ export default {
 }
 
 .selected-img-list {
-    /*display: inline-block;*/
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.selected-img-list > *{
+    width: 90px;
+    height: 90px;
+
+    margin: 0 15px 15px 0;
+    border-radius: 8px;
 }
 
 .selected-img-list>img {
-    width: 90px;
-    height: 90px;
-
-    margin: 0 12px;
-
     padding: 4px;
     border: 2px solid black;
-    border-radius: 8px;
 }
 
-
 .image-add {
-    width: 90px;
-    height: 90px;
-
-    margin: 0 15px;
     padding: 13px;
-    border-radius: 8px;
     background-color: #f5f6f7;
+
+    display: inline-block;
 
     cursor: pointer;
 }
