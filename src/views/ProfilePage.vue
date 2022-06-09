@@ -1,98 +1,74 @@
 <template>
-    <template v-if="userData">
-        <div class="panel">
+    <template v-if="userInfo">
+        <div class="panel panel-profile">
             <div class="user-profile">
 
-                <!-- 정보 수정 버튼 -->
-                <div class="info-correcrion-button">
-                    <img class="correction-button-img" src="./../assets/user_profile_assets/correctionIcon.svg"
-                        v-if="!isEditable"
-                        @click="isEditable = true"/>
-                    <img class="correction-button-img" src="./../assets/user_profile_assets/checkIcon.svg"
-                        v-else
-                        @click="updateProfile"/>
-                </div>
-
-                <!-- 프로필 이미지 -->
+                <div class="user-profile-background"></div>
+                                <!-- 프로필 이미지 -->
                 <div class="user-img-items">
-                    <div class="user-img-item">
-                        <img v-if="isEditable && editProfileImage" class="user-img" :src="editProfileImage" />
-                        <img v-else-if="userData.image" class="user-img" :src="userData.image" />
-                        <img v-else class="user-img" src="../assets/user_profile_assets/basic_profile_img.svg" />
+                        <img v-if="isEditable && editProfileImage" class="user-img-item" :src="editProfileImage" />
+                        <img v-else-if="userInfo.image" class="user-img-item" :src="userInfo.image" />
+                        <img v-else class="user-img-item" src="../assets/user_profile_assets/basic_profile_img.svg" />
 
                         <input v-if="isEditable" type="file" ref="image" @change="uploadProfileImage" id="profile-img-choice">
                         <label v-if="isEditable" for="profile-img-choice">
-                            <img src="./../assets/user_profile_assets/correctionIcon_white.svg" alt="">
+                            <img src="@/assets/user_profile_assets/correctionIcon_white.svg" alt="">
                         </label>
-                    </div>
                 </div>
+                <!-- 정보 수정 버튼 -->
+                <!-- <div v-if="isMyProfile" class="info-correcrion-button">
+                    <img class="correction-button-img" src="@/assets/user_profile_assets/correctionIcon.svg"
+                        v-if="!isEditable"
+                        @click="isEditable = true"/>
+                    <img class="correction-button-img" src="@/assets/user_profile_assets/checkIcon.svg"
+                        v-else
+                        @click="updateProfile"/>
+                </div> -->
+
+
 
                 <!-- 유저 정보(동아리, 이메일, 소개 등) -->
                 <div class="user-info-items">
-                    <div class="user-basic-contact-items">
-
-                        <!-- 이름, 번호, 학과 -->
-                        <div class="user-basic-items">
-                            <span class="user-name-item">{{ userData.username }}</span>
-                            <span class="user-major-item">{{ department_map[userData.department] }}</span>
-                            <span class="user-number-item">{{ userData.grade }}학년 {{ userData.class }}반 {{ userData.number }}번</span>
+                    <div class="user-info-wrapper">
+                        <div class="vertical">
+                            <div class="user-title">
+                                <div class="user-name">{{userInfo.username}}</div>
+                                <div class="user-email">{{userInfo.email}}</div>
+                            </div>
+                            <div class="user-status-message">
+                                {{ userInfo.description?userInfo.description:"" }}
+                            </div>
                         </div>
 
-                        <!-- 동아리, 이메일, 깃허브 -->
-                        <div class="user-contact-items">
-
-                            <!-- 동아리 -->
-                            <div v-if="!isEditable" class="user-contact-item user-contact-club">
-                                <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
-                                <span class="user-contact-text">{{ userData.clubInfo?userData.clubInfo.name:"" }}</span>
+                        <div class="vertical">
+                            <div class="user-info-group">
+                                <div class="user-info-label">학과</div>
+                                <div class="user-info-content">{{ department_map[userInfo.department] }}</div>
                             </div>
-                            <div v-else class="user-contact-item user-contact-club edit">
-                                <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
-                                <input v-model="editClubInfo" class="user-contact-text user-profile-edit-inout">
+                            <div class="user-info-group">
+                                <div class="user-info-label">학년/반/번호</div>
+                                <div class="user-info-content">{{ userInfo.grade }}학년 {{ userInfo.class }}반 {{ userInfo.number }}번</div>
                             </div>
-
-                            <!-- 부동아리 -->
-                            <div v-if="!isEditable" class="user-contact-item user-contact-club">
-                                <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
-                                <span class="user-contact-text">{{ userData.subClubInfo?.length?userData.subClubInfo.map(x => x.name).join(','):"" }}</span>
+                            <div class="user-info-group">
+                                <div class="user-info-label">전공/일반 동아리</div>
+                                <div class="user-info-content">{{ userInfo.clubInfo?.name }}</div>
                             </div>
-                            <div v-else class="user-contact-item user-contact-club edit">
-                                <img class="user-contact-icon" src="./../assets/user_profile_assets/clubIcon.svg"/>
-                                <input v-model="editSubClubInfo" class="user-contact-text user-profile-edit-inout">
-                            </div>
-
-                            <!-- 이메일 -->
-                            <div class="user-contact-item">
-                                <img class="user-contact-icon" src="./../assets/user_profile_assets/emailIcon.svg"/>
-                                <span class="user-contact-text">{{ userData.email }}</span>
-                            </div>
-
-                            <!-- 깃허브 계정 -->
-                            <div v-if="!isEditable && userData.githubLink != null" class="user-social-contact-item">
-                                <img class="user-contact-icon" src="./../assets/user_profile_assets/githubIcon.svg"/>
-                                <span class="user-contact-text">{{ userData.githubLink?githubID:"" }}</span>
-                            </div>
-                            <div v-else-if="isEditable" class="user-social-contact-item edit">
-                                <img class="user-contact-icon" src="./../assets/user_profile_assets/githubIcon.svg"/>
-                                <input v-model="editGithubLink" v class="user-contact-text user-profile-edit-inout">
-                            </div>
-
                         </div>
 
-                    </div>
-
-                    <!-- 소개 -->
-                    <div v-if="!isEditable" class="user-introduce-items">
-                        <span class="user-introduce-title">소개</span>
-                        <span class="user-introduce-item">{{ userData.description?userData.description:"" }}</span>
-                    </div>
-                    <div v-else class="user-introduce-items edit">
-                        <span class="user-introduce-title">소개</span>
-                        <textarea v class="user-introduce-item user-profile-edit-inout" v-model="editDescription"></textarea>
+                        <div class="vertical">
+                            <div class="user-info-group">
+                                <div class="user-info-label">GITHUB</div>
+                                <div class="user-info-content">{{ userInfo.githubLink }}</div>
+                            </div>
+                                 <div class="user-info-group">
+                                <div class="user-info-label">INSTAGRAM</div>
+                                <div class="user-info-content"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <span class="logout-btn" @click="logoutClick">로그아웃</span>
+                <span v-if="isMyProfile" class="logout-btn" @click="logoutClick">로그아웃</span>
             </div>
         </div>
     </template>
@@ -100,7 +76,7 @@
 
 <script>
 import { mapState } from "vuex"
-import {editProfileData, getUserData, logout} from "../api.js"
+import { editProfileData, getUserData, getUserDataById, logout } from "../api.js"
 import store from "../store.js"
 export default {
     data() {
@@ -111,7 +87,9 @@ export default {
             editSubClubInfo : "",
             editGithubLink : "",
             editDescription : "",
-            editProfileImage : ""
+            editProfileImage : "",
+
+            userInfo: null
             // 수정을 입력받은 데이터
         } 
     },
@@ -126,26 +104,26 @@ export default {
         },
         async updateProfile(){
             const update = {}
-            if (this.editGithubLink != this.userData.githubLink)
-                this.userData.githubLink = update["githubLink"] = this.editGithubLink;
-            if (this.editProfileImage != this.userData.image)
-                this.userData.image = update["image"] = this.editProfileImage;
-            if (this.editDescription != this.userData.description)
-                this.userData.description = update["description"] = this.editDescription;
+            if (this.editGithubLink != this.userInfo.githubLink)
+                this.userInfo.githubLink = update["githubLink"] = this.editGithubLink;
+            if (this.editProfileImage != this.userInfo.image)
+                this.userInfo.image = update["image"] = this.editProfileImage;
+            if (this.editDescription != this.userInfo.description)
+                this.userInfo.description = update["description"] = this.editDescription;
             
             if (this.editClubInfo){
-                if (!this.userData.clubInfo || this.editClubInfo != this.userData.clubInfo.id){
-                    if (!this.userData.clubInfo) this.userData.clubInfo = {};
+                if (!this.userInfo.clubInfo || this.editClubInfo != this.userInfo.clubInfo.id){
+                    if (!this.userInfo.clubInfo) this.userInfo.clubInfo = {};
                     update["clubInfo"] = this.editClubInfo || 0;
-                    this.userData.clubInfo.name = "로딩중...";
+                    this.userInfo.clubInfo.name = "로딩중...";
                 }
             }
             if (this.editSubClubInfo){
-                if (!this.userData.subClubInfo) this.userData.subClubInfo = [];
+                if (!this.userInfo.subClubInfo) this.userInfo.subClubInfo = [];
                 update["subClubInfo"] = this.editSubClubInfo.split(',')
                     .map(x => parseInt(x))
                     .filter(x => x)
-                this.userData.subClubInfo = [{name: "로딩중..."}]
+                this.userInfo.subClubInfo = [{name: "로딩중..."}]
             }
             this.isEditable = false
 
@@ -153,7 +131,7 @@ export default {
                 console.log(update)
                 await editProfileData(update)
                 getUserData().then((data) => {
-                    store.commit("setUserData", data)
+                    store.commit("setuserInfo", data)
                 })
             }
         },
@@ -161,30 +139,54 @@ export default {
             logout().then(res => {
                 if(res == "success") this.$router.push("/login")
             })
+        },
+        setEditData(val){
+            if (!val) return;
+            this.editClubInfo = val.clubInfo?.id;
+            this.editGithubLink = val.githubLink;
+            this.editDescription = val.description;
+            this.editProfileImage = val.image;
+            this.editSubClubInfo = val.subClubInfo?.map(x => x.id).join(',');
+        },
+        async loadData(){
+            if (this.isMyProfile)
+                this.userInfo = this.userData;
+            else
+                this.userInfo = await getUserDataById(this.userId);
         }
     },
     computed:{
+        getAuthToken() {
+            return this.$store.getters.getAuthToken;
+        },
         ...mapState(["userData", "department_map"]),
         githubID: function() {
-            return this.userData?.githubLink.split('/').filter(x=>x).pop();
+            return this.userInfo?.githubLink.split('/').filter(x=>x).pop();
+        },
+        userId() {
+            return this.$route.params.profileId;
+        },
+        isMyProfile() {
+            return this.userId === undefined;
         }
     },
     watch: {
-        userData: function(val) {
-            if (!val) return;
-            this.editClubInfo = val.clubInfo?.id
-            this.editGithubLink = val.githubLink
-            this.editDescription = val.description
-            this.editProfileImage = val.image
-            this.editSubClubInfo = val.subClubInfo?.map(x => x.id).join(',')
-        }
+        getAuthToken() {
+            this.loadData()
+        },
+        userData: function(){
+            if (this.isMyProfile)
+                this.userInfo = this.userData;
+        },
+        userInfo: function(val) {
+            this.setEditData(val);
+        },
+        $route() {
+            this.loadData();
+        },
     },
     mounted() {
-        this.editClubInfo = this.userData?.clubInfo?.id
-        this.editGithubLink = this.userData?.githubLink
-        this.editDescription = this.userData?.description
-        this.editProfileImage = this.userData?.image
-        this.editSubClubInfo = this.userData?.subClubInfo?.map(x => x.id).join(',')
+        if (this.$store.getters.getAuthToken !== null) this.loadData();
     }
 }
 </script>
@@ -193,36 +195,46 @@ export default {
     body {
         /*padding: 205px 231px;*/
     }
+    .panel-profile {
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        height:100vh;
+    }
     .user-profile{
-        width: 90%;
-        height: 350px;
-
-        max-width : 1040px;
-
-        background-color: #fff;
-        
+        width: 700px;
+        height: 541px;
         margin: 0 auto;
-        margin-top:205px;
+
         border-radius: 8px;
         box-shadow: 1px 0 6px 0 rgba(0, 0, 0, 0.16);
-
+        display: flex;
+        flex-direction: column;
         position: relative;
     }
+    .user-profile-background {
+        width:100%;
+        height:161px;
+        background:rgb(75, 75, 75);
+        border-radius: 9px 9px 0px 0px;
 
+    }
     .user-img-items {
-        width: 240px;
-        height: 100%;
+        width: 112px;
+        height: 112px;
         /*background-color: blanchedalmond;*/
-        float: left;
+        left:28px;
+        top:135px;
+        position:absolute;
     }
     .user-img-item {
-        margin: 48px;
-        width: 152px;
-        height: 152px;
+        width: 112px;
+        height: 112px;
         border-radius: 50%;
         background-color: #f5f6f7;
-
+border: 5px solid #50E98D;
         position: relative;
+        filter: drop-shadow(0px 2px 10px rgba(177, 174, 174, 0.25));
     }
     .user-img {
         width: 100px;
@@ -254,160 +266,69 @@ export default {
 
     .user-info-items {
         /*background-color: aquamarine;*/
-        padding: 60px 0;
-    }
+        height:380px;
+        background: white;
+        border-radius: 0px 0px 9px 9px;
 
-    .user-basic-contact-items {
-        /*background-color: chartreuse;*/
-        height: 118px;
     }
-
-    .user-basic-items {
-        /*background-color: rgb(76, 76, 110);*/
-        width: 195px;
-        float: left;
+    .user-info-wrapper {
+        display:flex;
+        flex-direction: column;
+        gap:21px;
+        margin-left:167px;
+        margin-top: 21px;
     }
-    .user-name-item {
-        font-family: 'Noto Sans KR', sans-serif;
-        font-size: 20px;
-        font-weight: bold;
-        font-stretch: normal;
-        font-style: normal;
-        line-height: 1.45;
-        letter-spacing: normal;
-        text-align: left;
-        color: #3d3d3d;
-        display: block;
-        margin-bottom: 7px;
+    .vertical {
+        display:flex;
+        flex-direction:column;
+        gap:13px;
     }
-    .user-major-item, .user-number-item {
-        font-family: 'Noto Sans KR', sans-serif;
-        font-size: 16px;
+    .user-info-label {
         font-weight: 500;
-        font-stretch: normal;
-        font-style: normal;
-        line-height: 1.5;
-        letter-spacing: normal;
-        text-align: left;
-        color: #a9a9a9;
-        display: block;
+        font-size: 13px;
+        line-height: 16px;
+        color: #727272;
     }
-
-    .user-contact-items {
-        /*background-color: crimson;*/
+    .user-info-content {
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 18px;
+        color: #242424;
     }
-    .user-contact-item {
-        display: inline;
-        margin-right: 24px;
+    .user-info-group {
+        display:flex;
+        flex-direction: column;
+        gap:3px;
     }
-    .user-contact-icon {
-        width: 24px;
-        height: 24px;
-        vertical-align: middle;
-        margin-right: 12px;
+    .user-title {
+        display:flex;
+        gap:7px;
+        align-items:flex-end;
     }
-    .user-contact-text {
-        font-family: 'Noto Sans KR', sans-serif;
-        font-size: 16px;
+    .user-status-message {
         font-weight: 500;
-        font-stretch: normal;
-        font-style: normal;
-        line-height: 1.5;
-        letter-spacing: normal;
-        text-align: left;
-        color: #3d3d3d;
-        vertical-align: middle;
-    }
-    .user-social-contact-item {
-        display: block;
-        margin-top: 16px;
-        margin-bottom: 16px;
-    }
-
-    .user-introduce-items {
-        /* background-color: deeppink; */
-        /* position: relative; */
-        /* background-color: #f00; */
-    }
-    .user-introduce-title {
-        height: 24px;
-        font-family: 'Noto Sans KR', sans-serif;
         font-size: 16px;
-        font-weight: bold;
-        font-stretch: normal;
-        font-style: normal;
-        line-height: 1.5;
-        letter-spacing: normal;
-        text-align: left;
-        color: #4992ff;
+        line-height: 19px;
+        color: #979797;
     }
-    .user-introduce-item {
-        /*background-color: #1e7edd;*/
-        display: block;
-        padding: 8px 16px;
-        font-family: 'Noto Sans KR', sans-serif;
-        font-size: 16px;
-        font-weight: 500;
-        font-stretch: normal;
-        font-style: normal;
-        line-height: 1.5;
-        letter-spacing: normal;
-        text-align: left;
-        color: #3d3d3d;
+    .user-name {
+        font-weight: 600;
+font-size: 20px;
+line-height: 24px;
+/* identical to box height */
+
+
+color: #000000;
     }
+    .user-email {
+        font-weight: 600;
+font-size: 15px;
+line-height: 18px;
+/* identical to box height */
 
-    .info-correcrion-button {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        display:inline-block;
-        position: relative;
-        float:right;
-        margin-top:24px;
-        margin-right:24px;
-        background-color: #f5f6f7;
-        transition-duration: 0.1s;
+
+color: #4D4D4D;
     }
-    .info-correcrion-button:hover {
-        background-color: #e1e2e4;
-        cursor: pointer;
-    }
-    .correction-button-img {
-        width: 24px;
-        height: 24px;
-        margin: 6px;
-    }
-
-
-    .user-profile-edit-inout {
-        height : 40px;
-        border : 0;
-
-        color: #3d3d3d;
-
-        padding: 8px 14px;
-        border-radius: 8px;
-        background-color: #f5f6f7;
-    }
-
-    .user-contact-club .user-profile-edit-inout {
-        width : 150px;
-    }
-
-    .user-social-contact-item .user-profile-edit-inout {
-        width : 300px;
-    }
-
-    textarea.user-profile-edit-inout {
-        width : 50%;
-        height: 7em;
-
-        margin : 0px;
-
-        border: none;
-        resize: none;
-    }
-
     .logout-btn {
         font-size: 12px;
         font-weight: 500;
@@ -430,4 +351,6 @@ export default {
             margin-bottom:10px;
         }
     }
+
+
 </style>

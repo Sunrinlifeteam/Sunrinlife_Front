@@ -2,7 +2,7 @@
 <div class="club-card nomal neu-morphism-card">
     <div class="header">
         <img v-if="selectClubData.logo_url != ''" :src="selectClubData.logo_url" alt="" class="logo">
-        <img v-else src="./../../assets/symbol.svg" :alt="`동아리 로고 기본값`" class="logo">
+        <img v-else src="@/assets/symbol.svg" :alt="`동아리 로고 기본값`" class="logo">
 
         <div class="descriptions-wrap">
             <h2 class="club-name">{{ selectClubData.name }}</h2>
@@ -123,12 +123,10 @@ export default {
 }
 
 .club-card .club-name {
-    font-family: 'Noto Sans KR', sans-serif;
     font-size: 20px;
 }
 
 .club-card .descriptions {
-    font-family: 'Noto Sans KR', sans-serif;
     font-size: 14px;
     font-weight: bold;
     word-break : keep-all;
@@ -161,7 +159,6 @@ export default {
 }
 
 .club-card .sns-link .url {
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
     font-size: 16px;
     color: #3d3d3d;
@@ -179,7 +176,6 @@ export default {
 }
 
 .club-card .ranker .position {
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
     font-size: 16px;
     font-weight: bold;
@@ -187,7 +183,6 @@ export default {
 }
 
 .club-card .ranker .name {
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
     font-size: 16px;
     font-weight: 500;
@@ -218,7 +213,6 @@ export default {
 }
 
 .club-card .curriculum li {
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
     font-size: 14px;
     font-weight: 500;

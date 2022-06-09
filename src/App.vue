@@ -17,10 +17,7 @@ import {
     getScheduleOfficial,
     getSchedulePersonal,
     getNoticeMain,
-    getNoticePageCount,
-    getClubMajor,
-    getClubGeneral,
-    getClubAutonomous,
+    getTodaySchedule
 } from "./api.js";
 import store from "./store.js";
 
@@ -32,6 +29,7 @@ export default {
     data() {
         return {
             showGlobalComponent: true,
+            userData:null
         };
     },
     components: {
@@ -79,9 +77,9 @@ export default {
         getAuthToken() {
             getUserData().then((data) => {
                 store.commit("setUserData", data);
-            });
-            getNoticePageCount().then((data) => {
-                store.commit("setNoticePageCount", data);
+                getTodaySchedule(data.grade, data.class).then((data) => {
+                    this.$store.commit("getTodaySchedule", data)
+                })
             });
             getMeal().then((res) => {
                 store.commit("getMeal", res);
@@ -94,24 +92,6 @@ export default {
             });
             getNoticeMain().then((data) => {
                 store.commit("getNoticeMain", data);
-            });
-            getClubMajor(0).then((data) => {
-                store.commit("setClubData", { id: "security", data });
-            });
-            getClubMajor(1).then((data) => {
-                store.commit("setClubData", { id: "software", data });
-            });
-            getClubMajor(2).then((data) => {
-                store.commit("setClubData", { id: "buisness", data });
-            });
-            getClubMajor(3).then((data) => {
-                store.commit("setClubData", { id: "design", data });
-            });
-            getClubGeneral().then((data) => {
-                store.commit("setClubData", { id: "general", data });
-            });
-            getClubAutonomous().then((data) => {
-                store.commit("setClubData", { id: "autonomous", data });
             });
         },
     },

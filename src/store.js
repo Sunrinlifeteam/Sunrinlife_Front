@@ -117,14 +117,14 @@ const store = createStore({
         getNoticePage(state){
             return state.noticePage
         },
-        getNoticePageCount(state){
-            return state.noticePageCount
-        },
         getUserData(state){
             return state.userData
         },
         isMobileWindow(state){
             return state.isMobileWindow;
+        },
+        getNoticePageCount(state){
+            return state.noticePageCount;
         }
     },
     watch:{

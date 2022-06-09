@@ -3,18 +3,18 @@
     grid-template-rows: auto 1fr;
 }
 
-main{
+main {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 20px;
 }
 
-.main-page-item{
+.main-page-item {
     background-color: white;
     border-radius: 8px;
-    padding : 12px 16px;
+    padding: 12px 16px;
 
-    box-shadow: 10px 10px 20px var(--gray4);
+    box-shadow: 10px 10px 20px 1px rgb(0 0 0 / 5%);
 
     display: grid;
     grid-template-rows: auto 1fr;
@@ -33,12 +33,11 @@ main{
     animation-timing-function: ease-in-out;
 } */
 
-.main-page-item .main-page-item-content{
-    
+.main-page-item .main-page-item-content {
 }
 
 .main-page-item h3 {
-    color : #3d3d3d;
+    color: #3d3d3d;
     display: inline;
     font-family: NotoSansB;
     font-size: 18px;
@@ -46,11 +45,9 @@ main{
 }
 
 .main-page-item:hover h3 {
-    
 }
 
 .main-page-item-content {
-    
 }
 
 /* .main-page-item:hover h3{
@@ -58,33 +55,27 @@ main{
 } */
 
 .notice-and-hot-sunrin {
-
 }
 
 .timer {
-
 }
 
 .meal {
-
 }
 
 .today-schedule {
-
 }
 
 .schedule {
-    
 }
 
 .club {
-
 }
 
 @media (min-width: 970px) {
     main {
         display: grid;
-        height:750px;
+        height: 750px;
         grid-template-columns: repeat(5, 1fr);
         grid-template-rows: repeat(13, 1fr);
     }
@@ -101,31 +92,30 @@ main{
     .meal {
         grid-row: 9 / 14;
     }
-    
+
     .today-schedule {
         grid-row: 9 / 14;
     }
-    
+
     .schedule {
         grid-column: 3 / 6;
         grid-row: 1 / 8;
     }
-    
+
     .club {
         grid-column: 3 / 6;
         grid-row: 8 / 14;
     }
 }
 
-
 @keyframes hoverAnimation {
-    0%{
+    0% {
         transform: rotateZ(0deg);
     }
-    50%{
+    50% {
         transform: rotateZ(-0.5deg);
     }
-    100%{
+    100% {
         transform: rotateZ(0.5deg);
     }
 }

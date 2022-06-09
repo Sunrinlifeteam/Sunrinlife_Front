@@ -62,7 +62,6 @@ export default {
 }
 
 .club-list .club-name{
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
     font-size:16px;
 }

@@ -2,24 +2,32 @@
 <transition name="nav-bar">
     <nav v-if="isSidebarShow" class="none-dragging">
 
-        <img src="./../assets/x_button.svg" alt="사이드바 닫기" class="close-sidebar" @click="$store.commit('sidebarOnOff')">
+        <img src="@/assets/x_button.svg" alt="사이드바 닫기" class="close-sidebar" @click="$store.commit('sidebarOnOff')">
     
         <div class="nav-list">
             <div class="logo" @click="hideSidebarOnMobile(); $router.push('/')">
-                <img src="./../assets/symbol.svg" alt="Logo" class="logo_symbol">
-                <img src="./../assets/logo.svg" alt="Logo" class="logo_text">
+                <img src="@/assets/symbol.svg" alt="Logo" class="logo_symbol">
+                <img src="@/assets/logo.svg" alt="Logo" class="logo_text">
             </div>
 
             <div class="menu_list">
-                <router-link
-                    v-for="i, n in navBarList" :key="n" :to="i.router"
-                    @click="hideSidebarOnMobile()">
-                    <img :src="i.img">
-                    <span>{{ i.name }}</span>
-                </router-link>
+                <div v-for="i, n in navBarList" :key="n" :class="{options:i.option}">
+                    <router-link
+                        :to="i.router"
+                        @click="hideSidebarOnMobile()"
+                        :class="{is_community:(isCommunity && checkCommunityRouter(i)) }">
+                        <img :src="i.img">
+                        <span>{{ i.name }}</span>
+                    </router-link>
+                    <template v-if="i.option">
+                        <router-link v-for="j, n in i.option" :key="n" :to="{path:j.path}" class="router_option">
+                            <span>{{j.name}}</span>
+                        </router-link>
+                    </template>
+                </div>
             </div>
             <template v-if="userData">
-                <router-link class="list-user-profile" :to="'profile'" @click="hideSidebarOnMobile()">
+                <router-link class="list-user-profile" :to="{name:'profile'}" @click="hideSidebarOnMobile()">
                     <template v-if="userData.image">
                         <img :src="userData.image">
                     </template>
@@ -50,18 +58,28 @@ export default {
     name : "Sidebar",
     data(){
         return{
-            
+            isCommunity : window.location.href.indexOf("community") !== -1
         }
     },
     methods : {
         hideSidebarOnMobile(){
             if (this.isMobileWindow)
                 this.$store.commit('sidebarOff')
+        },
+        checkCommunityRouter(e){
+            return e.router === "/community/public"
         }
     },
     computed :{
         ...mapState(['userData', 'navBarList', 'department_map', "isSidebarShow", "isMobileWindow"]),
         // store.js에 저장된 navBarList를 가져와서 목록으로 보여준다.
+        
+    },
+    watch:{
+        $route:function(){
+            if(window.location.href.indexOf("community") !== -1) this.isCommunity = true;
+            else this.isCommunity = false;
+        }
     },
     mounted(){
 
@@ -165,28 +183,83 @@ nav .menu_list{
     flex-direction: column;
 }
 
+nav .menu_list .options:hover .router_option{
+    display:flex;
+}
+
 nav .menu_list a{
     font-size: 18px;
     padding : 8px 16px;
     padding-left:32px;
-    color:#d9d9d9;
+    color:#b9b9b9;
     display : flex;
-
     cursor: pointer;
+}
+
+nav .menu_list .router_option{
+    display: none;
+}
+.is_community ~ .router_option{
+    display: flex !important;
+}
+nav .menu_list .router_option{
+    font-size:15px;
+    padding:4px;
+    padding-left: 65px;
+}
+nav .menu_list .router_option span{
+    margin: 0;
+}
+
+nav .menu_list .options .router_option span::before{
+    content:"";
+    display:inline-block;
+    width:5px;
+    height:5px;
+    border-radius: 100%;
+    background-color: #b9b9b9;
+    vertical-align: middle;
+    margin-bottom:3px;
+    margin-right:12px;
+}
+
+.is_community{
+    color : #4992ff !important;
+    font-weight: 700;
+}
+
+.is_community img{
+    filter: invert(57%) sepia(64%) saturate(4033%) hue-rotate(198deg) brightness(102%) contrast(102%);
+}
+
+.nav-list .router-link-active {
+    color : #4992ff;
+    font-weight: 700;
+}
+
+.router-link-active span::before{
+    background-color:#4992ff !important;
+}
+
+.router-link-active img{
+    filter: invert(57%) sepia(64%) saturate(4033%) hue-rotate(198deg) brightness(102%) contrast(102%);
 }
 
 .nav-list .router-link-exact-active{
     color : #4992ff;
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
+}
+
+.router-link-exact-active span::before{
+    background-color:#4992ff !important;
 }
 
 .router-link-exact-active img{
     filter: invert(57%) sepia(64%) saturate(4033%) hue-rotate(198deg) brightness(102%) contrast(102%);
 }
 
+
 nav .menu_list a span{
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
     margin-left:10px;
     display: block;

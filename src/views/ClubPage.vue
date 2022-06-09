@@ -59,7 +59,7 @@
                         :class="{ 'seleted' : selectIndex == n}"
                         @click="selectIndex = n">
                         <img v-if="i.logo_url != ''" :src="i.logo_url" :alt="`${i.name} 동아리 로고`" class="club-icon">
-                        <img v-else src="./../assets/symbol.svg" :alt="`동아리 로고 기본값`" class="club-icon">
+                        <img v-else src="@/assets/symbol.svg" :alt="`동아리 로고 기본값`" class="club-icon">
 
                         <div v-if="!isMobileWindow" class="club-name">{{ i.name }}</div>
                     </li>
@@ -83,8 +83,13 @@ import ClubCardMobile from "../components/club/ClubCardMobile.vue"
 
 
 
-// import { JB, SW, it, de } from "./../components/club/TempClubData"
+// import { JB, SW, it, de } from "@/components/club/TempClubData"
 import { mapState } from 'vuex'
+import {
+    getClubMajor,
+    getClubGeneral,
+    getClubAutonomous,} from "@/api"
+import store from "@/store"
 
 export default {
     name : "Club Page",
@@ -96,11 +101,19 @@ export default {
     },
     computed :{
         ...mapState(["isMobileWindow", "clubData"]),
+        getAuthToken() {
+            return this.$store.getters.getAuthToken;
+        },
         loadedClubData() {
             return this.clubData[this.division];
         },
         division() {
             return this.$route.query.division || "security";
+        }
+    },
+    watch:{
+        getAuthToken(){
+            this.loadData();
         }
     },
     components : {
@@ -112,8 +125,31 @@ export default {
             this.selectIndex = 0;
             this.$router.push({ path: 'club', query: { division }});
             this.selectIndex = 0;
+        },
+        loadData(){
+            getClubMajor(0).then((data) => {
+                store.commit("setClubData", { id: "security", data });
+            });
+            getClubMajor(1).then((data) => {
+                store.commit("setClubData", { id: "software", data });
+            });
+            getClubMajor(2).then((data) => {
+                store.commit("setClubData", { id: "buisness", data });
+            });
+            getClubMajor(3).then((data) => {
+                store.commit("setClubData", { id: "design", data });
+            });
+            getClubGeneral().then((data) => {
+                store.commit("setClubData", { id: "general", data });
+            });
+            getClubAutonomous().then((data) => {
+                store.commit("setClubData", { id: "autonomous", data });
+            });
         }
     },
+    mounted(){
+        if (this.$store.getters.getAuthToken !== null) this.loadData();
+    }
 }
 </script>
 
@@ -123,6 +159,7 @@ export default {
     display: grid;
     grid-template-columns: auto 1fr;
     gap : 30px;
+    margin-top:90px;
 }
 
 .club-list-wrap {
@@ -171,14 +208,9 @@ export default {
 <style scoped>
 .major-selecter {
     height: 44px;
-
     margin-bottom : 24px;
-
     position: relative;
-
     overflow: hidden;
-
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
 }
 
@@ -189,19 +221,15 @@ export default {
 .major-selecter > div {
     width : 100%;
     height : 100%;
-
     display: flex;
-
     position: absolute;
     top : 0px;
     left : 0px;
 }
 
 .major-selecter .current-major {
-    font-family: 'Noto Sans KR', sans-serif;
     font-size: 16px;
     font-weight: 700;
-
     justify-content: center;
     align-items: center;
 }
@@ -212,7 +240,6 @@ export default {
 
 .major-selecter .choice-major-wrap .choice-major {
     flex-grow: 1;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -284,11 +311,9 @@ export default {
 .club-list .club-icon {
     width: 24px;
     height: 24px;
-    box-shadow: 1px 0 6px 0 rgba(0, 0, 0, 0.16);
 }
 
 .club-list .club-name{
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
     font-size:16px;
 }

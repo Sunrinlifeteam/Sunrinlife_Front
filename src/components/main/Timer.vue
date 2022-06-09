@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import TimerDatas from "./../../assets/TimerData.js"
-import Time from "./../../Model/Time.js"
+import TimerDatas from "@/assets/TimerData.js"
+import Time from "@/Model/Time.js"
 
 // let currentTime
 // let nextTime
@@ -113,7 +113,6 @@ export default {
 }
 
 .timer span{
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
 }
 

@@ -2,7 +2,7 @@
 <div class="meal main-page-item">
     <div class="main-page-item-title"><h3>급식</h3></div>
     <div class="main-page-item-content two_panel">
-        <p v-for="i, n in meal" :key="n" class="text-truncated">{{i.menu_name}}</p>
+        <p v-for="i, n in meal" :key="n" class="text-truncated">{{i.menu_name.split(" ()")[0]}}</p>
         
 
         <!-- <div class="meal-detail" @click="$router.push('meal')">세부 보기</div> -->
@@ -11,8 +11,8 @@
 </template>
 
 <script>
-//import TimeTableData from "../../assets/TimerData.js"
-// import Time from "./../../../Model/Time.js"
+//import TimeTableData from "@/assets/TimerData.js"
+// import Time from "@/@/Model/Time.js"
 
 //let luanchRemainingTime
 //let launchStartTime
@@ -61,7 +61,6 @@ export default {
 }
 
 .two_panel p{
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight:500;
     font-size:14px;
     margin-left: 16px;

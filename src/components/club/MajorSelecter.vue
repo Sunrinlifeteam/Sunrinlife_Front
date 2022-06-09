@@ -53,7 +53,6 @@ export default {
 
     overflow: hidden;
     
-    font-family: 'Noto Sans KR', sans-serif;
     font-weight: 700;
 }
 
@@ -73,7 +72,6 @@ export default {
 }
 
 .major-selecter .current-major {
-    font-family: 'Noto Sans KR', sans-serif;
     font-size: 16px;
     font-weight: 700;
 

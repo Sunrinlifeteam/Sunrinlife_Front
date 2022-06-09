@@ -1,47 +1,37 @@
 <template>
-<div class="today-schedule main-page-item">
-    <div class="main-page-item-title"><h3>시간표</h3></div>
-    <div class="main-page-item-content two_panel">
-            
-        <p v-for="i, n in todaySchedule" :key="n" class="text-truncated">{{ i }}</p>
-
+    <div class="today-schedule main-page-item">
+        <div class="main-page-item-title"><h3>시간표</h3></div>
+        <div class="main-page-item-content two_panel">
+            <p v-for="(i, n) in todaySchedule" :key="n" class="text-truncated">
+                {{ i }}
+            </p>
+        </div>
     </div>
-</div>
 </template>
 
 <script>
-import {getTodaySchedule} from "../../api.js"
-import {mapState} from "vuex"
+import { mapState } from "vuex";
 
 export default {
-    name : "TodaySchedule",
-    data(){return{
-        
-    }},
-    computed:{
-        ...mapState(["todaySchedule"]),
-        getUserData(){
-            return this.$store.getters.getUserData
-        }
+    name: "TodaySchedule",
+    data() {
+        return {};
     },
-    watch:{
-        getUserData(){
-            let userData = this.$store.getters.getUserData
-            getTodaySchedule(userData.grade, userData.class).then((data) => {
-                this.$store.commit("getTodaySchedule", data)
-            })
-        }
-    }
-}
+    computed: {
+        ...mapState(["todaySchedule"]),
+        getUserData() {
+            return this.$store.getters.getUserData;
+        },
+    },
+    watch: {},
+};
 </script>
 
 <style scoped>
-.today-schedule{
-
+.today-schedule {
 }
 
-.today-schedule .time-table{
-    
+.today-schedule .time-table {
 }
 
 .today-schedule .main-page-item-content {
@@ -53,11 +43,10 @@ export default {
 }
 
 .two_panel {
-    padding : 8px 12px;
+    padding: 8px 12px;
 
     display: flex;
     flex-direction: column;
-    gap : 5px;
+    gap: 5px;
 }
-
 </style>

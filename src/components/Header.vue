@@ -1,7 +1,6 @@
 <template>
 <header>
-    <img @click="$store.commit('sidebarOnOff')" src="./../assets/menu_button.svg" alt="">
-    <span class="k none-dragging" @click="$router.push('i_love_sunrin')">이스터에그</span>
+    <img @click="$store.commit('sidebarOnOff')" src="@/assets/menu_button.svg" alt="">
 </header>
 </template>
 

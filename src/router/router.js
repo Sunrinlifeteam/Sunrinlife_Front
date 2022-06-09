@@ -1,17 +1,18 @@
-import { createWebHistory, createRouter } from "vue-router"
+import { createWebHistory, createRouter, RouterView } from "vue-router"
+import { h } from 'vue'
 
-import LoginPage from "./../views/LoginPage.vue"
-import Register from "./../views/RegisterPage.vue"
-import MainPage from "./../views/MainPage_v2.vue"
-import ProfilePage from './../views/ProfilePage.vue';
-import ClubPage from "./../views/ClubPage.vue"
-import NoticePage from "./../views/NoticePage.vue"
-import NoticeDetailPage from "./../views/NoticeDetailPage.vue"
-import CommunityPage from "./../views/CommunityPage.vue"
+import LoginPage from "@/views/LoginPage.vue"
+import Register from "@/views/RegisterPage.vue"
+import MainPage from "@/views/MainPage_v2.vue"
+import ProfilePage from '@/views/ProfilePage.vue';
+import ClubPage from "@/views/ClubPage.vue"
+import NoticePage from "@/views/NoticePage.vue"
+import NoticeDetailPage from "@/views/NoticeDetailPage.vue"
+import CommunityPage from "@/views/CommunityPage.vue"
 
-import EasterEggPage from "./../views/EasterEggPage.vue"
-import PostCreatePage from "@/views/PostCreatePage";
-import PostDetailPage from "@/views/PostDetailPage";
+import EasterEggPage from "@/views/EasterEggPage.vue"
+import CommunityPostCreatePage from "@/views/CommunityPostCreatePage";
+import CommunityPostDetailPage from "@/views/CommunityPostDetailPage";
 
 const routes = [
     {
@@ -36,18 +37,29 @@ const routes = [
     },
     {
         path : "/notice",
-        name: "notice",
-        component : NoticePage,
-    },
-    {
-        path : "/notice/:noticeId",
-        name: "noticeId",
-        component : NoticeDetailPage,
+        component: { render: () => h(RouterView) },
+        children: [
+            { 
+              path: '',
+              name: 'notice',
+              component : NoticePage,
+            },
+            { 
+              path: ':noticeId',
+              name: 'noticeId',
+              component : NoticeDetailPage,
+            }
+        ],
     },
     {
         path : "/profile",
         name: "profile",
         component : ProfilePage,
+    },
+    {
+        path:"/profile/:profileId",
+        name: "otherProfile",
+        component: ProfilePage
     },
     {
         path : "/club",
@@ -56,22 +68,47 @@ const routes = [
         props: true
     },
     {
-        path : "/community",
-        name: "community",
-        component : CommunityPage,
-        props: true
+        path : "/community/public",
+        component: { render: () => h(RouterView) },
+        children: [
+            { 
+              path: '',
+              name: 'publicCommunity',
+              component : CommunityPage,
+            },
+            { 
+              path: ':postId',
+              name: 'publicCommunityPostDetail',
+              component : CommunityPostDetailPage,
+            },
+            {
+                path : "write",
+                name: "publicCommunityWrite",
+                component : CommunityPostCreatePage,
+            },
+        ],
     },
     {
-        path : "/postCreate",
-        name: "postCreate",
-        component : PostCreatePage,
-        props: true
-    },
-    {
-        path : "/post/:postId",
-        name: "postDetail",
-        component : PostDetailPage,
-        props: true
+        path : "/community/anonymous",
+        component: { render: () => h(RouterView) },
+        children: [
+            { 
+              path: '',
+              name: 'anonymousCommunity',
+              component : CommunityPage,
+            },
+            { 
+              path: ':postId',
+              name: 'anonymousCommunityPostDetail',
+              component : CommunityPostDetailPage,
+            },
+            {
+                path : "write",
+                name: "anonymousCommunityWrite",
+                component : CommunityPostCreatePage,
+            },
+            
+        ],
     },
     {
         path : "/i_love_sunrin",

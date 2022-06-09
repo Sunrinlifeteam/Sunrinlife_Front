@@ -19,6 +19,11 @@ export async function getAccessToken() {
     })
 }
 
+export async function getUserDataById(id){
+    let userData = await getAPI.get(`/user/${id}/full`).then((res) => res.data).catch((e) => console.log(e))
+    return userData
+}
+
 export async function getUserData(){
     let userData = await getAPI.get("/user/full").then((res) => res.data).catch((e) => console.log(e))
     return userData
@@ -152,18 +157,72 @@ export async function getNoticeSearch(page, search){
 
 export async function getNoticePageCountWithSearch(search){
     let res = await getAPI.get(`/notice/count?search=${encodeURI(search)}`).then((res) => res.data).catch((e) => console.log(e))
-    res = Math.ceil(res / 10)
-    console.log(res)
+    res = Math.ceil(res / 10) || 1
     return res
 }
 
 export async function getNoticePageCount(){
     let res = await getAPI.get("/notice/count").then((res) => res.data).catch((e) => console.log(e))
-    res = Math.ceil(res / 10)
+    res = Math.ceil(res / 10) || 1
     return res
 }
 
 export async function getNoticeById(noticeId) {
     let res = await getAPI.get(`/notice/${noticeId}`).then(res => res.data).catch(console.log)
     return res
+}
+
+// 게시판
+export async function getPublicBoardPageCount(){
+    let res = await getAPI.get(`/board/named/count`)
+    res = Math.ceil(res.data / 10) || 1
+    return res
+}
+
+export async function getPublicHotBoardList(){
+    return await getAPI.get("/board/named/top")
+}
+
+export async function getPublicBoardList(pageId = 0){
+    let res = await getAPI.get(`/board/named?offset=${pageId}&count=10&sort=DESC&orderType=created`)
+    return res
+}
+
+export async function getPublicBoardDetail(id){
+    return await getAPI.get(`/board/named/${id}`);
+}
+
+export async function writePublicBoard(title, content, attachments) {
+    return await getAPI.post(`/board/named`, { title, content, attachments });
+}
+
+export async function getAnonymousBoardPageCount(){
+    let res = await getAPI.get(`/board/anonymous/count`)
+    res = Math.ceil(res.data / 10) || 1
+    return res
+}
+
+export async function getAnonymousBoardList(pageId = 0){
+    return await getAPI.get(`/board/anonymous?offset=${pageId}&count=10&sort=DESC&orderType=created`)
+}
+
+export async function getAnonymousHotBoardList(){
+    return await getAPI.get("/board/anonymous/top")
+}
+
+export async function getAnonymousBoardDetail(id){
+    return await getAPI.get(`/board/anonymous/${id}`);
+}
+
+export async function writeAnonymousBoard(title, content, attachments){
+    return await getAPI.post("/board/anonymous", {title, content, attachments})
+}
+
+export async function uploadSingleFile(file, mimetype){
+    if (!file) throw new Error("No file");
+    if (!mimetype) throw new Error("No mimetype");
+    let formData = new FormData();
+    formData.append("mimetype", mimetype);
+    formData.append("file", file);
+    return await getAPI.post("/upload", formData);
 }
