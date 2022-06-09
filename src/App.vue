@@ -44,7 +44,9 @@ export default {
                 setInterval(getAccessToken, 3600000);
             })
             .catch((e) => {
-                if (
+                if (!e.response || e.response.status != 200)
+                    alert("서버 통신 실패");
+                else if (
                     window.location.pathname.trim() != "/login" &&
                     e.response.status == 401
                 )
