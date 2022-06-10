@@ -193,8 +193,12 @@ export async function writePublicBoard(title, content, attachments) {
     return await getAPI.post(`/board/named`, { title, content, attachments });
 }
 
-export async function likePublicBoard(id){
+export async function isLikedPublicBoard(id) {
     return await getAPI.get(`/board/named/${id}/like`);
+}
+
+export async function likePublicBoard(id){
+    return await getAPI.post(`/board/named/${id}/like`);
 }
 
 export async function getAnonymousBoardPageCount(){
@@ -219,8 +223,12 @@ export async function writeAnonymousBoard(title, content, attachments){
     return await getAPI.post("/board/anonymous", {title, content, attachments})
 }
 
-export async function likeAnonymousBoard(id){
+export async function isLikedAnonymousBoard(id){
     return await getAPI.get(`/board/anonymous/${id}/like`)
+}
+
+export async function likeAnonymousBoard(id){
+    return await getAPI.post(`/board/anonymous/${id}/like`)
 }
 
 export async function uploadSingleFile(file, mimetype){

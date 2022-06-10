@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="button-wrap">
-                    <button class="heart" :class="{'enable' : false}" @click="toggleLike">추천 {{ postData.likes }}</button>
+                    <button class="heart" :class="{'enable' : liked}" @click="toggleLike">추천 {{ postData.likes }}</button>
                 </div>
             </div>
         </div>
@@ -32,13 +32,14 @@
 <script>
 import { getPublicBoardDetail,getAnonymousBoardDetail } from '@/api';
 import { DateTime } from "luxon";
-import { likePublicBoard, likeAnonymousBoard } from '../api';
+import { likePublicBoard, likeAnonymousBoard, isLikedPublicBoard, isLikedAnonymousBoard } from '../api';
 
 export default {
     name: "PostDetailPage",
     data(){
         return {
-            postData: null
+            postData: null,
+            liked: false,
         }
     },
     computed: {
@@ -64,10 +65,16 @@ export default {
             if (!this.isAnonymous) this.$router.push({ name: 'profile', query: { id: data.author.id } });
         },
         loadData(){
-            if(this.isAnonymous) getAnonymousBoardDetail(this.$route.params.postId).then(res => this.postData = res.data);
-            else getPublicBoardDetail(this.$route.params.postId).then(res => {
-                this.postData = res.data;
-            }).catch(() => {});
+            if(this.isAnonymous) {
+                getAnonymousBoardDetail(this.$route.params.postId).then(res => this.postData = res.data);
+                isLikedAnonymousBoard(this.$route.params.postId).then(res => this.liked = res.data);
+            }
+            else {
+                getPublicBoardDetail(this.$route.params.postId).then(res => {
+                    this.postData = res.data;
+                }).catch(() => {});
+                isLikedPublicBoard(this.$route.params.postId).then(res => this.liked = res.data);
+            }
         },
         imageUrl(file) {
             if (!file) return null;
@@ -76,12 +83,12 @@ export default {
         },
         toggleLike(){
             if(this.isAnonymous) likeAnonymousBoard(this.$route.params.postId).then(res => {
-                console.log(res);
                 this.postData.likes = res.data.likes;
+                this.liked = res.data.liked;
             });
             else likePublicBoard(this.$route.params.postId).then(res => {
-                console.log(res);
                 this.postData.likes = res.data.likes;
+                this.liked = res.data.liked;
             });
         }
     },
