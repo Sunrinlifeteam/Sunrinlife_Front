@@ -41,11 +41,12 @@ export default {
             .then(() => {
                 setInterval(getAccessToken, 3600000);
             })
-            .catch(() => {
+            .catch((e) => {
                 if (
                     window.location.pathname.trim() != "/login"
-                )
+                ){
                     this.$router.replace("/login");
+                }
             });
     },
     methods: {

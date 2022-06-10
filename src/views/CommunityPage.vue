@@ -480,10 +480,10 @@ export default {
 
 @media(max-height:800px){
 .community-content{
-    height:90vh;
+    height: 90vh;
 }
 .board-list ul{
-    gap: 1vh;
+    gap: 0.95vh;
 }
 }
 </style>

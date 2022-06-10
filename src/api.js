@@ -8,15 +8,12 @@ const getAPI = axios.create({
 })
 
 export async function getAccessToken() {
-    return new Promise((resolve, reject) => {
-        getAPI.get("/auth/refresh")
-            .then((res) => {
-                store.commit("changeAccessToken", res.data.accessToken)
-                getAPI.defaults.headers.common['Authorization'] = res.data.accessToken
-                resolve(res.data.accessToken)
-            })
-            .catch((e) => reject(e))
-    })
+    return getAPI.get("/auth/refresh")
+        .then((res) => {
+            store.commit("changeAccessToken", res.data.accessToken)
+            getAPI.defaults.headers.common['Authorization'] = res.data.accessToken
+            return res.data.accessToken
+        });
 }
 
 export async function getUserDataById(id){
@@ -216,4 +213,13 @@ export async function getAnonymousBoardDetail(id){
 
 export async function writeAnonymousBoard(title, content, attachments){
     return await getAPI.post("/board/anonymous", {title, content, attachments})
+}
+
+export async function uploadSingleFile(file, mimetype){
+    if (!file) throw new Error("No file");
+    if (!mimetype) throw new Error("No mimetype");
+    let formData = new FormData();
+    formData.append("mimetype", mimetype);
+    formData.append("file", file);
+    return await getAPI.post("/upload", formData);
 }

@@ -36,17 +36,17 @@
 
             <div class="main-page-item-content">
                 <div
-                    v-for="(i, j) in boardData"
-                    :key="j"
+                    v-for="i in hotData"
+                    :key="i.id"
                     class="hotsunrin-list"
                     @click="
                         $router.push({
-                            name: `postDetail`,
-                            params: { postId: j },
+                            name: `publicCommunityPostDetail`,
+                            params: { postId: i.id },
                         })
                     "
                 >
-                    <div class="heart-count">{{ i.heartCount }}</div>
+                    <div class="heart-count">{{ i.likes }}</div>
                     <p class="title text-truncated">{{ i.title }}</p>
                 </div>
             </div>
@@ -57,42 +57,42 @@
 <script>
 import NoticeIcon from "@/components/NoticeIcon";
 
+import { getPublicHotBoardList } from '@/api.js'
 import { mapState } from "vuex";
 
 export default {
     name: "NoticeAndHotSunrin",
     data() {
         return {
-            boardData: [
-                {
-                    heartCount: 13,
-                    title: "선린인터넷고등학교 인트라넷 오픈(할 수 있는거죠...?)",
-                    writer: "송우진",
-                    timeStamp: new Date(),
-                },
-                {
-                    heartCount: 13,
-                    title: "선린인터넷고등학교 인트라넷 오픈(할 수 있는거죠...?)",
-                    writer: "송우진",
-                    timeStamp: new Date(),
-                },
-                {
-                    heartCount: 13,
-                    title: "선린인터넷고등학교 인트라넷 오픈(할 수 있는거죠...?)",
-                    writer: "송우진",
-                    timeStamp: new Date(),
-                },
-            ],
+            hotData: [],
         };
     },
-    methods: {},
     components: {
         ...mapState(["noticeMain"]),
         NoticeIcon,
     },
-    mounted() {},
+    watch: {
+        '$store.getters.getAuthToken'() {
+            this.loadData();
+        }
+    },
+    methods: {
+        loadData() {
+            getPublicHotBoardList().then((res) => {
+                this.hotData = res.data.slice(0, 3);
+            });
+        },
+    },
+    mounted() {
+        if (this.$store.getters.getAuthToken !== null) {
+            this.loadData();
+        }
+    },
     computed: {
         ...mapState(["noticeMain"]),
+        getAuthToken() {
+            return this.$store.getters.getAuthToken;
+        },
     },
 };
 </script>
