@@ -9,7 +9,6 @@ import ClubPage from "@/views/ClubPage.vue"
 import NoticePage from "@/views/NoticePage.vue"
 import NoticeDetailPage from "@/views/NoticeDetailPage.vue"
 import CommunityPage from "@/views/CommunityPage.vue"
-
 import EasterEggPage from "@/views/EasterEggPage.vue"
 import CommunityPostCreatePage from "@/views/CommunityPostCreatePage";
 import CommunityPostDetailPage from "@/views/CommunityPostDetailPage";

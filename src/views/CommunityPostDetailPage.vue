@@ -20,6 +20,10 @@
                     <img class="content-image"  v-for="item in postData.attachments" :key="item.id" :src="imageUrl(item)" alt="본문 이미지">
                     <p>{{ postData.content }}</p>
                 </div>
+
+                <div class="button-wrap">
+                    <button class="heart" :class="{'enable' : false}">추천 {{ postData.likes }}</button>
+                </div>
             </div>
         </div>
     </div>
@@ -134,6 +138,8 @@ export default {
     .content {
         width: 100%;
 
+        min-height: 400px;
+
         margin-top : 40px;
     }
 
@@ -154,5 +160,26 @@ export default {
         margin-top: 24px;
 
         word-break: break-all;
+    }
+
+    .button-wrap {
+        margin-top: 43px;
+    }
+
+    button.heart {
+        padding: 5px 15px;
+
+        color: #ff4949;
+        font-size: 14px;
+        font-weight: 500;
+
+        border: 1px solid #ff4949;
+        border-radius: 4px;
+        background-color: #fff;
+    }
+
+    button.heart.enable {
+        color: #fff;
+        background-color: #ff4949;
     }
 </style>
