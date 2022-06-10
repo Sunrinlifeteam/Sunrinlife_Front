@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="button-wrap">
-                    <button class="heart" :class="{'enable' : false}">추천 {{ postData.likes }}</button>
+                    <button class="heart" :class="{'enable' : false}" @click="toggleLike">추천 {{ postData.likes }}</button>
                 </div>
             </div>
         </div>
@@ -32,6 +32,7 @@
 <script>
 import { getPublicBoardDetail,getAnonymousBoardDetail } from '@/api';
 import { DateTime } from "luxon";
+import { likePublicBoard, likeAnonymousBoard } from '../api';
 
 export default {
     name: "PostDetailPage",
@@ -72,6 +73,16 @@ export default {
             if (!file) return null;
             const baseUrl = process.env.VUE_APP_API_URL;
             return `${baseUrl}/upload/view/${file.id}`;
+        },
+        toggleLike(){
+            if(this.isAnonymous) likeAnonymousBoard(this.$route.params.postId).then(res => {
+                console.log(res);
+                this.postData.likes = res.data.likes;
+            });
+            else likePublicBoard(this.$route.params.postId).then(res => {
+                console.log(res);
+                this.postData.likes = res.data.likes;
+            });
         }
     },
     watch: {
