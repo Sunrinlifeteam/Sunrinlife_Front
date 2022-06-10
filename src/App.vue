@@ -43,12 +43,8 @@ export default {
             })
             .catch((e) => {
                 if (
-                    window.location.pathname.trim() != "/login" &&
-                    (!e.response ||
-                    e.response.status != 200)
+                    window.location.pathname.trim() != "/login"
                 ){
-                    if (!e.response || e.response.status != 401)
-                        alert("서버 통신 실패");
                     this.$router.replace("/login");
                 }
             });
