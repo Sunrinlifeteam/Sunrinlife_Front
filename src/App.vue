@@ -44,9 +44,10 @@ export default {
             .catch((e) => {
                 if (
                     window.location.pathname.trim() != "/login" &&
-                    e.response.status != 200
+                    (!e.response ||
+                    e.response.status != 200)
                 ){
-                    if (e.response.status != 401)
+                    if (!e.response || e.response.status != 401)
                         alert("서버 통신 실패");
                     this.$router.replace("/login");
                 }
