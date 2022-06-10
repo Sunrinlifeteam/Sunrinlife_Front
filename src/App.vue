@@ -42,13 +42,14 @@ export default {
                 setInterval(getAccessToken, 3600000);
             })
             .catch((e) => {
-                if (!e.response || e.response.status != 200)
-                    alert("서버 통신 실패");
-                else if (
+                if (
                     window.location.pathname.trim() != "/login" &&
-                    e.response.status == 401
-                )
+                    e.response.status != 200
+                ){
+                    if (e.response.status != 401)
+                        alert("서버 통신 실패");
                     this.$router.replace("/login");
+                }
             });
     },
     methods: {
