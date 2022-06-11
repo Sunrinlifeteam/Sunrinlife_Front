@@ -16,14 +16,14 @@
                         </label>
                 </div>
                 <!-- 정보 수정 버튼 -->
-                <!-- <div v-if="isMyProfile" class="info-correcrion-button">
+                <div v-if="isMyProfile" class="info-correcrion-button">
                     <img class="correction-button-img" src="@/assets/user_profile_assets/correctionIcon.svg"
                         v-if="!isEditable"
                         @click="isEditable = true"/>
                     <img class="correction-button-img" src="@/assets/user_profile_assets/checkIcon.svg"
                         v-else
                         @click="updateProfile"/>
-                </div> -->
+                </div>
 
 
 
@@ -339,6 +339,19 @@ color: #4D4D4D;
         right : 24px;
 
         cursor: pointer;
+    }
+
+    .correction-button-img {
+        background-color: #f5f6f7;
+        border-radius: 50%;
+        border-color: white;
+        padding: 3px;
+    }
+    
+    .info-correcrion-button {
+        position: absolute;
+        right: 24px;
+        top: 147px;
     }
 
     @media (max-width:1200px) {
