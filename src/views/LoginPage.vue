@@ -28,7 +28,7 @@ export default {
 
         loginClick(){
             const params = new URLSearchParams({
-                redirect: window.location.origin + (process.env.PUBLIC_PATH || "")
+                redirect: window.location.origin + (process.env.BASE_URL || "")
             });
 
             window.location.href = `${process.env.VUE_APP_API_URL}/auth/google?${params.toString()}`;
