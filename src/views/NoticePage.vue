@@ -27,7 +27,7 @@
                     <li
                         v-for="(i, n) in loadedNoticeData"
                         :key="n"
-                        @click="$router.push(`/notice/${i.id}`)"
+                        @click="$router.push({ name: 'noticeId', params: { noticeId: i.id } })"
                     >
                         <NoticeIcon :type="i.type" />
 
