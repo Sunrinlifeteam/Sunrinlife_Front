@@ -137,7 +137,7 @@ export default {
         },
         logoutClick(){
             logout().then(res => {
-                if(res == "success") this.$router.push("/login")
+                if(res == "success") this.$router.push({ name: 'login' })
             })
         },
         setEditData(val){

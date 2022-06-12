@@ -5,7 +5,7 @@
         <img src="@/assets/x_button.svg" alt="사이드바 닫기" class="close-sidebar" @click="$store.commit('sidebarOnOff')">
     
         <div class="nav-list">
-            <div class="logo" @click="hideSidebarOnMobile(); $router.push('/')">
+            <div class="logo" @click="hideSidebarOnMobile(); $router.push({ name: 'main' })">
                 <img src="@/assets/symbol.svg" alt="Logo" class="logo_symbol">
                 <img src="@/assets/logo.svg" alt="Logo" class="logo_text">
             </div>
