@@ -30,6 +30,8 @@ env:
 
 jobs:
   build-github-pages:
+    permissions: 
+      contents: write
     runs-on: ubuntu-latest
     env:
       VUE_APP_API_URL: "http://devapi.sunrint.life/"
