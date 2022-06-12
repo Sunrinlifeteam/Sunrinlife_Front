@@ -3,7 +3,6 @@
 <div class="panel">
     <div class="clud-page">
         <div class="page-content" :class="{'mobile-ui' : isMobileWindow}">
-
             <div class="club-list-wrap">
                 <!-- 학과 선택창 -->
                 <div class="major-selecter neu-morphism-card none-dragging">
@@ -11,7 +10,7 @@
                     <transition name="current-major-ani">
                         <div class="current-major"
                             v-if="!isShowDivisions"
-                            @click="isShowDivisions = true"
+                            @click="isShowDivisions = true;"
                             :class="{ [division]: true }">
                             <span v-if="division === 'security'">정보보호과</span>
                             <span v-else-if="division === 'software'">소프트웨어과</span>
@@ -114,6 +113,9 @@ export default {
     watch:{
         getAuthToken(){
             this.loadData();
+        },
+        $route(v){
+            this.loadData(v)
         }
     },
     components : {
@@ -127,28 +129,53 @@ export default {
             this.selectIndex = 0;
         },
         loadData(){
-            getClubMajor(0).then((data) => {
-                store.commit("setClubData", { id: "security", data });
-            });
-            getClubMajor(1).then((data) => {
-                store.commit("setClubData", { id: "software", data });
-            });
-            getClubMajor(2).then((data) => {
-                store.commit("setClubData", { id: "buisness", data });
-            });
-            getClubMajor(3).then((data) => {
-                store.commit("setClubData", { id: "design", data });
-            });
-            getClubGeneral().then((data) => {
-                store.commit("setClubData", { id: "general", data });
-            });
-            getClubAutonomous().then((data) => {
-                store.commit("setClubData", { id: "autonomous", data });
-            });
+            // 이미 있는 데이터가 동아리인 경우는 함수 종료
+            if(this.clubData[this.division] !== undefined){
+                return
+            }
+
+
+            //동아리 종류와 id메칭
+            let clubIdx
+            if(this.division === "security"){
+                clubIdx = 0
+            }
+            else if(this.division === "software"){
+                clubIdx = 1
+            }
+            else if(this.division === "buisness"){
+                clubIdx = 2
+            }
+            else if(this.division === "design"){
+                clubIdx = 3
+            }
+            else if(this.division === "general"){
+                clubIdx = 4
+            }
+            else if(this.division === "autonomous"){
+                clubIdx = 5
+            }
+
+            // 데이터가 없는 동아리인 경우에는 서버 통신
+            if(clubIdx <= 3){
+                getClubMajor(clubIdx).then((data) => {
+                    store.commit("setClubData", { id:  this.division, data });
+                });
+            }
+            else if(clubIdx === 4){
+                getClubGeneral().then((data) => {
+                    store.commit("setClubData", { id: this.division, data });
+                });
+            }
+            else if(clubIdx === 5){
+                getClubAutonomous().then((data) => {
+                    store.commit("setClubData", { id: this.division, data });
+                });
+            }
         }
     },
     mounted(){
-        if (this.$store.getters.getAuthToken !== null) this.loadData();
+        if (this.$store.getters.getAuthToken !== null) this.loadData(this.division);
     }
 }
 </script>
