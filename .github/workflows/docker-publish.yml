@@ -29,8 +29,30 @@ env:
 
 
 jobs:
+  build-github-pages:
+    runs-on: ubuntu-latest
+    env:
+      VUE_APP_API_URL: "http://devapi.sunrint.life/"
+      PUBLIC_PATH: /${{ github.event.repository.name }}
+      node-version: 16.x
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ env.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ env.node-version }}
+        cache: 'npm'
+    - name: Generate vue.config.js for github pages
+      run: |
+        wget https://gist.githubusercontent.com/rmagur1203/6b4080637f28f8d979daf20bf6a372d5/raw/26794a6ea1e07e9e9fe01797448c54a117e84dec/vue.config.js
+    - run: npm ci
+    - run: npm run build --if-present
+    - name: deploy
+      uses: JamesIves/github-pages-deploy-action@v4.3.3
+      with:
+        branch: github-pages
+        folder: dist
   build:
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
