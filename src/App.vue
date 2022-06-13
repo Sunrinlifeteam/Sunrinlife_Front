@@ -41,7 +41,7 @@ export default {
             .then(() => {
                 setInterval(getAccessToken, 3600000);
             })
-            .catch((e) => {
+            .catch(() => {
                 if (
                     this.$route.name != "login"
                 ){
