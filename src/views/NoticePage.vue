@@ -135,7 +135,7 @@ export default {
     mounted() {
         this.loadNotice();
         this.updateCount();
-        if(this.$store.getters.getNoticePageCount === null) getNoticePageCount().then(res=>store.commit("setNoticePageCount", res));
+        //if(this.$store.getters.getNoticePageCount === null) getNoticePageCount().then(res=>store.commit("setNoticePageCount", res));
         if(this.$route.query.search){
             this.searchQueryText = this.$route.query.search
         }
