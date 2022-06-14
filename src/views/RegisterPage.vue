@@ -81,7 +81,7 @@ export default {
                 "githubLink": this.editGithubLink,
                 "description": this.editDescription
             }).then(() => getUserDataAndCommit())
-            .then(() => this.$router.push("/"));
+            .then(() => this.$router.push({ name: "main" }));
         }
     }
 }

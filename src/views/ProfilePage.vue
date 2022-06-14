@@ -16,14 +16,12 @@
                         </label>
                 </div>
                 <!-- 정보 수정 버튼 -->
-                <!-- <div v-if="isMyProfile" class="info-correcrion-button">
+                <div v-if="isMyProfile" class="info-correcrion-button" @click="!isEditable?isEditable=true:updateProfile()">
                     <img class="correction-button-img" src="@/assets/user_profile_assets/correctionIcon.svg"
-                        v-if="!isEditable"
-                        @click="isEditable = true"/>
+                        v-if="!isEditable"/>
                     <img class="correction-button-img" src="@/assets/user_profile_assets/checkIcon.svg"
-                        v-else
-                        @click="updateProfile"/>
-                </div> -->
+                        v-else/>
+                </div>
 
 
 
@@ -35,9 +33,10 @@
                                 <div class="user-name">{{userInfo.username}}</div>
                                 <div class="user-email">{{userInfo.email}}</div>
                             </div>
-                            <div class="user-status-message">
-                                {{ userInfo.description?userInfo.description:"" }}
+                            <div v-if="!isEditable" class="user-status-message">
+                                {{ userInfo?.description }}
                             </div>
+                            <input type="text" v-model="editDescription" v-else>
                         </div>
 
                         <div class="vertical">
@@ -58,7 +57,8 @@
                         <div class="vertical">
                             <div class="user-info-group">
                                 <div class="user-info-label">GITHUB</div>
-                                <div class="user-info-content">{{ userInfo.githubLink }}</div>
+                                <div v-if="!isEditable" class="user-info-content">{{ userInfo.githubLink }}</div>
+                                <input class="github" type="text" v-model="editGithubLink" v-else>
                             </div>
                                  <div class="user-info-group">
                                 <div class="user-info-label">INSTAGRAM</div>
@@ -76,8 +76,7 @@
 
 <script>
 import { mapState } from "vuex"
-import { editProfileData, getUserData, getUserDataById, logout } from "../api.js"
-import store from "../store.js"
+import { editProfileData, getUserDataById, logout } from "../api.js"
 export default {
     data() {
         return {
@@ -104,11 +103,18 @@ export default {
         },
         async updateProfile(){
             const update = {}
-            if (this.editGithubLink != this.userInfo.githubLink)
+            if (this.editGithubLink !== this.userInfo.githubLink){
+                if(this.editGithubLink !== ""){
+                    if(this.editGithubLink.indexOf("https://github.com/") === -1){
+                        alert("정확한 깃허브 링크를 입력해주세요.");
+                        return;
+                    }
+                }
                 this.userInfo.githubLink = update["githubLink"] = this.editGithubLink;
-            if (this.editProfileImage != this.userInfo.image)
+            }
+            if (this.editProfileImage !== this.userInfo.image)
                 this.userInfo.image = update["image"] = this.editProfileImage;
-            if (this.editDescription != this.userInfo.description)
+            if (this.editDescription !== this.userInfo.description)
                 this.userInfo.description = update["description"] = this.editDescription;
             
             if (this.editClubInfo){
@@ -129,15 +135,12 @@ export default {
 
             if (Object.keys(update).length > 0){
                 console.log(update)
-                await editProfileData(update)
-                getUserData().then((data) => {
-                    store.commit("setuserInfo", data)
-                })
+                await editProfileData(update);
             }
         },
         logoutClick(){
             logout().then(res => {
-                if(res == "success") this.$router.push("/login")
+                if(res === "success") this.$router.push({ name: 'login' })
             })
         },
         setEditData(val){
@@ -186,12 +189,12 @@ export default {
         },
     },
     mounted() {
-        if (this.$store.getters.getAuthToken !== null) this.loadData();
+        this.loadData();
     }
 }
 </script>
 
-<style>
+<style scoped>
     body {
         /*padding: 205px 231px;*/
     }
@@ -208,8 +211,6 @@ export default {
 
         border-radius: 8px;
         box-shadow: 1px 0 6px 0 rgba(0, 0, 0, 0.16);
-        display: flex;
-        flex-direction: column;
         position: relative;
     }
     .user-profile-background {
@@ -232,7 +233,7 @@ export default {
         height: 112px;
         border-radius: 50%;
         background-color: #f5f6f7;
-border: 5px solid #50E98D;
+        border: 5px solid #50E98D;
         position: relative;
         filter: drop-shadow(0px 2px 10px rgba(177, 174, 174, 0.25));
     }
@@ -264,6 +265,24 @@ border: 5px solid #50E98D;
         z-index: 3;
     }
 
+    .info-correcrion-button{
+        width:36px;
+        height:36px;
+        position:absolute;
+        background-color: #f5f6f7;
+        border-radius: 100%;
+        cursor: pointer;
+        top:144px;
+        right:24px;
+        box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+    }
+    .correction-button-img{
+        width:24px;
+        height:24px;
+        margin-top:6px;
+        margin-left:6px;
+    }
+
     .user-info-items {
         /*background-color: aquamarine;*/
         height:380px;
@@ -276,7 +295,7 @@ border: 5px solid #50E98D;
         flex-direction: column;
         gap:21px;
         margin-left:167px;
-        margin-top: 21px;
+        padding-top:21px;
     }
     .vertical {
         display:flex;
@@ -292,7 +311,7 @@ border: 5px solid #50E98D;
     .user-info-content {
         font-weight: 600;
         font-size: 15px;
-        line-height: 18px;
+        line-height: 21px;
         color: #242424;
     }
     .user-info-group {
@@ -313,21 +332,21 @@ border: 5px solid #50E98D;
     }
     .user-name {
         font-weight: 600;
-font-size: 20px;
-line-height: 24px;
-/* identical to box height */
+        font-size: 20px;
+        line-height: 24px;
+        /* identical to box height */
 
 
-color: #000000;
+        color: #000000;
     }
     .user-email {
         font-weight: 600;
-font-size: 15px;
-line-height: 18px;
-/* identical to box height */
+        font-size: 15px;
+        line-height: 18px;
+        /* identical to box height */
 
 
-color: #4D4D4D;
+        color: #4D4D4D;
     }
     .logout-btn {
         font-size: 12px;
@@ -340,6 +359,19 @@ color: #4D4D4D;
 
         cursor: pointer;
     }
+
+    input{
+        border:none;
+        border-radius: 8px;
+        background-color: #f5f6f7;
+        font-size:15px;
+        padding-left:6px;
+    }
+
+    .github{
+        width:300px;
+    }
+
 
     @media (max-width:1200px) {
         .user-social-contact-item {

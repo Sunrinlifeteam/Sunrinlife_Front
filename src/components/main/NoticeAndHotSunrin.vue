@@ -16,7 +16,7 @@
                     <NoticeIcon :type="i.type" />
                     <p
                         class="title text-truncated"
-                        @click="$router.push(`/notice/${i.id}`)"
+                        @click="$router.push({ name: 'noticeId', params: { noticeId: i.id } })"
                     >
                         {{ i.title }}
                     </p>
