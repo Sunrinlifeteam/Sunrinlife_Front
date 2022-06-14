@@ -24,6 +24,19 @@
                 <div class="button-wrap">
                     <button class="heart" :class="{'enable' : liked}" @click="toggleLike">추천 {{ postData.likes }}</button>
                 </div>
+
+                <div class="comment-wrap">
+                    <h3>댓글</h3>
+                    <div class="comment-body">
+                        <div class="comment-right">
+                            <textarea placeholder="댓글" cols="30" rows="5"></textarea>
+                        </div>
+                        <div class="comment-left">
+                            <button class="submit">입력</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -200,4 +213,51 @@ export default {
         color: #fff;
         background-color: #ff4949;
     }
+
+    .comment-wrap {
+        margin-top: 17px;
+    }
+
+    .comment-body {
+        margin-top: 14px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap : 16px;
+    }
+
+    .comment-right {
+
+    }
+
+    .comment-right * {
+        width: 100%;
+    }
+
+    .comment-right textarea {
+        padding: 10px 14px;
+
+        border: 0px;
+        border-radius: 8px;
+        background-color: #f5f6f7;
+
+        resize: none;
+    }
+
+    .comment-right textarea::placeholder {
+        font-size: 14px;
+        font-weight: 500;
+        color: #b9b9b9;
+    }
+
+    .comment-left .submit {
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+
+        padding: 5px 34px;
+        border: 1px solid #4893ff;
+        border-radius: 4px;
+        background-color: #4893ff;
+    }
+
 </style>
