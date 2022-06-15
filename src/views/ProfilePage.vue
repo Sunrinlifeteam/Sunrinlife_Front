@@ -56,7 +56,7 @@
 
                         <div class="vertical">
                             <div class="user-info-group">
-                                <div class="user-info-label">GITHUB</div>
+                                <div v-if="userInfo.githubLink !== '' || isEditable" class="user-info-label">GITHUB</div>
                                 <div v-if="!isEditable" class="user-info-content">{{ userInfo.githubLink }}</div>
                                 <input class="github" type="text" v-model="editGithubLink" v-else>
                             </div>
