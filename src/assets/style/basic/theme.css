@@ -36,6 +36,32 @@ body {
     background-color: #ecf0f3;
 }
 /* 버튼 테마 */
+input {
+    background-color: gainsboro;
+
+    border: 2px solid gray;
+    border-radius: 12px;
+}
+
+input:focus {
+    outline: none !important;
+    border-color: var(--main-btn-border-color);
+}
+
+button {
+    color:white;
+    border:none;
+
+    cursor: pointer;
+
+    transition: 0.1s;
+}
+button:hover {
+    transform: scale(1.01);
+}
+button:active {
+    transform: scale(0.99);
+}
 
 .neu-morphism {
     box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
