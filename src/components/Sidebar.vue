@@ -28,7 +28,7 @@
             </div>
             <template v-if="userData">
                 <router-link class="list-user-profile" :to="{name:'profile'}" @click="hideSidebarOnMobile()">
-                    <template v-if="userData.image">
+                    <template v-if="!userData.image">
                         <img :src="userData.image">
                     </template>
                     <template v-else>
@@ -169,7 +169,7 @@ nav .logo{
 nav .logo .logo_symbol{
     width:36px;
     margin-bottom:4px;
-    margin-left:36px;
+    margin-left:46.185px;
 }
 
 nav .logo .logo_text{

@@ -67,7 +67,7 @@ export default {
         loadData(){
             if(this.isAnonymous) {
                 getAnonymousBoardDetail(this.$route.params.postId).then(res => this.postData = res.data);
-                isLikedAnonymousBoard(this.$route.params.postId).then(res => this.liked = res.data);
+                isLikedAnonymousBoard(this.$route.params.postId).then(res => console.log(res.data));
             }
             else {
                 getPublicBoardDetail(this.$route.params.postId).then(res => {
