@@ -161,6 +161,14 @@ button:active {
     background-color: #4982ff;
 }
 
+.autonomous {
+    background-color: #3d3d3d;
+    color: white;
+}
+.autonomous:hover {
+    background-color: #4d4d4d;
+}
+
 @media (max-width: 970px) {
     .panel {
         margin-left: 0;
