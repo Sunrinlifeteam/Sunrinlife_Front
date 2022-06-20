@@ -16,7 +16,7 @@
                     <NoticeIcon :type="i.type" />
                     <p
                         class="title text-truncated"
-                        @click="$router.push(`/notice/${i.id}`)"
+                        @click="$router.push({ name: 'noticeId', params: { noticeId: i.id } })"
                     >
                         {{ i.title }}
                     </p>
@@ -110,7 +110,7 @@ export default {
 }
 
 .main-page-item-title img {
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.16);
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.16);
     border-radius: 50%;
     cursor: pointer;
 }

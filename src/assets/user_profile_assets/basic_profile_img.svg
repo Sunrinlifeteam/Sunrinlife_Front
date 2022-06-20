@@ -1,13 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
-    <defs>
-        <clipPath id="2j66ej0r2a">
-            <path data-name="사각형 72" transform="translate(.597 .597)" style="fill:#fff;stroke:#707070" d="M0 0h100v100H0z"/>
-        </clipPath>
+<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_5">
+   <rect fill="#F9F9F9" stroke="#000" x="0" y="0" width="100" height="100" id="svg_3" stroke-width="0"/>
+   <g id="svg_2">
+    <defs transform="translate(-3.00001 0) translate(0 12.92) translate(0 -18.92) translate(0 -24.1948) translate(-26.1754 0) translate(23.1948 23.1948) translate(-187 -140) translate(0 4.68727) translate(-23.5194 0) translate(0 -170.628) translate(-17 110) translate(2 12) translate(0 -5.09902) translate(0 9) translate(0 -7.50001) translate(-4.50002 0) translate(-13 -91) translate(5 26) translate(8 51) translate(9 -68) translate(14 -2) translate(-137 35) translate(350.002 0) translate(0 246.247)">
+     <clipPath id="svg_1">
+      <path id="svg_4" data-name="사각형 72" d="m0.59873,3.304l100,0l0,100l-100,0l0,-100z" fill="#fff" stroke="#707070"/>
+     </clipPath>
     </defs>
-    <g data-name="마스크 그룹 27" transform="translate(-.597 -.597)" style="clip-path:url(#2j66ej0r2a)">
-        <g data-name="그룹 33" transform="translate(15.134 10.81)">
-            <path data-name="패스 77" d="M665.57 830.483c-17.417 0-31.938 13.447-35.327 31.338-.776 4.092 1.895 7.988 5.454 7.988h59.741c3.56 0 6.23-3.9 5.459-7.988-3.388-17.89-17.915-31.338-35.327-31.338z" transform="translate(-630.108 -782.729)" style="fill:#4992ff"/>
-            <circle data-name="타원 8" cx="20.03" cy="20.03" r="20.03" transform="translate(15.434)" style="fill:#4992ff"/>
-        </g>
+    <g id="svg_6" data-name="마스크 그룹 27" clip-path="url(#svg_1)">
+     <g id="svg_7" data-name="그룹 33">
+      <path id="svg_8" data-name="패스 77" d="m50.00076,60.674c-17.417,0 -31.938,13.447 -35.327,31.338c-0.776,4.092 1.895,7.988 5.454,7.988l59.741,0c3.56,0 6.23,-3.9 5.459,-7.988c-3.388,-17.89 -17.915,-31.338 -35.327,-31.338z" fill="#4992ff"/>
+      <circle id="svg_9" data-name="타원 8" cx="50.00273" cy="32.95" r="20.03" fill="#4992ff"/>
+     </g>
     </g>
+   </g>
+  </g>
+ </g>
 </svg>
