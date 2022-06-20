@@ -59,8 +59,8 @@ export default {
                 return;
             }
             (async () => {
-                this.uploadFiles();
-                this.writeBoard();
+                const ids = await this.uploadFiles();
+                await this.writeBoard(ids);
             })();
         },
         async uploadFiles() {
@@ -76,7 +76,7 @@ export default {
             }
             return ids;
         },
-        writeBoard(attachmentIds) {
+        async writeBoard(attachmentIds = []) {
             if (this.isAnonymous) writeAnonymousBoard(this.title, this.content, attachmentIds).then(() => this.$router.push({ name: "anonymousCommunity" }))
             else writePublicBoard(this.title, this.content, attachmentIds)
                 .then(() => {
