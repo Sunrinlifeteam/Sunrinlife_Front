@@ -5,7 +5,7 @@
         <img src="@/assets/x_button.svg" alt="사이드바 닫기" class="close-sidebar" @click="$store.commit('sidebarOnOff')">
     
         <div class="nav-list">
-            <div class="logo" @click="hideSidebarOnMobile(); $router.push('/')">
+            <div class="logo" @click="hideSidebarOnMobile(); $router.push({ name: 'main' })">
                 <img src="@/assets/symbol.svg" alt="Logo" class="logo_symbol">
                 <img src="@/assets/logo.svg" alt="Logo" class="logo_text">
             </div>
@@ -28,7 +28,7 @@
             </div>
             <template v-if="userData">
                 <router-link class="list-user-profile" :to="{name:'profile'}" @click="hideSidebarOnMobile()">
-                    <template v-if="userData.image">
+                    <template v-if="!userData.image">
                         <img :src="userData.image">
                     </template>
                     <template v-else>
@@ -169,7 +169,7 @@ nav .logo{
 nav .logo .logo_symbol{
     width:36px;
     margin-bottom:4px;
-    margin-left:36px;
+    margin-left:46.185px;
 }
 
 nav .logo .logo_text{

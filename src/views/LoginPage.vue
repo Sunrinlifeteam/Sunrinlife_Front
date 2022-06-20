@@ -27,8 +27,11 @@ export default {
         ...mapActions(["login", "getToken"]),
 
         loginClick(){
+            const params = new URLSearchParams({
+                redirect: window.location.origin + (process.env.PUBLIC_PATH || "")
+            });
 
-            window.location.href = `${process.env.VUE_APP_API_URL}/auth/google`;
+            window.location.href = `${process.env.VUE_APP_API_URL}/auth/google?${params.toString()}`;
 
             //this.login({ "email" : this.inputEmail, "password" : this.inputPassword})    
         }
