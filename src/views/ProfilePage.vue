@@ -58,7 +58,7 @@
                                 <div class="user-info-top-right">
                                     <div class="user-info-contents">
                                         <img src="@/assets/user_profile_assets/clubIcon.svg" alt="clubIcon"
-                                        v-if="userInfo.clubInfo.name || isEditable">
+                                        v-if="userInfo.clubInfo?.name !== undefined || isEditable">
                                         <div>{{ userInfo.clubInfo?.name }}</div>
                                         <!-- <select v-else name="club" id="club-select" v-model="editClubData">
                                             <option v-for="(i, k) in loadedClubData" :value="i.id" :key="k">{{ i.id }}</option>
@@ -84,7 +84,7 @@
                             <div class="user-info-description">
                                 <div class="user-description-label" v-if="userInfo.description !== '' || isEditable">소개</div>
                                 <div class="user-description" v-if="!isEditable">{{ userInfo?.description }}</div>
-                                <input v-else class="description-input" type="text" v-model="editDescription">
+                                <textarea v-else class="description-input" type="text" v-model="editDescription"></textarea>
                             </div>
                         </div>
 <!-- 
@@ -98,7 +98,7 @@
                     </div>
                 </div>
 
-                <span v-if="isMyProfile || !isEditable" class="logout-btn" @click="logoutClick">로그아웃</span>
+                <span v-if="!isEditable && isMyProfile" class="logout-btn" @click="logoutClick">로그아웃</span>
             </div>
         </div>
     </template>
@@ -284,12 +284,13 @@ export default {
         margin: 26px;
     }
 
-    input{
+    input, textarea{
         border:none;
+        resize: none;
         border-radius: 8px;
         background-color: #f5f6f7;
         font-size:15px;
-        padding: 8px 0 8px 14px;
+        padding: 8px 14px 8px 14px;
     }
     #profile-img-choice {
         display: none;
@@ -371,7 +372,7 @@ export default {
     .description-input{
         margin-top: 8px;
         width: 100%;
-        height: 50px;
+        height: 85px;
     }
     .description-input input{
         padding: 0 0 8px 0;
@@ -420,6 +421,7 @@ export default {
         color: #000000;
     }
     .user-info-top-left{
+        width: 110px;
         display:flex;
         flex-wrap: wrap;
         align-content: flex-start;
