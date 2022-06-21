@@ -169,7 +169,7 @@ nav .logo{
 nav .logo .logo_symbol{
     width:36px;
     margin-bottom:4px;
-    margin-left:36px;
+    margin-left:46.185px;
 }
 
 nav .logo .logo_text{
