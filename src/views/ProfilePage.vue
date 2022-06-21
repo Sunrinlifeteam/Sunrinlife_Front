@@ -172,10 +172,10 @@ export default {
         },
         changeProfile(){
             this.isEditable = true
-            getClubAll().then((data)=>{
-                store.commit("setClubData", {id:"all",data})
-                console.log(data)
-            })
+            // getClubAll().then((data)=>{
+            //     store.commit("setClubData", {id:"all",data})
+            //     console.log(data)
+            // })
         },
         logoutClick(){
             logout().then(res => {
