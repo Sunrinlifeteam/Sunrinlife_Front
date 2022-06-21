@@ -135,7 +135,7 @@ export default {
     mounted() {
         this.loadNotice();
         this.updateCount();
-        //if(this.$store.getters.getNoticePageCount === null) getNoticePageCount().then(res=>store.commit("setNoticePageCount", res));
+        if(this.$store.getters.getNoticePageCount === null) getNoticePageCount().then(res=>store.commit("setNoticePageCount", res));
         if(this.$route.query.search){
             this.searchQueryText = this.$route.query.search
         }
@@ -168,7 +168,8 @@ export default {
 
 .header h3 {
     text-align: center;
-
+    display: flex;
+    flex: 1 1 auto;
     margin-right: 12px;
 }
 
@@ -190,6 +191,7 @@ export default {
 
 .search-wrap input {
     height: 100%;
+    width: 100%;
     flex: 1;
 
     font-size: 16px;
