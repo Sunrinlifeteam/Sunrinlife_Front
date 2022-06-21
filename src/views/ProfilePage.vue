@@ -16,7 +16,7 @@
                         </label>
                 </div>
                 <!-- 정보 수정 버튼 -->
-                <div v-if="isMyProfile" class="info-correcrion-button" @click="!isEditable?isEditable=true:updateProfile()">
+                <div v-if="isMyProfile" class="info-correcrion-button" @click="!isEditable?changeProfile():updateProfile()">
                     <img class="correction-button-img" src="@/assets/user_profile_assets/correctionIcon.svg"
                         v-if="!isEditable"/>
                     <img class="correction-button-img" src="@/assets/user_profile_assets/checkIcon.svg"
@@ -28,43 +28,73 @@
                 <!-- 유저 정보(동아리, 이메일, 소개 등) -->
                 <div class="user-info-items">
                     <div class="user-info-wrapper">
-                        <div class="vertical">
-                            <div class="user-title">
-                                <div class="user-name">{{userInfo.username}}</div>
-                                <div class="user-email">{{userInfo.email}}</div>
-                            </div>
-                            <div v-if="!isEditable" class="user-status-message">
+                            <!-- <div v-if="!isEditable" class="user-status-message">
                                 {{ userInfo?.description }}
                             </div>
-                            <input type="text" v-model="editDescription" v-else>
-                        </div>
-
+                            <input type="text" v-model="editDescription" v-else> -->
+<!-- 
                         <div class="vertical">
                             <div class="user-info-group">
-                                <div class="user-info-label">학과</div>
                                 <div class="user-info-content">{{ department_map[userInfo.department] }}</div>
                             </div>
                             <div class="user-info-group">
-                                <div class="user-info-label">학년/반/번호</div>
                                 <div class="user-info-content">{{ userInfo.grade }}학년 {{ userInfo.class }}반 {{ userInfo.number }}번</div>
                             </div>
                             <div class="user-info-group">
                                 <div class="user-info-label">전공/일반 동아리</div>
                                 <div class="user-info-content">{{ userInfo.clubInfo?.name }}</div>
                             </div>
+                        </div> -->
+
+                        <div class="user-info-top-wrapper">
+                            <div class="user-title">
+                                <div class="user-name">{{userInfo.username}}</div>
+                            </div>
+                            <div class="user-info-group">
+                                <div class="user-info-top-left">
+                                    <div class="user-info-label" style="color:#a9a9a9;">{{ department_map[userInfo.department] }}</div>
+                                    <div class="user-info-content" style="color:#a9a9a9;">{{userInfo.grade+('0'+userInfo.class).slice(-2)+('0'+userInfo.number).slice(-2)}}</div>
+                                </div>
+                                <div class="user-info-top-right">
+                                    <div class="user-info-contents">
+                                        <img src="@/assets/user_profile_assets/clubIcon.svg" alt="clubIcon"
+                                        v-if="userInfo.clubInfo.name || isEditable">
+                                        <div>{{ userInfo.clubInfo?.name }}</div>
+                                        <!-- <select v-else name="club" id="club-select" v-model="editClubData">
+                                            <option v-for="(i, k) in loadedClubData" :value="i.id" :key="k">{{ i.id }}</option>
+                                        </select> -->
+                                    </div>
+                                    <div class="user-info-contents">
+                                        <img src="@/assets/user_profile_assets/emailIcon.svg" alt="emailIcon">
+                                        <div>{{ userInfo.email }}</div>
+                                    </div>
+                                    <div class="user-info-contents">
+                                        <img src="@/assets/user_profile_assets/githubIcon.svg" alt="githubIcon"
+                                        v-if="userInfo.githubLink !== '' || isEditable">
+                                        <div v-if="!isEditable">{{ userInfo.githubLink }}</div>
+                                        <input class="github" v-else type="text" v-model="editGithubLink">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
+                        <hr color="#a9a9a9">
+
+                        <div class="user-info-bottom-wrapper">
+                            <div class="user-info-description">
+                                <div class="user-description-label" v-if="userInfo.description !== '' || isEditable">소개</div>
+                                <div class="user-description" v-if="!isEditable">{{ userInfo?.description }}</div>
+                                <input v-else class="description-input" type="text" v-model="editDescription">
+                            </div>
+                        </div>
+<!-- 
                         <div class="vertical">
                             <div class="user-info-group">
                                 <div v-if="userInfo.githubLink !== '' || isEditable" class="user-info-label">GITHUB</div>
                                 <div v-if="!isEditable" class="user-info-content">{{ userInfo.githubLink }}</div>
                                 <input class="github" type="text" v-model="editGithubLink" v-else>
                             </div>
-                                 <div class="user-info-group">
-                                <div class="user-info-label">INSTAGRAM</div>
-                                <div class="user-info-content"></div>
-                            </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -76,6 +106,8 @@
 
 <script>
 import { mapState } from "vuex"
+import { getClubAll } from '@/api.js'
+import store from '@/store.js'
 import { editProfileData, getUserDataById, logout } from "../api.js"
 export default {
     data() {
@@ -138,6 +170,13 @@ export default {
                 await editProfileData(update);
             }
         },
+        changeProfile(){
+            this.isEditable = true
+            getClubAll().then((data)=>{
+                store.commit("setClubData", {id:"all",data})
+                console.log(data)
+            })
+        },
         logoutClick(){
             logout().then(res => {
                 if(res === "success") this.$router.push({ name: 'login' })
@@ -162,7 +201,7 @@ export default {
         getAuthToken() {
             return this.$store.getters.getAuthToken;
         },
-        ...mapState(["userData", "department_map"]),
+        ...mapState(["userData", "department_map", "clubData"]),
         githubID: function() {
             return this.userInfo?.githubLink.split('/').filter(x=>x).pop();
         },
@@ -171,6 +210,9 @@ export default {
         },
         isMyProfile() {
             return this.userId === undefined;
+        },
+        loadedClubData(){
+            return this.clubData["all"]
         }
     },
     watch: {
@@ -205,8 +247,8 @@ export default {
         height:100vh;
     }
     .user-profile{
-        width: 700px;
-        height: 541px;
+        width: 979px;
+        height: 506px;
         margin: 0 auto;
 
         border-radius: 8px;
@@ -215,25 +257,24 @@ export default {
     }
     .user-profile-background {
         width:100%;
-        height:161px;
-        background:rgb(75, 75, 75);
-        border-radius: 9px 9px 0px 0px;
+        height:208px;
+        background:#ffcf49;
+        border-radius: 8px 8px 0px 0px;
 
     }
     .user-img-items {
-        width: 112px;
-        height: 112px;
+        width: 152px;
+        height: 152px;
         /*background-color: blanchedalmond;*/
-        left:28px;
-        top:135px;
+        left:48px;
+        top:132px;
         position:absolute;
     }
     .user-img-item {
-        width: 112px;
-        height: 112px;
+        width: 152px;
+        height: 152px;
         border-radius: 50%;
         background-color: #f5f6f7;
-        border: 5px solid #50E98D;
         position: relative;
         filter: drop-shadow(0px 2px 10px rgba(177, 174, 174, 0.25));
     }
@@ -243,7 +284,13 @@ export default {
         margin: 26px;
     }
 
-    
+    input{
+        border:none;
+        border-radius: 8px;
+        background-color: #f5f6f7;
+        font-size:15px;
+        padding: 8px 0 8px 14px;
+    }
     #profile-img-choice {
         display: none;
     }
@@ -272,7 +319,7 @@ export default {
         background-color: #f5f6f7;
         border-radius: 100%;
         cursor: pointer;
-        top:144px;
+        top:190px;
         right:24px;
         box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
     }
@@ -285,39 +332,72 @@ export default {
 
     .user-info-items {
         /*background-color: aquamarine;*/
-        height:380px;
+        height:298px;
         background: white;
         border-radius: 0px 0px 9px 9px;
 
     }
+    .user-info-group{
+        display: flex;
+        gap: 36px;
+        margin-top: 16px;
+    }
     .user-info-wrapper {
         display:flex;
         flex-direction: column;
-        gap:21px;
-        margin-left:167px;
-        padding-top:21px;
+        gap:16px;
+        margin-left:224px;
+        margin-right: 16px;
     }
-    .vertical {
-        display:flex;
-        flex-direction:column;
-        gap:13px;
+    .user-info-top-wrapper{
+        padding-top:19px;
+        padding: 19px 16px 0 16px;
+        box-sizing: border-box;
+    }
+    .user-info-bottom-wrapper{
+        padding: 0 16px 0 16px;
     }
     .user-info-label {
         font-weight: 500;
-        font-size: 13px;
-        line-height: 16px;
-        color: #727272;
+        font-size: 16px;
+        line-height: 26px;
+        color: #3d3d3d;
+    }
+    .user-description-label{
+        font-size: 14px;
+        line-height: 20px;
+        color: var(--main-color4);
+    }
+    .description-input{
+        margin-top: 8px;
+        width: 100%;
+        height: 50px;
+    }
+    .description-input input{
+        padding: 0 0 8px 0;
+    }
+    .user-description{
+        font-size: 16px;
+        line-height: 24px;
+        margin-left: 16px;
+        color: #3d3d3d;
+        margin-top: 8px;
     }
     .user-info-content {
-        font-weight: 600;
-        font-size: 15px;
-        line-height: 21px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 24px;
         color: #242424;
     }
-    .user-info-group {
-        display:flex;
-        flex-direction: column;
-        gap:3px;
+    .user-info-contents{
+        display: flex;
+        gap: 12px;
+        font-size: 16px;
+        align-items: center;
+    }
+    .user-info-contents img{
+        width: 24px;
+        height: 24px;
     }
     .user-title {
         display:flex;
@@ -332,21 +412,23 @@ export default {
     }
     .user-name {
         font-weight: 600;
-        font-size: 20px;
+        font-size: 24px;
         line-height: 24px;
         /* identical to box height */
 
 
         color: #000000;
     }
-    .user-email {
-        font-weight: 600;
-        font-size: 15px;
-        line-height: 18px;
-        /* identical to box height */
-
-
-        color: #4D4D4D;
+    .user-info-top-left{
+        display:flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+    }
+    .user-info-top-right{
+        display: flex;
+        flex-wrap: wrap;
+        align-content:space-between;
+        gap: 16px 24px;
     }
     .logout-btn {
         font-size: 12px;
@@ -360,17 +442,14 @@ export default {
         cursor: pointer;
     }
 
-    input{
-        border:none;
-        border-radius: 8px;
-        background-color: #f5f6f7;
-        font-size:15px;
-        padding-left:6px;
-    }
-
     .github{
-        width:300px;
+        font-size: 14px;
+        width: 300px;
     }
+    #club-select{
+
+    }
+    
 
 
     @media (max-width:1200px) {
