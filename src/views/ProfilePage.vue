@@ -98,7 +98,7 @@
                     </div>
                 </div>
 
-                <span v-if="isMyProfile" class="logout-btn" @click="logoutClick">로그아웃</span>
+                <span v-if="isMyProfile || !isEditable" class="logout-btn" @click="logoutClick">로그아웃</span>
             </div>
         </div>
     </template>
