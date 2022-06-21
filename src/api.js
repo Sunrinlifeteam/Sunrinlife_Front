@@ -87,9 +87,9 @@ export async function editProfileData(data){
 // 전체 동아리 가져오기
 export async function getClubAll(){
     let clubData = await getAPI.get("/club/all")
-        .then((res) => {
+        .then(res => 
             res.data
-        })
+        )
         .catch(e => console.log(e))
 
     return clubData
