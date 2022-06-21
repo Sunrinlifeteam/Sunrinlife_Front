@@ -58,7 +58,7 @@
                                 <div class="user-info-top-right">
                                     <div class="user-info-contents">
                                         <img src="@/assets/user_profile_assets/clubIcon.svg" alt="clubIcon"
-                                        v-if="userInfo.clubInfo.name || isEditable">
+                                        v-if="userInfo.clubInfo?.name !== undefined || isEditable">
                                         <div>{{ userInfo.clubInfo?.name }}</div>
                                         <!-- <select v-else name="club" id="club-select" v-model="editClubData">
                                             <option v-for="(i, k) in loadedClubData" :value="i.id" :key="k">{{ i.id }}</option>
@@ -421,6 +421,7 @@ export default {
         color: #000000;
     }
     .user-info-top-left{
+        width: 110px;
         display:flex;
         flex-wrap: wrap;
         align-content: flex-start;
