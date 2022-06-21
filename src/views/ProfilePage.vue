@@ -60,9 +60,10 @@
                                 <div v-if="!isEditable" class="user-info-content">{{ userInfo.githubLink }}</div>
                                 <input class="github" type="text" v-model="editGithubLink" v-else>
                             </div>
-                                 <div class="user-info-group">
-                                <div class="user-info-label">INSTAGRAM</div>
-                                <div class="user-info-content"></div>
+                            <div class="user-info-group">
+                                <div v-if="userInfo.instagramLink !== '' || isEditable" class="user-info-label">INSTAGRAM</div>
+                                <div v-if="!isEditable" class="user-info-content">@{{ userInfo.instagramLink }}</div>
+                                <input class="instagram" type="text" v-model="editInstagramLink" v-else>
                             </div>
                         </div>
                     </div>
@@ -85,6 +86,7 @@ export default {
             editClubInfo : "",
             editSubClubInfo : "",
             editGithubLink : "",
+            editInstagramLink : "",
             editDescription : "",
             editProfileImage : "",
 
@@ -111,6 +113,9 @@ export default {
                     }
                 }
                 this.userInfo.githubLink = update["githubLink"] = this.editGithubLink;
+            }
+            if (this.editInstagramLink !== this.userInfo.instagramLink){
+                this.userInfo.instagramLink = update["instagramLink"] = this.editInstagramLink;
             }
             if (this.editProfileImage !== this.userInfo.image)
                 this.userInfo.image = update["image"] = this.editProfileImage;
@@ -147,6 +152,7 @@ export default {
             if (!val) return;
             this.editClubInfo = val.clubInfo?.id;
             this.editGithubLink = val.githubLink;
+            this.editInstagramLink = val.instagramLink;
             this.editDescription = val.description;
             this.editProfileImage = val.image;
             this.editSubClubInfo = val.subClubInfo?.map(x => x.id).join(',');
@@ -166,6 +172,10 @@ export default {
         githubID: function() {
             return this.userInfo?.githubLink.split('/').filter(x=>x).pop();
         },
+        instagramID: function() {
+            return this.userInfo?.instagramLink.filter(x=>x).pop();
+        }
+        ,
         userId() {
             return this.$route.params.profileId;
         },
@@ -372,6 +382,9 @@ export default {
         width:300px;
     }
 
+    .instagram {
+        width: 300px;
+    }
 
     @media (max-width:1200px) {
         .user-social-contact-item {
