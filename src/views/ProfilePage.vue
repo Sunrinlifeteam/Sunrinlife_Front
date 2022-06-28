@@ -28,73 +28,48 @@
                 <!-- 유저 정보(동아리, 이메일, 소개 등) -->
                 <div class="user-info-items">
                     <div class="user-info-wrapper">
-                            <!-- <div v-if="!isEditable" class="user-status-message">
-                                {{ userInfo?.description }}
-                            </div>
-                            <input type="text" v-model="editDescription" v-else> -->
-<!-- 
-                        <div class="vertical">
-                            <div class="user-info-group">
-                                <div class="user-info-content">{{ department_map[userInfo.department] }}</div>
-                            </div>
-                            <div class="user-info-group">
-                                <div class="user-info-content">{{ userInfo.grade }}학년 {{ userInfo.class }}반 {{ userInfo.number }}번</div>
-                            </div>
-                            <div class="user-info-group">
-                                <div class="user-info-label">전공/일반 동아리</div>
-                                <div class="user-info-content">{{ userInfo.clubInfo?.name }}</div>
-                            </div>
-                        </div> -->
-
                         <div class="user-info-top-wrapper">
                             <div class="user-title">
                                 <div class="user-name">{{userInfo.username}}</div>
+                                <div class="user-info-top-left">
+                                    <div>{{ department_map[userInfo.department] }}</div>
+                                    <div>{{ userInfo.grade }}학년 {{ userInfo.class }}반 {{ userInfo.number }}번</div>
+                                </div>
                             </div>
                             <div class="user-info-group">
-                                <div class="user-info-top-left">
-                                    <div class="user-info-label" style="color:#a9a9a9;">{{ department_map[userInfo.department] }}</div>
-                                    <div class="user-info-content" style="color:#a9a9a9;">{{userInfo.grade+('0'+userInfo.class).slice(-2)+('0'+userInfo.number).slice(-2)}}</div>
-                                </div>
                                 <div class="user-info-top-right">
                                     <div class="user-info-contents">
-                                        <img src="@/assets/user_profile_assets/clubIcon.svg" alt="clubIcon"
-                                        v-if="userInfo.clubInfo?.name !== undefined || isEditable">
-                                        <div>{{ userInfo.clubInfo?.name }}</div>
+                                        <div class="user-info-label"
+                                        v-if="userInfo.clubInfo?.name !== undefined || isEditable">동아리</div>
+                                        <div class="user-info-content">{{ userInfo.clubInfo?.name }}</div>
                                         <!-- <select v-else name="club" id="club-select" v-model="editClubData">
                                             <option v-for="(i, k) in loadedClubData" :value="i.id" :key="k">{{ i.id }}</option>
                                         </select> -->
                                     </div>
                                     <div class="user-info-contents">
-                                        <img src="@/assets/user_profile_assets/emailIcon.svg" alt="emailIcon">
-                                        <div>{{ userInfo.email }}</div>
+                                        <div class="user-info-label">메일</div>
+                                        <div class="user-info-content">{{ userInfo.email }}</div>
                                     </div>
                                     <div class="user-info-contents">
-                                        <img src="@/assets/user_profile_assets/githubIcon.svg" alt="githubIcon"
-                                        v-if="userInfo.githubLink !== '' || isEditable">
-                                        <div v-if="!isEditable">{{ userInfo.githubLink }}</div>
+                                        <div class="user-info-label"
+                                        v-if="userInfo.githubLink !== '' || isEditable">GITHUB</div>
+                                        <a :href="userInfo.githubLink" target="_blank" v-if="!isEditable" class="user-info-content">{{ userInfo.githubLink }}</a>
                                         <input class="github" v-else type="text" v-model="editGithubLink">
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <hr color="#a9a9a9">
+                        <hr style="margin-top:37px;margin-bottom:18px;" color="#a9a9a9" v-if="!isEditable">
+                        <hr style="margin-top:25px;margin-bottom:18px;" color="#a9a9a9" v-else>
 
                         <div class="user-info-bottom-wrapper">
                             <div class="user-info-description">
-                                <div class="user-description-label" v-if="userInfo.description !== '' || isEditable">소개</div>
-                                <div class="user-description" v-if="!isEditable">{{ userInfo?.description }}</div>
+                                <div class="user-info-label" v-if="userInfo.description !== '' || isEditable">소개</div>
+                                <div class="user-info-content" v-if="!isEditable">{{ userInfo?.description }}</div>
                                 <textarea v-else class="description-input" type="text" v-model="editDescription"></textarea>
                             </div>
                         </div>
-<!-- 
-                        <div class="vertical">
-                            <div class="user-info-group">
-                                <div v-if="userInfo.githubLink !== '' || isEditable" class="user-info-label">GITHUB</div>
-                                <div v-if="!isEditable" class="user-info-content">{{ userInfo.githubLink }}</div>
-                                <input class="github" type="text" v-model="editGithubLink" v-else>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
 
@@ -106,8 +81,8 @@
 
 <script>
 import { mapState } from "vuex"
-import { getClubAll } from '@/api.js'
-import store from '@/store.js'
+// import { getClubAll } from '@/api.js'
+// import store from '@/store.js'
 import { editProfileData, getUserDataById, logout } from "../api.js"
 export default {
     data() {
@@ -247,8 +222,8 @@ export default {
         height:100vh;
     }
     .user-profile{
-        width: 979px;
-        height: 506px;
+        width: 684px;
+        height: 533px;
         margin: 0 auto;
 
         border-radius: 8px;
@@ -257,22 +232,22 @@ export default {
     }
     .user-profile-background {
         width:100%;
-        height:208px;
+        height:138px;
         background:#ffcf49;
         border-radius: 8px 8px 0px 0px;
 
     }
     .user-img-items {
-        width: 152px;
-        height: 152px;
+        width: 116px;
+        height: 116px;
         /*background-color: blanchedalmond;*/
-        left:48px;
-        top:132px;
+        left:36px;
+        top:89px;
         position:absolute;
     }
     .user-img-item {
-        width: 152px;
-        height: 152px;
+        width: 116px;
+        height: 116px;
         border-radius: 50%;
         background-color: #f5f6f7;
         position: relative;
@@ -314,26 +289,26 @@ export default {
     }
 
     .info-correcrion-button{
-        width:36px;
-        height:36px;
+        width:32px;
+        height:32px;
         position:absolute;
         background-color: #f5f6f7;
         border-radius: 100%;
         cursor: pointer;
-        top:190px;
-        right:24px;
+        top:164px;
+        right:18px;
         box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
     }
     .correction-button-img{
         width:24px;
         height:24px;
-        margin-top:6px;
-        margin-left:6px;
+        margin-top:4px;
+        margin-left:4px;
     }
 
     .user-info-items {
         /*background-color: aquamarine;*/
-        height:298px;
+        height:395px;
         background: white;
         border-radius: 0px 0px 9px 9px;
 
@@ -341,33 +316,26 @@ export default {
     .user-info-group{
         display: flex;
         gap: 36px;
-        margin-top: 16px;
+        margin-top: 18px;
     }
     .user-info-wrapper {
         display:flex;
         flex-direction: column;
-        gap:16px;
-        margin-left:224px;
-        margin-right: 16px;
+        margin-left:36px;
+        margin-right: 36px;
     }
     .user-info-top-wrapper{
-        padding-top:19px;
-        padding: 19px 16px 0 16px;
+        padding-top:24px;
         box-sizing: border-box;
     }
     .user-info-bottom-wrapper{
-        padding: 0 16px 0 16px;
+        padding: 0 28px 0 28px;
     }
     .user-info-label {
         font-weight: 500;
-        font-size: 16px;
-        line-height: 26px;
-        color: #3d3d3d;
-    }
-    .user-description-label{
         font-size: 14px;
         line-height: 20px;
-        color: var(--main-color4);
+        color: #9e9e9e;
     }
     .description-input{
         margin-top: 8px;
@@ -377,33 +345,23 @@ export default {
     .description-input input{
         padding: 0 0 8px 0;
     }
-    .user-description{
+    .user-info-content {
+        font-weight: 700;
         font-size: 16px;
         line-height: 24px;
-        margin-left: 16px;
         color: #3d3d3d;
-        margin-top: 8px;
-    }
-    .user-info-content {
-        font-weight: 500;
-        font-size: 14px;
-        line-height: 24px;
-        color: #242424;
+        margin-left: 5px;
     }
     .user-info-contents{
         display: flex;
-        gap: 12px;
-        font-size: 16px;
-        align-items: center;
-    }
-    .user-info-contents img{
-        width: 24px;
-        height: 24px;
+        gap: 2px;
+        flex-direction: column;
     }
     .user-title {
+        margin-left: 156px;
         display:flex;
-        gap:7px;
-        align-items:flex-end;
+        gap:4px;
+        flex-direction: column;
     }
     .user-status-message {
         font-weight: 500;
@@ -413,24 +371,28 @@ export default {
     }
     .user-name {
         font-weight: 600;
-        font-size: 24px;
-        line-height: 24px;
+        font-size: 20px;
+        line-height: 29px;
         /* identical to box height */
 
 
         color: #000000;
     }
     .user-info-top-left{
-        width: 110px;
         display:flex;
-        flex-wrap: wrap;
-        align-content: flex-start;
+        color: #3d3d3d;
+        gap:4px;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 20px;
     }
     .user-info-top-right{
         display: flex;
         flex-wrap: wrap;
         align-content:space-between;
-        gap: 16px 24px;
+        padding: 0px;
+        margin-left: 28px;
+        gap: 16px 76px;
     }
     .logout-btn {
         font-size: 12px;
