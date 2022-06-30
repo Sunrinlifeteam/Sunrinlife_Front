@@ -2,7 +2,7 @@
 <transition name="nav-bar">
     <nav v-if="isSidebarShow" class="none-dragging">
 
-        <img src="@/assets/x_button.svg" alt="사이드바 닫기" class="close-sidebar" @click="$store.commit('sidebarOnOff')">
+        <img src="@/assets/x_button.svg" alt="사이드바 닫기" class="close-sidebar" @click="$store.commit('sidebarOff')">
     
         <div class="nav-list">
             <div class="logo" @click="hideSidebarOnMobile(); $router.push({ name: 'main' })">
@@ -45,7 +45,7 @@
 </transition>
 
 <transition name="nav-bg">
-    <div v-if="isSidebarShow" @click="$store.commit('sidebarOnOff')" class="sidebar-bg"></div>
+    <div v-if="isSidebarShow" @click="$store.commit('sidebarOff')" class="sidebar-bg"></div>
 </transition>
 
 </template>

@@ -78,7 +78,7 @@ const store = createStore({
         },
 
         // Sidebar
-        sidebarOnOff(state){
+        sidebarToggle(state){
             state.isSidebarShow = !state.isSidebarShow
         },
         sidebarOn(state){
