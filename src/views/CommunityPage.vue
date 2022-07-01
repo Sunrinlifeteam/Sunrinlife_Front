@@ -6,7 +6,7 @@
                     <div class="header">
                         <h2 v-if="isAnonymous">익명 게시판</h2>
                         <h2 v-else>일반 게시판</h2>
-                        <img src="@/assets/user_profile_assets/correctionIcon.svg" alt="글쓰기" @click="$router.push({ name: `${isAnonymous ? 'anonymous' : 'public'}CommunityWrite`})"/>
+                        <img src="../assets/user_profile_assets/correctionIcon.svg" alt="글쓰기" @click="$router.push({ name: `${isAnonymous ? 'anonymous' : 'public'}CommunityWrite`})"/>
                     </div>
 
                     <div class="search-filter-wrap">
@@ -21,7 +21,7 @@
                                 <option>일반</option>
                             </select>
 
-                            <img src="@/assets/community/select_arrow.svg" alt="실행"/>
+                            <img src="../assets/community/select_arrow.svg" alt="실행"/>
                         </div>
                     </div>
 
@@ -49,7 +49,7 @@
                                         <p @click="$router.push({ name: `${ isAnonymous ? 'anonymous' : 'public' }CommunityPostDetail`, params: { postId: i.id }, })">
                                             {{ i.title }}
                                         </p>
-                                        <img src="@/assets/community/eye_icon.svg" alt="" v-if="n % 3 == 0" />
+                                        <img src="../assets/community/eye_icon.svg" alt="" v-if="n % 3 == 0" />
                                     </div>
                                 </div>
                                 <div>
@@ -76,7 +76,7 @@
                                     <div class="title">
                                         <p @click="$router.push({ name: `${ isAnonymous ? 'anonymous' : 'public' }CommunityPostDetail`, params: { postId: i.id }, })">{{ i.title }}</p>
                                         <!-- todo 제목 짤림 -->
-                                        <img src="@/assets/community/eye_icon.svg" alt="" v-if="n % 3 == 0"/>
+                                        <img src="../assets/community/eye_icon.svg" alt="" v-if="n % 3 == 0"/>
                                     </div>
                                 </div>
                                 <div>
@@ -98,7 +98,7 @@
 </template>
 
 <script>
-import Pagination from "@/components/Pagination.vue";
+import Pagination from "../components/Pagination.vue";
 import { DateTime } from "luxon";
 import { getPublicHotBoardList, getPublicBoardList, getPublicBoardPageCount, getAnonymousBoardPageCount, getAnonymousBoardList, getAnonymousHotBoardList } from "../api.js";
 

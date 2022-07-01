@@ -17,20 +17,20 @@
 
                 <!-- 프로필 이미지 -->
                 <div class="user-img-items">
-                    <img v-if="isEditable && editProfileImage" class="user-img-item" :src="editProfileImage" />
-                    <img v-else-if="userInfo.image" class="user-img-item" :src="userInfo.image" />
-                    <img v-else class="user-img-item" src="@/assets/user_profile_assets/basic_profile_img.svg" />
+                        <img v-if="isEditable && editProfileImage" class="user-img-item" :src="editProfileImage" />
+                        <img v-else-if="userInfo.image" class="user-img-item" :src="userInfo.image" />
+                        <img v-else class="user-img-item" src="../assets/user_profile_assets/basic_profile_img.svg" />
 
-                    <input v-if="isEditable" type="file" ref="image" @change="uploadImage" id="profile-img-choice">
-                    <label v-if="isEditable" for="profile-img-choice">
-                        <img src="@/assets/user_profile_assets/correctionIcon_white.svg" alt="">
-                    </label>
+                        <input v-if="isEditable" type="file" ref="image" @change="uploadProfileImage" id="profile-img-choice">
+                        <label v-if="isEditable" for="profile-img-choice">
+                            <img src="../assets/user_profile_assets/correctionIcon_white.svg" alt="">
+                        </label>
                 </div>
                 <!-- 정보 수정 버튼 -->
                 <div v-if="isMyProfile" class="info-correcrion-button" @click="!isEditable?changeProfile():updateProfile()">
-                    <img class="correction-button-img" src="@/assets/user_profile_assets/correctionIcon.svg"
+                    <img class="correction-button-img" src="../assets/user_profile_assets/correctionIcon.svg"
                         v-if="!isEditable"/>
-                    <img class="correction-button-img" src="@/assets/user_profile_assets/checkIcon.svg"
+                    <img class="correction-button-img" src="../assets/user_profile_assets/checkIcon.svg"
                         v-else/>
                 </div>
 
@@ -90,8 +90,8 @@
 
 <script>
 import { mapState } from "vuex"
-// import { getClubAll } from '@/api.js'
-// import store from '@/store.js'
+// import { getClubAll } from '../api.js'
+// import store from '../store.js'
 import { editProfileData, getUserDataById, logout } from "../api.js"
 export default {
     data() {

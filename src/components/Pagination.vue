@@ -1,7 +1,7 @@
 <template>
     <div class="pagination-wrap">
         <img
-            src="@/assets/prev_arrow.svg"
+            src="../assets/prev_arrow.svg"
             alt=""
             class="arrow prev-btn"
             @click="
@@ -22,7 +22,7 @@
             </template>
         </div>
         <img
-            src="@/assets/next_arrow.svg"
+            src="../assets/next_arrow.svg"
             alt=""
             class="arrow next-btn"
             @click="

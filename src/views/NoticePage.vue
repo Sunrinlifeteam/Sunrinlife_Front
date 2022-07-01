@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import NoticeIcon from "@/components/NoticeIcon.vue";
+import NoticeIcon from "../components/NoticeIcon.vue";
 
 import { mapState } from "vuex";
 
@@ -50,9 +50,9 @@ import {
     getNoticeSearch,
     getNoticePageCountWithSearch,
     getNoticePageCount
-} from "@/api.js";
-import store from "@/store.js";
-import Pagination from "@/components/Pagination.vue";
+} from "../api.js";
+import store from "../store.js";
+import Pagination from "../components/Pagination.vue";
 
 export default {
     name: "Notice",

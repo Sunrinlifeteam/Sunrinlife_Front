@@ -8,17 +8,17 @@
             <div v-for="(content, i) in task.schedule" :key="i" class="schedule_list_item">
                 <div class="schedule_box" v-if="!content.isEditable" v-bind:class="{official:content.official, personal:!content.official}">
                     <div class="item-content" @dblclick.prevent="editTodo(content)">{{ content.content }}</div>
-                    <img v-if="!content.official" src="@/assets/delete.svg" class="item-button" @click.prevent="task.schedule.splice(i, 1)">
+                    <img v-if="!content.official" src="../../../assets/delete.svg" class="item-button" @click.prevent="task.schedule.splice(i, 1)">
                 </div>
                 <div class="schedule_box_edit personal" v-if="content.isEditable">
                     <input class="item-input" placeholder="추가할 내용 입력" v-model="content.content" @keyup.enter="editTodoComplete(task, i)" @blur="editTodoComplete(task, i)" autofocus/>
-                    <img src="@/assets/delete.svg" class="item-button" @click.prevent="task.schedule.splice(i, 1)">
+                    <img src="../../../assets/delete.svg" class="item-button" @click.prevent="task.schedule.splice(i, 1)">
                 </div>
 
             </div>
             <div v-if="task.schedule.length == 0">Add Todos!</div>
             <div class="add_button_panel">
-                <img src="@/assets/image_add.svg" class="add-button" @click.prevent="addTodo(task.schedule)">
+                <img src="../../../assets/image_add.svg" class="add-button" @click.prevent="addTodo(task.schedule)">
             </div>
         </div> -->
         <div class="schedule-items" v-for="day in weeks" :key="day">
@@ -34,16 +34,16 @@
                 <div v-if="day.date === content.date" class="schedule_list_item">
                     <div class="schedule_box personal" v-if="!content.isEditable">
                         <div class="item-content" @dblclick.prevent="content.isEditable=true">{{ content.body }}</div>
-                        <img src="@/assets/delete.svg" class="item-button" @click.prevent="deleteTodo(getSchedulePersonal, i, content.id)">
+                        <img src="../../../assets/delete.svg" class="item-button" @click.prevent="deleteTodo(getSchedulePersonal, i, content.id)">
                     </div>
                     <div class="schedule_box_edit personal" v-if="day.date === content.date && content.isEditable">
                         <input class="item-input" placeholder="추가할 내용 입력" v-model="content.body" @keyup.enter="editTodoComplete(getSchedulePersonal,content, i)" @blur="editTodoComplete(getSchedulePersonal, content, i)" autofocus/>
-                        <img src="@/assets/delete.svg" class="item-button" @click.prevent="getSchedulePersonal.splice(i, 1)">
+                        <img src="../../../assets/delete.svg" class="item-button" @click.prevent="getSchedulePersonal.splice(i, 1)">
                     </div>
                 </div>
             </template>
             <div class="add_button_panel">
-                <img src="@/assets/plus_icon.svg" class="add-button" @click.prevent="addTodo(day.date)">
+                <img src="../../../assets/plus_icon.svg" class="add-button" @click.prevent="addTodo(day.date)">
             </div>
         </div>
         
@@ -55,7 +55,7 @@
 
 <script>
 import {mapState} from "vuex"
-import {addSchedulePersonal, delSchedulePersonal, editSchedulePersonal } from "@/api.js"
+import {addSchedulePersonal, delSchedulePersonal, editSchedulePersonal } from "../../../api.js"
 export default {
     name : "Schedule",
     data(){ return{

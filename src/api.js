@@ -3,7 +3,7 @@ import store from "./store.js"
 
 const getAPI = axios.create({
     withCredentials: true,
-    baseURL: process.env.VUE_APP_API_URL,
+    baseURL: import.meta.env.VITE_API_URL,
 
 })
 
