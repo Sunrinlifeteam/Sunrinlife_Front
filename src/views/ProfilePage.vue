@@ -60,7 +60,7 @@
                                         <div class="user-info-label">메일</div>
                                         <div class="user-info-content">{{ userInfo.email }}</div>
                                     </div>
-                                    <div class="user-info-contents" v-if="userInfo.githubLink || isEditable">
+                                    <div class="user-info-contents" v-if="userInfo?.githubLink || isEditable">
                                         <div class="user-info-label">GITHUB</div>
                                         <a :href="userInfo.githubLink" target="_blank" v-if="!isEditable" class="user-info-content">{{ userInfo.githubLink }}</a>
                                         <input class="github" v-else type="text" v-model="editGithubLink">
@@ -69,7 +69,7 @@
                             </div>
                         </div>
 
-                        <hr v-if="userInfo.description" :class="{ hr_after: isEditable || !githubLink || !userInfo.clubInfo, hr_before: !isEditable }" color="#a9a9a9"> 
+                        <hr v-if="userInfo.description" :class="{ hr_after: isEditable || !userInfo.githubLink || !userInfo.clubInfo, hr_before: !isEditable }" color="#a9a9a9"> 
 
 
                         <div class="user-info-bottom-wrapper">
