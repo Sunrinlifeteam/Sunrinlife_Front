@@ -2,18 +2,29 @@
     <template v-if="userInfo">
         <div class="panel panel-profile">
             <div class="user-profile">
+                
+                <div class="user-profile-background-item">
+                    <img v-if="isEditable && editBackgroundImage" class="user-profile-background-items" :src="editBackgroundImage">
+                    <img v-else-if="userInfo.backgroundImage" class="user-profile-background-items" :src="userInfo.backgroundImage">
+                    <div v-else class="user-profile-background"></div>
 
-                <div class="user-profile-background"></div>
-                                <!-- 프로필 이미지 -->
+                    <input v-if="isEditable" type="file" ref="image" @change="uploadImage" id="profile-background-choice">
+                    <label v-if="isEditable" for="profile-background-choice">
+                        <img src="@/assets/user_profile_assets/add.svg">
+                    </label>
+                </div>
+                
+
+                <!-- 프로필 이미지 -->
                 <div class="user-img-items">
-                        <img v-if="isEditable && editProfileImage" class="user-img-item" :src="editProfileImage" />
-                        <img v-else-if="userInfo.image" class="user-img-item" :src="userInfo.image" />
-                        <img v-else class="user-img-item" src="../assets/user_profile_assets/basic_profile_img.svg" />
+                    <img v-if="isEditable && editProfileImage" class="user-img-item" :src="editProfileImage" />
+                    <img v-else-if="userInfo.image" class="user-img-item" :src="userInfo.image" />
+                    <img v-else class="user-img-item" src="@/assets/user_profile_assets/basic_profile_img.svg" />
 
-                        <input v-if="isEditable" type="file" ref="image" @change="uploadProfileImage" id="profile-img-choice">
-                        <label v-if="isEditable" for="profile-img-choice">
-                            <img src="@/assets/user_profile_assets/correctionIcon_white.svg" alt="">
-                        </label>
+                    <input v-if="isEditable" type="file" ref="image" @change="uploadImage" id="profile-img-choice">
+                    <label v-if="isEditable" for="profile-img-choice">
+                        <img src="@/assets/user_profile_assets/correctionIcon_white.svg" alt="">
+                    </label>
                 </div>
                 <!-- 정보 수정 버튼 -->
                 <div v-if="isMyProfile" class="info-correcrion-button" @click="!isEditable?changeProfile():updateProfile()">
@@ -38,9 +49,8 @@
                             </div>
                             <div class="user-info-group">
                                 <div class="user-info-top-right">
-                                    <div class="user-info-contents">
-                                        <div class="user-info-label"
-                                        v-if="userInfo.clubInfo?.name !== undefined || isEditable">동아리</div>
+                                    <div class="user-info-contents" v-if="userInfo.clubInfo?.name !== undefined">
+                                        <div class="user-info-label">동아리</div>
                                         <div class="user-info-content">{{ userInfo.clubInfo?.name }}</div>
                                         <!-- <select v-else name="club" id="club-select" v-model="editClubData">
                                             <option v-for="(i, k) in loadedClubData" :value="i.id" :key="k">{{ i.id }}</option>
@@ -50,9 +60,8 @@
                                         <div class="user-info-label">메일</div>
                                         <div class="user-info-content">{{ userInfo.email }}</div>
                                     </div>
-                                    <div class="user-info-contents">
-                                        <div class="user-info-label"
-                                        v-if="userInfo.githubLink !== '' || isEditable">GITHUB</div>
+                                    <div class="user-info-contents" v-if="userInfo.githubLink || isEditable">
+                                        <div class="user-info-label">GITHUB</div>
                                         <a :href="userInfo.githubLink" target="_blank" v-if="!isEditable" class="user-info-content">{{ userInfo.githubLink }}</a>
                                         <input class="github" v-else type="text" v-model="editGithubLink">
                                     </div>
@@ -60,12 +69,12 @@
                             </div>
                         </div>
 
-                        <hr style="margin-top:37px;margin-bottom:18px;" color="#a9a9a9" v-if="!isEditable">
-                        <hr style="margin-top:25px;margin-bottom:18px;" color="#a9a9a9" v-else>
+                        <hr v-if="userInfo.description" :class="{ hr_after: isEditable || !githubLink || !userInfo.clubInfo, hr_before: !isEditable }" color="#a9a9a9"> 
+
 
                         <div class="user-info-bottom-wrapper">
                             <div class="user-info-description">
-                                <div class="user-info-label" v-if="userInfo.description !== '' || isEditable">소개</div>
+                                <div class="user-info-label" v-if="userInfo.description || isEditable">소개</div>
                                 <div class="user-info-content" v-if="!isEditable">{{ userInfo?.description }}</div>
                                 <textarea v-else class="description-input" type="text" v-model="editDescription"></textarea>
                             </div>
@@ -94,19 +103,25 @@ export default {
             editGithubLink : "",
             editDescription : "",
             editProfileImage : "",
+            editBackgroundImage : "",
 
             userInfo: null
             // 수정을 입력받은 데이터
         } 
     },
     methods: {
-        uploadProfileImage(){
+        uploadImage(payload){
             const reader = new FileReader()
 
-            reader.onloadend = () => {
-                this.editProfileImage = reader.result
+            reader.onload = () => {
+                const key = {
+                    'profile-img-choice': 'editProfileImage',
+                    'profile-background-choice': 'editBackgroundImage'
+                };
+                this[key[payload.target.id]] = reader.result;
             }
-            reader.readAsDataURL(this.$refs.image.files[0]);
+            
+            reader.readAsDataURL(payload.target.files[0]);
         },
         async updateProfile(){
             const update = {}
@@ -121,6 +136,8 @@ export default {
             }
             if (this.editProfileImage !== this.userInfo.image)
                 this.userInfo.image = update["image"] = this.editProfileImage;
+            if (this.editBackgroundImage !== this.userInfo.backgroundImage)
+                this.userInfo.backgroundImage = update["backgroundImage"] = this.editBackgroundImage;
             if (this.editDescription !== this.userInfo.description)
                 this.userInfo.description = update["description"] = this.editDescription;
             
@@ -163,11 +180,13 @@ export default {
             this.editGithubLink = val.githubLink;
             this.editDescription = val.description;
             this.editProfileImage = val.image;
+            this.editBackgroundImage = val.backgroundImage;
             this.editSubClubInfo = val.subClubInfo?.map(x => x.id).join(',');
         },
         async loadData(){
-            if (this.isMyProfile)
+            if (this.isMyProfile){
                 this.userInfo = this.userData;
+            }
             else
                 this.userInfo = await getUserDataById(this.userId);
         }
@@ -231,27 +250,36 @@ export default {
         position: relative;
     }
     .user-profile-background {
-        width:100%;
-        height:138px;
+        width: 100%;
+        height: 100%;
         background:#ffcf49;
         border-radius: 8px 8px 0px 0px;
+    }
 
+    .hr_before{
+        margin-top:37px;
+        margin-bottom:18px;
+    }
+    .hr_after{
+        margin-top:25px;
+        margin-bottom:18px;
     }
     .user-img-items {
         width: 116px;
         height: 116px;
-        /*background-color: blanchedalmond;*/
+        filter: drop-shadow(0px 2px 10px rgba(177, 174, 174, 0.25));
+        border-radius: 50%;
         left:36px;
         top:89px;
         position:absolute;
     }
-    .user-img-item {
-        width: 116px;
-        height: 116px;
+    .user-img-item {    
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        background-color: #ebebeb;
         border-radius: 50%;
-        background-color: #f5f6f7;
         position: relative;
-        filter: drop-shadow(0px 2px 10px rgba(177, 174, 174, 0.25));
     }
     .user-img {
         width: 100px;
@@ -270,6 +298,11 @@ export default {
     #profile-img-choice {
         display: none;
     }
+    #profile-background-choice{
+        display: none;
+        width: 100px;
+        height: 100%;
+    }
 
     label[for="profile-img-choice"]{
         width: 36px;
@@ -280,12 +313,43 @@ export default {
         box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
         background-color: #4992ff;
 
-        position: absolute;
+        position: absolute; 
         bottom : 0px;
-        right : 0px;
+        right: 0px;
 
         cursor: pointer;
-        z-index: 3;
+    }
+    
+
+    label[for="profile-background-choice"]{
+        width: 32px;
+        height: 32px;
+
+        border-radius: 100%;
+        box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+        background-color: rgb(223, 223, 223);
+
+        transform: translate(-50%, -50%);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        cursor: pointer;
+    }
+    label[for="profile-background-choice"] img{
+        margin-top: 4px;
+        margin-left: 4px;
+    }
+    .user-profile-background-item{
+        width:100%;
+        height:138px;
+        position: relative;
+    }
+    .user-profile-background-items{
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        border-radius: 8px 8px 0 0;
     }
 
     .info-correcrion-button{
