@@ -58,7 +58,7 @@
                         :class="{ 'seleted' : selectIndex == n}"
                         @click="selectIndex = n">
                         <img v-if="i.logo_url != ''" :src="i.logo_url" :alt="`${i.name} 동아리 로고`" class="club-icon">
-                        <img v-else src="@/assets/symbol.svg" :alt="`동아리 로고 기본값`" class="club-icon">
+                        <img v-else src="../assets/symbol.svg" :alt="`동아리 로고 기본값`" class="club-icon">
 
                         <div v-if="!isMobileWindow" class="club-name">{{ i.name }}</div>
                     </li>
@@ -82,13 +82,13 @@ import ClubCardMobile from "../components/club/ClubCardMobile.vue"
 
 
 
-// import { JB, SW, it, de } from "@/components/club/TempClubData"
+// import { JB, SW, it, de } from "../components/club/TempClubData"
 import { mapState } from 'vuex'
 import {
     getClubMajor,
     getClubGeneral,
-    getClubAutonomous,} from "@/api"
-import store from "@/store"
+    getClubAutonomous,} from "../api.js"
+import store from "../store.js"
 
 export default {
     name : "Club Page",

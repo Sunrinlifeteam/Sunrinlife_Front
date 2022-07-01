@@ -38,9 +38,9 @@
 <script>
 import NoticeAndHotSunrin from "../components/main/NoticeAndHotSunrin.vue";
 import Meal from "../components/main/Meal.vue";
-import TodaySchedule from "../components/main/TodaySchedule";
-import Schedule from "@/components/main/Sechedule/Schedule";
-import Timer_v2 from "@/components/main/Timer_v2";
+import TodaySchedule from "../components/main/TodaySchedule.vue";
+import Schedule from "../components/main/Sechedule/Schedule.vue";
+import Timer_v2 from "../components/main/Timer_v2.vue";
 
 export default {
     name: "mainPage",

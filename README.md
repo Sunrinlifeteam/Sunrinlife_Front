@@ -28,5 +28,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 NODE_ENV
 BASE_URL
 
-VUE_APP_API_URL
+VITE_API_URL
 ```

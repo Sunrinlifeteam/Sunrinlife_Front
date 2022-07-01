@@ -1,6 +1,6 @@
 <template>
 <header>
-    <img @click="$store.commit('sidebarOff')" src="@/assets/menu_button.svg" alt="">
+    <img @click="$store.commit('sidebarOff')" src="../assets/menu_button.svg" alt="">
 </header>
 </template>
 
