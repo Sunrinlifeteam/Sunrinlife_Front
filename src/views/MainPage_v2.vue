@@ -141,9 +141,7 @@ main {
 }
 
 @media (min-width: 970px){
-    body{
-        overflow-y: hidden;
-    }
+    
 }
 
 @media (max-width: 970px) {
