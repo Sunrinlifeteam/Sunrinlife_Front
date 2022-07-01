@@ -10,7 +10,7 @@
 
                     <input v-if="isEditable" type="file" ref="image" @change="uploadImage" id="profile-background-choice">
                     <label v-if="isEditable" for="profile-background-choice">
-                        <img src="@/assets/user_profile_assets/add.svg">
+                        <img src="../assets/user_profile_assets/add.svg">
                     </label>
                 </div>
                 
