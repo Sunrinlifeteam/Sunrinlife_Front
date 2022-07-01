@@ -87,9 +87,9 @@ export async function editProfileData(data){
 // 전체 동아리 가져오기
 export async function getClubAll(){
     let clubData = await getAPI.get("/club/all")
-        .then((res) => {
+        .then(res => 
             res.data
-        })
+        )
         .catch(e => console.log(e))
 
     return clubData
@@ -125,12 +125,12 @@ export async function getClubAutonomous() {
 
 //급식 API
 export async function getMeal(){
-    let response = await getAPI.get("http://neis-api.sunrin.in/meal").then((res) => res.data).catch((e) => console.log(e))
+    let response = await getAPI.get("https://neis.sunrin.net/meal").then((res) => res.data).catch((e) => console.log(e))
     return response
 }
 
 export async function getTodaySchedule(grade, cl){
-    let res = await getAPI.get(`http://neis-api.sunrin.in/classSchedule/${grade}/${cl}`).then((res) => res.data).catch((e) => console.log(e))
+    let res = await getAPI.get(`https://neis.sunrin.net/classSchedule/${grade}/${cl}`).then((res) => res.data).catch((e) => console.log(e))
     return res
 }
 

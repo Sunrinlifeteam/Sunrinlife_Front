@@ -50,6 +50,7 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - name: deploy
+      if: github.event_name != 'pull_request'
       uses: JamesIves/github-pages-deploy-action@v4.3.3
       with:
         branch: github-pages
