@@ -1,23 +1,28 @@
+import home from "/src/assets/sidebar/home.svg"
+import notice from "/src/assets/sidebar/notification.svg"
+import club from "/src/assets/sidebar/club.svg"
+import community from "/src/assets/sidebar/community.svg"
+
 export default [
 	{
 		name : "홈",
 		router : "/",
-		img:"/src/assets/sidebar/home.svg",
+		img:home,
 	},
 	{
 		name : "공지",
 		router : "/notice",
-		img:"/src/assets/sidebar/notification.svg"
+		img:notice
 	},
 	{
 		name : "동아리",
 		router : "/club",
-		img:"/src/assets/sidebar/club.svg"
+		img:club
 	},
 	{
 		name : "게시판",
 		router : "/community/public",
-		img:"/src/assets/sidebar/community.svg",
+		img:community,
 		option:[
 			{
 				name : "일반",
