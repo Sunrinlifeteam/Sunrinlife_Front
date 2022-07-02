@@ -18,7 +18,7 @@ header {
 
     /* visibility: hidden; */
 
-    display: flex;
+    display: none;
     justify-content: space-between;
 
     position: absolute;
@@ -37,7 +37,7 @@ img {
 
 @media (max-width : 970px) {
     header {
-        visibility: visible;
+        display: flex;
     }
 }
 </style>
