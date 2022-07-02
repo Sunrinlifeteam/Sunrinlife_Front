@@ -50,10 +50,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["postcss", "npm:7.0.39"],\
             ["regenerator-runtime", "npm:0.13.9"],\
             ["serve", "npm:13.0.2"],\
-            ["tailwindcss", [\
-              "@tailwindcss/postcss7-compat",\
-              "npm:2.2.17"\
-            ]],\
             ["vite", "virtual:b7ac0a7112c0fe38c27fe901c9104a597ec2e4ab14d1967961fb8cd9785dc349d35e4cb51bd3dbf714bf436799c925fa20dc94bb0bc0265d2abc1bd3f97ed16d#npm:2.9.13"],\
             ["vue", "npm:3.2.37"],\
             ["vue-router", "virtual:b7ac0a7112c0fe38c27fe901c9104a597ec2e4ab14d1967961fb8cd9785dc349d35e4cb51bd3dbf714bf436799c925fa20dc94bb0bc0265d2abc1bd3f97ed16d#npm:4.0.16"],\
@@ -6468,10 +6464,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["postcss", "npm:7.0.39"],\
             ["regenerator-runtime", "npm:0.13.9"],\
             ["serve", "npm:13.0.2"],\
-            ["tailwindcss", [\
-              "@tailwindcss/postcss7-compat",\
-              "npm:2.2.17"\
-            ]],\
             ["vite", "virtual:b7ac0a7112c0fe38c27fe901c9104a597ec2e4ab14d1967961fb8cd9785dc349d35e4cb51bd3dbf714bf436799c925fa20dc94bb0bc0265d2abc1bd3f97ed16d#npm:2.9.13"],\
             ["vue", "npm:3.2.37"],\
             ["vue-router", "virtual:b7ac0a7112c0fe38c27fe901c9104a597ec2e4ab14d1967961fb8cd9785dc349d35e4cb51bd3dbf714bf436799c925fa20dc94bb0bc0265d2abc1bd3f97ed16d#npm:4.0.16"],\
