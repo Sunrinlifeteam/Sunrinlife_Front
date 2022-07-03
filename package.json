@@ -8,18 +8,10 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@tailwindcss/postcss7-compat": "^2.2.17",
-    "autoprefixer": "^9.8.8",
     "axios": "^0.25.0",
-    "cross-env": "^7.0.3",
-    "eslint": "8",
-    "eslint-plugin-vue": "8",
     "luxon": "^2.4.0",
     "mitt": "^3.0.0",
-    "postcss": "^7.0.39",
-    "regenerator-runtime": "^0.13.9",
     "serve": "^13.0.2",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
     "vue": "^3.0.0",
     "vue-router": "^4.0.12",
     "vue3-cookies": "^1.0.6",
@@ -31,7 +23,13 @@
     "@types/luxon": "^2.3.2",
     "@vitejs/plugin-vue": "^2.3.3",
     "@vue/compiler-sfc": "^3.0.0",
+    "autoprefixer": "^9.8.8",
     "babel-loader": "latest",
+    "cross-env": "^7.0.3",
+    "eslint": "8",
+    "eslint-plugin-vue": "8",
+    "postcss": "^7.0.39",
+    "regenerator-runtime": "^0.13.9",
     "vite": "^2.9.13"
   },
   "eslintConfig": {
