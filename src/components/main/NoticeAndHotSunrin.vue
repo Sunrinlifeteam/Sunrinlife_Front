@@ -5,7 +5,7 @@
                 <h3>공지</h3>
 
                 <img
-                    src="@/assets/more.svg"
+                    src="../../assets/more.svg"
                     alt="공지 더보기 버튼"
                     @click="$router.push({ name: 'notice' })"
                 />
@@ -30,7 +30,7 @@
                 <router-link
                     :to="{ name: 'publicCommunity'}"
                 >
-                    <img src="@/assets/more.svg" alt="핫선린 더보기 버튼" />
+                    <img src="../../assets/more.svg" alt="핫선린 더보기 버튼" />
                 </router-link>
             </div>
 
@@ -55,9 +55,9 @@
 </template>
 
 <script>
-import NoticeIcon from "@/components/NoticeIcon";
+import NoticeIcon from "../../components/NoticeIcon.vue";
 
-import { getPublicHotBoardList } from '@/api.js'
+import { getPublicHotBoardList } from '../../api.js'
 import { mapState } from "vuex";
 
 export default {

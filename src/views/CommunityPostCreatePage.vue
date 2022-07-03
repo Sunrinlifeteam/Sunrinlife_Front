@@ -4,7 +4,7 @@
             <div class="post-create-content neu-morphism-card">
 
                 <div class="header">
-                    <img src="@/assets/prev_arrow.svg" alt="<" @click="$router.back();">
+                    <img src="../assets/prev_arrow.svg" alt="<" @click="$router.back();">
                     <h2>{{ isAnonymous ? "익명" : "일반" }} 게시글 작성</h2>
                 </div>
 
@@ -18,7 +18,7 @@
 
                     <label class="image-add post-image">
                         <input type="file" class="image" multiple @change="addFile">
-                        <img src="@/assets/community/image_add.svg" alt="" srcset="">
+                        <img src="../assets/community/image_add.svg" alt="" srcset="">
                     </label>
                 </ul>
 

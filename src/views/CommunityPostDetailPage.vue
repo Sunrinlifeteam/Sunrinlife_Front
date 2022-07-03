@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import { getPublicBoardDetail, getAnonymousBoardDetail } from "@/api";
+import { getPublicBoardDetail, getAnonymousBoardDetail } from "../api";
 import { DateTime } from "luxon";
 import { likePublicBoard, likeAnonymousBoard, isLikedPublicBoard, isLikedAnonymousBoard } from "../api";
 
@@ -115,7 +115,7 @@ export default {
         },
         imageUrl(file) {
             if (!file) return null;
-            const baseUrl = process.env.VUE_APP_API_URL;
+            const baseUrl = import.meta.env.VITE_API_URL;
             return `${baseUrl}/upload/view/${file.id}`;
         },
         toggleLike() {

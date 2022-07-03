@@ -1,17 +1,17 @@
 import { createWebHistory, createRouter, RouterView } from "vue-router"
 import { h } from 'vue'
 
-import LoginPage from "@/views/LoginPage.vue"
-import Register from "@/views/RegisterPage.vue"
-import MainPage from "@/views/MainPage_v2.vue"
-import ProfilePage from '@/views/ProfilePage.vue';
-import ClubPage from "@/views/ClubPage.vue"
-import NoticePage from "@/views/NoticePage.vue"
-import NoticeDetailPage from "@/views/NoticeDetailPage.vue"
-import CommunityPage from "@/views/CommunityPage.vue"
-import EasterEggPage from "@/views/EasterEggPage.vue"
-import CommunityPostCreatePage from "@/views/CommunityPostCreatePage";
-import CommunityPostDetailPage from "@/views/CommunityPostDetailPage";
+import LoginPage from "../views/LoginPage.vue"
+import Register from "../views/RegisterPage.vue"
+import MainPage from "../views/MainPage_v2.vue"
+import ProfilePage from '../views/ProfilePage.vue';
+import ClubPage from "../views/ClubPage.vue"
+import NoticePage from "../views/NoticePage.vue"
+import NoticeDetailPage from "../views/NoticeDetailPage.vue"
+import CommunityPage from "../views/CommunityPage.vue"
+import EasterEggPage from "../views/EasterEggPage.vue"
+import CommunityPostCreatePage from "../views/CommunityPostCreatePage.vue";
+import CommunityPostDetailPage from "../views/CommunityPostDetailPage.vue";
 
 const routes = [
     {
@@ -117,7 +117,7 @@ const routes = [
 ]
 
 const router = createRouter({
-    history : createWebHistory(process.env.PUBLIC_PATH),
+    history : createWebHistory(import.meta.env.PUBLIC_PATH),
     routes,
 });
 

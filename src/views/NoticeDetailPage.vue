@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import NoticeIcon from "@/components/NoticeIcon.vue"
+import NoticeIcon from "../components/NoticeIcon.vue"
 
-import { getNoticeById } from "@/api.js"
+import { getNoticeById } from "../api.js"
 
 export default {
     name : "Notice detail page",
