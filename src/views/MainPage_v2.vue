@@ -8,8 +8,8 @@
                         <span v-if="nowDate.getMonth() < 9">0</span
                         >{{ nowDate.getMonth() + 1 }}월
                         <span v-if="nowDate.getDate() < 9">0</span
-                        >{{ nowDate.getDate() + 1 }}일
-                        {{ dateList[nowDate.getDay() - 1] }}요일
+                        >{{ nowDate.getDate() }}일
+                        {{ dateList[nowDate.getDay()] }}요일
                     </h2>
                     <h3>
                         <template v-if="nowDate.getHours() < 12">오전</template>
