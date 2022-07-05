@@ -51,6 +51,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["serve", "npm:13.0.2"],\
             ["vite", "virtual:b7ac0a7112c0fe38c27fe901c9104a597ec2e4ab14d1967961fb8cd9785dc349d35e4cb51bd3dbf714bf436799c925fa20dc94bb0bc0265d2abc1bd3f97ed16d#npm:2.9.13"],\
             ["vue", "npm:3.2.37"],\
+            ["vue-cli-plugin-pnp", "virtual:b7ac0a7112c0fe38c27fe901c9104a597ec2e4ab14d1967961fb8cd9785dc349d35e4cb51bd3dbf714bf436799c925fa20dc94bb0bc0265d2abc1bd3f97ed16d#npm:1.0.0"],\
             ["vue-router", "virtual:b7ac0a7112c0fe38c27fe901c9104a597ec2e4ab14d1967961fb8cd9785dc349d35e4cb51bd3dbf714bf436799c925fa20dc94bb0bc0265d2abc1bd3f97ed16d#npm:4.0.16"],\
             ["vue3-cookies", "npm:1.0.6"],\
             ["vuex", "virtual:b7ac0a7112c0fe38c27fe901c9104a597ec2e4ab14d1967961fb8cd9785dc349d35e4cb51bd3dbf714bf436799c925fa20dc94bb0bc0265d2abc1bd3f97ed16d#npm:4.0.2"]\
@@ -5105,6 +5106,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["pnp-webpack-plugin", [\
+        ["npm:1.7.0", {\
+          "packageLocation": "./.yarn/cache/pnp-webpack-plugin-npm-1.7.0-f6c94efb72-a41716d136.zip/node_modules/pnp-webpack-plugin/",\
+          "packageDependencies": [\
+            ["pnp-webpack-plugin", "npm:1.7.0"],\
+            ["ts-pnp", "virtual:f6c94efb72da698edc23c95ed60dce17fd5eefc9b285f3b3aee8db345bcd495351cf161d6ba8d0f66984085c26681fa41ddd68a1b7d366f81606ea5d8745bd42#npm:1.2.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["postcss", [\
         ["npm:7.0.39", {\
           "packageLocation": "./.yarn/cache/postcss-npm-7.0.39-0f8737296e-4ac793f506.zip/node_modules/postcss/",\
@@ -5698,6 +5709,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["serve", "npm:13.0.2"],\
             ["vite", "virtual:b7ac0a7112c0fe38c27fe901c9104a597ec2e4ab14d1967961fb8cd9785dc349d35e4cb51bd3dbf714bf436799c925fa20dc94bb0bc0265d2abc1bd3f97ed16d#npm:2.9.13"],\
             ["vue", "npm:3.2.37"],\
+            ["vue-cli-plugin-pnp", "virtual:b7ac0a7112c0fe38c27fe901c9104a597ec2e4ab14d1967961fb8cd9785dc349d35e4cb51bd3dbf714bf436799c925fa20dc94bb0bc0265d2abc1bd3f97ed16d#npm:1.0.0"],\
             ["vue-router", "virtual:b7ac0a7112c0fe38c27fe901c9104a597ec2e4ab14d1967961fb8cd9785dc349d35e4cb51bd3dbf714bf436799c925fa20dc94bb0bc0265d2abc1bd3f97ed16d#npm:4.0.16"],\
             ["vue3-cookies", "npm:1.0.6"],\
             ["vuex", "virtual:b7ac0a7112c0fe38c27fe901c9104a597ec2e4ab14d1967961fb8cd9785dc349d35e4cb51bd3dbf714bf436799c925fa20dc94bb0bc0265d2abc1bd3f97ed16d#npm:4.0.2"]\
@@ -5761,6 +5773,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/to-fast-properties-npm-2.0.0-0dc60cc481-be2de62fe5.zip/node_modules/to-fast-properties/",\
           "packageDependencies": [\
             ["to-fast-properties", "npm:2.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["ts-pnp", [\
+        ["npm:1.2.0", {\
+          "packageLocation": "./.yarn/cache/ts-pnp-npm-1.2.0-43620de7df-c2a698b85d.zip/node_modules/ts-pnp/",\
+          "packageDependencies": [\
+            ["ts-pnp", "npm:1.2.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:f6c94efb72da698edc23c95ed60dce17fd5eefc9b285f3b3aee8db345bcd495351cf161d6ba8d0f66984085c26681fa41ddd68a1b7d366f81606ea5d8745bd42#npm:1.2.0", {\
+          "packageLocation": "./.yarn/__virtual__/ts-pnp-virtual-04186d9d5c/0/cache/ts-pnp-npm-1.2.0-43620de7df-c2a698b85d.zip/node_modules/ts-pnp/",\
+          "packageDependencies": [\
+            ["ts-pnp", "virtual:f6c94efb72da698edc23c95ed60dce17fd5eefc9b285f3b3aee8db345bcd495351cf161d6ba8d0f66984085c26681fa41ddd68a1b7d366f81606ea5d8745bd42#npm:1.2.0"],\
+            ["@types/typescript", null],\
+            ["typescript", null]\
+          ],\
+          "packagePeers": [\
+            "@types/typescript",\
+            "typescript"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -5959,6 +5993,29 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@vue/runtime-dom", "npm:3.2.37"],\
             ["@vue/server-renderer", "virtual:c15242c7af88e957688e92d9c054d0c6533fd55fdb771c3854473b923e00751099a2c292023fc5bcf1d904adde806541a7f6b2b8e48d11e76ccb2ee0856b45bd#npm:3.2.37"],\
             ["@vue/shared", "npm:3.2.37"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["vue-cli-plugin-pnp", [\
+        ["npm:1.0.0", {\
+          "packageLocation": "./.yarn/cache/vue-cli-plugin-pnp-npm-1.0.0-83a46cc37a-943113a841.zip/node_modules/vue-cli-plugin-pnp/",\
+          "packageDependencies": [\
+            ["vue-cli-plugin-pnp", "npm:1.0.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:b7ac0a7112c0fe38c27fe901c9104a597ec2e4ab14d1967961fb8cd9785dc349d35e4cb51bd3dbf714bf436799c925fa20dc94bb0bc0265d2abc1bd3f97ed16d#npm:1.0.0", {\
+          "packageLocation": "./.yarn/__virtual__/vue-cli-plugin-pnp-virtual-eb0a56643b/0/cache/vue-cli-plugin-pnp-npm-1.0.0-83a46cc37a-943113a841.zip/node_modules/vue-cli-plugin-pnp/",\
+          "packageDependencies": [\
+            ["vue-cli-plugin-pnp", "virtual:b7ac0a7112c0fe38c27fe901c9104a597ec2e4ab14d1967961fb8cd9785dc349d35e4cb51bd3dbf714bf436799c925fa20dc94bb0bc0265d2abc1bd3f97ed16d#npm:1.0.0"],\
+            ["@types/vue__cli-service", null],\
+            ["@vue/cli-service", null],\
+            ["pnp-webpack-plugin", "npm:1.7.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/vue__cli-service",\
+            "@vue/cli-service"\
           ],\
           "linkType": "HARD"\
         }]\
