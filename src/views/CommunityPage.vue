@@ -2,7 +2,7 @@
     <div class="panel page community-page">
         <div class="page-content">
             <div class="community-content neu-morphism-card">
-                <div>
+                <div class="temp">
                     <div class="header">
                         <h2 v-if="isAnonymous">익명 게시판</h2>
                         <h2 v-else>일반 게시판</h2>
@@ -188,7 +188,6 @@ export default {
 <style scoped>
 .community-content {
     padding: 14px 24px;
-    height: 825px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -429,54 +428,54 @@ export default {
     color: #4992ff;
 }
 
-.pagination-wrap {
-    height: 32px;
+/*.pagination-wrap {*/
+/*    height: 32px;*/
 
-    /* margin-top : 32px; */
-    display: flex;
-    justify-content: center;
-}
+/*    !* margin-top : 32px; *!*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*}*/
 
-.pagination-wrap img {
-    width: 32px;
+/*.pagination-wrap img {*/
+/*    width: 32px;*/
 
-    padding: 8px;
-}
+/*    padding: 8px;*/
+/*}*/
 
-.pagination-wrap .page-button-wrap {
-    display: flex;
-    gap: 4px;
-}
+/*.pagination-wrap .page-button-wrap {*/
+/*    display: flex;*/
+/*    gap: 4px;*/
+/*}*/
 
-.pagination-wrap .page-btn {
-    width: 32px;
+/*.pagination-wrap .page-btn {*/
+/*    width: 32px;*/
 
-    color: #c9c9c9;
-    font-size: 14px;
-    font-weight: 500;
+/*    color: #c9c9c9;*/
+/*    font-size: 14px;*/
+/*    font-weight: 500;*/
 
-    border-radius: 50%;
+/*    border-radius: 50%;*/
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
 
-    user-select: none;
-}
+/*    user-select: none;*/
+/*}*/
 
-.pagination-wrap .page-btn:hover {
-    background-color: var(--gray1);
-}
+/*.pagination-wrap .page-btn:hover {*/
+/*    background-color: var(--gray1);*/
+/*}*/
 
-.pagination-wrap .page-btn.current-page {
-    color: white;
+/*.pagination-wrap .page-btn.current-page {*/
+/*    color: white;*/
 
-    background-color: var(--main-color4);
-}
+/*    background-color: var(--main-color4);*/
+/*}*/
 
-.pagination-wrap * {
-    cursor: pointer;
-}
+/*.pagination-wrap * {*/
+/*    cursor: pointer;*/
+/*}*/
 
 @media(max-height:800px){
 .community-content{
@@ -486,4 +485,8 @@ export default {
     gap: 0.95vh;
 }
 }
+
+/*.temp {*/
+/*    background-color: red;*/
+/*}*/
 </style>
