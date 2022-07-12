@@ -1,0 +1,249 @@
+.community-content {
+  padding: 14px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header,
+.search-filter-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+.header {
+  // 페이지 제목과 글쓰기 버튼이 있는 헤더
+  h2 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #3d3d3d;
+  }
+
+  img {
+    width: 36px;
+    height: 36px;
+    padding: 6px;
+    background-color: #f5f6f7;
+    border-radius: 50%;
+
+    cursor: pointer;
+  }
+}
+
+
+.search-filter-wrap {
+  margin-top: 15px;
+}
+
+.search-wrap {
+  // 검색창
+
+  height: 40px;
+  max-width: 430px;
+  flex: 1;
+
+  padding: 8px 16px;
+  border-radius: 8px;
+  background-color: #f5f6f7;
+
+  display: flex;
+  gap: 8px;
+
+  position: relative;
+
+  input {
+    height: 100%;
+    flex: 1;
+
+    font-size: 16px;
+    font-weight: 500;
+
+    background-color: transparent;
+
+    border: 0px;
+    border-radius: 0px;
+
+    &::placeholder {
+      color: #b9b9b9;
+    }
+  }
+
+  .search-button {
+    width: 20px;
+    height: 20px;
+
+    cursor: pointer;
+  }
+}
+
+
+.filter-wrap {
+  // 글 목록 셀렉터 (전체, 핫선린, 일반)
+  width: 97px;
+  height: 40px;
+
+  position: relative;
+
+  img {
+    pointer-events: none;
+
+    position: absolute;
+
+    top: 50%;
+    right: 6px;
+    transform: translateY(-50%);
+  }
+}
+
+.select-board-type {
+  // 글 목록 셀렉터 (전체, 핫선린, 일반)
+  width: 100%;
+  padding: 10px 6px 10px 12px;
+
+  border: 0px;
+  border-radius: 8px;
+  background-color: #f5f6f7;
+
+  appearance: none;
+
+  &::-ms-expand {
+    display: none;
+  }
+
+  &:focus {
+    border: 0px;
+  }
+}
+
+.field-name {
+  // 글 목록 최상단 필드 설명
+  border-bottom: solid 1px #cdcdcd;
+
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+
+  * {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
+
+    padding: 8px 8px;
+  }
+
+  div{
+    display: inline;
+  }
+}
+
+.board-list {
+  // 핫선린과 일반 목록의 전체적인 디자인
+  padding: 12px 16px;
+
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  h3 {
+    font-size: 16px;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.board-list-item {
+  //핫선린과 일반의 글 아이템의 전체적인 디자인
+  display: flex;
+  justify-content: space-between;
+
+  * {
+    display: flex;
+    align-items: center;
+  }
+
+  .heart {
+    display:block;
+    width:22px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    margin-right: 16px;
+
+    img {
+      width: 24px;
+
+      padding: 4px;
+    }
+  }
+
+  .title {
+
+    color: #3d3d3d;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    p:hover {
+      cursor: pointer;
+    }
+
+    img {
+      width: 24px;
+
+      margin-left: 10px;
+    }
+  }
+
+  .writer {
+    color: #b9b9b9;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .date {
+    color: #b9b9b9;
+    font-size: 12px;
+    font-weight: 500;
+
+    margin-left: 17px;
+  }
+}
+
+.hot-sunrin {
+  // 한선린 리스트 디자인
+  margin-top: 16px;
+
+  background-color: hsla(0, 100%, 64%, 0.1);
+
+  h3 {
+    color: #ff4949;
+  }
+
+  li .heart {
+    color: #ff4949;
+  }
+}
+
+
+.normal li .heart {
+  color: #4992ff;
+}
+
+@media(max-height:800px){
+  .community-content{
+    height: 90vh;
+  }
+  .board-list ul{
+    gap: 0.95vh;
+  }
+}
