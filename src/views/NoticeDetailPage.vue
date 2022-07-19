@@ -34,46 +34,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.notice-detail-content {
-    padding : 16px;
-
-    display: flex;
-    flex-direction: column;
-}
-
-.notice-icon {
-    margin : 0px;
-}
-
-.header {
-    display: flex;
-    gap : 16px;
-}
-
-.header h3 {
-    font-size: 18px;
-    font-weight: bold;
-    color: #3d3d3d;
-}
-
-.notice-content {
-    font-size: 18px;
-    font-weight: bold;
-    color: #3d3d3d;
-
-    padding : 48px;
-}
-
-
-@media (max-width : 970px) {
-    .header {
-        flex-direction: column-reverse;
-        gap : 8px;
-    }
-
-    .notice-content {
-        padding : 24px 36px;
-    }
-}
+<style scoped lang="scss">
+@import "src/assets/style/notice/notice/noticeDetail/style.scss";
 </style>
