@@ -26,13 +26,6 @@
                             <img src="../assets/user_profile_assets/correctionIcon_white.svg" alt="">
                         </label>
                 </div>
-                <!-- 정보 수정 버튼 -->
-                <div v-if="isMyProfile" class="info-correcrion-button" @click="!isEditable?changeProfile():updateProfile()">
-                    <img class="correction-button-img" src="../assets/user_profile_assets/correctionIcon.svg"
-                        v-if="!isEditable"/>
-                    <img class="correction-button-img" src="../assets/user_profile_assets/checkIcon.svg"
-                        v-else/>
-                </div>
 
 
 
@@ -44,9 +37,25 @@
                                 <div class="user-name">{{userInfo.username}}</div>
                                 <div class="user-info-top-left">
                                     <div>{{ department_map[userInfo.department] }}</div>
+                                    <div class="text-gray">·</div>
                                     <div>{{ userInfo.grade }}학년 {{ userInfo.class }}반 {{ userInfo.number }}번</div>
                                 </div>
                             </div>
+
+                            <div class="user-info-btns">
+                                
+                                <span v-if="!isEditable && isMyProfile" class="logout-btn user-info-btn" @click="logoutClick">로그아웃</span>
+
+                                <!-- 정보 수정 버튼 -->
+                                <div v-if="isMyProfile" class="info-correcrion-button  user-info-btn" @click="!isEditable?changeProfile():updateProfile()">
+                                    <p class="user-profile-edit-text">프로필 수정하기</p>
+                                    <img class="correction-button-img" src="../assets/user_profile_assets/correctionIcon.svg"
+                                        v-if="!isEditable"/>
+                                    <img class="correction-button-img" src="../assets/user_profile_assets/checkIcon.svg"
+                                        v-else/>
+                                </div>
+                            </div>
+
                             <div class="user-info-group">
                                 <div class="user-info-top-right">
                                     <div class="user-info-contents" v-if="userInfo.clubInfo?.name !== undefined">
@@ -82,7 +91,6 @@
                     </div>
                 </div>
 
-                <span v-if="!isEditable && isMyProfile" class="logout-btn" @click="logoutClick">로그아웃</span>
             </div>
         </div>
     </template>
@@ -242,7 +250,7 @@ export default {
     }
     .user-profile{
         width: 684px;
-        height: 533px;
+        height: auto;
         margin: 0 auto;
 
         border-radius: 8px;
@@ -478,6 +486,13 @@ export default {
 
     }
     
+    .text-gray {
+        color: #A9ACB0;
+    }
+    
+    .user-profile-edit-text {
+        display: none;
+    }
 
 
     @media (max-width:1200px) {
@@ -488,6 +503,125 @@ export default {
         .user-contact-item{
             display:block;
             margin-bottom:10px;
+        }
+    }
+
+    @media screen and (max-width: 710px){ 
+        hr{
+            display:none;
+        }
+
+        .user-info-items{
+            height: auto;
+        }
+
+        .user-img-items{
+            width: 88px;
+            height: 88px;
+            top: 70px;
+            left: 50%;
+            transform: translate(-50%);
+        }
+
+        .user-title {
+            margin: 0;
+            margin-top: 64px;
+            text-align: center;
+            gap: 8px;
+        }
+
+        .user-info-top-left {
+            display: flex;
+            margin: 0;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        .user-profile {
+            width: 342px;
+            max-width: 90%;
+        }
+
+        .user-profile-background-item{
+            height: 114px;
+        }
+
+        .user-info-wrapper {
+            gap: 24px;
+            margin-left: 24px;
+            margin-right: 24px;
+        }
+
+        .user-info-top-wrapper{
+            padding-top: 0;
+        }
+
+        .user-info-top-right {
+            flex-direction: column;
+            gap: 24px;
+            margin: 0px;
+        }
+
+        .user-info-bottom-wrapper {
+            padding: 0;
+        }
+
+        .info-correcrion-button {
+            position: static;
+            padding: 0;
+            width: auto;
+            height: auto;
+            box-shadow: none;
+        }
+
+        .logout-btn {
+            position: static;
+        }
+
+        .user-info-bottom-wrapper {
+            margin-bottom: 32px;
+        }
+        
+        .user-info-btns {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .user-info-btn {
+            border-radius: 8px;
+            padding: 8px 12px;
+            background-color: #F4F5F7;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .correction-button-img {
+            width: 16px;
+            height: 16px;
+            margin: 0;
+        }
+
+        .user-profile-edit-text {
+            display: block;
+            color: #4893FF;
+        }
+
+        label[for="profile-img-choice"] {
+            width: 30px;
+            height: 30px;
+        }
+
+        label[for="profile-img-choice"] img {
+            width: 18px;
+        }
+
+        label[for="profile-background-choice"] {
+            width: 30px;
+            height: 30px;
+            top: 40%;
         }
     }
 
